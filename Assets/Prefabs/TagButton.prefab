@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4644449249400064}
   - component: {fileID: 114723088697568856}
   - component: {fileID: 114442916615455782}
+  - component: {fileID: 65653466885258230}
   m_Layer: 8
   m_Name: TagButton
   m_TagString: Untagged
@@ -71,6 +72,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &65653466885258230
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1131110379348616}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 140, y: 140, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &114442916615455782
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -83,8 +96,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tweenTarget: {fileID: 1131110379348616}
-  hover: {r: 1, g: 1, b: 1, a: 0.78431374}
-  pressed: {r: 1, g: 1, b: 1, a: 1}
+  hover: {r: 1, g: 1, b: 1, a: 0.54901963}
+  pressed: {r: 1, g: 1, b: 1, a: 0.39215687}
   disabledColor: {r: 1, g: 1, b: 1, a: 1}
   duration: 0.2
   dragHighlight: 0
@@ -192,7 +205,7 @@ MonoBehaviour:
     relative: 1
     absolute: 0
   updateAnchors: 1
-  mColor: {r: 1, g: 1, b: 1, a: 0.39215687}
+  mColor: {r: 1, g: 1, b: 1, a: 0.78431374}
   mPivot: 4
   mWidth: 140
   mHeight: 140
