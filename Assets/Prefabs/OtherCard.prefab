@@ -699,7 +699,7 @@ MonoBehaviour:
   activeAnimation: {fileID: 111153812330503732}
   animator: {fileID: 0}
   tween: {fileID: 0}
-  startsActive: 1
+  startsActive: 0
   instantTween: 0
   optionCanBeNone: 0
   onChange: []

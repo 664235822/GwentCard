@@ -108,7 +108,13 @@ MonoBehaviour:
   pressedSprite2D: {fileID: 0}
   disabledSprite2D: {fileID: 0}
   pixelSnap: 0
-  onClick: []
+  onClick:
+  - mTarget: {fileID: 0}
+    mMethodName: OnClick
+    mParameters:
+    - obj: {fileID: 1131110379348616}
+      field: 
+    oneShot: 0
 --- !u!114 &114445294941141122
 MonoBehaviour:
   m_ObjectHideFlags: 1
