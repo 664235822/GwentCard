@@ -3,11 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class TagController : MonoBehaviour {
-
     public GameObject[] tagButtons;
     public GameObject[] groups;
     public UIPopupList popupList;
+    public UILabel groupLabel;
     GameObject[] grids = new GameObject[4];
+    readonly string[] groupLabelText = {
+        "赢得一局后可从牌组中抽一张牌",
+        "平手时获得胜利",
+        "每局过后随机选择一张怪物单位牌待在战场上",
+        "战斗开始时，你可以决定谁先行动"
+    };
 
     private void Start()
     {
@@ -25,6 +31,7 @@ public class TagController : MonoBehaviour {
                 GetGrids(i);
                 OnValueChange();
                 tagButtons[i].GetComponent<UIButton>().isEnabled = false;
+                groupLabel.text = groupLabelText[i];
             }
             else
             {
@@ -32,6 +39,8 @@ public class TagController : MonoBehaviour {
                 tagButtons[i].GetComponent<UIButton>().isEnabled = true;
             }
         }
+
+        
     }
 
     public void OnValueChange()
@@ -50,6 +59,10 @@ public class TagController : MonoBehaviour {
                 break;
             case "中立牌":
                 index = 3;
+                break;
+            case null:
+                popupList.value = "领导牌";
+                //修复切换牌组后popupList标题不变的bug
                 break;
         }
 
