@@ -219,6 +219,7 @@ GameObject:
   - component: {fileID: 114650062874725956}
   - component: {fileID: 114673906845348540}
   - component: {fileID: 65606287958221596}
+  - component: {fileID: 114863168865419676}
   m_Layer: 8
   m_Name: OtherCard
   m_TagString: Untagged
@@ -573,7 +574,11 @@ MonoBehaviour:
   pressedSprite2D: {fileID: 0}
   disabledSprite2D: {fileID: 0}
   pixelSnap: 0
-  onClick: []
+  onClick:
+  - mTarget: {fileID: 114863168865419676}
+    mMethodName: Minus
+    mParameters: []
+    oneShot: 0
 --- !u!114 &114076192511442218
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -702,7 +707,11 @@ MonoBehaviour:
   startsActive: 0
   instantTween: 0
   optionCanBeNone: 0
-  onChange: []
+  onChange:
+  - mTarget: {fileID: 114863168865419676}
+    mMethodName: Check
+    mParameters: []
+    oneShot: 0
   checkSprite: {fileID: 0}
   checkAnimation: {fileID: 0}
   eventReceiver: {fileID: 0}
@@ -1125,7 +1134,23 @@ MonoBehaviour:
   pressedSprite2D: {fileID: 0}
   disabledSprite2D: {fileID: 0}
   pixelSnap: 0
-  onClick: []
+  onClick:
+  - mTarget: {fileID: 114863168865419676}
+    mMethodName: Plus
+    mParameters: []
+    oneShot: 0
+--- !u!114 &114863168865419676
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1988182350991062}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21eb9a3ead5dbc94e888df3123868cf5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  total: 0
 --- !u!114 &114946046298615200
 MonoBehaviour:
   m_ObjectHideFlags: 1

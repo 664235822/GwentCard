@@ -322,7 +322,11 @@ MonoBehaviour:
   startsActive: 0
   instantTween: 0
   optionCanBeNone: 0
-  onChange: []
+  onChange:
+  - mTarget: {fileID: 0}
+    mMethodName: Number
+    mParameters: []
+    oneShot: 0
   checkSprite: {fileID: 0}
   checkAnimation: {fileID: 0}
   eventReceiver: {fileID: 0}

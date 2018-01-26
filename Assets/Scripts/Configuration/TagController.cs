@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class TagController : MonoBehaviour {
+    public static Constants.Group group;
+    public static Constants.List list;
     public GameObject[] tagButtons;
     public GameObject[] groups;
     public UIPopupList popupList;
@@ -15,7 +17,8 @@ public class TagController : MonoBehaviour {
         "战斗开始时，你可以决定谁先行动"
     };
 
-    private void Start()
+    // Use this for initialization
+    void Start()
     {
         tagButtons[0].GetComponent<UIButton>().isEnabled = false;
         GetGrids(0);
@@ -31,6 +34,7 @@ public class TagController : MonoBehaviour {
                 GetGrids(i);
                 OnValueChange();
                 tagButtons[i].GetComponent<UIButton>().isEnabled = false;
+                group = (Constants.Group)System.Enum.Parse(typeof(Constants.Group), tagButtons[i].transform.name);
                 groupLabel.text = groupLabelText[i];
             }
             else
@@ -50,20 +54,38 @@ public class TagController : MonoBehaviour {
         {
             case "领导牌":
                 index = 0;
+                list = Constants.List.leader;
                 break;
             case "特殊牌":
                 index = 1;
+                list = Constants.List.special;
                 break;
             case "生物牌":
                 index = 2;
+                list = Constants.List.monster;
                 break;
             case "中立牌":
                 index = 3;
+                list = Constants.List.neutral;
                 break;
             case null:
-                popupList.value = "领导牌";
-                //修复切换牌组后popupList标题不变的bug
-                break;
+                switch(list)
+                {
+                    case Constants.List.leader:
+                        popupList.value = "领导牌";
+                        break;
+                    case Constants.List.special:
+                        popupList.value = "特殊牌";
+                        break;
+                    case Constants.List.monster:
+                        popupList.value = "生物牌";
+                        break;
+                    case Constants.List.neutral:
+                        popupList.value = "中立牌";
+                        break;
+                }
+                return;
+                //修复切换牌组的bug
         }
 
         for (int i = 0; i < popupList.items.Count; i++)
