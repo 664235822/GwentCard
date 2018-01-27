@@ -55008,6 +55008,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   label: {fileID: 610947621}
+  scrollView: {fileID: 1275774099}
 --- !u!1 &1050607009
 GameObject:
   m_ObjectHideFlags: 0

@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class TagController : MonoBehaviour {
-    public static Constants.Group group;
-    public static Constants.List list;
+    public static Constants.Group group = Constants.Group.northern;
+    public static Constants.List list = Constants.List.leader;
     public GameObject[] tagButtons;
     public GameObject[] groups;
     public UIPopupList popupList;
