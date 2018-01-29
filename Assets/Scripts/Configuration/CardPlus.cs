@@ -25,6 +25,7 @@ public class CardPlus : MonoBehaviour {
         total++;
         PrintLabel();
         NumberController.instance.Number();
+        SaveController.instance.UpdateXML(transform);
     }
 
     public void Minus()
@@ -38,6 +39,13 @@ public class CardPlus : MonoBehaviour {
 
         PrintLabel();
         NumberController.instance.Number();
+        SaveController.instance.UpdateXML(transform);
+    }
+
+    public void WriteTotal(int index)
+    {
+        total = index;
+        PrintLabel();
     }
 
     public void Check()
@@ -49,6 +57,7 @@ public class CardPlus : MonoBehaviour {
         }
 
         NumberController.instance.Number();
+        SaveController.instance.UpdateXML(transform);
     }
 
     void PrintLabel()

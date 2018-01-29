@@ -44,7 +44,7 @@ public class TagController : MonoBehaviour {
             }
         }
 
-        
+        SaveController.instance.LoadXML();
     }
 
     public void OnValueChange()
