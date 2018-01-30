@@ -20,7 +20,6 @@ public class TagController : MonoBehaviour {
     // Use this for initialization
     void Start()
     {
-        tagButtons[0].GetComponent<UIButton>().isEnabled = false;
         OnClick(tagButtons[0]);
     }
 
