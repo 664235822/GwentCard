@@ -55,7 +55,7 @@ MonoBehaviour:
   mSprites:
   - name: 185508404
     x: 0
-    y: 214
+    y: 149
     width: 500
     height: 298
     borderLeft: 0
@@ -66,9 +66,22 @@ MonoBehaviour:
     paddingRight: 0
     paddingTop: 0
     paddingBottom: 0
+  - name: board
+    x: 0
+    y: 448
+    width: 1024
+    height: 576
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
   - name: player_faction_northern_nilfgaard
-    x: 210
-    y: 102
+    x: 315
+    y: 37
     width: 104
     height: 111
     borderLeft: 0
@@ -80,8 +93,8 @@ MonoBehaviour:
     paddingTop: 2
     paddingBottom: 2
   - name: player_faction_northern_no_mans_land
-    x: 315
-    y: 100
+    x: 105
+    y: 35
     width: 104
     height: 113
     borderLeft: 0
@@ -93,8 +106,8 @@ MonoBehaviour:
     paddingTop: 1
     paddingBottom: 1
   - name: player_faction_northern_realms
-    x: 0
-    y: 100
+    x: 210
+    y: 35
     width: 104
     height: 113
     borderLeft: 0
@@ -106,8 +119,8 @@ MonoBehaviour:
     paddingTop: 1
     paddingBottom: 1
   - name: player_faction_scoiatael
-    x: 105
-    y: 98
+    x: 0
+    y: 33
     width: 104
     height: 115
     borderLeft: 0
