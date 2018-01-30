@@ -28,6 +28,7 @@ public class SaveController : MonoBehaviour {
         XmlElement root = xml.CreateElement("root");
 
         XmlElement northern = xml.CreateElement("northern");
+        northern.SetAttribute("save", false.ToString());
 
         XmlElement leader1 = xml.CreateElement("leader");
         XmlElement special1 = xml.CreateElement("special");
@@ -40,6 +41,7 @@ public class SaveController : MonoBehaviour {
         northern.AppendChild(neutral1);
 
         XmlElement nilfgaardian = xml.CreateElement("nilfgaardian");
+        nilfgaardian.SetAttribute("save", false.ToString());
 
         XmlElement leader2 = xml.CreateElement("leader");
         XmlElement special2 = xml.CreateElement("special");
@@ -52,6 +54,7 @@ public class SaveController : MonoBehaviour {
         nilfgaardian.AppendChild(neutral2);
 
         XmlElement monster = xml.CreateElement("monster");
+        monster.SetAttribute("save", false.ToString());
 
         XmlElement leader3 = xml.CreateElement("leader");
         XmlElement special3 = xml.CreateElement("special");
@@ -64,6 +67,7 @@ public class SaveController : MonoBehaviour {
         monster.AppendChild(neutral3);
 
         XmlElement scoiatael = xml.CreateElement("scoiatael");
+        scoiatael.SetAttribute("save", false.ToString());
 
         XmlElement leader4 = xml.CreateElement("leader");
         XmlElement special4 = xml.CreateElement("special");
@@ -89,9 +93,10 @@ public class SaveController : MonoBehaviour {
         string group = TagController.group.ToString();
         xml.Load(Constants.path);
         XmlElement root = xml.DocumentElement;
-        XmlNode groupNode = root.SelectSingleNode(group);
-        //XmlNode groupNode = root.SelectSingleNode("root/" + group);
+        XmlNode groupNode = root.SelectSingleNode("/root/" + group);
         Transform groupTransform = scrollView.Find(group);
+        if (groupNode.Attributes["save"].Value == false.ToString())
+            return;
 
         Transform leaderTransform = groupTransform.Find("leader");
         XmlNode leaderNode = groupNode.SelectSingleNode("leader");
@@ -99,8 +104,7 @@ public class SaveController : MonoBehaviour {
         foreach (XmlNode cardNode in leaderNodeList)
         {
             Transform card = leaderTransform.Find(cardNode.Name);
-            card.GetComponent<UIToggle>().value = true;
-            card.GetComponent<CardPlus>().WriteTotal(int.Parse(cardNode["total"].Value));
+            card.Find("Control - Simple Checkbox").GetComponent<UIToggle>().value = true;
         }
 
         Transform specialTransform = groupTransform.Find("special");
@@ -109,8 +113,8 @@ public class SaveController : MonoBehaviour {
         foreach (XmlNode cardNode in specialNodeList)
         {
             Transform card = specialTransform.Find(cardNode.Name);
-            card.GetComponent<UIToggle>().value = true;
-            card.GetComponent<CardPlus>().WriteTotal(int.Parse(cardNode["total"].Value));
+            card.Find("Control - Simple Checkbox").GetComponent<UIToggle>().value = true;
+            card.GetComponent<CardPlus>().WriteTotal(int.Parse(cardNode.Attributes["total"].Value));
         }
 
         Transform monsterTransform = groupTransform.Find("monster");
@@ -119,8 +123,8 @@ public class SaveController : MonoBehaviour {
         foreach (XmlNode cardNode in monsterNodeList)
         {
             Transform card = monsterTransform.Find(cardNode.Name);
-            card.GetComponent<UIToggle>().value = true;
-            card.GetComponent<CardPlus>().WriteTotal(int.Parse(cardNode["total"].Value));
+            card.Find("Control - Simple Checkbox").GetComponent<UIToggle>().value = true;
+            card.GetComponent<CardPlus>().WriteTotal(int.Parse(cardNode.Attributes["total"].Value));
         }
 
         Transform neutralTransform = groupTransform.Find("neutral");
@@ -129,8 +133,8 @@ public class SaveController : MonoBehaviour {
         foreach (XmlNode cardNode in neutralNodeList)
         {
             Transform card = neutralTransform.Find(cardNode.Name);
-            card.GetComponent<UIToggle>().value = true;
-            card.GetComponent<CardPlus>().WriteTotal(int.Parse(cardNode["total"].Value));
+            card.Find("Control - Simple Checkbox").GetComponent<UIToggle>().value = true;
+            card.GetComponent<CardPlus>().WriteTotal(int.Parse(cardNode.Attributes["total"].Value));
         }
     }
 
@@ -146,7 +150,8 @@ public class SaveController : MonoBehaviour {
             if (card.Find("Control - Simple Checkbox").GetComponent<UIToggle>().value)
             {
                 XmlElement cardElement = xml.CreateElement(card.name);
-                cardElement.SetAttribute("total", card.GetComponent<CardPlus>().total.ToString());
+                if (list != "leader")
+                    cardElement.SetAttribute("total", card.GetComponent<CardPlus>().total.ToString());
                 node.AppendChild(cardElement);
             }
         }
@@ -154,7 +159,10 @@ public class SaveController : MonoBehaviour {
         {
             XmlNode cardNode = node.SelectSingleNode(card.name);
             if (card.Find("Control - Simple Checkbox").GetComponent<UIToggle>().value)
-                cardNode.Attributes["total"].Value = card.GetComponent<CardPlus>().total.ToString();
+            {
+                if (list != "leader")
+                    cardNode.Attributes["total"].Value = card.GetComponent<CardPlus>().total.ToString();
+            }
             else
                 node.RemoveChild(cardNode);
         }
@@ -173,6 +181,9 @@ public class SaveController : MonoBehaviour {
             if (NumberController.instance.monsterCount < 25 || NumberController.instance.monsterCount > 40)
                 throw new SaveException();
 
+            XmlElement root = xml.DocumentElement;
+            XmlNode groupNode = root.SelectSingleNode(string.Format("/root/{0}", TagController.group.ToString()));
+            groupNode.Attributes["save"].Value = true.ToString();
             xml.Save(Constants.path);
             StartCoroutine(ShowLabel("保存成功"));
         }

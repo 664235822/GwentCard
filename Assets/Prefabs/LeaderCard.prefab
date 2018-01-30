@@ -324,6 +324,12 @@ MonoBehaviour:
   optionCanBeNone: 0
   onChange:
   - mTarget: {fileID: 0}
+    mMethodName: UpdateXML
+    mParameters:
+    - obj: {fileID: 4117913379193698}
+      field: transform
+    oneShot: 0
+  - mTarget: {fileID: 0}
     mMethodName: Number
     mParameters: []
     oneShot: 0

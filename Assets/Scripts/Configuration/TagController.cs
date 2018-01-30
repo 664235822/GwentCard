@@ -21,7 +21,7 @@ public class TagController : MonoBehaviour {
     void Start()
     {
         tagButtons[0].GetComponent<UIButton>().isEnabled = false;
-        GetGrids(0);
+        OnClick(tagButtons[0]);
     }
 
     public void OnClick(GameObject tagButton)
@@ -45,6 +45,7 @@ public class TagController : MonoBehaviour {
         }
 
         SaveController.instance.LoadXML();
+        NumberController.instance.Number();
     }
 
     public void OnValueChange()
