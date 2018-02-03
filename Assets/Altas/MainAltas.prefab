@@ -67,8 +67,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: black
-    x: 315
-    y: 12
+    x: 728
+    y: 292
     width: 24
     height: 24
     borderLeft: 0
@@ -92,8 +92,21 @@ MonoBehaviour:
     paddingRight: 0
     paddingTop: 0
     paddingBottom: 0
+  - name: board_cards
+    x: 268
+    y: 58
+    width: 60
+    height: 90
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
   - name: board_deck_nilfgaard
-    x: 420
+    x: 0
     y: 26
     width: 66
     height: 122
@@ -106,33 +119,7 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: board_deck_no_mans_land
-    x: 501
-    y: 202
-    width: 66
-    height: 122
-    borderLeft: 0
-    borderRight: 0
-    borderTop: 0
-    borderBottom: 0
-    paddingLeft: 0
-    paddingRight: 0
-    paddingTop: 0
-    paddingBottom: 0
-  - name: board_deck_northern_realms
-    x: 501
-    y: 325
-    width: 66
-    height: 122
-    borderLeft: 0
-    borderRight: 0
-    borderTop: 0
-    borderBottom: 0
-    paddingLeft: 0
-    paddingRight: 0
-    paddingTop: 0
-    paddingBottom: 0
-  - name: board_deck_scoiatael
-    x: 487
+    x: 67
     y: 26
     width: 66
     height: 122
@@ -144,9 +131,74 @@ MonoBehaviour:
     paddingRight: 0
     paddingTop: 0
     paddingBottom: 0
+  - name: board_deck_northern_realms
+    x: 134
+    y: 26
+    width: 66
+    height: 122
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: board_deck_scoiatael
+    x: 201
+    y: 26
+    width: 66
+    height: 122
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: player_avatar_anonymous
+    x: 795
+    y: 108
+    width: 92
+    height: 92
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 28
+    paddingRight: 30
+    paddingTop: 29
+    paddingBottom: 29
+  - name: player_avatar_border
+    x: 678
+    y: 317
+    width: 124
+    height: 130
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 13
+    paddingRight: 13
+    paddingTop: 10
+    paddingBottom: 10
+  - name: player_avatar_geralt
+    x: 663
+    y: 117
+    width: 131
+    height: 149
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 10
+    paddingRight: 9
+    paddingTop: 1
+    paddingBottom: 0
   - name: player_faction_northern_nilfgaard
-    x: 315
-    y: 37
+    x: 908
+    y: 336
     width: 104
     height: 111
     borderLeft: 0
@@ -158,8 +210,8 @@ MonoBehaviour:
     paddingTop: 2
     paddingBottom: 2
   - name: player_faction_northern_no_mans_land
-    x: 210
-    y: 35
+    x: 803
+    y: 334
     width: 104
     height: 113
     borderLeft: 0
@@ -171,8 +223,8 @@ MonoBehaviour:
     paddingTop: 1
     paddingBottom: 1
   - name: player_faction_northern_realms
-    x: 105
-    y: 35
+    x: 900
+    y: 220
     width: 104
     height: 113
     borderLeft: 0
@@ -184,8 +236,8 @@ MonoBehaviour:
     paddingTop: 1
     paddingBottom: 1
   - name: player_faction_scoiatael
-    x: 0
-    y: 33
+    x: 795
+    y: 201
     width: 104
     height: 115
     borderLeft: 0
@@ -195,6 +247,84 @@ MonoBehaviour:
     paddingLeft: 6
     paddingRight: 5
     paddingTop: 0
+    paddingBottom: 0
+  - name: player_life_gem_large
+    x: 501
+    y: 267
+    width: 176
+    height: 180
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 2
+    paddingRight: 2
+    paddingTop: 0
+    paddingBottom: 0
+  - name: player_power_indicator
+    x: 329
+    y: 76
+    width: 72
+    height: 72
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: player_turn_indicator_opponent
+    x: 678
+    y: 267
+    width: 49
+    height: 49
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 3
+    paddingRight: 3
+    paddingTop: 3
+    paddingBottom: 3
+  - name: player_turn_indicator_self
+    x: 402
+    y: 97
+    width: 51
+    height: 51
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 2
+    paddingRight: 2
+    paddingTop: 2
+    paddingBottom: 2
+  - name: player_winner_indicator
+    x: 501
+    y: 135
+    width: 161
+    height: 131
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 3
+    paddingRight: 0
+    paddingTop: 22
+    paddingBottom: 11
+  - name: row_power_indicator
+    x: 900
+    y: 90
+    width: 78
+    height: 129
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 1
+    paddingRight: 1
+    paddingTop: 1
     paddingBottom: 0
   mPixelSize: 1
   mReplacement: {fileID: 0}
