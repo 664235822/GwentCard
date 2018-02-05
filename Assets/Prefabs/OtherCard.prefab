@@ -220,6 +220,7 @@ GameObject:
   - component: {fileID: 114673906845348540}
   - component: {fileID: 65606287958221596}
   - component: {fileID: 114863168865419676}
+  - component: {fileID: 114497043296445316}
   m_Layer: 8
   m_Name: OtherCard
   m_TagString: Untagged
@@ -853,6 +854,22 @@ MonoBehaviour:
   mMaxLineHeight: 0
   mLineWidth: 0
   mMultiline: 1
+--- !u!114 &114497043296445316
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1988182350991062}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59d44c77cb633ef4db3353341a8fb511, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  line: 0
+  effect: 0
+  gold: 0
+  power: 0
+  muster: []
 --- !u!114 &114555529602576918
 MonoBehaviour:
   m_ObjectHideFlags: 1
