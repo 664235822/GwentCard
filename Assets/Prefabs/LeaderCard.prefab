@@ -55,6 +55,7 @@ GameObject:
   - component: {fileID: 114106503341030976}
   - component: {fileID: 65246851079450236}
   - component: {fileID: 114828235748671224}
+  - component: {fileID: 114322476858467592}
   m_Layer: 8
   m_Name: Control - Simple Checkbox
   m_TagString: Untagged
@@ -323,14 +324,8 @@ MonoBehaviour:
   instantTween: 0
   optionCanBeNone: 0
   onChange:
-  - mTarget: {fileID: 0}
-    mMethodName: UpdateXML
-    mParameters:
-    - obj: {fileID: 4117913379193698}
-      field: transform
-    oneShot: 0
-  - mTarget: {fileID: 0}
-    mMethodName: Number
+  - mTarget: {fileID: 114322476858467592}
+    mMethodName: Check
     mParameters: []
     oneShot: 0
   checkSprite: {fileID: 0}
@@ -406,6 +401,17 @@ MonoBehaviour:
   mMaxLineHeight: 0
   mLineWidth: 0
   mMultiline: 1
+--- !u!114 &114322476858467592
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1526744179872050}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c65e067223f71fd4abf24477e91d1348, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114400148836658492
 MonoBehaviour:
   m_ObjectHideFlags: 1

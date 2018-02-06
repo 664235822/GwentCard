@@ -144,14 +144,29 @@ public class SaveController : MonoBehaviour {
         string list = TagController.list.ToString();
         XmlElement root = xml.DocumentElement;
         XmlNode node = root.SelectSingleNode(string.Format("/root/{0}/{1}", group, list));
-        
-        if(node.SelectSingleNode(card.name)==null)
+
+        if (node.SelectSingleNode(card.name) == null)
         {
             if (card.Find("Control - Simple Checkbox").GetComponent<UIToggle>().value)
             {
                 XmlElement cardElement = xml.CreateElement(card.name);
                 if (list != "leader")
+                {
                     cardElement.SetAttribute("total", card.GetComponent<CardPlus>().total.ToString());
+                    CardProperty cardProperty = card.GetComponent<CardProperty>();
+                    cardElement.SetAttribute("line", cardProperty.line.ToString());
+                    cardElement.SetAttribute("effect", cardProperty.effect.ToString());
+                    cardElement.SetAttribute("gold", cardProperty.gold.ToString());
+                    cardElement.SetAttribute("power", cardProperty.power.ToString());
+                    if (cardProperty.muster.Length != 0)
+                    {
+                        for (int i = 0; i < cardProperty.muster.Length; i++)
+                        {
+                            XmlElement musterElement = xml.CreateElement(cardProperty.muster[i].name);
+                            cardElement.AppendChild(musterElement);
+                        }
+                    }
+                }
                 node.AppendChild(cardElement);
             }
         }
