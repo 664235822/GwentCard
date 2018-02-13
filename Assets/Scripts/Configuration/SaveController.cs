@@ -153,6 +153,7 @@ public class SaveController : MonoBehaviour {
                 if (list != "leader")
                 {
                     cardElement.SetAttribute("total", card.GetComponent<CardPlus>().total.ToString());
+                    cardElement.SetAttribute("sprite", card.GetComponent<UISprite>().spriteName);
                     CardProperty cardProperty = card.GetComponent<CardProperty>();
                     cardElement.SetAttribute("line", cardProperty.line.ToString());
                     cardElement.SetAttribute("effect", cardProperty.effect.ToString());

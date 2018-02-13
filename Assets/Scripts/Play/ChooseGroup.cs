@@ -28,5 +28,7 @@ public class ChooseGroup : MonoBehaviour {
     {
         BlackShow.instance.Show(false);
         transform.parent.gameObject.SetActive(false);
+        PlayerController.instance.Initialize(name);
+        EnemyController.instance.Initialize();
     }
 }
