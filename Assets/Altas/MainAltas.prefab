@@ -67,7 +67,7 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: black
-    x: 728
+    x: 763
     y: 292
     width: 24
     height: 24
@@ -106,19 +106,6 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: board_deck_nilfgaard
-    x: 0
-    y: 26
-    width: 66
-    height: 122
-    borderLeft: 0
-    borderRight: 0
-    borderTop: 0
-    borderBottom: 0
-    paddingLeft: 0
-    paddingRight: 0
-    paddingTop: 0
-    paddingBottom: 0
-  - name: board_deck_no_mans_land
     x: 67
     y: 26
     width: 66
@@ -131,7 +118,7 @@ MonoBehaviour:
     paddingRight: 0
     paddingTop: 0
     paddingBottom: 0
-  - name: board_deck_northern_realms
+  - name: board_deck_no_mans_land
     x: 134
     y: 26
     width: 66
@@ -144,7 +131,7 @@ MonoBehaviour:
     paddingRight: 0
     paddingTop: 0
     paddingBottom: 0
-  - name: board_deck_scoiatael
+  - name: board_deck_northern_realms
     x: 201
     y: 26
     width: 66
@@ -157,6 +144,32 @@ MonoBehaviour:
     paddingRight: 0
     paddingTop: 0
     paddingBottom: 0
+  - name: board_deck_scoiatael
+    x: 0
+    y: 26
+    width: 66
+    height: 122
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: card_effect_spy
+    x: 678
+    y: 268
+    width: 84
+    height: 48
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 7
+    paddingRight: 7
+    paddingTop: 26
+    paddingBottom: 26
   - name: player_avatar_anonymous
     x: 795
     y: 108
@@ -210,8 +223,8 @@ MonoBehaviour:
     paddingTop: 2
     paddingBottom: 2
   - name: player_faction_northern_no_mans_land
-    x: 803
-    y: 334
+    x: 900
+    y: 220
     width: 104
     height: 113
     borderLeft: 0
@@ -223,8 +236,8 @@ MonoBehaviour:
     paddingTop: 1
     paddingBottom: 1
   - name: player_faction_northern_realms
-    x: 900
-    y: 220
+    x: 803
+    y: 334
     width: 104
     height: 113
     borderLeft: 0
@@ -275,8 +288,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: player_turn_indicator_opponent
-    x: 678
-    y: 267
+    x: 454
+    y: 85
     width: 49
     height: 49
     borderLeft: 0

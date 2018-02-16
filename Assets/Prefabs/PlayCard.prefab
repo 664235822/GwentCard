@@ -23,6 +23,7 @@ GameObject:
   - component: {fileID: 114654201336772584}
   - component: {fileID: 114443763816954696}
   - component: {fileID: 65228381344757250}
+  - component: {fileID: 114800420912083772}
   m_Layer: 8
   m_Name: PlayCard
   m_TagString: Untagged
@@ -147,3 +148,19 @@ MonoBehaviour:
   mAtlas: {fileID: 114438320826604494, guid: 29403d4f893411440b24a74962abb07d, type: 2}
   mSpriteName: ballista1
   mFillCenter: 1
+--- !u!114 &114800420912083772
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1447798922550114}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59d44c77cb633ef4db3353341a8fb511, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  line: 0
+  effect: 0
+  gold: 0
+  power: 0
+  muster: []
