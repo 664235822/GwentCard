@@ -8,7 +8,7 @@ public class ShowCards : MonoBehaviour {
     public GameObject show;
     public UILabel label;
     public Transform grid;
-    public UIScrollView ScrollView;
+    public UIScrollView scrollView;
     Behaviour behaviour;
 
     private void Awake()
@@ -16,7 +16,7 @@ public class ShowCards : MonoBehaviour {
         instance = this;
     }
 
-    public void Show(Behaviour behav)
+    public void Show(Behaviour behav,Transform ShowGrid)
     {
         behaviour = behav;
         BlackShow.instance.Show(true);
@@ -35,7 +35,22 @@ public class ShowCards : MonoBehaviour {
                 label.text = "显示卡牌";
                 break;
         }
-        GetCards();
+
+        for (int i = 0; i < ShowGrid.childCount; i++)
+        {
+            GameObject card = Instantiate(ShowGrid.GetChild(i).gameObject, grid);
+            UISprite sprite = card.GetComponent<UISprite>();
+            sprite.width = 250;
+            sprite.height = 450;
+            if (behaviour == Behaviour.draw)
+                card.GetComponent<UIButton>().enabled = true;
+            else
+                card.GetComponent<UIButton>().enabled = false;
+            card.GetComponent<UIDragScrollView>().scrollView = scrollView;
+            card.GetComponent<BoxCollider>().size = new Vector3(250, 450, 1);
+        }
+
+        grid.GetComponent<UIGrid>().Reposition();
     }
 
     public void Hide()
@@ -45,21 +60,5 @@ public class ShowCards : MonoBehaviour {
         PlayerController.instance.player.SetActive(true);
         EnemyController.instance.enemy.SetActive(true);
         show.SetActive(false);
-    }
-
-    void GetCards()
-    {
-        for (int i = 0; i < PlayerController.instance.grids[1].childCount; i++)
-        {
-            GameObject card = Instantiate(PlayerController.instance.grids[1].GetChild(i).gameObject, grid);
-            UISprite sprite = card.GetComponent<UISprite>();
-            sprite.width = 250;
-            sprite.height = 450;
-            card.GetComponent<UIButton>().enabled = true;
-            card.GetComponent<UIDragScrollView>().scrollView = ScrollView;
-            card.GetComponent<BoxCollider>().size = new Vector3(250, 450, 1);
-        }
-
-        grid.GetComponent<UIGrid>().Reposition();
     }
 }

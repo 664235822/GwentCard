@@ -59,13 +59,15 @@ public class PlayerController : MonoBehaviour {
         XmlElement root = xml.DocumentElement;
         XmlNode xmlNode = root.SelectSingleNode(string.Format("/root/{0}", Group));
 
+        int name = 0;
         XmlNodeList special = xmlNode.SelectSingleNode("special").ChildNodes;
         foreach(XmlNode cardNode in special)
         {
             for (int i = 0; i < int.Parse(cardNode.Attributes["total"].Value); i++)
             {
                 GameObject cardObject = Instantiate(cardPerfab, grids[0]);
-                cardObject.name = cardNode.Name;
+                cardObject.name = name.ToString();
+                name++;
                 UISprite cardSprite = cardObject.GetComponent<UISprite>();
                 cardSprite.atlas = atlas[4];
                 cardSprite.spriteName = cardNode.Attributes["sprite"].Value;
@@ -83,7 +85,8 @@ public class PlayerController : MonoBehaviour {
             for (int i = 0; i < int.Parse(cardNode.Attributes["total"].Value); i++)
             {
                 GameObject cardObject = Instantiate(cardPerfab, grids[0]);
-                cardObject.name = cardNode.Name;
+                cardObject.name = name.ToString();
+                name++;
                 UISprite cardSprite = cardObject.GetComponent<UISprite>();
                 cardSprite.atlas = totalAtlas;
                 cardSprite.spriteName = cardNode.Attributes["sprite"].Value;
@@ -101,7 +104,8 @@ public class PlayerController : MonoBehaviour {
             for (int i = 0; i < int.Parse(cardNode.Attributes["total"].Value); i++)
             {
                 GameObject cardObject = Instantiate(cardPerfab, grids[0]);
-                cardObject.name = cardNode.Name;
+                cardObject.name = name.ToString();
+                name++;
                 UISprite cardSprite = cardObject.GetComponent<UISprite>();
                 cardSprite.atlas = atlas[4];
                 cardSprite.spriteName = cardNode.Attributes["sprite"].Value;
@@ -117,7 +121,7 @@ public class PlayerController : MonoBehaviour {
         Number();
     }
 
-    void DrawCards(int index)
+    public void DrawCards(int index)
     {
         for (int i = 0; i < index; i++)
         {
@@ -126,7 +130,7 @@ public class PlayerController : MonoBehaviour {
         }
     }
 
-    void Number()
+    public void Number()
     {
         number_label.text = grids[1].childCount.ToString();
         deck_realms_label.text = grids[0].childCount.ToString();

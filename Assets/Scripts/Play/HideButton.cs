@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ShowFalseButton : MonoBehaviour {
+public class HideButton : MonoBehaviour {
 
 	public void OnClick()
     {

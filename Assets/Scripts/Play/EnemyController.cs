@@ -8,6 +8,7 @@ public class EnemyController : MonoBehaviour {
     public UISprite avatar_group;
     public UILabel group_label;
     public UISprite deck_realms;
+    public Transform[] grids;
     Constants.Group group;
 
     private void Awake()
