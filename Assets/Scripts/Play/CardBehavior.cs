@@ -52,6 +52,23 @@ public class CardBehavior : MonoBehaviour {
                 break;
         }
 
+        switch(cardProperty.effect)
+        {
+            case Constants.Effect.clear_sky:
+                WeatherController.instance.ClearSky();
+                Destroy(PlayerController.instance.grids[1].GetChild(index).gameObject);
+                break;
+            case Constants.Effect.frost:
+                WeatherController.instance.Frost(index);
+                break;
+            case Constants.Effect.fog:
+                WeatherController.instance.Fog(index);
+                break;
+            case Constants.Effect.rain:
+                WeatherController.instance.Rain(index);
+                break;
+        }
+
         PlayerController.instance.grids[1].GetComponent<UIGrid>().Reposition();
         ShowCards.instance.Hide();
         PowerNumberController.instance.Number();
