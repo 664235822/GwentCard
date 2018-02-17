@@ -6878,6 +6878,7 @@ GameObject:
   - component: {fileID: 1749374671}
   - component: {fileID: 1749374670}
   - component: {fileID: 1749374672}
+  - component: {fileID: 1749374673}
   m_Layer: 8
   m_Name: Play
   m_TagString: Untagged
@@ -6964,6 +6965,25 @@ MonoBehaviour:
   label: {fileID: 691497593}
   grid: {fileID: 219462216}
   scrollView: {fileID: 0}
+--- !u!114 &1749374673
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1749374668}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: caf30bfe1e473a148a1ed633a01f68a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player_power_total: {fileID: 1527971887}
+  player_power_melee: {fileID: 1458199885}
+  player_power_ranged: {fileID: 106566460}
+  player_power_siege: {fileID: 1883440541}
+  enemy_power_total: {fileID: 615352573}
+  enemy_power_melee: {fileID: 1275177577}
+  enemy_power_ranged: {fileID: 1471428021}
+  enemy_power_siege: {fileID: 1390817176}
 --- !u!1 &1757265212
 GameObject:
   m_ObjectHideFlags: 0
