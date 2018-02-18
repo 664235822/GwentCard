@@ -5,10 +5,15 @@ using UnityEngine;
 public class WeatherController : MonoBehaviour {
     public static WeatherController instance;
     public Transform grid;
-    public GameObject frostSprite;
-    public GameObject fogSprite;
-    public GameObject rainSprite;
-    public bool frost, fog, rain;
+    public GameObject playerFrostSprite;
+    public GameObject playerFogSprite;
+    public GameObject playerRainSprite;
+    public GameObject enemyFrostSprite;
+    public GameObject enemyFogSprite;
+    public GameObject enemyRainSprite;
+    public bool frost = false;
+    public bool fog = false;
+    public bool rain = false;
 
     private void Awake()
     {
@@ -18,41 +23,51 @@ public class WeatherController : MonoBehaviour {
     public void ClearSky()
     {
         grid.DestroyChildren();
+        grid.GetComponent<UIGrid>().Reposition();
         frost = false;
         fog = false;
         rain = false;
-        frostSprite.SetActive(false);
-        fogSprite.SetActive(false);
-        rainSprite.SetActive(false);
+        playerFrostSprite.SetActive(false);
+        playerFogSprite.SetActive(false);
+        playerRainSprite.SetActive(false);
+        enemyFrostSprite.SetActive(false);
+        enemyFogSprite.SetActive(false);
+        enemyRainSprite.SetActive(false);
     }
 
     public void Frost(int index)
     {
-        if (!WeatherController.instance.frost)
+        if (!frost)
         {
             PlayerController.instance.grids[1].GetChild(index).SetParent(grid);
+            grid.GetComponent<UIGrid>().Reposition();
             frost = true;
-            frostSprite.SetActive(true);
+            playerFrostSprite.SetActive(true);
+            enemyFrostSprite.SetActive(true);
         }
     }
 
     public void Fog(int index)
     {
-        if (!WeatherController.instance.fog)
+        if (!fog)
         {
             PlayerController.instance.grids[1].GetChild(index).SetParent(grid);
+            grid.GetComponent<UIGrid>().Reposition();
             fog = true;
-            fogSprite.SetActive(true);
+            playerFogSprite.SetActive(true);
+            enemyFogSprite.SetActive(true);
         }
     }
 
     public void Rain(int index)
     {
-        if (!WeatherController.instance.fog)
+        if (!rain)
         {
             PlayerController.instance.grids[1].GetChild(index).SetParent(grid);
+            grid.GetComponent<UIGrid>().Reposition();
             rain = true;
-            rainSprite.SetActive(true);
+            playerRainSprite.SetActive(true);
+            enemyRainSprite.SetActive(true);
         }
     }
 }

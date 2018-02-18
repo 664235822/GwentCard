@@ -67,8 +67,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: black
-    x: 598
-    y: 28
+    x: 1092
+    y: 907
     width: 24
     height: 24
     borderLeft: 0
@@ -93,8 +93,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: board_cards
-    x: 1139
-    y: 53
+    x: 1025
+    y: 595
     width: 60
     height: 90
     borderLeft: 0
@@ -105,9 +105,35 @@ MonoBehaviour:
     paddingRight: 0
     paddingTop: 0
     paddingBottom: 0
+  - name: board_coin_castle
+    x: 513
+    y: 82
+    width: 176
+    height: 180
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 7
+    paddingRight: 7
+    paddingTop: 5
+    paddingBottom: 5
+  - name: board_coin_torch
+    x: 501
+    y: 263
+    width: 185
+    height: 184
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 3
+    paddingRight: 2
+    paddingTop: 3
+    paddingBottom: 3
   - name: board_deck_nilfgaard
-    x: 1005
-    y: 51
+    x: 1118
+    y: 902
     width: 66
     height: 122
     borderLeft: 0
@@ -119,8 +145,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: board_deck_no_mans_land
-    x: 1072
-    y: 51
+    x: 1025
+    y: 809
     width: 66
     height: 122
     borderLeft: 0
@@ -132,8 +158,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: board_deck_northern_realms
-    x: 1139
-    y: 144
+    x: 1092
+    y: 779
     width: 66
     height: 122
     borderLeft: 0
@@ -145,8 +171,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: board_deck_scoiatael
-    x: 717
-    y: 43
+    x: 1025
+    y: 686
     width: 66
     height: 122
     borderLeft: 0
@@ -158,7 +184,7 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: board_weather_fog
-    x: 501
+    x: 687
     y: 382
     width: 512
     height: 65
@@ -171,8 +197,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: board_weather_frost
-    x: 501
-    y: 316
+    x: 513
+    y: 16
     width: 512
     height: 65
     borderLeft: 0
@@ -197,8 +223,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: card_effect_spy
-    x: 513
-    y: 4
+    x: 1026
+    y: 38
     width: 84
     height: 48
     borderLeft: 0
@@ -210,8 +236,8 @@ MonoBehaviour:
     paddingTop: 26
     paddingBottom: 26
   - name: player_avatar_anonymous
-    x: 1005
-    y: 174
+    x: 1025
+    y: 932
     width: 92
     height: 92
     borderLeft: 0
@@ -223,8 +249,8 @@ MonoBehaviour:
     paddingTop: 29
     paddingBottom: 29
   - name: player_avatar_border
-    x: 513
-    y: 53
+    x: 690
+    y: 119
     width: 124
     height: 130
     borderLeft: 0
@@ -236,8 +262,8 @@ MonoBehaviour:
     paddingTop: 10
     paddingBottom: 10
   - name: player_avatar_geralt
-    x: 663
-    y: 166
+    x: 852
+    y: 232
     width: 131
     height: 149
     borderLeft: 0
@@ -249,8 +275,8 @@ MonoBehaviour:
     paddingTop: 1
     paddingBottom: 0
   - name: player_faction_northern_nilfgaard
-    x: 795
-    y: 88
+    x: 1130
+    y: 89
     width: 104
     height: 111
     borderLeft: 0
@@ -262,8 +288,8 @@ MonoBehaviour:
     paddingTop: 2
     paddingBottom: 2
   - name: player_faction_northern_no_mans_land
-    x: 900
-    y: 202
+    x: 920
+    y: 118
     width: 104
     height: 113
     borderLeft: 0
@@ -275,8 +301,8 @@ MonoBehaviour:
     paddingTop: 1
     paddingBottom: 1
   - name: player_faction_northern_realms
-    x: 900
-    y: 88
+    x: 1025
+    y: 87
     width: 104
     height: 113
     borderLeft: 0
@@ -288,8 +314,8 @@ MonoBehaviour:
     paddingTop: 1
     paddingBottom: 1
   - name: player_faction_scoiatael
-    x: 795
-    y: 200
+    x: 815
+    y: 116
     width: 104
     height: 115
     borderLeft: 0
@@ -301,8 +327,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: player_life_gem_large
-    x: 1014
-    y: 267
+    x: 1026
+    y: 201
     width: 176
     height: 180
     borderLeft: 0
@@ -314,8 +340,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: player_power_indicator
-    x: 784
-    y: 15
+    x: 1130
+    y: 16
     width: 72
     height: 72
     borderLeft: 0
@@ -327,8 +353,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: player_turn_indicator_opponent
-    x: 909
-    y: 38
+    x: 1025
+    y: 545
     width: 49
     height: 49
     borderLeft: 0
@@ -340,8 +366,8 @@ MonoBehaviour:
     paddingTop: 3
     paddingBottom: 3
   - name: player_turn_indicator_self
-    x: 857
-    y: 36
+    x: 1203
+    y: 37
     width: 51
     height: 51
     borderLeft: 0
@@ -353,8 +379,8 @@ MonoBehaviour:
     paddingTop: 2
     paddingBottom: 2
   - name: player_winner_indicator
-    x: 501
-    y: 184
+    x: 690
+    y: 250
     width: 161
     height: 131
     borderLeft: 0
@@ -366,8 +392,8 @@ MonoBehaviour:
     paddingTop: 22
     paddingBottom: 11
   - name: row_power_indicator
-    x: 638
-    y: 36
+    x: 1200
+    y: 895
     width: 78
     height: 129
     borderLeft: 0
