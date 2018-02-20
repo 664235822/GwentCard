@@ -44,8 +44,8 @@ public class ShowCards : MonoBehaviour {
             sprite.height = 450;
             UIButton button = card.GetComponent<UIButton>();
             if (button != null)
-                if (behaviour == Behaviour.draw) card.GetComponent<UIButton>().enabled = true;
-                else card.GetComponent<UIButton>().enabled = false;
+                if (behaviour == Behaviour.draw) button.enabled = true;
+                else button.enabled = false;
             card.GetComponent<UIDragScrollView>().scrollView = scrollView;
             card.GetComponent<BoxCollider>().size = new Vector3(250, 450, 1);
         }
