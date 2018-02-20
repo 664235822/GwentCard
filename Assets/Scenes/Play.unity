@@ -7594,6 +7594,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 1749374669}
+  - component: {fileID: 1749374675}
   - component: {fileID: 1749374671}
   - component: {fileID: 1749374670}
   - component: {fileID: 1749374672}
@@ -7663,12 +7664,6 @@ MonoBehaviour:
   number_label: {fileID: 773164920}
   deck_realms_label: {fileID: 1885540425}
   cardPerfab: {fileID: 1447798922550114, guid: a20a1f7cb19c1d840a9c5c4f01a91a8e, type: 2}
-  atlas:
-  - {fileID: 114438320826604494, guid: 29403d4f893411440b24a74962abb07d, type: 2}
-  - {fileID: 114223472341888394, guid: b501f3bd93895384ab1524f14215c89c, type: 2}
-  - {fileID: 114278269571534250, guid: e2262d434e545664799c6815391cbfbe, type: 2}
-  - {fileID: 114264725574521832, guid: 5c100004eddb41e469cb23a852558ceb, type: 2}
-  - {fileID: 114608170071411750, guid: 63a139151f3f6fc48829ba77600e2d90, type: 2}
   grids:
   - {fileID: 264975099}
   - {fileID: 600705352}
@@ -7730,6 +7725,23 @@ MonoBehaviour:
   frost: 0
   fog: 0
   rain: 0
+--- !u!114 &1749374675
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1749374668}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff1a70024d9e85243a8735646b331960, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  atlas:
+  - {fileID: 114438320826604494, guid: 29403d4f893411440b24a74962abb07d, type: 2}
+  - {fileID: 114223472341888394, guid: b501f3bd93895384ab1524f14215c89c, type: 2}
+  - {fileID: 114278269571534250, guid: e2262d434e545664799c6815391cbfbe, type: 2}
+  - {fileID: 114264725574521832, guid: 5c100004eddb41e469cb23a852558ceb, type: 2}
+  - {fileID: 114608170071411750, guid: 63a139151f3f6fc48829ba77600e2d90, type: 2}
 --- !u!1 &1757265212
 GameObject:
   m_ObjectHideFlags: 0

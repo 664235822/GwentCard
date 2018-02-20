@@ -12,7 +12,6 @@ public class PlayerController : MonoBehaviour {
     public UILabel number_label;
     public UILabel deck_realms_label;
     public GameObject cardPerfab;
-    public UIAtlas[] atlas;
     public Transform[] grids;
     Constants.Group group;
 
@@ -32,25 +31,25 @@ public class PlayerController : MonoBehaviour {
                 avatar_group.spriteName = "player_faction_northern_realms";
                 group_label.text = "北方领域";
                 deck_realms.spriteName = "board_deck_northern_realms";
-                totalAtlas = atlas[0];
+                totalAtlas = GameController.instance.atlas[0];
                 break;
             case Constants.Group.nilfgaardian:
                 avatar_group.spriteName = "player_faction_northern_nilfgaard";
                 group_label.text = "尼弗迦德";
                 deck_realms.spriteName = "board_deck_nilfgaard";
-                totalAtlas = atlas[1];
+                totalAtlas = GameController.instance.atlas[1];
                 break;
             case Constants.Group.monster:
                 avatar_group.spriteName = "player_faction_northern_no_mans_land";
                 group_label.text = "怪兽";
                 deck_realms.spriteName = "board_deck_no_mans_land";
-                totalAtlas = atlas[2];
+                totalAtlas = GameController.instance.atlas[2];
                 break;
             case Constants.Group.scoiatael:
                 avatar_group.spriteName = "player_faction_scoiatael";
                 group_label.text = "松鼠党";
                 deck_realms.spriteName = "board_deck_scoiatael";
-                totalAtlas = atlas[3];
+                totalAtlas = GameController.instance.atlas[3];
                 break;
         }
 
@@ -69,7 +68,7 @@ public class PlayerController : MonoBehaviour {
                 cardObject.name = name.ToString();
                 name++;
                 UISprite cardSprite = cardObject.GetComponent<UISprite>();
-                cardSprite.atlas = atlas[4];
+                cardSprite.atlas = GameController.instance.atlas[4];
                 cardSprite.spriteName = cardNode.Attributes["sprite"].Value;
                 CardProperty cardProperty = cardObject.GetComponent<CardProperty>();
                 cardProperty.line = (Constants.Line)System.Enum.Parse(typeof(Constants.Line), cardNode.Attributes["line"].Value);
@@ -107,7 +106,7 @@ public class PlayerController : MonoBehaviour {
                 cardObject.name = name.ToString();
                 name++;
                 UISprite cardSprite = cardObject.GetComponent<UISprite>();
-                cardSprite.atlas = atlas[4];
+                cardSprite.atlas = GameController.instance.atlas[4];
                 cardSprite.spriteName = cardNode.Attributes["sprite"].Value;
                 CardProperty cardProperty = cardObject.GetComponent<CardProperty>();
                 cardProperty.line = (Constants.Line)System.Enum.Parse(typeof(Constants.Line), cardNode.Attributes["line"].Value);

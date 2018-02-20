@@ -37,17 +37,20 @@ public class CardBehavior : MonoBehaviour {
                 PlayerController.instance.DrawCards(2);
                 break;
             case Constants.Effect.clear_sky:
-                WeatherController.instance.ClearSky();
                 Destroy(PlayerController.instance.grids[1].GetChild(index).gameObject);
+                WeatherController.instance.ClearSky();
                 break;
             case Constants.Effect.frost:
-                WeatherController.instance.Frost(index);
+                PlayerController.instance.grids[1].GetChild(index).SetParent(WeatherController.instance.grid);
+                WeatherController.instance.Frost();
                 break;
             case Constants.Effect.fog:
-                WeatherController.instance.Fog(index);
+                PlayerController.instance.grids[1].GetChild(index).SetParent(WeatherController.instance.grid);
+                WeatherController.instance.Fog();
                 break;
             case Constants.Effect.rain:
-                WeatherController.instance.Rain(index);
+                PlayerController.instance.grids[1].GetChild(index).SetParent(WeatherController.instance.grid);
+                WeatherController.instance.Rain();
                 break;
             default:
                 switch (cardProperty.line)
@@ -72,5 +75,6 @@ public class CardBehavior : MonoBehaviour {
         ShowCards.instance.Hide();
         PlayerController.instance.Number();
         PowerNumberController.instance.Number();
+        EnemyController.instance.Play();
     }
 }

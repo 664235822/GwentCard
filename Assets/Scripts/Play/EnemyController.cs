@@ -32,28 +32,28 @@ public class EnemyController : MonoBehaviour {
                 avatar_group.spriteName = "player_faction_northern_realms";
                 group_label.text = "北方领域";
                 deck_realms.spriteName = "board_deck_northern_realms";
-                totalAtlas = PlayerController.instance.atlas[0];
+                totalAtlas = GameController.instance.atlas[0];
                 break;
             case 2:
                 group = Constants.Group.nilfgaardian;
                 avatar_group.spriteName = "player_faction_northern_nilfgaard";
                 group_label.text = "尼弗迦德";
                 deck_realms.spriteName = "board_deck_nilfgaard";
-                totalAtlas = PlayerController.instance.atlas[1];
+                totalAtlas = GameController.instance.atlas[1];
                 break;
             case 3:
                 group = Constants.Group.monster;
                 avatar_group.spriteName = "player_faction_northern_no_mans_land";
                 group_label.text = "怪兽";
                 deck_realms.spriteName = "board_deck_no_mans_land";
-                totalAtlas = PlayerController.instance.atlas[2];
+                totalAtlas = GameController.instance.atlas[2];
                 break;
             case 4:
                 group = Constants.Group.scoiatael;
                 avatar_group.spriteName = "player_faction_scoiatael";
                 group_label.text = "松鼠党";
                 deck_realms.spriteName = "board_deck_scoiatael";
-                totalAtlas = PlayerController.instance.atlas[3];
+                totalAtlas = GameController.instance.atlas[3];
                 break;
         }
 
@@ -72,7 +72,7 @@ public class EnemyController : MonoBehaviour {
                 cardObject.name = name.ToString();
                 name++;
                 UISprite cardSprite = cardObject.GetComponent<UISprite>();
-                cardSprite.atlas = PlayerController.instance.atlas[4];
+                cardSprite.atlas = GameController.instance.atlas[4];
                 cardSprite.spriteName = cardNode.Attributes["sprite"].Value;
                 CardProperty cardProperty = cardObject.GetComponent<CardProperty>();
                 cardProperty.line = (Constants.Line)System.Enum.Parse(typeof(Constants.Line), cardNode.Attributes["line"].Value);
@@ -110,7 +110,7 @@ public class EnemyController : MonoBehaviour {
                 cardObject.name = name.ToString();
                 name++;
                 UISprite cardSprite = cardObject.GetComponent<UISprite>();
-                cardSprite.atlas = PlayerController.instance.atlas[4];
+                cardSprite.atlas = GameController.instance.atlas[4];
                 cardSprite.spriteName = cardNode.Attributes["sprite"].Value;
                 CardProperty cardProperty = cardObject.GetComponent<CardProperty>();
                 cardProperty.line = (Constants.Line)System.Enum.Parse(typeof(Constants.Line), cardNode.Attributes["line"].Value);
@@ -137,5 +137,69 @@ public class EnemyController : MonoBehaviour {
     {
         number_label.text = grids[1].childCount.ToString();
         deck_realms_label.text = grids[0].childCount.ToString();
+    }
+
+    public void Play()
+    {
+        int random = Random.Range(0, grids[1].childCount);
+        CardProperty cardProperty = grids[1].GetChild(random).GetComponent<CardProperty>();
+
+        switch (cardProperty.effect)
+        {
+            case Constants.Effect.spy:
+                switch (cardProperty.line)
+                {
+                    case Constants.Line.melee:
+                        grids[1].GetChild(random).SetParent(PlayerController.instance.grids[2]);
+                        PlayerController.instance.grids[2].GetComponent<UIGrid>().Reposition();
+                        break;
+                    case Constants.Line.ranged:
+                        grids[1].GetChild(random).SetParent(PlayerController.instance.grids[3]);
+                        PlayerController.instance.grids[3].GetComponent<UIGrid>().Reposition();
+                        break;
+                    case Constants.Line.siege:
+                        grids[1].GetChild(random).SetParent(PlayerController.instance.grids[4]);
+                        PlayerController.instance.grids[4].GetComponent<UIGrid>().Reposition();
+                        break;
+                }
+                PlayerController.instance.DrawCards(2);
+                break;
+            case Constants.Effect.clear_sky:
+                Destroy(grids[1].GetChild(random).gameObject);
+                WeatherController.instance.ClearSky();
+                break;
+            case Constants.Effect.frost:
+                grids[1].GetChild(random).SetParent(WeatherController.instance.grid);
+                WeatherController.instance.Frost();
+                break;
+            case Constants.Effect.fog:
+                grids[1].GetChild(random).SetParent(WeatherController.instance.grid);
+                WeatherController.instance.Fog();
+                break;
+            case Constants.Effect.rain:
+                grids[1].GetChild(random).SetParent(WeatherController.instance.grid);
+                WeatherController.instance.Rain();
+                break;
+            default:
+                switch (cardProperty.line)
+                {
+                    case Constants.Line.melee:
+                        grids[1].GetChild(random).SetParent(grids[2]);
+                        grids[2].GetComponent<UIGrid>().Reposition();
+                        break;
+                    case Constants.Line.ranged:
+                        grids[1].GetChild(random).SetParent(grids[3]);
+                        grids[3].GetComponent<UIGrid>().Reposition();
+                        break;
+                    case Constants.Line.siege:
+                        grids[1].GetChild(random).SetParent(grids[4]);
+                        grids[4].GetComponent<UIGrid>().Reposition();
+                        break;
+                }
+                break;
+        }
+
+        Number();
+        PowerNumberController.instance.Number();
     }
 }

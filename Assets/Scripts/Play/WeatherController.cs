@@ -35,11 +35,10 @@ public class WeatherController : MonoBehaviour {
         enemyRainSprite.SetActive(false);
     }
 
-    public void Frost(int index)
+    public void Frost()
     {
         if (!frost)
         {
-            PlayerController.instance.grids[1].GetChild(index).SetParent(grid);
             grid.GetComponent<UIGrid>().Reposition();
             frost = true;
             playerFrostSprite.SetActive(true);
@@ -47,11 +46,10 @@ public class WeatherController : MonoBehaviour {
         }
     }
 
-    public void Fog(int index)
+    public void Fog()
     {
         if (!fog)
         {
-            PlayerController.instance.grids[1].GetChild(index).SetParent(grid);
             grid.GetComponent<UIGrid>().Reposition();
             fog = true;
             playerFogSprite.SetActive(true);
@@ -59,11 +57,10 @@ public class WeatherController : MonoBehaviour {
         }
     }
 
-    public void Rain(int index)
+    public void Rain()
     {
         if (!rain)
         {
-            PlayerController.instance.grids[1].GetChild(index).SetParent(grid);
             grid.GetComponent<UIGrid>().Reposition();
             rain = true;
             playerRainSprite.SetActive(true);
