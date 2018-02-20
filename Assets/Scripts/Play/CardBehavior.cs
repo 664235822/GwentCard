@@ -70,6 +70,7 @@ public class CardBehavior : MonoBehaviour {
 
         PlayerController.instance.grids[1].GetComponent<UIGrid>().Reposition();
         ShowCards.instance.Hide();
+        PlayerController.instance.Number();
         PowerNumberController.instance.Number();
     }
 }

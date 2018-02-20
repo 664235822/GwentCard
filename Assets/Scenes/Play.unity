@@ -6127,13 +6127,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c5ecb5660b11414fb042fb826e03b73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scalingStyle: 1
+  scalingStyle: 2
   manualWidth: 1920
   manualHeight: 1080
   minimumHeight: 1080
   maximumHeight: 1920
   fitWidth: 1
-  fitHeight: 0
+  fitHeight: 1
   adjustByDPI: 1
   shrinkPortraitUI: 0
 --- !u!4 &1522447887
