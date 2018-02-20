@@ -48,26 +48,26 @@ public class PowerNumberController : MonoBehaviour {
             else
                 player_siege += PlayerController.instance.grids[4].GetChild(i).GetComponent<CardProperty>().power;
         }
-        for (int i = 0; i < EnemyController.instance.grids[0].childCount; i++)
-        {
-            if (WeatherController.instance.frost && !EnemyController.instance.grids[0].GetChild(i).GetComponent<CardProperty>().gold)
-                enemy_melee += 1;
-            else
-                enemy_melee += EnemyController.instance.grids[0].GetChild(i).GetComponent<CardProperty>().power;
-        }
-        for (int i = 0; i < EnemyController.instance.grids[1].childCount; i++)
-        {
-            if (WeatherController.instance.fog && !EnemyController.instance.grids[1].GetChild(i).GetComponent<CardProperty>().gold)
-                enemy_ranged += 1;
-            else
-                enemy_ranged += EnemyController.instance.grids[1].GetChild(i).GetComponent<CardProperty>().power;
-        }
         for (int i = 0; i < EnemyController.instance.grids[2].childCount; i++)
         {
-            if (WeatherController.instance.rain && !EnemyController.instance.grids[2].GetChild(i).GetComponent<CardProperty>().gold)
+            if (WeatherController.instance.frost && !EnemyController.instance.grids[2].GetChild(i).GetComponent<CardProperty>().gold)
+                enemy_melee += 1;
+            else
+                enemy_melee += EnemyController.instance.grids[2].GetChild(i).GetComponent<CardProperty>().power;
+        }
+        for (int i = 0; i < EnemyController.instance.grids[3].childCount; i++)
+        {
+            if (WeatherController.instance.fog && !EnemyController.instance.grids[3].GetChild(i).GetComponent<CardProperty>().gold)
+                enemy_ranged += 1;
+            else
+                enemy_ranged += EnemyController.instance.grids[3].GetChild(i).GetComponent<CardProperty>().power;
+        }
+        for (int i = 0; i < EnemyController.instance.grids[4].childCount; i++)
+        {
+            if (WeatherController.instance.rain && !EnemyController.instance.grids[4].GetChild(i).GetComponent<CardProperty>().gold)
                 enemy_siege += 1;
             else
-                enemy_siege += EnemyController.instance.grids[2].GetChild(i).GetComponent<CardProperty>().power;
+                enemy_siege += EnemyController.instance.grids[4].GetChild(i).GetComponent<CardProperty>().power;
         }
 
         player_power_melee.text = player_melee.ToString();

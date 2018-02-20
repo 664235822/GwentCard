@@ -57,7 +57,7 @@ public class PlayerController : MonoBehaviour {
         XmlDocument xml = new XmlDocument();
         xml.Load(Constants.path);
         XmlElement root = xml.DocumentElement;
-        XmlNode xmlNode = root.SelectSingleNode(string.Format("/root/{0}", Group));
+        XmlNode xmlNode = root.SelectSingleNode(string.Format("/root/{0}", group));
 
         int name = 0;
         XmlNodeList special = xmlNode.SelectSingleNode("special").ChildNodes;

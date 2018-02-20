@@ -22,16 +22,16 @@ public class CardBehavior : MonoBehaviour {
                 switch (cardProperty.line)
                 {
                     case Constants.Line.melee:
-                        PlayerController.instance.grids[1].GetChild(index).SetParent(EnemyController.instance.grids[0]);
-                        EnemyController.instance.grids[0].GetComponent<UIGrid>().Reposition();
-                        break;
-                    case Constants.Line.ranged:
-                        PlayerController.instance.grids[1].GetChild(index).SetParent(EnemyController.instance.grids[1]);
-                        EnemyController.instance.grids[1].GetComponent<UIGrid>().Reposition();
-                        break;
-                    case Constants.Line.siege:
                         PlayerController.instance.grids[1].GetChild(index).SetParent(EnemyController.instance.grids[2]);
                         EnemyController.instance.grids[2].GetComponent<UIGrid>().Reposition();
+                        break;
+                    case Constants.Line.ranged:
+                        PlayerController.instance.grids[1].GetChild(index).SetParent(EnemyController.instance.grids[3]);
+                        EnemyController.instance.grids[3].GetComponent<UIGrid>().Reposition();
+                        break;
+                    case Constants.Line.siege:
+                        PlayerController.instance.grids[1].GetChild(index).SetParent(EnemyController.instance.grids[4]);
+                        EnemyController.instance.grids[4].GetComponent<UIGrid>().Reposition();
                         break;
                 }
                 PlayerController.instance.DrawCards(2);
