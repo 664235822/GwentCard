@@ -6,7 +6,7 @@ public class CardPlus : MonoBehaviour {
     UILabel label;
     UIToggle toggle;
     public int total;
-    int max;
+    public int max;
 
     private void Awake()
     {

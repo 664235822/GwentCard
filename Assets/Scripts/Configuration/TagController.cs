@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class TagController : MonoBehaviour {
+    public static TagController instance;
     public static Constants.Group group = Constants.Group.northern;
     public static Constants.List list = Constants.List.leader;
     public GameObject[] tagButtons;
@@ -21,6 +22,11 @@ public class TagController : MonoBehaviour {
     void Start()
     {
         OnClick(tagButtons[0]);
+    }
+
+    private void Awake()
+    {
+        instance = this;
     }
 
     public void OnClick(GameObject tagButton)
@@ -85,7 +91,6 @@ public class TagController : MonoBehaviour {
                         break;
                 }
                 return;
-                //修复切换牌组的bug
         }
 
         for (int i = 0; i < popupList.items.Count; i++)
