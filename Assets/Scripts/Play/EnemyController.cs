@@ -124,16 +124,16 @@ public class EnemyController : MonoBehaviour {
         Number();
     }
 
-    public void DrawCards(int index)
+    void DrawCards(int index)
     {
         for (int i = 0; i < index; i++)
         {
             int random = Random.Range(0, grids[0].childCount);
-            grids[0].GetChild(random).SetParent(grids[1]);
+            Constants.SetParent(grids[0], grids[1], random);
         }
     }
 
-    public void Number()
+    void Number()
     {
         number_label.text = grids[1].childCount.ToString();
         deck_realms_label.text = grids[0].childCount.ToString();
@@ -150,50 +150,53 @@ public class EnemyController : MonoBehaviour {
                 switch (cardProperty.line)
                 {
                     case Constants.Line.melee:
-                        grids[1].GetChild(random).SetParent(PlayerController.instance.grids[2]);
-                        PlayerController.instance.grids[2].GetComponent<UIGrid>().Reposition();
+                        Constants.SetParent(grids[1], PlayerController.instance.grids[2], random);
                         break;
                     case Constants.Line.ranged:
-                        grids[1].GetChild(random).SetParent(PlayerController.instance.grids[3]);
-                        PlayerController.instance.grids[3].GetComponent<UIGrid>().Reposition();
+                        Constants.SetParent(grids[1], PlayerController.instance.grids[3], random);
                         break;
                     case Constants.Line.siege:
-                        grids[1].GetChild(random).SetParent(PlayerController.instance.grids[4]);
-                        PlayerController.instance.grids[4].GetComponent<UIGrid>().Reposition();
+                        Constants.SetParent(grids[1], PlayerController.instance.grids[4], random);
                         break;
                 }
-                PlayerController.instance.DrawCards(2);
+                DrawCards(2);
                 break;
             case Constants.Effect.clear_sky:
-                Destroy(grids[1].GetChild(random).gameObject);
+                Constants.SetParent(grids[1], GameController.instance.grids[1], random);
                 WeatherController.instance.ClearSky();
                 break;
             case Constants.Effect.frost:
-                grids[1].GetChild(random).SetParent(WeatherController.instance.grid);
-                WeatherController.instance.Frost();
+                if (!WeatherController.instance.frost)
+                {
+                    Constants.SetParent(grids[1], WeatherController.instance.grid, random);
+                    WeatherController.instance.Frost();
+                }
                 break;
             case Constants.Effect.fog:
-                grids[1].GetChild(random).SetParent(WeatherController.instance.grid);
-                WeatherController.instance.Fog();
+                if (!WeatherController.instance.fog)
+                {
+                    Constants.SetParent(grids[1], WeatherController.instance.grid, random);
+                    WeatherController.instance.Fog();
+                }
                 break;
             case Constants.Effect.rain:
-                grids[1].GetChild(random).SetParent(WeatherController.instance.grid);
-                WeatherController.instance.Rain();
+                if (!WeatherController.instance.fog)
+                {
+                    Constants.SetParent(grids[1], WeatherController.instance.grid, random);
+                    WeatherController.instance.Rain();
+                }
                 break;
             default:
                 switch (cardProperty.line)
                 {
                     case Constants.Line.melee:
-                        grids[1].GetChild(random).SetParent(grids[2]);
-                        grids[2].GetComponent<UIGrid>().Reposition();
+                        Constants.SetParent(grids[1], grids[2], random);
                         break;
                     case Constants.Line.ranged:
-                        grids[1].GetChild(random).SetParent(grids[3]);
-                        grids[3].GetComponent<UIGrid>().Reposition();
+                        Constants.SetParent(grids[1], grids[3], random);
                         break;
                     case Constants.Line.siege:
-                        grids[1].GetChild(random).SetParent(grids[4]);
-                        grids[4].GetComponent<UIGrid>().Reposition();
+                        Constants.SetParent(grids[1], grids[4], random);
                         break;
                 }
                 break;

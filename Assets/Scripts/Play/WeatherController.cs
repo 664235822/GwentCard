@@ -22,8 +22,8 @@ public class WeatherController : MonoBehaviour {
 
     public void ClearSky()
     {
-        grid.DestroyChildren();
-        grid.GetComponent<UIGrid>().Reposition();
+        for (int i = 0; i < grid.childCount; i++)
+            Constants.SetParent(grid, GameController.instance.grids[0], i);
         frost = false;
         fog = false;
         rain = false;
@@ -37,34 +37,22 @@ public class WeatherController : MonoBehaviour {
 
     public void Frost()
     {
-        if (!frost)
-        {
-            grid.GetComponent<UIGrid>().Reposition();
-            frost = true;
-            playerFrostSprite.SetActive(true);
-            enemyFrostSprite.SetActive(true);
-        }
+        frost = true;
+        playerFrostSprite.SetActive(true);
+        enemyFrostSprite.SetActive(true);
     }
 
     public void Fog()
     {
-        if (!fog)
-        {
-            grid.GetComponent<UIGrid>().Reposition();
-            fog = true;
-            playerFogSprite.SetActive(true);
-            enemyFogSprite.SetActive(true);
-        }
+        fog = true;
+        playerFogSprite.SetActive(true);
+        enemyFogSprite.SetActive(true);
     }
 
     public void Rain()
     {
-        if (!rain)
-        {
-            grid.GetComponent<UIGrid>().Reposition();
-            rain = true;
-            playerRainSprite.SetActive(true);
-            enemyRainSprite.SetActive(true);
-        }
+        rain = true;
+        playerRainSprite.SetActive(true);
+        enemyRainSprite.SetActive(true);
     }
 }

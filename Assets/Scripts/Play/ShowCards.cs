@@ -16,7 +16,7 @@ public class ShowCards : MonoBehaviour {
         instance = this;
     }
 
-    public void Show(Behaviour behav,Transform ShowGrid)
+    public void Show(Behaviour behav, Transform ShowGrid)
     {
         behaviour = behav;
         BlackShow.instance.Show(true);

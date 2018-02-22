@@ -12,6 +12,8 @@ public class PowerNumberController : MonoBehaviour {
     public UILabel enemy_power_melee;
     public UILabel enemy_power_ranged;
     public UILabel enemy_power_siege;
+    public int player_total;
+    public int enemy_total;
 
     private void Awake()
     {
@@ -70,13 +72,16 @@ public class PowerNumberController : MonoBehaviour {
                 enemy_siege += EnemyController.instance.grids[4].GetChild(i).GetComponent<CardProperty>().power;
         }
 
+        player_total = player_melee + player_ranged + player_siege;
+        enemy_total = enemy_melee + enemy_ranged + enemy_siege;
+
         player_power_melee.text = player_melee.ToString();
         player_power_ranged.text = player_ranged.ToString();
         player_power_siege.text = player_siege.ToString();
         enemy_power_melee.text = enemy_melee.ToString();
         enemy_power_ranged.text = enemy_ranged.ToString();
         enemy_power_siege.text = enemy_siege.ToString();
-        player_power_total.text = (player_melee + player_ranged + player_siege).ToString();
-        enemy_power_total.text = (enemy_melee + enemy_ranged + enemy_siege).ToString();
+        player_power_total.text = player_total.ToString();
+        enemy_power_total.text = enemy_total.ToString();
     }
 }
