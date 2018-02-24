@@ -22,39 +22,39 @@ public class CardBehavior : MonoBehaviour {
                 switch (cardProperty.line)
                 {
                     case Constants.Line.melee:
-                        Constants.SetParent(PlayerController.instance.grids[1], EnemyController.instance.grids[2], index);
+                        PlayerController.instance.grids[1].SetParent(index, EnemyController.instance.grids[2]);
                         break;
                     case Constants.Line.ranged:
-                        Constants.SetParent(PlayerController.instance.grids[1], EnemyController.instance.grids[3], index);
+                        PlayerController.instance.grids[1].SetParent(index, EnemyController.instance.grids[3]);
                         break;
                     case Constants.Line.siege:
-                        Constants.SetParent(PlayerController.instance.grids[1], EnemyController.instance.grids[4], index);
+                        PlayerController.instance.grids[1].SetParent(index, EnemyController.instance.grids[4]);
                         break;
                 }
                 PlayerController.instance.DrawCards(2);
                 break;
             case Constants.Effect.clear_sky:
-                Constants.SetParent(PlayerController.instance.grids[1], GameController.instance.grids[0], index);
+                PlayerController.instance.grids[1].SetParent(index, PlayerController.instance.grids[5]);
                 WeatherController.instance.ClearSky();
                 break;
             case Constants.Effect.frost:
                 if(!WeatherController.instance.frost)
                 {
-                    Constants.SetParent(PlayerController.instance.grids[1], WeatherController.instance.grid, index);
+                    PlayerController.instance.grids[1].SetParent(index, WeatherController.instance.grid);
                     WeatherController.instance.Frost();
                 }
                 break;
             case Constants.Effect.fog:
                 if(!WeatherController.instance.fog)
                 {
-                    Constants.SetParent(PlayerController.instance.grids[1], WeatherController.instance.grid, index);
+                    PlayerController.instance.grids[1].SetParent(index, WeatherController.instance.grid);
                     WeatherController.instance.Fog();
                 }
                 break;
             case Constants.Effect.rain:
                 if(!WeatherController.instance.rain)
                 {
-                    Constants.SetParent(PlayerController.instance.grids[1], WeatherController.instance.grid, index);
+                    PlayerController.instance.grids[1].SetParent(index, WeatherController.instance.grid);
                     WeatherController.instance.Rain();
                 }
                 break;
@@ -62,13 +62,13 @@ public class CardBehavior : MonoBehaviour {
                 switch (cardProperty.line)
                 {
                     case Constants.Line.melee:
-                        Constants.SetParent(PlayerController.instance.grids[1], PlayerController.instance.grids[2], index);
+                        PlayerController.instance.grids[1].SetParent(index, PlayerController.instance.grids[2]);
                         break;
                     case Constants.Line.ranged:
-                        Constants.SetParent(PlayerController.instance.grids[1], PlayerController.instance.grids[3], index);
+                        PlayerController.instance.grids[1].SetParent(index, PlayerController.instance.grids[3]);
                         break;
                     case Constants.Line.siege:
-                        Constants.SetParent(PlayerController.instance.grids[1], PlayerController.instance.grids[4], index);
+                        PlayerController.instance.grids[1].SetParent(index, PlayerController.instance.grids[4]);
                         break;
                 }
                 break;

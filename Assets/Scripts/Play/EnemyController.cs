@@ -27,28 +27,28 @@ public class EnemyController : MonoBehaviour {
         UIAtlas totalAtlas = new UIAtlas();
         switch (random)
         {
-            case 1:
+            case 0:
                 group = Constants.Group.northern;
                 avatar_group.spriteName = "player_faction_northern_realms";
                 group_label.text = "北方领域";
                 deck_realms.spriteName = "board_deck_northern_realms";
                 totalAtlas = GameController.instance.atlas[0];
                 break;
-            case 2:
+            case 1:
                 group = Constants.Group.nilfgaardian;
                 avatar_group.spriteName = "player_faction_northern_nilfgaard";
                 group_label.text = "尼弗迦德";
                 deck_realms.spriteName = "board_deck_nilfgaard";
                 totalAtlas = GameController.instance.atlas[1];
                 break;
-            case 3:
+            case 2:
                 group = Constants.Group.monster;
                 avatar_group.spriteName = "player_faction_northern_no_mans_land";
                 group_label.text = "怪兽";
                 deck_realms.spriteName = "board_deck_no_mans_land";
                 totalAtlas = GameController.instance.atlas[2];
                 break;
-            case 4:
+            case 3:
                 group = Constants.Group.scoiatael;
                 avatar_group.spriteName = "player_faction_scoiatael";
                 group_label.text = "松鼠党";
@@ -129,7 +129,7 @@ public class EnemyController : MonoBehaviour {
         for (int i = 0; i < index; i++)
         {
             int random = Random.Range(0, grids[0].childCount);
-            Constants.SetParent(grids[0], grids[1], random);
+            grids[0].SetParent(random, grids[1]);
         }
     }
 
@@ -150,39 +150,39 @@ public class EnemyController : MonoBehaviour {
                 switch (cardProperty.line)
                 {
                     case Constants.Line.melee:
-                        Constants.SetParent(grids[1], PlayerController.instance.grids[2], random);
+                        grids[1].SetParent(random, PlayerController.instance.grids[2]);
                         break;
                     case Constants.Line.ranged:
-                        Constants.SetParent(grids[1], PlayerController.instance.grids[3], random);
+                        grids[1].SetParent(random, PlayerController.instance.grids[3]);
                         break;
                     case Constants.Line.siege:
-                        Constants.SetParent(grids[1], PlayerController.instance.grids[4], random);
+                        grids[1].SetParent(random, PlayerController.instance.grids[4]);
                         break;
                 }
                 DrawCards(2);
                 break;
             case Constants.Effect.clear_sky:
-                Constants.SetParent(grids[1], GameController.instance.grids[1], random);
+                grids[1].SetParent(random, grids[5]);
                 WeatherController.instance.ClearSky();
                 break;
             case Constants.Effect.frost:
                 if (!WeatherController.instance.frost)
                 {
-                    Constants.SetParent(grids[1], WeatherController.instance.grid, random);
+                    grids[1].SetParent(random, WeatherController.instance.grid);
                     WeatherController.instance.Frost();
                 }
                 break;
             case Constants.Effect.fog:
                 if (!WeatherController.instance.fog)
                 {
-                    Constants.SetParent(grids[1], WeatherController.instance.grid, random);
+                    grids[1].SetParent(random, WeatherController.instance.grid);
                     WeatherController.instance.Fog();
                 }
                 break;
             case Constants.Effect.rain:
                 if (!WeatherController.instance.fog)
                 {
-                    Constants.SetParent(grids[1], WeatherController.instance.grid, random);
+                    grids[1].SetParent(random, WeatherController.instance.grid);
                     WeatherController.instance.Rain();
                 }
                 break;
@@ -190,13 +190,13 @@ public class EnemyController : MonoBehaviour {
                 switch (cardProperty.line)
                 {
                     case Constants.Line.melee:
-                        Constants.SetParent(grids[1], grids[2], random);
+                        grids[1].SetParent(random, grids[2]);
                         break;
                     case Constants.Line.ranged:
-                        Constants.SetParent(grids[1], grids[3], random);
+                        grids[1].SetParent(random, grids[3]);
                         break;
                     case Constants.Line.siege:
-                        Constants.SetParent(grids[1], grids[4], random);
+                        grids[1].SetParent(random, grids[4]);
                         break;
                 }
                 break;

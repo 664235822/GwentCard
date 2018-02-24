@@ -7,7 +7,6 @@ public class GameController : MonoBehaviour {
     public UIAtlas[] atlas;
     public UISprite[] player_life_gem;
     public UISprite[] enemy_life_gem;
-    public Transform[] grids;
     bool offensive;
     int player_fail = 0;
     int enemy_fail = 0;
@@ -58,13 +57,23 @@ public class GameController : MonoBehaviour {
     {
         WeatherController.instance.ClearSky();
 
-        for (int i = 2; i < PlayerController.instance.grids.Length; i++)
-            for (int ii = 0; i < PlayerController.instance.grids[i].childCount; i++)
-                Constants.SetParent(PlayerController.instance.grids[i], grids[0], ii);
-        
-        for (int i = 2; i < EnemyController.instance.grids.Length; i++)
-            for (int ii = 0; i < EnemyController.instance.grids[i].childCount; i++)
-                Constants.SetParent(EnemyController.instance.grids[i], grids[1], ii);
+        for (int i = 0; i < PlayerController.instance.grids[2].childCount; i++)
+            PlayerController.instance.grids[2].SetParent(i, PlayerController.instance.grids[5]);
+        for (int i = 0; i < PlayerController.instance.grids[3].childCount; i++)
+            PlayerController.instance.grids[3].SetParent(i, PlayerController.instance.grids[5]);
+        for (int i = 0; i < PlayerController.instance.grids[3].childCount; i++)
+            PlayerController.instance.grids[3].SetParent(i, PlayerController.instance.grids[5]);
+        for (int i = 0; i < EnemyController.instance.grids[2].childCount; i++)
+            EnemyController.instance.grids[2].SetParent(i, EnemyController.instance.grids[5]);
+        for (int i = 0; i < EnemyController.instance.grids[3].childCount; i++)
+            EnemyController.instance.grids[3].SetParent(i, EnemyController.instance.grids[5]);
+        for (int i = 0; i < EnemyController.instance.grids[4].childCount; i++)
+            EnemyController.instance.grids[4].SetParent(i, EnemyController.instance.grids[5]);
+
+        PlayerController.instance.grids[5].gameObject.SetActive(false);
+        PlayerController.instance.grids[5].gameObject.SetActive(true);
+        EnemyController.instance.grids[5].gameObject.SetActive(false);
+        EnemyController.instance.grids[5].gameObject.SetActive(true);
 
         PowerNumberController.instance.Number();
 

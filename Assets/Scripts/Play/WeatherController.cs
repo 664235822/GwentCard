@@ -23,7 +23,7 @@ public class WeatherController : MonoBehaviour {
     public void ClearSky()
     {
         for (int i = 0; i < grid.childCount; i++)
-            Constants.SetParent(grid, GameController.instance.grids[0], i);
+            grid.SetParent(i, PlayerController.instance.grids[5]);
         frost = false;
         fog = false;
         rain = false;
