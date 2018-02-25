@@ -61,8 +61,8 @@ public class GameController : MonoBehaviour {
             PlayerController.instance.grids[2].SetParent(i, PlayerController.instance.grids[5]);
         for (int i = 0; i < PlayerController.instance.grids[3].childCount; i++)
             PlayerController.instance.grids[3].SetParent(i, PlayerController.instance.grids[5]);
-        for (int i = 0; i < PlayerController.instance.grids[3].childCount; i++)
-            PlayerController.instance.grids[3].SetParent(i, PlayerController.instance.grids[5]);
+        for (int i = 0; i < PlayerController.instance.grids[4].childCount; i++)
+            PlayerController.instance.grids[4].SetParent(i, PlayerController.instance.grids[5]);
         for (int i = 0; i < EnemyController.instance.grids[2].childCount; i++)
             EnemyController.instance.grids[2].SetParent(i, EnemyController.instance.grids[5]);
         for (int i = 0; i < EnemyController.instance.grids[3].childCount; i++)
