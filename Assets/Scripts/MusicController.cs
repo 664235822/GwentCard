@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MusicController : MonoBehaviour {
     public static MusicController instance;
-    public AudioClip[] audioClip;
+    [SerializeField] AudioClip[] audioClip;
     AudioSource audioSource;
     bool pause = false;
 

@@ -5,14 +5,13 @@ using System.Xml;
 
 public class EnemyController : MonoBehaviour {
     public static EnemyController instance;
-    public GameObject enemy;
-    public UISprite avatar_group;
-    public UILabel group_label;
-    public UISprite deck_realms;
-    public UILabel number_label;
-    public UILabel deck_realms_label;
-    public GameObject cardPerfab;
     public Transform[] grids;
+    public GameObject enemy;
+    [SerializeField] UISprite avatar_group;
+    [SerializeField] UILabel group_label;
+    [SerializeField] UISprite deck_realms;
+    [SerializeField] UILabel number_label;
+    [SerializeField] UILabel deck_realms_label;
     Constants.Group group;
 
     private void Awake()
@@ -68,7 +67,7 @@ public class EnemyController : MonoBehaviour {
         {
             for (int i = 0; i < int.Parse(cardNode.Attributes["max"].Value); i++)
             {
-                GameObject cardObject = Instantiate(cardPerfab, grids[0]);
+                GameObject cardObject = Instantiate(GameController.instance.cardPerfab, grids[0]);
                 cardObject.name = name.ToString();
                 name++;
                 UISprite cardSprite = cardObject.GetComponent<UISprite>();
@@ -87,7 +86,7 @@ public class EnemyController : MonoBehaviour {
         {
             for (int i = 0; i < int.Parse(cardNode.Attributes["max"].Value); i++)
             {
-                GameObject cardObject = Instantiate(cardPerfab, grids[0]);
+                GameObject cardObject = Instantiate(GameController.instance.cardPerfab, grids[0]);
                 cardObject.name = name.ToString();
                 name++;
                 UISprite cardSprite = cardObject.GetComponent<UISprite>();
@@ -106,7 +105,7 @@ public class EnemyController : MonoBehaviour {
         {
             for (int i = 0; i < int.Parse(cardNode.Attributes["max"].Value); i++)
             {
-                GameObject cardObject = Instantiate(cardPerfab, grids[0]);
+                GameObject cardObject = Instantiate(GameController.instance.cardPerfab, grids[0]);
                 cardObject.name = name.ToString();
                 name++;
                 UISprite cardSprite = cardObject.GetComponent<UISprite>();

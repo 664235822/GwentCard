@@ -4,16 +4,16 @@ using UnityEngine;
 
 public class PowerNumberController : MonoBehaviour {
     public static PowerNumberController instance;
-    public UILabel player_power_total;
-    public UILabel player_power_melee;
-    public UILabel player_power_ranged;
-    public UILabel player_power_siege;
-    public UILabel enemy_power_total;
-    public UILabel enemy_power_melee;
-    public UILabel enemy_power_ranged;
-    public UILabel enemy_power_siege;
-    public int player_total;
-    public int enemy_total;
+    [SerializeField] UILabel player_power_total;
+    [SerializeField] UILabel player_power_melee;
+    [SerializeField] UILabel player_power_ranged;
+    [SerializeField] UILabel player_power_siege;
+    [SerializeField] UILabel enemy_power_total;
+    [SerializeField] UILabel enemy_power_melee;
+    [SerializeField] UILabel enemy_power_ranged;
+    [SerializeField] UILabel enemy_power_siege;
+    [HideInInspector] public int player_total;
+    [HideInInspector] public int enemy_total;
 
     private void Awake()
     {

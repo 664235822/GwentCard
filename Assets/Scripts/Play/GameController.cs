@@ -5,8 +5,9 @@ using UnityEngine;
 public class GameController : MonoBehaviour {
     public static GameController instance;
     public UIAtlas[] atlas;
-    public UISprite[] player_life_gem;
-    public UISprite[] enemy_life_gem;
+    public GameObject cardPerfab;
+    [SerializeField] UISprite[] player_life_gem;
+    [SerializeField] UISprite[] enemy_life_gem;
     bool offensive;
     int player_fail = 0;
     int enemy_fail = 0;

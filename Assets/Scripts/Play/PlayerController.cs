@@ -5,14 +5,13 @@ using System.Xml;
 
 public class PlayerController : MonoBehaviour {
     public static PlayerController instance;
-    public GameObject player;
-    public UISprite avatar_group;
-    public UILabel group_label;
-    public UISprite deck_realms;
-    public UILabel number_label;
-    public UILabel deck_realms_label;
-    public GameObject cardPerfab;
     public Transform[] grids;
+    public GameObject player;
+    [SerializeField] UISprite avatar_group;
+    [SerializeField] UILabel group_label;
+    [SerializeField] UISprite deck_realms;
+    [SerializeField] UILabel number_label;
+    [SerializeField] UILabel deck_realms_label;
     Constants.Group group;
 
     private void Awake()
@@ -64,7 +63,7 @@ public class PlayerController : MonoBehaviour {
         {
             for (int i = 0; i < int.Parse(cardNode.Attributes["total"].Value); i++)
             {
-                GameObject cardObject = Instantiate(cardPerfab, grids[0]);
+                GameObject cardObject = Instantiate(GameController.instance.cardPerfab, grids[0]);
                 cardObject.name = name.ToString();
                 name++;
                 UISprite cardSprite = cardObject.GetComponent<UISprite>();
@@ -83,7 +82,7 @@ public class PlayerController : MonoBehaviour {
         {
             for (int i = 0; i < int.Parse(cardNode.Attributes["total"].Value); i++)
             {
-                GameObject cardObject = Instantiate(cardPerfab, grids[0]);
+                GameObject cardObject = Instantiate(GameController.instance.cardPerfab, grids[0]);
                 cardObject.name = name.ToString();
                 name++;
                 UISprite cardSprite = cardObject.GetComponent<UISprite>();
@@ -102,7 +101,7 @@ public class PlayerController : MonoBehaviour {
         {
             for (int i = 0; i < int.Parse(cardNode.Attributes["total"].Value); i++)
             {
-                GameObject cardObject = Instantiate(cardPerfab, grids[0]);
+                GameObject cardObject = Instantiate(GameController.instance.cardPerfab, grids[0]);
                 cardObject.name = name.ToString();
                 name++;
                 UISprite cardSprite = cardObject.GetComponent<UISprite>();

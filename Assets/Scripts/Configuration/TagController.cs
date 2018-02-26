@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class TagController : MonoBehaviour {
     public static TagController instance;
-    public static Constants.Group group = Constants.Group.northern;
-    public static Constants.List list = Constants.List.leader;
-    public GameObject[] tagButtons;
     public GameObject[] groups;
-    public UIPopupList popupList;
-    public UILabel groupLabel;
+    [SerializeField] GameObject[] tagButtons;
+    [SerializeField] UIPopupList popupList;
+    [SerializeField] UILabel groupLabel;
+    [HideInInspector] public Constants.Group group = Constants.Group.northern;
+    [HideInInspector] public Constants.List list = Constants.List.leader;
     GameObject[] grids = new GameObject[4];
     readonly string[] groupLabelText = {
         "赢得一局后可从牌组中抽一张牌",

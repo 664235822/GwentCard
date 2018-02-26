@@ -5,15 +5,15 @@ using UnityEngine;
 public class WeatherController : MonoBehaviour {
     public static WeatherController instance;
     public Transform grid;
-    public GameObject playerFrostSprite;
-    public GameObject playerFogSprite;
-    public GameObject playerRainSprite;
-    public GameObject enemyFrostSprite;
-    public GameObject enemyFogSprite;
-    public GameObject enemyRainSprite;
-    public bool frost = false;
-    public bool fog = false;
-    public bool rain = false;
+    [SerializeField] GameObject playerFrostSprite;
+    [SerializeField] GameObject playerFogSprite;
+    [SerializeField] GameObject playerRainSprite;
+    [SerializeField] GameObject enemyFrostSprite;
+    [SerializeField] GameObject enemyFogSprite;
+    [SerializeField] GameObject enemyRainSprite;
+    [HideInInspector] public bool frost = false;
+    [HideInInspector] public bool fog = false;
+    [HideInInspector] public bool rain = false;
 
     private void Awake()
     {

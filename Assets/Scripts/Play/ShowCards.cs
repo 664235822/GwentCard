@@ -5,11 +5,11 @@ using UnityEngine;
 public class ShowCards : MonoBehaviour {
     public static ShowCards instance;
     public enum Behaviour { draw, replace, show }
-    public GameObject show;
-    public UILabel label;
     public Transform grid;
-    public UIScrollView scrollView;
-    public Transform totalGrid;
+    [SerializeField] GameObject show;
+    [SerializeField] UILabel label;
+    [SerializeField] UIScrollView scrollView;
+    [HideInInspector] public Transform totalGrid;
     Behaviour behaviour;
 
     private void Awake()

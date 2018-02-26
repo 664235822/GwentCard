@@ -1167,6 +1167,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21eb9a3ead5dbc94e888df3123868cf5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  label: {fileID: 114327548503641926}
+  toggle: {fileID: 114290873978169754}
   total: 0
   max: 0
 --- !u!114 &114946046298615200

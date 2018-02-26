@@ -3,15 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class CardPlus : MonoBehaviour {
-    UILabel label;
-    UIToggle toggle;
-    public int total;
-    public int max;
+    [SerializeField] UILabel label;
+    [SerializeField] UIToggle toggle;
+    [HideInInspector] public int total;
+    [HideInInspector] public int max;
 
     private void Awake()
     {
-        label = transform.Find("Label").GetComponent<UILabel>();
-        toggle = transform.Find("Control - Simple Checkbox").GetComponent<UIToggle>();
         string[] text = label.text.Split('/');
         total = int.Parse(text[0]);
         max = int.Parse(text[1]);

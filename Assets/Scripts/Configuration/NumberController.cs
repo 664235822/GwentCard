@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class NumberController : MonoBehaviour {
     public static NumberController instance;
-    public UILabel[] labels;
-    public int leaderCount = 0;
-    public int specialCount = 0;
-    public int monsterCount = 0;
+    [SerializeField] UILabel[] labels;
+    [HideInInspector] public int leaderCount = 0;
+    [HideInInspector] public int specialCount = 0;
+    [HideInInspector] public int monsterCount = 0;
 
     private void Awake()
     {
@@ -16,7 +16,7 @@ public class NumberController : MonoBehaviour {
 
     public void Number()
     {
-        Transform group = transform.Find(TagController.group.ToString());
+        Transform group = transform.Find(TagController.instance.group.ToString());
         leaderCount = 0;
         specialCount = 0;
         monsterCount = 0;

@@ -6,8 +6,8 @@ using System.IO;
 
 public class SaveController : MonoBehaviour {
     public static SaveController instance;
-    public UILabel label;
-    public Transform scrollView;
+    [SerializeField] UILabel label;
+    [SerializeField] Transform scrollView;
     XmlDocument xml = new XmlDocument();
 
     // Use this for initialization
@@ -90,7 +90,7 @@ public class SaveController : MonoBehaviour {
 
     public void LoadXML()
     {
-        string group = TagController.group.ToString();
+        string group = TagController.instance.group.ToString();
         xml.Load(Constants.path);
         XmlElement root = xml.DocumentElement;
         XmlNode groupNode = root.SelectSingleNode("/root/" + group);
@@ -140,8 +140,8 @@ public class SaveController : MonoBehaviour {
 
     public void UpdateXML(Transform card)
     {
-        string group = TagController.group.ToString();
-        string list = TagController.list.ToString();
+        string group = TagController.instance.group.ToString();
+        string list = TagController.instance.list.ToString();
         XmlElement root = xml.DocumentElement;
         XmlNode node = root.SelectSingleNode(string.Format("/root/{0}/{1}", group, list));
 
@@ -198,7 +198,7 @@ public class SaveController : MonoBehaviour {
                 throw new SaveException();
 
             XmlElement root = xml.DocumentElement;
-            XmlNode groupNode = root.SelectSingleNode(string.Format("/root/{0}", TagController.group.ToString()));
+            XmlNode groupNode = root.SelectSingleNode(string.Format("/root/{0}", TagController.instance.group.ToString()));
             groupNode.Attributes["save"].Value = true.ToString();
             xml.Save(Constants.path);
             StartCoroutine(ShowLabel("保存成功"));
