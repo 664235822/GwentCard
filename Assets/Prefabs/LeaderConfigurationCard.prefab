@@ -90,7 +90,7 @@ GameObject:
   - component: {fileID: 114487457447823186}
   - component: {fileID: 65748273324801962}
   m_Layer: 8
-  m_Name: LeaderCard
+  m_Name: LeaderConfigurationCard
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -222,7 +222,7 @@ GameObject:
   - component: {fileID: 114863168865419676}
   - component: {fileID: 114497043296445316}
   m_Layer: 8
-  m_Name: OtherCard
+  m_Name: ConfigurationCard
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1168,6 +1168,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   total: 0
+  max: 0
 --- !u!114 &114946046298615200
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -26,7 +26,7 @@ public class GameController : MonoBehaviour {
         if (random == 0) offensive = true;
         else offensive = false;
 
-        if (!offensive) EnemyController.instance.Play();
+        if (!offensive) EnemyController.instance.Play(EnemyController.instance.grids[0]);
     }
 
     public void EndTurn()
@@ -50,11 +50,6 @@ public class GameController : MonoBehaviour {
             enemy_fail++;
         }
 
-        NewTurn();
-    }
-
-    void NewTurn()
-    {
         WeatherController.instance.ClearSky();
 
         for (int i = 0; i < PlayerController.instance.grids[2].childCount; i++)
@@ -78,6 +73,6 @@ public class GameController : MonoBehaviour {
         PowerNumberController.instance.Number();
 
         offensive = !offensive;
-        if (!offensive) EnemyController.instance.Play();
+        if (!offensive) EnemyController.instance.Play(EnemyController.instance.grids[0]);
     }
 }

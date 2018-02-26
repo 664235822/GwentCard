@@ -9,6 +9,7 @@ public class ShowCards : MonoBehaviour {
     public UILabel label;
     public Transform grid;
     public UIScrollView scrollView;
+    public Transform totalGrid;
     Behaviour behaviour;
 
     private void Awake()
@@ -19,6 +20,7 @@ public class ShowCards : MonoBehaviour {
     public void Show(Behaviour behav, Transform ShowGrid)
     {
         behaviour = behav;
+        totalGrid = ShowGrid;
         BlackShow.instance.Show(true);
         PlayerController.instance.player.SetActive(false);
         EnemyController.instance.enemy.SetActive(false);
@@ -43,9 +45,8 @@ public class ShowCards : MonoBehaviour {
             sprite.width = 250;
             sprite.height = 450;
             UIButton button = card.GetComponent<UIButton>();
-            if (button != null)
-                if (behaviour == Behaviour.draw) button.enabled = true;
-                else button.enabled = false;
+            if (behaviour == Behaviour.draw) button.enabled = true;
+            else button.enabled = false;
             card.GetComponent<UIDragScrollView>().scrollView = scrollView;
             card.GetComponent<BoxCollider>().size = new Vector3(250, 450, 1);
         }
@@ -55,6 +56,7 @@ public class ShowCards : MonoBehaviour {
 
     public void Hide()
     {
+        totalGrid = null;
         grid.DestroyChildren();
         BlackShow.instance.Show(false);
         PlayerController.instance.player.SetActive(true);

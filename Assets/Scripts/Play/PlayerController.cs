@@ -125,7 +125,7 @@ public class PlayerController : MonoBehaviour {
         for (int i = 0; i < index; i++)
         {
             int random = Random.Range(0, grids[0].childCount);
-            grids[0].GetChild(random).SetParent(grids[1]);
+            grids[0].SetParent(random, grids[1]);
         }
     }
 

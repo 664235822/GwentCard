@@ -12,8 +12,9 @@ public class CardBehavior : MonoBehaviour {
 
     public void Play()
     {
+        Transform grid = ShowCards.instance.totalGrid;
         int index = 0;
-        for (int i = 0; i < PlayerController.instance.grids[1].childCount; i++)
+        for (int i = 0; i < grid.childCount; i++)
             if (ShowCards.instance.grid.GetChild(i).name == name) index = i;
 
         switch (cardProperty.effect)
@@ -22,39 +23,39 @@ public class CardBehavior : MonoBehaviour {
                 switch (cardProperty.line)
                 {
                     case Constants.Line.melee:
-                        PlayerController.instance.grids[1].SetParent(index, EnemyController.instance.grids[2]);
+                        grid.SetParent(index, EnemyController.instance.grids[2]);
                         break;
                     case Constants.Line.ranged:
-                        PlayerController.instance.grids[1].SetParent(index, EnemyController.instance.grids[3]);
+                        grid.SetParent(index, EnemyController.instance.grids[3]);
                         break;
                     case Constants.Line.siege:
-                        PlayerController.instance.grids[1].SetParent(index, EnemyController.instance.grids[4]);
+                        grid.SetParent(index, EnemyController.instance.grids[4]);
                         break;
                 }
                 PlayerController.instance.DrawCards(2);
                 break;
             case Constants.Effect.clear_sky:
-                PlayerController.instance.grids[1].SetParent(index, PlayerController.instance.grids[5]);
+                grid.SetParent(index, PlayerController.instance.grids[5]);
                 WeatherController.instance.ClearSky();
                 break;
             case Constants.Effect.frost:
                 if(!WeatherController.instance.frost)
                 {
-                    PlayerController.instance.grids[1].SetParent(index, WeatherController.instance.grid);
+                    grid.SetParent(index, WeatherController.instance.grid);
                     WeatherController.instance.Frost();
                 }
                 break;
             case Constants.Effect.fog:
                 if(!WeatherController.instance.fog)
                 {
-                    PlayerController.instance.grids[1].SetParent(index, WeatherController.instance.grid);
+                    grid.SetParent(index, WeatherController.instance.grid);
                     WeatherController.instance.Fog();
                 }
                 break;
             case Constants.Effect.rain:
                 if(!WeatherController.instance.rain)
                 {
-                    PlayerController.instance.grids[1].SetParent(index, WeatherController.instance.grid);
+                    grid.SetParent(index, WeatherController.instance.grid);
                     WeatherController.instance.Rain();
                 }
                 break;
@@ -62,21 +63,23 @@ public class CardBehavior : MonoBehaviour {
                 switch (cardProperty.line)
                 {
                     case Constants.Line.melee:
-                        PlayerController.instance.grids[1].SetParent(index, PlayerController.instance.grids[2]);
+                        grid.SetParent(index, PlayerController.instance.grids[2]);
                         break;
                     case Constants.Line.ranged:
-                        PlayerController.instance.grids[1].SetParent(index, PlayerController.instance.grids[3]);
+                        grid.SetParent(index, PlayerController.instance.grids[3]);
                         break;
                     case Constants.Line.siege:
-                        PlayerController.instance.grids[1].SetParent(index, PlayerController.instance.grids[4]);
+                        grid.SetParent(index, PlayerController.instance.grids[4]);
                         break;
                 }
                 break;
         }
 
         ShowCards.instance.Hide();
+        if (cardProperty.effect == Constants.Effect.nurse) ShowCards.instance.Show(ShowCards.Behaviour.draw, PlayerController.instance.grids[5]);
+
         PlayerController.instance.Number();
         PowerNumberController.instance.Number();
-        EnemyController.instance.Play();
+        EnemyController.instance.Play(EnemyController.instance.grids[0]);
     }
 }

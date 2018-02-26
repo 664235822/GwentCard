@@ -139,10 +139,11 @@ public class EnemyController : MonoBehaviour {
         deck_realms_label.text = grids[0].childCount.ToString();
     }
 
-    public void Play()
+    public void Play(Transform grid)
     {
-        int random = Random.Range(0, grids[1].childCount);
-        CardProperty cardProperty = grids[1].GetChild(random).GetComponent<CardProperty>();
+        if (grid.childCount == 0) return;
+        int random = Random.Range(0, grid.childCount);
+        CardProperty cardProperty = grid.GetChild(random).GetComponent<CardProperty>();
 
         switch (cardProperty.effect)
         {
@@ -150,39 +151,39 @@ public class EnemyController : MonoBehaviour {
                 switch (cardProperty.line)
                 {
                     case Constants.Line.melee:
-                        grids[1].SetParent(random, PlayerController.instance.grids[2]);
+                        grid.SetParent(random, PlayerController.instance.grids[2]);
                         break;
                     case Constants.Line.ranged:
-                        grids[1].SetParent(random, PlayerController.instance.grids[3]);
+                        grid.SetParent(random, PlayerController.instance.grids[3]);
                         break;
                     case Constants.Line.siege:
-                        grids[1].SetParent(random, PlayerController.instance.grids[4]);
+                        grid.SetParent(random, PlayerController.instance.grids[4]);
                         break;
                 }
                 DrawCards(2);
                 break;
             case Constants.Effect.clear_sky:
-                grids[1].SetParent(random, grids[5]);
+                grid.SetParent(random, grids[5]);
                 WeatherController.instance.ClearSky();
                 break;
             case Constants.Effect.frost:
                 if (!WeatherController.instance.frost)
                 {
-                    grids[1].SetParent(random, WeatherController.instance.grid);
+                    grid.SetParent(random, WeatherController.instance.grid);
                     WeatherController.instance.Frost();
                 }
                 break;
             case Constants.Effect.fog:
                 if (!WeatherController.instance.fog)
                 {
-                    grids[1].SetParent(random, WeatherController.instance.grid);
+                    grid.SetParent(random, WeatherController.instance.grid);
                     WeatherController.instance.Fog();
                 }
                 break;
             case Constants.Effect.rain:
                 if (!WeatherController.instance.fog)
                 {
-                    grids[1].SetParent(random, WeatherController.instance.grid);
+                    grid.SetParent(random, WeatherController.instance.grid);
                     WeatherController.instance.Rain();
                 }
                 break;
@@ -190,18 +191,19 @@ public class EnemyController : MonoBehaviour {
                 switch (cardProperty.line)
                 {
                     case Constants.Line.melee:
-                        grids[1].SetParent(random, grids[2]);
+                        grid.SetParent(random, grids[2]);
                         break;
                     case Constants.Line.ranged:
-                        grids[1].SetParent(random, grids[3]);
+                        grid.SetParent(random, grids[3]);
                         break;
                     case Constants.Line.siege:
-                        grids[1].SetParent(random, grids[4]);
+                        grid.SetParent(random, grids[4]);
                         break;
                 }
                 break;
         }
 
+        if (cardProperty.effect == Constants.Effect.nurse) Play(grids[5]);
         Number();
         PowerNumberController.instance.Number();
     }
