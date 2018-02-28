@@ -22,65 +22,166 @@ public class PowerNumberController : MonoBehaviour {
 
     public void Number()
     {
-        int player_melee = 0;
-        int player_ranged = 0;
-        int player_siege = 0;
-        int enemy_melee = 0;
-        int enemy_ranged = 0;
-        int enemy_siege = 0;
+        int[] player = { 0, 0, 0 };
+        int[] enemy = { 0, 0, 0 };
+        int[] player_improve_neighbours = { 0, 0, 0 };
+        int[] enemy_improve_neighbours = { 0, 0, 0 };
+        Dictionary<string, int> player_same_type_morale = new Dictionary<string, int>();
+        Dictionary<string, int> enemy_same_type_morale = new Dictionary<string, int>();
+
+        for (int i = 2; i < 5; i++)
+        {
+            for (int ii = 0; ii < PlayerController.instance.grids[i].childCount; ii++)
+            {
+                CardProperty cardProperty = PlayerController.instance.grids[i].GetChild(ii).GetComponent<CardProperty>();
+                switch (cardProperty.effect)
+                {
+                    case Constants.Effect.improve_neighbours:
+                        player_improve_neighbours[i - 2]++;
+                        break;
+                    case Constants.Effect.same_type_morale:
+                        string spriteName = cardProperty.GetComponent<UISprite>().spriteName;
+                        if (!player_same_type_morale.ContainsKey(spriteName))
+                            player_same_type_morale.Add(spriteName, 1);
+                        else
+                        {
+                            int value = player_same_type_morale[spriteName];
+                            value++;
+                            player_same_type_morale[spriteName] = value;
+                        }
+                        break;
+                }
+            }
+        }
+        for (int i = 2; i < 5; i++)
+        {
+            for (int ii = 0; ii < EnemyController.instance.grids[i].childCount; ii++)
+            {
+                CardProperty cardProperty = EnemyController.instance.grids[i].GetChild(ii).GetComponent<CardProperty>();
+                switch (cardProperty.effect)
+                {
+                    case Constants.Effect.improve_neighbours:
+                        enemy_improve_neighbours[i - 2]++;
+                        break;
+                    case Constants.Effect.same_type_morale:
+                        string spriteName = cardProperty.GetComponent<UISprite>().spriteName;
+                        if (!enemy_same_type_morale.ContainsKey(spriteName))
+                            enemy_same_type_morale.Add(spriteName, 1);
+                        else
+                        {
+                            int value = enemy_same_type_morale[spriteName];
+                            value++;
+                            enemy_same_type_morale[spriteName] = value;
+                        }
+                        break;
+                }
+            }
+        }
+
+
+
 
         for (int i = 0; i < PlayerController.instance.grids[2].childCount; i++)
         {
-            if (WeatherController.instance.frost && !PlayerController.instance.grids[2].GetChild(i).GetComponent<CardProperty>().gold)
-                player_melee += 1;
+            CardProperty cardProperty = PlayerController.instance.grids[2].GetChild(i).GetComponent<CardProperty>();
+            int power = 0;
+            if (WeatherController.instance.frost && !cardProperty.gold)
+                power += 1;
             else
-                player_melee += PlayerController.instance.grids[2].GetChild(i).GetComponent<CardProperty>().power;
+                power += cardProperty.power;
+            string spriteName = cardProperty.GetComponent<UISprite>().spriteName;
+            if (player_same_type_morale.ContainsKey(spriteName))
+                power *= player_same_type_morale[spriteName];
+            if (cardProperty.effect != Constants.Effect.improve_neighbours)
+                power += player_improve_neighbours[0];
+            player[0] += power;
+
         }
         for (int i = 0; i < PlayerController.instance.grids[3].childCount; i++)
         {
-            if (WeatherController.instance.fog && !PlayerController.instance.grids[3].GetChild(i).GetComponent<CardProperty>().gold)
-                player_ranged += 1;
+            CardProperty cardProperty = PlayerController.instance.grids[3].GetChild(i).GetComponent<CardProperty>();
+            int power = 0;
+            if (WeatherController.instance.fog && !cardProperty.gold)
+                power += 1;
             else
-                player_ranged += PlayerController.instance.grids[3].GetChild(i).GetComponent<CardProperty>().power;
+                power += cardProperty.power;
+            string spriteName = cardProperty.GetComponent<UISprite>().spriteName;
+            if (player_same_type_morale.ContainsKey(spriteName))
+                power *= player_same_type_morale[spriteName];
+            if (cardProperty.effect != Constants.Effect.improve_neighbours)
+                power += player_improve_neighbours[1];
+            player[1] += power;
         }
         for (int i = 0; i < PlayerController.instance.grids[4].childCount; i++)
         {
-            if (WeatherController.instance.rain && !PlayerController.instance.grids[4].GetChild(i).GetComponent<CardProperty>().gold)
-                player_siege += 1;
+            CardProperty cardProperty = PlayerController.instance.grids[4].GetChild(i).GetComponent<CardProperty>();
+            int power = 0;
+            if (WeatherController.instance.rain && !cardProperty.gold)
+                power += 1;
             else
-                player_siege += PlayerController.instance.grids[4].GetChild(i).GetComponent<CardProperty>().power;
+                power += cardProperty.power;
+            string spriteName = cardProperty.GetComponent<UISprite>().spriteName;
+            if (player_same_type_morale.ContainsKey(spriteName))
+                power *= player_same_type_morale[spriteName];
+            if (cardProperty.effect != Constants.Effect.improve_neighbours)
+                power += player_improve_neighbours[2];
+            player[2] += power;
         }
         for (int i = 0; i < EnemyController.instance.grids[2].childCount; i++)
         {
-            if (WeatherController.instance.frost && !EnemyController.instance.grids[2].GetChild(i).GetComponent<CardProperty>().gold)
-                enemy_melee += 1;
+            CardProperty cardProperty = EnemyController.instance.grids[2].GetChild(i).GetComponent<CardProperty>();
+            int power = 0;
+            if (WeatherController.instance.frost && !cardProperty.gold)
+                power += 1;
             else
-                enemy_melee += EnemyController.instance.grids[2].GetChild(i).GetComponent<CardProperty>().power;
+                power += cardProperty.power;
+            string spriteName = cardProperty.GetComponent<UISprite>().spriteName;
+            if (enemy_same_type_morale.ContainsKey(spriteName))
+                power *= enemy_same_type_morale[spriteName];
+            if (cardProperty.effect != Constants.Effect.improve_neighbours)
+                power += enemy_improve_neighbours[0];
+            enemy[0] += power;
         }
         for (int i = 0; i < EnemyController.instance.grids[3].childCount; i++)
         {
-            if (WeatherController.instance.fog && !EnemyController.instance.grids[3].GetChild(i).GetComponent<CardProperty>().gold)
-                enemy_ranged += 1;
+            CardProperty cardProperty = EnemyController.instance.grids[3].GetChild(i).GetComponent<CardProperty>();
+            int power = 0;
+            if (WeatherController.instance.fog && !cardProperty.gold)
+                power += 1;
             else
-                enemy_ranged += EnemyController.instance.grids[3].GetChild(i).GetComponent<CardProperty>().power;
+                power += cardProperty.power;
+            string spriteName = cardProperty.GetComponent<UISprite>().spriteName;
+            if (enemy_same_type_morale.ContainsKey(spriteName))
+                power *= enemy_same_type_morale[spriteName];
+            if (cardProperty.effect != Constants.Effect.improve_neighbours)
+                power += enemy_improve_neighbours[1];
+            enemy[1] += power;
         }
         for (int i = 0; i < EnemyController.instance.grids[4].childCount; i++)
         {
-            if (WeatherController.instance.rain && !EnemyController.instance.grids[4].GetChild(i).GetComponent<CardProperty>().gold)
-                enemy_siege += 1;
+            CardProperty cardProperty = EnemyController.instance.grids[4].GetChild(i).GetComponent<CardProperty>();
+            int power = 0;
+            if (WeatherController.instance.rain && !cardProperty.gold)
+                power += 1;
             else
-                enemy_siege += EnemyController.instance.grids[4].GetChild(i).GetComponent<CardProperty>().power;
+                power += cardProperty.power;
+            string spriteName = cardProperty.GetComponent<UISprite>().spriteName;
+            if (enemy_same_type_morale.ContainsKey(spriteName))
+                power *= enemy_same_type_morale[spriteName];
+            if (cardProperty.effect != Constants.Effect.improve_neighbours)
+                power += enemy_improve_neighbours[2];
+            enemy[2] += power;
         }
 
-        player_total = player_melee + player_ranged + player_siege;
-        enemy_total = enemy_melee + enemy_ranged + enemy_siege;
+        player_total = player[0] + player[1] + player[2];
+        enemy_total = enemy[0] + enemy[1] + enemy[2];
 
-        player_power_melee.text = player_melee.ToString();
-        player_power_ranged.text = player_ranged.ToString();
-        player_power_siege.text = player_siege.ToString();
-        enemy_power_melee.text = enemy_melee.ToString();
-        enemy_power_ranged.text = enemy_ranged.ToString();
-        enemy_power_siege.text = enemy_siege.ToString();
+        player_power_melee.text = player[0].ToString();
+        player_power_ranged.text = player[1].ToString();
+        player_power_siege.text = player[2].ToString();
+        enemy_power_melee.text = enemy[0].ToString();
+        enemy_power_ranged.text = enemy[1].ToString();
+        enemy_power_siege.text = enemy[2].ToString();
         player_power_total.text = player_total.ToString();
         enemy_power_total.text = enemy_total.ToString();
     }
