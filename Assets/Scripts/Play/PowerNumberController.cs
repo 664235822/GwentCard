@@ -78,9 +78,6 @@ public class PowerNumberController : MonoBehaviour {
             }
         }
 
-
-
-
         for (int i = 0; i < PlayerController.instance.grids[2].childCount; i++)
         {
             CardProperty cardProperty = PlayerController.instance.grids[2].GetChild(i).GetComponent<CardProperty>();
