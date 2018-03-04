@@ -8386,14 +8386,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: caf30bfe1e473a148a1ed633a01f68a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player_power_total: {fileID: 1527971887}
-  player_power_melee: {fileID: 1458199885}
-  player_power_ranged: {fileID: 106566460}
-  player_power_siege: {fileID: 1883440541}
-  enemy_power_total: {fileID: 615352573}
-  enemy_power_melee: {fileID: 1275177577}
-  enemy_power_ranged: {fileID: 1471428021}
-  enemy_power_siege: {fileID: 1390817176}
+  player_power_label:
+  - {fileID: 1458199885}
+  - {fileID: 106566460}
+  - {fileID: 1883440541}
+  - {fileID: 1527971887}
+  enemy_power_label:
+  - {fileID: 1275177577}
+  - {fileID: 1471428021}
+  - {fileID: 1390817176}
+  - {fileID: 615352573}
   player_total: 0
   enemy_total: 0
 --- !u!114 &1749374674

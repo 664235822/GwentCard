@@ -162,30 +162,53 @@ public class EnemyController : MonoBehaviour {
                 DrawCards(2);
                 break;
             case Constants.Effect.clear_sky:
-                grid.SetParent(random, grids[5]);
                 WeatherController.instance.ClearSky();
-                break;
+                goto default;
             case Constants.Effect.frost:
-                if (!WeatherController.instance.frost)
-                {
-                    grid.SetParent(random, WeatherController.instance.grid);
-                    WeatherController.instance.Frost();
-                }
-                break;
+                if (!WeatherController.instance.frost) WeatherController.instance.Frost();
+                goto default;
             case Constants.Effect.fog:
-                if (!WeatherController.instance.fog)
-                {
-                    grid.SetParent(random, WeatherController.instance.grid);
-                    WeatherController.instance.Fog();
-                }
-                break;
+                if (!WeatherController.instance.fog) WeatherController.instance.Fog();
+                goto default;
             case Constants.Effect.rain:
-                if (!WeatherController.instance.fog)
+                if (!WeatherController.instance.fog)   WeatherController.instance.Rain();
+                goto default;
+            case Constants.Effect.scorch:
+                int maxPower = 0;
+                for (int i = 2; i < 5; i++)
                 {
-                    grid.SetParent(random, WeatherController.instance.grid);
-                    WeatherController.instance.Rain();
+                    for (int ii = 0; ii < PlayerController.instance.grids[i].childCount; ii++)
+                    {
+                        int power = PlayerController.instance.grids[i].GetChild(ii).GetComponent<CardBehavior>().totalPower;
+                        if (power > maxPower) maxPower = power;
+                    }
                 }
-                break;
+                for (int i = 2; i < 5; i++)
+                {
+                    for (int ii = 0; ii < EnemyController.instance.grids[i].childCount; ii++)
+                    {
+                        int power = EnemyController.instance.grids[i].GetChild(ii).GetComponent<CardBehavior>().totalPower;
+                        if (power > maxPower) maxPower = power;
+                    }
+                }
+
+                for (int i = 2; i < 5; i++)
+                {
+                    for (int ii = 0; ii < PlayerController.instance.grids[i].childCount; ii++)
+                    {
+                        if (PlayerController.instance.grids[i].GetChild(ii).GetComponent<CardBehavior>().totalPower == maxPower)
+                            PlayerController.instance.grids[i].SetParent(ii, PlayerController.instance.grids[5]);
+                    }
+                }
+                for (int i = 2; i < 5; i++)
+                {
+                    for (int ii = 0; ii < EnemyController.instance.grids[i].childCount; ii++)
+                    {
+                        if (EnemyController.instance.grids[i].GetChild(ii).GetComponent<CardBehavior>().totalPower == maxPower)
+                            EnemyController.instance.grids[i].SetParent(ii, EnemyController.instance.grids[5]);
+                    }
+                }
+                goto default;
             default:
                 switch (cardProperty.line)
                 {
@@ -198,12 +221,14 @@ public class EnemyController : MonoBehaviour {
                     case Constants.Line.siege:
                         grid.SetParent(random, grids[4]);
                         break;
+                    case Constants.Line.empty:
+                        grid.SetParent(random, grids[5]);
+                        break;
                 }
                 break;
         }
 
-        if (cardProperty.effect == Constants.Effect.nurse) Play(grids[5]);
         Number();
-        PowerNumberController.instance.Number();
+        PowerController.instance.Number();
     }
 }

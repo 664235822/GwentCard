@@ -32,7 +32,7 @@ public class GameController : MonoBehaviour {
 
     public void EndTurn()
     {
-        int power = PowerNumberController.instance.player_total - PowerNumberController.instance.enemy_total;
+        int power = PowerController.instance.player_total - PowerController.instance.enemy_total;
         if (power > 0)
         {
             enemy_life_gem[enemy_fail].color = black;
@@ -73,7 +73,7 @@ public class GameController : MonoBehaviour {
         EnemyController.instance.grids[5].gameObject.SetActive(false);
         EnemyController.instance.grids[5].gameObject.SetActive(true);
 
-        PowerNumberController.instance.Number();
+        PowerController.instance.Number();
 
         offensive = !offensive;
         if (!offensive) EnemyController.instance.Play(EnemyController.instance.grids[0]);
