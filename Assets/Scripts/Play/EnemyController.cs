@@ -194,7 +194,7 @@ public class EnemyController : MonoBehaviour {
 
                 for (int i = 2; i < 5; i++)
                 {
-                    for (int ii = 0; ii < PlayerController.instance.grids[i].childCount; ii++)
+                    for (int ii = PlayerController.instance.grids[i].childCount - 1; ii >= 0; ii--)
                     {
                         if (PlayerController.instance.grids[i].GetChild(ii).GetComponent<CardBehavior>().totalPower == maxPower)
                             PlayerController.instance.grids[i].SetParent(ii, PlayerController.instance.grids[5]);
@@ -202,7 +202,7 @@ public class EnemyController : MonoBehaviour {
                 }
                 for (int i = 2; i < 5; i++)
                 {
-                    for (int ii = 0; ii < EnemyController.instance.grids[i].childCount; ii++)
+                    for (int ii = EnemyController.instance.grids[i].childCount - 1; ii >= 0; ii--)
                     {
                         if (EnemyController.instance.grids[i].GetChild(ii).GetComponent<CardBehavior>().totalPower == maxPower)
                             EnemyController.instance.grids[i].SetParent(ii, EnemyController.instance.grids[5]);

@@ -206,7 +206,6 @@ PlayerSettings:
   tvOSSmallIconLayers: []
   tvOSSmallIconLayers2x: []
   tvOSLargeIconLayers: []
-  tvOSLargeIconLayers2x: []
   tvOSTopShelfImageLayers: []
   tvOSTopShelfImageLayers2x: []
   tvOSTopShelfImageWideLayers: []
@@ -560,7 +559,8 @@ PlayerSettings:
   webGLCompressionFormat: 1
   scriptingDefineSymbols: {}
   platformArchitecture: {}
-  scriptingBackend: {}
+  scriptingBackend:
+    Android: 0
   incrementalIl2cppBuild: {}
   additionalIl2CppArgs: 
   scriptingRuntimeVersion: 1
