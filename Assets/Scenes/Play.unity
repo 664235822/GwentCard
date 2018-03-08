@@ -1852,7 +1852,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 712bcf0ecb23d7f4181dba72bb2f60bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  behaviour: 2
+  behaviour: 1
   grid: {fileID: 554622357}
 --- !u!65 &444981331
 BoxCollider:
@@ -2291,7 +2291,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 712bcf0ecb23d7f4181dba72bb2f60bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  behaviour: 2
+  behaviour: 1
   grid: {fileID: 740401577}
 --- !u!65 &588277605
 BoxCollider:
@@ -5045,7 +5045,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 712bcf0ecb23d7f4181dba72bb2f60bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  behaviour: 2
+  behaviour: 1
   grid: {fileID: 1433508382}
 --- !u!65 &1198946433
 BoxCollider:
@@ -5557,7 +5557,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 712bcf0ecb23d7f4181dba72bb2f60bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  behaviour: 2
+  behaviour: 1
   grid: {fileID: 420423685}
 --- !u!65 &1306021063
 BoxCollider:
@@ -7197,7 +7197,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 712bcf0ecb23d7f4181dba72bb2f60bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  behaviour: 2
+  behaviour: 1
   grid: {fileID: 2115584301}
 --- !u!65 &1578243838
 BoxCollider:
@@ -7693,7 +7693,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 712bcf0ecb23d7f4181dba72bb2f60bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  behaviour: 2
+  behaviour: 1
   grid: {fileID: 710089526}
 --- !u!65 &1681423498
 BoxCollider:
@@ -7829,7 +7829,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 712bcf0ecb23d7f4181dba72bb2f60bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  behaviour: 2
+  behaviour: 1
   grid: {fileID: 1115554523}
 --- !u!65 &1694860988
 BoxCollider:
@@ -8885,7 +8885,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 712bcf0ecb23d7f4181dba72bb2f60bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  behaviour: 2
+  behaviour: 1
   grid: {fileID: 353921879}
 --- !u!65 &1857504920
 BoxCollider:
