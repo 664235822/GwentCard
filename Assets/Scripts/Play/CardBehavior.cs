@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class CardBehavior : MonoBehaviour {
+    public static int cardIndex;
     [HideInInspector] public int totalPower;
     CardProperty cardProperty;
 
@@ -17,6 +18,7 @@ public class CardBehavior : MonoBehaviour {
         int index = 0;
         for (int i = 0; i < grid.childCount; i++)
             if (ShowCards.instance.grid.GetChild(i).name == name) index = i;
+        cardIndex = index;
 
         switch (cardProperty.effect)
         {
@@ -86,6 +88,9 @@ public class CardBehavior : MonoBehaviour {
                     }
                 }
                 goto default;
+            case Constants.Effect.dummy:
+                ShowCards.instance.Show(ShowCards.Behaviour.dummy, PlayerController.instance.grids[2], true);
+                return;
             default:
                 switch (cardProperty.line)
                 {
@@ -105,12 +110,13 @@ public class CardBehavior : MonoBehaviour {
                 break;
         }
 
-        ShowCards.instance.Hide();
-        if (cardProperty.effect == Constants.Effect.nurse) ShowCards.instance.Show(ShowCards.Behaviour.draw, PlayerController.instance.grids[5]);
+        if (cardProperty.effect == Constants.Effect.nurse)
+            ShowCards.instance.Show(ShowCards.Behaviour.draw, PlayerController.instance.grids[5], true);
+        else
+            ShowCards.instance.Hide();
 
         PlayerController.instance.Number();
         PowerController.instance.Number();
-
         EnemyController.instance.Play(EnemyController.instance.grids[0]);
     }
 }

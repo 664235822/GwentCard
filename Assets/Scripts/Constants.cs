@@ -18,4 +18,14 @@ public static class Constants {
         if (grid1 != null) grid1.Reposition();
         if (grid2 != null) grid2.Reposition();
     }
+
+    public static int GetItemsInt(this UIPopupList popupList)
+    {
+        int index = 0;
+        for (int i = 0; i < popupList.items.Count; i++)
+        {
+            if (popupList.value == popupList.items[i]) index = i;
+        }
+        return index;
+    }
 }

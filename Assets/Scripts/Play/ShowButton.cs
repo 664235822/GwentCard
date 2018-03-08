@@ -8,7 +8,7 @@ public class ShowButton : MonoBehaviour {
 
     public void OnClick()
     {
-        ShowCards.instance.Show(behaviour, grid);
+        ShowCards.instance.Show(behaviour, grid, false);
     }
 	
 }

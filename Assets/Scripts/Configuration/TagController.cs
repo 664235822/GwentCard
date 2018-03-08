@@ -56,41 +56,29 @@ public class TagController : MonoBehaviour {
     public void OnValueChange()
     {
         int index = 0;
-        switch (popupList.value)
+        if (popupList.value != null)
         {
-            case "领导牌":
-                index = 0;
-                list = Constants.List.leader;
-                break;
-            case "特殊牌":
-                index = 1;
-                list = Constants.List.special;
-                break;
-            case "生物牌":
-                index = 2;
-                list = Constants.List.monster;
-                break;
-            case "中立牌":
-                index = 3;
-                list = Constants.List.neutral;
-                break;
-            case null:
-                switch(list)
-                {
-                    case Constants.List.leader:
-                        popupList.value = "领导牌";
-                        break;
-                    case Constants.List.special:
-                        popupList.value = "特殊牌";
-                        break;
-                    case Constants.List.monster:
-                        popupList.value = "生物牌";
-                        break;
-                    case Constants.List.neutral:
-                        popupList.value = "中立牌";
-                        break;
-                }
-                return;
+            index = popupList.GetItemsInt();
+            list = (Constants.List)index;
+        }
+        else
+        {
+            switch (list)
+            {
+                case Constants.List.leader:
+                    popupList.value = "领导牌";
+                    break;
+                case Constants.List.special:
+                    popupList.value = "特殊牌";
+                    break;
+                case Constants.List.monster:
+                    popupList.value = "生物牌";
+                    break;
+                case Constants.List.neutral:
+                    popupList.value = "中立牌";
+                    break;
+            }
+            return;
         }
 
         for (int i = 0; i < popupList.items.Count; i++)
@@ -107,6 +95,4 @@ public class TagController : MonoBehaviour {
         for (int i = 0; i < groups[index].transform.childCount; i++)
             grids[i] = groups[index].transform.GetChild(i).gameObject;
     }
-
-
 }
