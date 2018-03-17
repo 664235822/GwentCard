@@ -209,6 +209,16 @@ public class EnemyController : MonoBehaviour {
                     }
                 }
                 goto default;
+            case Constants.Effect.dummy:
+                for (int i = 2; i < 5; i++)
+                {
+                    if (grids[i].childCount == 0) continue;
+                    int dummyRandom = Random.Range(0, grids[i].childCount);
+                    grids[1].SetParent(random, grids[i]);
+                    grids[i].SetParent(dummyRandom, grids[1]);
+                    break;
+                }
+                break;
             default:
                 switch (cardProperty.line)
                 {

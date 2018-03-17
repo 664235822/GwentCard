@@ -58,8 +58,20 @@ public class ShowCards : MonoBehaviour {
             sprite.width = 250;
             sprite.height = 450;
             UIButton button = card.GetComponent<UIButton>();
-            if (behaviour == Behaviour.draw) button.enabled = true;
-            else button.enabled = false;
+            switch (behaviour)
+            {
+                case Behaviour.draw:
+                    EventDelegate.Add(button.onClick, () => card.GetComponent<CardBehavior>().Play());
+                    button.enabled = true;
+                    break;
+                case Behaviour.show:
+                    button.enabled = false;
+                    break;
+                case Behaviour.dummy:
+                    EventDelegate.Add(button.onClick, () => card.GetComponent<CardBehavior>().Dummy());
+                    button.enabled = true;
+                    break;
+            }
             card.GetComponent<UIDragScrollView>().scrollView = scrollView;
             card.GetComponent<BoxCollider>().size = new Vector3(250, 450, 1);
         }

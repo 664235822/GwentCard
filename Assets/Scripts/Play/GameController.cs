@@ -27,7 +27,7 @@ public class GameController : MonoBehaviour {
         if (random == 0) offensive = true;
         else offensive = false;
 
-        if (!offensive) EnemyController.instance.Play(EnemyController.instance.grids[0]);
+        if (!offensive) EnemyController.instance.Play(EnemyController.instance.grids[1]);
     }
 
     public void EndTurn()
@@ -76,6 +76,6 @@ public class GameController : MonoBehaviour {
         PowerController.instance.Number();
 
         offensive = !offensive;
-        if (!offensive) EnemyController.instance.Play(EnemyController.instance.grids[0]);
+        if (!offensive) EnemyController.instance.Play(EnemyController.instance.grids[1]);
     }
 }

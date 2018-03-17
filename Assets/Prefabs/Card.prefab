@@ -68,6 +68,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8e28d19573573647b8935bb65d6f73f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  totalPower: 0
 --- !u!114 &114443763816954696
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -105,11 +106,7 @@ MonoBehaviour:
   pressedSprite2D: {fileID: 0}
   disabledSprite2D: {fileID: 0}
   pixelSnap: 0
-  onClick:
-  - mTarget: {fileID: 114104557089647670}
-    mMethodName: Play
-    mParameters: []
-    oneShot: 0
+  onClick: []
 --- !u!114 &114693800953678288
 MonoBehaviour:
   m_ObjectHideFlags: 1
