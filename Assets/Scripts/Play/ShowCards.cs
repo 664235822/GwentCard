@@ -4,11 +4,12 @@ using UnityEngine;
 
 public class ShowCards : MonoBehaviour {
     public static ShowCards instance;
-    public enum Behaviour { draw, show, dummy }
+    public enum Behaviour { draw, show, dummy, warhorn }
     public Transform grid;
     [SerializeField] GameObject show;
     [SerializeField] UILabel label;
     [SerializeField] UIScrollView scrollView;
+    [SerializeField] UIButton button;
     [SerializeField] UIPopupList popupList;
     [HideInInspector] public Transform totalGrid;
     Behaviour behaviour;
@@ -31,6 +32,10 @@ public class ShowCards : MonoBehaviour {
             show.SetActive(true);
         }
 
+        popupList.gameObject.SetActive(false);
+        popupList.value = "近战";
+        button.onClick.Clear();
+
         switch (behaviour)
         {
             case Behaviour.draw:
@@ -42,10 +47,16 @@ public class ShowCards : MonoBehaviour {
             case Behaviour.dummy:
                 label.text = "请选择要替换的牌";
                 popupList.gameObject.SetActive(true);
-                popupList.value = "近战";
+                goto default;
+            case Behaviour.warhorn:
+                label.text = "战争号角";
+                popupList.gameObject.SetActive(true);
+                button.transform.Find("Label").GetComponent<UILabel>().text = "确定";
+                //EventDelegate.Add(button.onClick, () =>);
                 break;
             default:
-                popupList.gameObject.SetActive(false);
+                button.transform.Find("Label").GetComponent<UILabel>().text = "返回";
+                EventDelegate.Add(button.onClick, () => Hide());
                 break;
         }
 
@@ -57,19 +68,22 @@ public class ShowCards : MonoBehaviour {
             UISprite sprite = card.GetComponent<UISprite>();
             sprite.width = 250;
             sprite.height = 450;
-            UIButton button = card.GetComponent<UIButton>();
+            UIButton cardButton = card.GetComponent<UIButton>();
             switch (behaviour)
             {
                 case Behaviour.draw:
-                    EventDelegate.Add(button.onClick, () => card.GetComponent<CardBehavior>().Play());
-                    button.enabled = true;
+                    EventDelegate.Add(cardButton.onClick, () => card.GetComponent<CardBehavior>().Play());
+                    cardButton.enabled = true;
                     break;
                 case Behaviour.show:
-                    button.enabled = false;
+                    cardButton.enabled = false;
                     break;
                 case Behaviour.dummy:
-                    EventDelegate.Add(button.onClick, () => card.GetComponent<CardBehavior>().Dummy());
-                    button.enabled = true;
+                    EventDelegate.Add(cardButton.onClick, () => card.GetComponent<CardBehavior>().Dummy());
+                    cardButton.enabled = true;
+                    break;
+                case Behaviour.warhorn:
+                    cardButton.enabled = false;
                     break;
             }
             card.GetComponent<UIDragScrollView>().scrollView = scrollView;

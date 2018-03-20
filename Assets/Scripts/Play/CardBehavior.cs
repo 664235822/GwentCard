@@ -89,6 +89,9 @@ public class CardBehavior : MonoBehaviour {
             case Constants.Effect.dummy:
                 ShowCards.instance.Show(ShowCards.Behaviour.dummy, PlayerController.instance.grids[2], true);
                 return;
+            case Constants.Effect.warhorn:
+                ShowCards.instance.Show(ShowCards.Behaviour.warhorn, PlayerController.instance.grids[2], true);
+                return;
             default:
                 switch (cardProperty.line)
                 {
