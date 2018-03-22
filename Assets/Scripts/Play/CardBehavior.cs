@@ -20,35 +20,24 @@ public class CardBehavior : MonoBehaviour {
 
         switch (cardProperty.effect)
         {
-            case Constants.Effect.spy:
-                switch (cardProperty.line)
-                {
-                    case Constants.Line.melee:
-                        grid.SetParent(index, EnemyController.instance.grids[2]);
-                        break;
-                    case Constants.Line.ranged:
-                        grid.SetParent(index, EnemyController.instance.grids[3]);
-                        break;
-                    case Constants.Line.siege:
-                        grid.SetParent(index, EnemyController.instance.grids[4]);
-                        break;
-                }
+            case Global.Effect.spy:
+                grid.SetParent(index, EnemyController.instance.grids[(int)cardProperty.line + 2]);
                 PlayerController.instance.DrawCards(2);
                 break;
-            case Constants.Effect.clear_sky:
+            case Global.Effect.clear_sky:
                 WeatherController.instance.ClearSky();
                 goto default;
-            case Constants.Effect.frost:
+            case Global.Effect.frost:
                 if (!WeatherController.instance.frost) WeatherController.instance.Frost();
                 goto default;
-            case Constants.Effect.fog:
+            case Global.Effect.fog:
                 if (!WeatherController.instance.fog) WeatherController.instance.Fog();
                 goto default;
-            case Constants.Effect.rain:
+            case Global.Effect.rain:
                 if (!WeatherController.instance.rain) WeatherController.instance.Rain();
                 goto default;
-            case Constants.Effect.scorch:
-                if (cardProperty.effect == Constants.Effect.scorch)
+            case Global.Effect.scorch:
+                if (cardProperty.effect == Global.Effect.scorch)
                 {
                     int maxPower = 0;
                     for (int i = 2; i < 5; i++)
@@ -86,32 +75,18 @@ public class CardBehavior : MonoBehaviour {
                     }
                 }
                 goto default;
-            case Constants.Effect.dummy:
+            case Global.Effect.dummy:
                 ShowCards.instance.Show(ShowCards.Behaviour.dummy, PlayerController.instance.grids[2], true);
                 return;
-            case Constants.Effect.warhorn:
+            case Global.Effect.warhorn:
                 ShowCards.instance.Show(ShowCards.Behaviour.warhorn, PlayerController.instance.grids[2], true);
                 return;
             default:
-                switch (cardProperty.line)
-                {
-                    case Constants.Line.melee:
-                        grid.SetParent(index, PlayerController.instance.grids[2]);
-                        break;
-                    case Constants.Line.ranged:
-                        grid.SetParent(index, PlayerController.instance.grids[3]);
-                        break;
-                    case Constants.Line.siege:
-                        grid.SetParent(index, PlayerController.instance.grids[4]);
-                        break;
-                    case Constants.Line.empty:
-                        grid.SetParent(index, PlayerController.instance.grids[5]);
-                        break;
-                }
+                grid.SetParent(index, PlayerController.instance.grids[(int)cardProperty.line + 2]);
                 break;
         }
 
-        if (cardProperty.effect == Constants.Effect.nurse)
+        if (cardProperty.effect == Global.Effect.nurse)
             ShowCards.instance.Show(ShowCards.Behaviour.draw, PlayerController.instance.grids[5], true);
         else
             ShowCards.instance.Hide();

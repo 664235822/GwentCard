@@ -8,7 +8,7 @@ public class EnemySaveController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		if(!File.Exists(Constants.enemyPath))
+		if(!File.Exists(Global.enemyPath))
         {
             XmlDocument xml = new XmlDocument();
             XmlElement root = xml.CreateElement("root");
@@ -375,7 +375,7 @@ public class EnemySaveController : MonoBehaviour {
             root.AppendChild(scoiatael);
 
             xml.AppendChild(root);
-            xml.Save(Constants.enemyPath);
+            xml.Save(Global.enemyPath);
         }
 	}
 	

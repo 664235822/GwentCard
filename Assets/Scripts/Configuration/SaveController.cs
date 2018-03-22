@@ -12,7 +12,7 @@ public class SaveController : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        if (File.Exists(Constants.path))
+        if (File.Exists(Global.path))
             LoadXML();
         else
             Initialize();
@@ -85,13 +85,13 @@ public class SaveController : MonoBehaviour {
         root.AppendChild(scoiatael);
 
         xml.AppendChild(root);
-        xml.Save(Constants.path);
+        xml.Save(Global.path);
     }
 
     public void LoadXML()
     {
         string group = TagController.instance.group.ToString();
-        xml.Load(Constants.path);
+        xml.Load(Global.path);
         XmlElement root = xml.DocumentElement;
         XmlNode groupNode = root.SelectSingleNode("/root/" + group);
         Transform groupTransform = scrollView.Find(group);
@@ -200,7 +200,7 @@ public class SaveController : MonoBehaviour {
             XmlElement root = xml.DocumentElement;
             XmlNode groupNode = root.SelectSingleNode(string.Format("/root/{0}", TagController.instance.group.ToString()));
             groupNode.Attributes["save"].Value = true.ToString();
-            xml.Save(Constants.path);
+            xml.Save(Global.path);
             StartCoroutine(ShowLabel("保存成功"));
         }
         catch (SaveException)

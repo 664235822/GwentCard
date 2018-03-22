@@ -12,7 +12,7 @@ public class EnemyController : MonoBehaviour {
     [SerializeField] UISprite deck_realms;
     [SerializeField] UILabel number_label;
     [SerializeField] UILabel deck_realms_label;
-    Constants.Group group;
+    Global.Group group;
 
     private void Awake()
     {
@@ -27,28 +27,28 @@ public class EnemyController : MonoBehaviour {
         switch (random)
         {
             case 0:
-                group = Constants.Group.northern;
+                group = Global.Group.northern;
                 avatar_group.spriteName = "player_faction_northern_realms";
                 group_label.text = "北方领域";
                 deck_realms.spriteName = "board_deck_northern_realms";
                 totalAtlas = GameController.instance.atlas[0];
                 break;
             case 1:
-                group = Constants.Group.nilfgaardian;
+                group = Global.Group.nilfgaardian;
                 avatar_group.spriteName = "player_faction_northern_nilfgaard";
                 group_label.text = "尼弗迦德";
                 deck_realms.spriteName = "board_deck_nilfgaard";
                 totalAtlas = GameController.instance.atlas[1];
                 break;
             case 2:
-                group = Constants.Group.monster;
+                group = Global.Group.monster;
                 avatar_group.spriteName = "player_faction_northern_no_mans_land";
                 group_label.text = "怪兽";
                 deck_realms.spriteName = "board_deck_no_mans_land";
                 totalAtlas = GameController.instance.atlas[2];
                 break;
             case 3:
-                group = Constants.Group.scoiatael;
+                group = Global.Group.scoiatael;
                 avatar_group.spriteName = "player_faction_scoiatael";
                 group_label.text = "松鼠党";
                 deck_realms.spriteName = "board_deck_scoiatael";
@@ -57,7 +57,7 @@ public class EnemyController : MonoBehaviour {
         }
 
         XmlDocument xml = new XmlDocument();
-        xml.Load(Constants.enemyPath);
+        xml.Load(Global.enemyPath);
         XmlElement root = xml.DocumentElement;
         XmlNode xmlNode = root.SelectSingleNode(string.Format("/root/{0}", group));
 
@@ -74,8 +74,8 @@ public class EnemyController : MonoBehaviour {
                 cardSprite.atlas = GameController.instance.atlas[4];
                 cardSprite.spriteName = cardNode.Attributes["sprite"].Value;
                 CardProperty cardProperty = cardObject.GetComponent<CardProperty>();
-                cardProperty.line = (Constants.Line)System.Enum.Parse(typeof(Constants.Line), cardNode.Attributes["line"].Value);
-                cardProperty.effect = (Constants.Effect)System.Enum.Parse(typeof(Constants.Effect), cardNode.Attributes["effect"].Value);
+                cardProperty.line = (Global.Line)System.Enum.Parse(typeof(Global.Line), cardNode.Attributes["line"].Value);
+                cardProperty.effect = (Global.Effect)System.Enum.Parse(typeof(Global.Effect), cardNode.Attributes["effect"].Value);
                 cardProperty.gold = bool.Parse(cardNode.Attributes["gold"].Value);
                 cardProperty.power = int.Parse(cardNode.Attributes["power"].Value);
             }
@@ -93,8 +93,8 @@ public class EnemyController : MonoBehaviour {
                 cardSprite.atlas = totalAtlas;
                 cardSprite.spriteName = cardNode.Attributes["sprite"].Value;
                 CardProperty cardProperty = cardObject.GetComponent<CardProperty>();
-                cardProperty.line = (Constants.Line)System.Enum.Parse(typeof(Constants.Line), cardNode.Attributes["line"].Value);
-                cardProperty.effect = (Constants.Effect)System.Enum.Parse(typeof(Constants.Effect), cardNode.Attributes["effect"].Value);
+                cardProperty.line = (Global.Line)System.Enum.Parse(typeof(Global.Line), cardNode.Attributes["line"].Value);
+                cardProperty.effect = (Global.Effect)System.Enum.Parse(typeof(Global.Effect), cardNode.Attributes["effect"].Value);
                 cardProperty.gold = bool.Parse(cardNode.Attributes["gold"].Value);
                 cardProperty.power = int.Parse(cardNode.Attributes["power"].Value);
             }
@@ -112,8 +112,8 @@ public class EnemyController : MonoBehaviour {
                 cardSprite.atlas = GameController.instance.atlas[4];
                 cardSprite.spriteName = cardNode.Attributes["sprite"].Value;
                 CardProperty cardProperty = cardObject.GetComponent<CardProperty>();
-                cardProperty.line = (Constants.Line)System.Enum.Parse(typeof(Constants.Line), cardNode.Attributes["line"].Value);
-                cardProperty.effect = (Constants.Effect)System.Enum.Parse(typeof(Constants.Effect), cardNode.Attributes["effect"].Value);
+                cardProperty.line = (Global.Line)System.Enum.Parse(typeof(Global.Line), cardNode.Attributes["line"].Value);
+                cardProperty.effect = (Global.Effect)System.Enum.Parse(typeof(Global.Effect), cardNode.Attributes["effect"].Value);
                 cardProperty.gold = bool.Parse(cardNode.Attributes["gold"].Value);
                 cardProperty.power = int.Parse(cardNode.Attributes["power"].Value);
             }
@@ -146,34 +146,23 @@ public class EnemyController : MonoBehaviour {
 
         switch (cardProperty.effect)
         {
-            case Constants.Effect.spy:
-                switch (cardProperty.line)
-                {
-                    case Constants.Line.melee:
-                        grid.SetParent(random, PlayerController.instance.grids[2]);
-                        break;
-                    case Constants.Line.ranged:
-                        grid.SetParent(random, PlayerController.instance.grids[3]);
-                        break;
-                    case Constants.Line.siege:
-                        grid.SetParent(random, PlayerController.instance.grids[4]);
-                        break;
-                }
+            case Global.Effect.spy:
+                grid.SetParent(random, PlayerController.instance.grids[(int)cardProperty.line + 2]);
                 DrawCards(2);
                 break;
-            case Constants.Effect.clear_sky:
+            case Global.Effect.clear_sky:
                 WeatherController.instance.ClearSky();
                 goto default;
-            case Constants.Effect.frost:
+            case Global.Effect.frost:
                 if (!WeatherController.instance.frost) WeatherController.instance.Frost();
                 goto default;
-            case Constants.Effect.fog:
+            case Global.Effect.fog:
                 if (!WeatherController.instance.fog) WeatherController.instance.Fog();
                 goto default;
-            case Constants.Effect.rain:
+            case Global.Effect.rain:
                 if (!WeatherController.instance.fog)   WeatherController.instance.Rain();
                 goto default;
-            case Constants.Effect.scorch:
+            case Global.Effect.scorch:
                 int maxPower = 0;
                 for (int i = 2; i < 5; i++)
                 {
@@ -209,7 +198,7 @@ public class EnemyController : MonoBehaviour {
                     }
                 }
                 goto default;
-            case Constants.Effect.dummy:
+            case Global.Effect.dummy:
                 for (int i = 2; i < 5; i++)
                 {
                     if (grids[i].childCount == 0) continue;
@@ -220,21 +209,7 @@ public class EnemyController : MonoBehaviour {
                 }
                 break;
             default:
-                switch (cardProperty.line)
-                {
-                    case Constants.Line.melee:
-                        grid.SetParent(random, grids[2]);
-                        break;
-                    case Constants.Line.ranged:
-                        grid.SetParent(random, grids[3]);
-                        break;
-                    case Constants.Line.siege:
-                        grid.SetParent(random, grids[4]);
-                        break;
-                    case Constants.Line.empty:
-                        grid.SetParent(random, grids[5]);
-                        break;
-                }
+                grid.SetParent(random, grids[(int)cardProperty.line + 2]);
                 break;
         }
 

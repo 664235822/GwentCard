@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public static class Constants {
+public static class Global {
     public enum Group { northern, nilfgaardian, monster, scoiatael }
     public enum List { leader, special, monster, neutral }
     public enum Line { melee, ranged, siege, empty, agile }

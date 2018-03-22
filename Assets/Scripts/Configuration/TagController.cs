@@ -8,8 +8,8 @@ public class TagController : MonoBehaviour {
     [SerializeField] GameObject[] tagButtons;
     [SerializeField] UIPopupList popupList;
     [SerializeField] UILabel groupLabel;
-    [HideInInspector] public Constants.Group group = Constants.Group.northern;
-    [HideInInspector] public Constants.List list = Constants.List.leader;
+    [HideInInspector] public Global.Group group = Global.Group.northern;
+    [HideInInspector] public Global.List list = Global.List.leader;
     GameObject[] grids = new GameObject[4];
     readonly string[] groupLabelText = {
         "赢得一局后可从牌组中抽一张牌",
@@ -39,7 +39,7 @@ public class TagController : MonoBehaviour {
                 GetGrids(i);
                 OnValueChange();
                 tagButtons[i].GetComponent<UIButton>().isEnabled = false;
-                group = (Constants.Group)System.Enum.Parse(typeof(Constants.Group), tagButtons[i].transform.name);
+                group = (Global.Group)System.Enum.Parse(typeof(Global.Group), tagButtons[i].transform.name);
                 groupLabel.text = groupLabelText[i];
             }
             else
@@ -59,22 +59,22 @@ public class TagController : MonoBehaviour {
         if (popupList.value != null)
         {
             index = popupList.GetItemsInt();
-            list = (Constants.List)index;
+            list = (Global.List)index;
         }
         else
         {
             switch (list)
             {
-                case Constants.List.leader:
+                case Global.List.leader:
                     popupList.value = "领导牌";
                     break;
-                case Constants.List.special:
+                case Global.List.special:
                     popupList.value = "特殊牌";
                     break;
-                case Constants.List.monster:
+                case Global.List.monster:
                     popupList.value = "生物牌";
                     break;
-                case Constants.List.neutral:
+                case Global.List.neutral:
                     popupList.value = "中立牌";
                     break;
             }

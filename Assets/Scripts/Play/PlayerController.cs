@@ -12,7 +12,7 @@ public class PlayerController : MonoBehaviour {
     [SerializeField] UISprite deck_realms;
     [SerializeField] UILabel number_label;
     [SerializeField] UILabel deck_realms_label;
-    Constants.Group group;
+    Global.Group group;
 
     private void Awake()
     {
@@ -22,29 +22,29 @@ public class PlayerController : MonoBehaviour {
     public void Initialize(string Group)
     {
         player.SetActive(true);
-        group = (Constants.Group)System.Enum.Parse(typeof(Constants.Group), Group);
+        group = (Global.Group)System.Enum.Parse(typeof(Global.Group), Group);
         UIAtlas totalAtlas = new UIAtlas();
         switch (group)
         {
-            case Constants.Group.northern:
+            case Global.Group.northern:
                 avatar_group.spriteName = "player_faction_northern_realms";
                 group_label.text = "北方领域";
                 deck_realms.spriteName = "board_deck_northern_realms";
                 totalAtlas = GameController.instance.atlas[0];
                 break;
-            case Constants.Group.nilfgaardian:
+            case Global.Group.nilfgaardian:
                 avatar_group.spriteName = "player_faction_northern_nilfgaard";
                 group_label.text = "尼弗迦德";
                 deck_realms.spriteName = "board_deck_nilfgaard";
                 totalAtlas = GameController.instance.atlas[1];
                 break;
-            case Constants.Group.monster:
+            case Global.Group.monster:
                 avatar_group.spriteName = "player_faction_northern_no_mans_land";
                 group_label.text = "怪兽";
                 deck_realms.spriteName = "board_deck_no_mans_land";
                 totalAtlas = GameController.instance.atlas[2];
                 break;
-            case Constants.Group.scoiatael:
+            case Global.Group.scoiatael:
                 avatar_group.spriteName = "player_faction_scoiatael";
                 group_label.text = "松鼠党";
                 deck_realms.spriteName = "board_deck_scoiatael";
@@ -53,7 +53,7 @@ public class PlayerController : MonoBehaviour {
         }
 
         XmlDocument xml = new XmlDocument();
-        xml.Load(Constants.path);
+        xml.Load(Global.path);
         XmlElement root = xml.DocumentElement;
         XmlNode xmlNode = root.SelectSingleNode(string.Format("/root/{0}", group));
 
@@ -70,8 +70,8 @@ public class PlayerController : MonoBehaviour {
                 cardSprite.atlas = GameController.instance.atlas[4];
                 cardSprite.spriteName = cardNode.Attributes["sprite"].Value;
                 CardProperty cardProperty = cardObject.GetComponent<CardProperty>();
-                cardProperty.line = (Constants.Line)System.Enum.Parse(typeof(Constants.Line), cardNode.Attributes["line"].Value);
-                cardProperty.effect = (Constants.Effect)System.Enum.Parse(typeof(Constants.Effect), cardNode.Attributes["effect"].Value);
+                cardProperty.line = (Global.Line)System.Enum.Parse(typeof(Global.Line), cardNode.Attributes["line"].Value);
+                cardProperty.effect = (Global.Effect)System.Enum.Parse(typeof(Global.Effect), cardNode.Attributes["effect"].Value);
                 cardProperty.gold = bool.Parse(cardNode.Attributes["gold"].Value);
                 cardProperty.power = int.Parse(cardNode.Attributes["power"].Value);
             }
@@ -89,8 +89,8 @@ public class PlayerController : MonoBehaviour {
                 cardSprite.atlas = totalAtlas;
                 cardSprite.spriteName = cardNode.Attributes["sprite"].Value;
                 CardProperty cardProperty = cardObject.GetComponent<CardProperty>();
-                cardProperty.line = (Constants.Line)System.Enum.Parse(typeof(Constants.Line), cardNode.Attributes["line"].Value);
-                cardProperty.effect = (Constants.Effect)System.Enum.Parse(typeof(Constants.Effect), cardNode.Attributes["effect"].Value);
+                cardProperty.line = (Global.Line)System.Enum.Parse(typeof(Global.Line), cardNode.Attributes["line"].Value);
+                cardProperty.effect = (Global.Effect)System.Enum.Parse(typeof(Global.Effect), cardNode.Attributes["effect"].Value);
                 cardProperty.gold = bool.Parse(cardNode.Attributes["gold"].Value);
                 cardProperty.power = int.Parse(cardNode.Attributes["power"].Value);
             }
@@ -108,8 +108,8 @@ public class PlayerController : MonoBehaviour {
                 cardSprite.atlas = GameController.instance.atlas[4];
                 cardSprite.spriteName = cardNode.Attributes["sprite"].Value;
                 CardProperty cardProperty = cardObject.GetComponent<CardProperty>();
-                cardProperty.line = (Constants.Line)System.Enum.Parse(typeof(Constants.Line), cardNode.Attributes["line"].Value);
-                cardProperty.effect = (Constants.Effect)System.Enum.Parse(typeof(Constants.Effect), cardNode.Attributes["effect"].Value);
+                cardProperty.line = (Global.Line)System.Enum.Parse(typeof(Global.Line), cardNode.Attributes["line"].Value);
+                cardProperty.effect = (Global.Effect)System.Enum.Parse(typeof(Global.Effect), cardNode.Attributes["effect"].Value);
                 cardProperty.gold = bool.Parse(cardNode.Attributes["gold"].Value);
                 cardProperty.power = int.Parse(cardNode.Attributes["power"].Value);
             }

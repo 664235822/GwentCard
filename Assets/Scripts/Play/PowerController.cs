@@ -30,10 +30,10 @@ public class PowerController : MonoBehaviour {
                 CardProperty cardProperty = PlayerController.instance.grids[i].GetChild(ii).GetComponent<CardProperty>();
                 switch (cardProperty.effect)
                 {
-                    case Constants.Effect.improve_neighbours:
+                    case Global.Effect.improve_neighbours:
                         player_improve_neighbours[i - 2]++;
                         break;
-                    case Constants.Effect.same_type_morale:
+                    case Global.Effect.same_type_morale:
                         string spriteName = cardProperty.GetComponent<UISprite>().spriteName;
                         if (!player_same_type_morale.ContainsKey(spriteName))
                             player_same_type_morale.Add(spriteName, 1);
@@ -54,10 +54,10 @@ public class PowerController : MonoBehaviour {
                 CardProperty cardProperty = EnemyController.instance.grids[i].GetChild(ii).GetComponent<CardProperty>();
                 switch (cardProperty.effect)
                 {
-                    case Constants.Effect.improve_neighbours:
+                    case Global.Effect.improve_neighbours:
                         enemy_improve_neighbours[i - 2]++;
                         break;
-                    case Constants.Effect.same_type_morale:
+                    case Global.Effect.same_type_morale:
                         string spriteName = cardProperty.GetComponent<UISprite>().spriteName;
                         if (!enemy_same_type_morale.ContainsKey(spriteName))
                             enemy_same_type_morale.Add(spriteName, 1);
@@ -84,7 +84,7 @@ public class PowerController : MonoBehaviour {
             string spriteName = card.GetComponent<UISprite>().spriteName;
             if (player_same_type_morale.ContainsKey(spriteName))
                 power *= player_same_type_morale[spriteName];
-            if (cardProperty.effect != Constants.Effect.improve_neighbours)
+            if (cardProperty.effect != Global.Effect.improve_neighbours)
                 power += player_improve_neighbours[0];
             card.GetComponent<CardBehavior>().totalPower = power;
             player[0] += power;
@@ -101,7 +101,7 @@ public class PowerController : MonoBehaviour {
             string spriteName = card.GetComponent<UISprite>().spriteName;
             if (player_same_type_morale.ContainsKey(spriteName))
                 power *= player_same_type_morale[spriteName];
-            if (cardProperty.effect != Constants.Effect.improve_neighbours)
+            if (cardProperty.effect != Global.Effect.improve_neighbours)
                 power += player_improve_neighbours[1];
             card.GetComponent<CardBehavior>().totalPower = power;
             player[1] += power;
@@ -118,7 +118,7 @@ public class PowerController : MonoBehaviour {
             string spriteName = card.GetComponent<UISprite>().spriteName;
             if (player_same_type_morale.ContainsKey(spriteName))
                 power *= player_same_type_morale[spriteName];
-            if (cardProperty.effect != Constants.Effect.improve_neighbours)
+            if (cardProperty.effect != Global.Effect.improve_neighbours)
                 power += player_improve_neighbours[2];
             card.GetComponent<CardBehavior>().totalPower = power;
             player[2] += power;
@@ -135,7 +135,7 @@ public class PowerController : MonoBehaviour {
             string spriteName = card.GetComponent<UISprite>().spriteName;
             if (enemy_same_type_morale.ContainsKey(spriteName))
                 power *= enemy_same_type_morale[spriteName];
-            if (cardProperty.effect != Constants.Effect.improve_neighbours)
+            if (cardProperty.effect != Global.Effect.improve_neighbours)
                 power += enemy_improve_neighbours[0];
             card.GetComponent<CardBehavior>().totalPower = power;
             enemy[0] += power;
@@ -152,7 +152,7 @@ public class PowerController : MonoBehaviour {
             string spriteName = card.GetComponent<UISprite>().spriteName;
             if (enemy_same_type_morale.ContainsKey(spriteName))
                 power *= enemy_same_type_morale[spriteName];
-            if (cardProperty.effect != Constants.Effect.improve_neighbours)
+            if (cardProperty.effect != Global.Effect.improve_neighbours)
                 power += enemy_improve_neighbours[1];
             card.GetComponent<CardBehavior>().totalPower = power;
             enemy[1] += power;
@@ -169,7 +169,7 @@ public class PowerController : MonoBehaviour {
             string spriteName = card.GetComponent<UISprite>().spriteName;
             if (enemy_same_type_morale.ContainsKey(spriteName))
                 power *= enemy_same_type_morale[spriteName];
-            if (cardProperty.effect != Constants.Effect.improve_neighbours)
+            if (cardProperty.effect != Global.Effect.improve_neighbours)
                 power += enemy_improve_neighbours[2];
             card.GetComponent<CardBehavior>().totalPower = power;
             enemy[2] += power;
