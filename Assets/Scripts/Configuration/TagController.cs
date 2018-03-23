@@ -2,8 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TagController : MonoBehaviour {
-    public static TagController instance;
+public class TagController : Singleton<TagController> {
     public GameObject[] groups;
     [SerializeField] GameObject[] tagButtons;
     [SerializeField] UIPopupList popupList;
@@ -22,11 +21,6 @@ public class TagController : MonoBehaviour {
     void Start()
     {
         OnClick(tagButtons[0]);
-    }
-
-    private void Awake()
-    {
-        instance = this;
     }
 
     public void OnClick(GameObject tagButton)
@@ -49,8 +43,8 @@ public class TagController : MonoBehaviour {
             }
         }
 
-        SaveController.instance.LoadXML();
-        NumberController.instance.Number();
+        SaveController.GetInstance().LoadXML();
+        NumberController.GetInstance().Number();
     }
 
     public void OnValueChange()

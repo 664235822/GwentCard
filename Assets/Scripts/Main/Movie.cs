@@ -16,13 +16,13 @@ public class Movie : MonoBehaviour {
         if (videoPlayer.isPlaying && Input.GetMouseButtonDown(0))
         {
             videoPlayer.Stop();
-            MusicController.instance.Continue();
+            MusicController.GetInstance().Continue();
         }
     }
 
     public void OnClick()
     {
         videoPlayer.Play();
-        MusicController.instance.Pause();
+        MusicController.GetInstance().Pause();
     }
 }

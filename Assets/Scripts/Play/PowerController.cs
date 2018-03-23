@@ -2,18 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PowerController : MonoBehaviour {
-    public static PowerController instance;
+public class PowerController : Singleton<PowerController> {
     [SerializeField] UILabel[] player_power_label;
     [SerializeField] UILabel[] enemy_power_label;
     [HideInInspector] public int player_total = 0;
     [HideInInspector] public int enemy_total = 0;
     
-    private void Awake()
-    {
-        instance = this;
-    }
-
     public void Number()
     {
         int[] player = { 0, 0, 0 };
@@ -25,9 +19,9 @@ public class PowerController : MonoBehaviour {
 
         for (int i = 2; i < 5; i++)
         {
-            for (int ii = 0; ii < PlayerController.instance.grids[i].childCount; ii++)
+            for (int ii = 0; ii < PlayerController.GetInstance().grids[i].childCount; ii++)
             {
-                CardProperty cardProperty = PlayerController.instance.grids[i].GetChild(ii).GetComponent<CardProperty>();
+                CardProperty cardProperty = PlayerController.GetInstance().grids[i].GetChild(ii).GetComponent<CardProperty>();
                 switch (cardProperty.effect)
                 {
                     case Global.Effect.improve_neighbours:
@@ -49,9 +43,9 @@ public class PowerController : MonoBehaviour {
         }
         for (int i = 2; i < 5; i++)
         {
-            for (int ii = 0; ii < EnemyController.instance.grids[i].childCount; ii++)
+            for (int ii = 0; ii < EnemyController.GetInstance().grids[i].childCount; ii++)
             {
-                CardProperty cardProperty = EnemyController.instance.grids[i].GetChild(ii).GetComponent<CardProperty>();
+                CardProperty cardProperty = EnemyController.GetInstance().grids[i].GetChild(ii).GetComponent<CardProperty>();
                 switch (cardProperty.effect)
                 {
                     case Global.Effect.improve_neighbours:
@@ -72,12 +66,12 @@ public class PowerController : MonoBehaviour {
             }
         }
 
-        for (int i = 0; i < PlayerController.instance.grids[2].childCount; i++)
+        for (int i = 0; i < PlayerController.GetInstance().grids[2].childCount; i++)
         {
-            Transform card = PlayerController.instance.grids[2].GetChild(i);
+            Transform card = PlayerController.GetInstance().grids[2].GetChild(i);
             CardProperty cardProperty = card.GetComponent<CardProperty>();
             int power = 0;
-            if (WeatherController.instance.frost && !cardProperty.gold)
+            if (WeatherController.GetInstance().frost && !cardProperty.gold)
                 power += 1;
             else
                 power += cardProperty.power;
@@ -89,12 +83,12 @@ public class PowerController : MonoBehaviour {
             card.GetComponent<CardBehavior>().totalPower = power;
             player[0] += power;
         }
-        for (int i = 0; i < PlayerController.instance.grids[3].childCount; i++)
+        for (int i = 0; i < PlayerController.GetInstance().grids[3].childCount; i++)
         {
-            Transform card = PlayerController.instance.grids[3].GetChild(i);
+            Transform card = PlayerController.GetInstance().grids[3].GetChild(i);
             CardProperty cardProperty = card.GetComponent<CardProperty>();
             int power = 0;
-            if (WeatherController.instance.fog && !cardProperty.gold)
+            if (WeatherController.GetInstance().fog && !cardProperty.gold)
                 power += 1;
             else
                 power += cardProperty.power;
@@ -106,12 +100,12 @@ public class PowerController : MonoBehaviour {
             card.GetComponent<CardBehavior>().totalPower = power;
             player[1] += power;
         }
-        for (int i = 0; i < PlayerController.instance.grids[4].childCount; i++)
+        for (int i = 0; i < PlayerController.GetInstance().grids[4].childCount; i++)
         {
-            Transform card = PlayerController.instance.grids[4].GetChild(i);
+            Transform card = PlayerController.GetInstance().grids[4].GetChild(i);
             CardProperty cardProperty = card.GetComponent<CardProperty>();
             int power = 0;
-            if (WeatherController.instance.rain && !cardProperty.gold)
+            if (WeatherController.GetInstance().rain && !cardProperty.gold)
                 power += 1;
             else
                 power += cardProperty.power;
@@ -123,12 +117,12 @@ public class PowerController : MonoBehaviour {
             card.GetComponent<CardBehavior>().totalPower = power;
             player[2] += power;
         }
-        for (int i = 0; i < EnemyController.instance.grids[2].childCount; i++)
+        for (int i = 0; i < EnemyController.GetInstance().grids[2].childCount; i++)
         {
-            Transform card = EnemyController.instance.grids[2].GetChild(i);
+            Transform card = EnemyController.GetInstance().grids[2].GetChild(i);
             CardProperty cardProperty = card.GetComponent<CardProperty>();
             int power = 0;
-            if (WeatherController.instance.frost && !cardProperty.gold)
+            if (WeatherController.GetInstance().frost && !cardProperty.gold)
                 power += 1;
             else
                 power += cardProperty.power;
@@ -140,12 +134,12 @@ public class PowerController : MonoBehaviour {
             card.GetComponent<CardBehavior>().totalPower = power;
             enemy[0] += power;
         }
-        for (int i = 0; i < EnemyController.instance.grids[3].childCount; i++)
+        for (int i = 0; i < EnemyController.GetInstance().grids[3].childCount; i++)
         {
-            Transform card = EnemyController.instance.grids[3].GetChild(i);
+            Transform card = EnemyController.GetInstance().grids[3].GetChild(i);
             CardProperty cardProperty = card.GetComponent<CardProperty>();
             int power = 0;
-            if (WeatherController.instance.frost && !cardProperty.gold)
+            if (WeatherController.GetInstance().frost && !cardProperty.gold)
                 power += 1;
             else
                 power += cardProperty.power;
@@ -157,12 +151,12 @@ public class PowerController : MonoBehaviour {
             card.GetComponent<CardBehavior>().totalPower = power;
             enemy[1] += power;
         }
-        for (int i = 0; i < EnemyController.instance.grids[4].childCount; i++)
+        for (int i = 0; i < EnemyController.GetInstance().grids[4].childCount; i++)
         {
-            Transform card = EnemyController.instance.grids[4].GetChild(i);
+            Transform card = EnemyController.GetInstance().grids[4].GetChild(i);
             CardProperty cardProperty = card.GetComponent<CardProperty>();
             int power = 0;
-            if (WeatherController.instance.frost && !cardProperty.gold)
+            if (WeatherController.GetInstance().frost && !cardProperty.gold)
                 power += 1;
             else
                 power += cardProperty.power;

@@ -6,7 +6,7 @@ public class LeaderCardCheck : MonoBehaviour {
 
     public void Check()
     {
-        SaveController.instance.UpdateXML(transform.parent);
-        NumberController.instance.Number();
+        SaveController.GetInstance().UpdateXML(transform.parent);
+        NumberController.GetInstance().Number();
     }
 }

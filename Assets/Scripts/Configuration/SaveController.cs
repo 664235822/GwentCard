@@ -4,8 +4,7 @@ using UnityEngine;
 using System.Xml;
 using System.IO;
 
-public class SaveController : MonoBehaviour {
-    public static SaveController instance;
+public class SaveController : Singleton<SaveController> {
     [SerializeField] UILabel label;
     [SerializeField] Transform scrollView;
     XmlDocument xml = new XmlDocument();
@@ -17,11 +16,6 @@ public class SaveController : MonoBehaviour {
         else
             Initialize();
 	}
-
-    private void Awake()
-    {
-        instance = this;
-    }
 
     void Initialize()
     {
@@ -90,7 +84,7 @@ public class SaveController : MonoBehaviour {
 
     public void LoadXML()
     {
-        string group = TagController.instance.group.ToString();
+        string group = TagController.GetInstance().group.ToString();
         xml.Load(Global.path);
         XmlElement root = xml.DocumentElement;
         XmlNode groupNode = root.SelectSingleNode("/root/" + group);
@@ -140,8 +134,8 @@ public class SaveController : MonoBehaviour {
 
     public void UpdateXML(Transform card)
     {
-        string group = TagController.instance.group.ToString();
-        string list = TagController.instance.list.ToString();
+        string group = TagController.GetInstance().group.ToString();
+        string list = TagController.GetInstance().list.ToString();
         XmlElement root = xml.DocumentElement;
         XmlNode node = root.SelectSingleNode(string.Format("/root/{0}/{1}", group, list));
 
@@ -183,22 +177,22 @@ public class SaveController : MonoBehaviour {
                 node.RemoveChild(cardNode);
         }
 
-        NumberController.instance.Number();
+        NumberController.GetInstance().Number();
     }
 
     public void OnClick()
     {
         try
         {
-            if (NumberController.instance.leaderCount != 1)
+            if (NumberController.GetInstance().leaderCount != 1)
                 throw new SaveException();
-            if (NumberController.instance.specialCount > 10)
+            if (NumberController.GetInstance().specialCount > 10)
                 throw new SaveException();
-            if (NumberController.instance.monsterCount < 25 || NumberController.instance.monsterCount > 40)
+            if (NumberController.GetInstance().monsterCount < 25 || NumberController.GetInstance().monsterCount > 40)
                 throw new SaveException();
 
             XmlElement root = xml.DocumentElement;
-            XmlNode groupNode = root.SelectSingleNode(string.Format("/root/{0}", TagController.instance.group.ToString()));
+            XmlNode groupNode = root.SelectSingleNode(string.Format("/root/{0}", TagController.GetInstance().group.ToString()));
             groupNode.Attributes["save"].Value = true.ToString();
             xml.Save(Global.path);
             StartCoroutine(ShowLabel("保存成功"));

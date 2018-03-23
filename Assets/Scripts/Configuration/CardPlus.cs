@@ -21,9 +21,9 @@ public class CardPlus : MonoBehaviour {
             return;
 
         total++;
-        PrintLabel();
-        NumberController.instance.Number();
-        SaveController.instance.UpdateXML(transform);
+        label.text = string.Format("{0}/{1}", total, max);
+        NumberController.GetInstance().Number();
+        SaveController.GetInstance().UpdateXML(transform);
     }
 
     public void Minus()
@@ -35,15 +35,15 @@ public class CardPlus : MonoBehaviour {
         if (total == 0)
             toggle.value = false;
 
-        PrintLabel();
-        NumberController.instance.Number();
-        SaveController.instance.UpdateXML(transform);
+        label.text = string.Format("{0}/{1}", total, max);
+        NumberController.GetInstance().Number();
+        SaveController.GetInstance().UpdateXML(transform);
     }
 
     public void WriteTotal(int index)
     {
         total = index;
-        PrintLabel();
+        label.text = string.Format("{0}/{1}", total, max);
     }
 
     public void Check()
@@ -51,15 +51,10 @@ public class CardPlus : MonoBehaviour {
         if (toggle.value == true && total == 0)
         {
             total++;
-            PrintLabel();
+            label.text = string.Format("{0}/{1}", total, max);
         }
 
-        NumberController.instance.Number();
-        SaveController.instance.UpdateXML(transform);
-    }
-
-    void PrintLabel()
-    {
-        label.text = string.Format("{0}/{1}", total, max);
+        NumberController.GetInstance().Number();
+        SaveController.GetInstance().UpdateXML(transform);
     }
 }

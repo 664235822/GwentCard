@@ -14,7 +14,7 @@ public class EnemySaveController : MonoBehaviour {
             XmlElement root = xml.CreateElement("root");
 
             XmlElement northern = xml.CreateElement("northern");
-            Transform groupTransform = TagController.instance.groups[0].transform;
+            Transform groupTransform = TagController.GetInstance().groups[0].transform;
 
             XmlElement leader1 = xml.CreateElement("leader");
             Transform leader1Transform = groupTransform.Find("leader");
@@ -103,7 +103,7 @@ public class EnemySaveController : MonoBehaviour {
             northern.AppendChild(neutral1);
 
             XmlElement nilfgaardian = xml.CreateElement("nilfgaardian");
-            groupTransform= TagController.instance.groups[1].transform;
+            groupTransform= TagController.GetInstance().groups[1].transform;
 
             XmlElement leader2 = xml.CreateElement("leader");
             Transform leader2Transform = groupTransform.Find("leader");
@@ -192,7 +192,7 @@ public class EnemySaveController : MonoBehaviour {
             nilfgaardian.AppendChild(neutral2);
 
             XmlElement monster = xml.CreateElement("monster");
-            groupTransform = TagController.instance.groups[2].transform;
+            groupTransform = TagController.GetInstance().groups[2].transform;
 
             XmlElement leader3 = xml.CreateElement("leader");
             Transform leader3Transform = groupTransform.Find("leader");
@@ -281,7 +281,7 @@ public class EnemySaveController : MonoBehaviour {
             monster.AppendChild(neutral3);
 
             XmlElement scoiatael = xml.CreateElement("scoiatael");
-            groupTransform = TagController.instance.groups[3].transform;
+            groupTransform = TagController.GetInstance().groups[3].transform;
 
             XmlElement leader4 = xml.CreateElement("leader");
             Transform leader4Transform = groupTransform.Find("leader");

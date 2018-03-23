@@ -2,15 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MusicController : MonoBehaviour {
-    public static MusicController instance;
+public class MusicController : Singleton<MusicController> {
     [SerializeField] AudioClip[] audioClip;
     AudioSource audioSource;
     bool pause = false;
 
     private void Awake()
     {
-        instance = this;
         audioSource = GetComponent<AudioSource>();
     }
 

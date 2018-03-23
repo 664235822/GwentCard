@@ -2,8 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WeatherController : MonoBehaviour {
-    public static WeatherController instance;
+public class WeatherController : Singleton<WeatherController> {
     public Transform grid;
     [SerializeField] GameObject playerFrostSprite;
     [SerializeField] GameObject playerFogSprite;
@@ -15,15 +14,10 @@ public class WeatherController : MonoBehaviour {
     [HideInInspector] public bool fog = false;
     [HideInInspector] public bool rain = false;
 
-    private void Awake()
-    {
-        instance = this;
-    }
-
     public void ClearSky()
     {
         for (int i = 0; i < grid.childCount; i++)
-            grid.SetParent(i, PlayerController.instance.grids[5]);
+            grid.SetParent(i, PlayerController.GetInstance().grids[5]);
         frost = false;
         fog = false;
         rain = false;

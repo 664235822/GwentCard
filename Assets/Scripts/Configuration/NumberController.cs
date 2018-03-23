@@ -2,21 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NumberController : MonoBehaviour {
-    public static NumberController instance;
+public class NumberController : Singleton<NumberController> {
     [SerializeField] UILabel[] labels;
     [HideInInspector] public int leaderCount = 0;
     [HideInInspector] public int specialCount = 0;
     [HideInInspector] public int monsterCount = 0;
 
-    private void Awake()
-    {
-        instance = this;
-    }
-
     public void Number()
     {
-        Transform group = transform.Find(TagController.instance.group.ToString());
+        Transform group = transform.Find(TagController.GetInstance().group.ToString());
         leaderCount = 0;
         specialCount = 0;
         monsterCount = 0;

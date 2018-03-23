@@ -2,8 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ShowCards : MonoBehaviour {
-    public static ShowCards instance;
+public class ShowCards : Singleton<ShowCards> {
     public enum Behaviour { draw, show, dummy, warhorn }
     public Transform grid;
     [SerializeField] GameObject show;
@@ -14,11 +13,6 @@ public class ShowCards : MonoBehaviour {
     [HideInInspector] public Transform totalGrid;
     Behaviour behaviour;
 
-    private void Awake()
-    {
-        instance = this;
-    }
-
     public void Show(Behaviour behav, Transform ShowGrid, bool Repeat)
     {
         behaviour = behav;
@@ -26,9 +20,9 @@ public class ShowCards : MonoBehaviour {
 
         if (!Repeat)
         {
-            BlackShow.instance.Show(true);
-            PlayerController.instance.player.SetActive(false);
-            EnemyController.instance.enemy.SetActive(false);
+            BlackShow.GetInstance().Show(true);
+            PlayerController.GetInstance().player.SetActive(false);
+            EnemyController.GetInstance().enemy.SetActive(false);
             show.SetActive(true);
         }
 
@@ -97,14 +91,14 @@ public class ShowCards : MonoBehaviour {
     {
         totalGrid = null;
         grid.DestroyChildren();
-        BlackShow.instance.Show(false);
-        PlayerController.instance.player.SetActive(true);
-        EnemyController.instance.enemy.SetActive(true);
+        BlackShow.GetInstance().Show(false);
+        PlayerController.GetInstance().player.SetActive(true);
+        EnemyController.GetInstance().enemy.SetActive(true);
         show.SetActive(false);
     }
 
     public void LineChanged()
     {
-        Show(behaviour, PlayerController.instance.grids[popupList.GetItemsInt() + 2], true);
+        Show(behaviour, PlayerController.GetInstance().grids[popupList.GetItemsInt() + 2], true);
     }
 }

@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Xml;
 
-public class PlayerController : MonoBehaviour {
-    public static PlayerController instance;
+public class PlayerController : Singleton<PlayerController> {
     public Transform[] grids;
     public GameObject player;
     [SerializeField] UISprite avatar_group;
@@ -13,11 +12,6 @@ public class PlayerController : MonoBehaviour {
     [SerializeField] UILabel number_label;
     [SerializeField] UILabel deck_realms_label;
     Global.Group group;
-
-    private void Awake()
-    {
-        instance = this;
-    }
 
     public void Initialize(string Group)
     {
@@ -30,25 +24,25 @@ public class PlayerController : MonoBehaviour {
                 avatar_group.spriteName = "player_faction_northern_realms";
                 group_label.text = "北方领域";
                 deck_realms.spriteName = "board_deck_northern_realms";
-                totalAtlas = GameController.instance.atlas[0];
+                totalAtlas = GameController.GetInstance().atlas[0];
                 break;
             case Global.Group.nilfgaardian:
                 avatar_group.spriteName = "player_faction_northern_nilfgaard";
                 group_label.text = "尼弗迦德";
                 deck_realms.spriteName = "board_deck_nilfgaard";
-                totalAtlas = GameController.instance.atlas[1];
+                totalAtlas = GameController.GetInstance().atlas[1];
                 break;
             case Global.Group.monster:
                 avatar_group.spriteName = "player_faction_northern_no_mans_land";
                 group_label.text = "怪兽";
                 deck_realms.spriteName = "board_deck_no_mans_land";
-                totalAtlas = GameController.instance.atlas[2];
+                totalAtlas = GameController.GetInstance().atlas[2];
                 break;
             case Global.Group.scoiatael:
                 avatar_group.spriteName = "player_faction_scoiatael";
                 group_label.text = "松鼠党";
                 deck_realms.spriteName = "board_deck_scoiatael";
-                totalAtlas = GameController.instance.atlas[3];
+                totalAtlas = GameController.GetInstance().atlas[3];
                 break;
         }
 
@@ -63,11 +57,11 @@ public class PlayerController : MonoBehaviour {
         {
             for (int i = 0; i < int.Parse(cardNode.Attributes["total"].Value); i++)
             {
-                GameObject cardObject = Instantiate(GameController.instance.cardPerfab, grids[0]);
+                GameObject cardObject = Instantiate(GameController.GetInstance().cardPerfab, grids[0]);
                 cardObject.name = name.ToString();
                 name++;
                 UISprite cardSprite = cardObject.GetComponent<UISprite>();
-                cardSprite.atlas = GameController.instance.atlas[4];
+                cardSprite.atlas = GameController.GetInstance().atlas[4];
                 cardSprite.spriteName = cardNode.Attributes["sprite"].Value;
                 CardProperty cardProperty = cardObject.GetComponent<CardProperty>();
                 cardProperty.line = (Global.Line)System.Enum.Parse(typeof(Global.Line), cardNode.Attributes["line"].Value);
@@ -82,7 +76,7 @@ public class PlayerController : MonoBehaviour {
         {
             for (int i = 0; i < int.Parse(cardNode.Attributes["total"].Value); i++)
             {
-                GameObject cardObject = Instantiate(GameController.instance.cardPerfab, grids[0]);
+                GameObject cardObject = Instantiate(GameController.GetInstance().cardPerfab, grids[0]);
                 cardObject.name = name.ToString();
                 name++;
                 UISprite cardSprite = cardObject.GetComponent<UISprite>();
@@ -101,11 +95,11 @@ public class PlayerController : MonoBehaviour {
         {
             for (int i = 0; i < int.Parse(cardNode.Attributes["total"].Value); i++)
             {
-                GameObject cardObject = Instantiate(GameController.instance.cardPerfab, grids[0]);
+                GameObject cardObject = Instantiate(GameController.GetInstance().cardPerfab, grids[0]);
                 cardObject.name = name.ToString();
                 name++;
                 UISprite cardSprite = cardObject.GetComponent<UISprite>();
-                cardSprite.atlas = GameController.instance.atlas[4];
+                cardSprite.atlas = GameController.GetInstance().atlas[4];
                 cardSprite.spriteName = cardNode.Attributes["sprite"].Value;
                 CardProperty cardProperty = cardObject.GetComponent<CardProperty>();
                 cardProperty.line = (Global.Line)System.Enum.Parse(typeof(Global.Line), cardNode.Attributes["line"].Value);

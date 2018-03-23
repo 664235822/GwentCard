@@ -25,8 +25,8 @@ public class ChooseGroup : MonoBehaviour {
 
     public void OnClick()
     {
-        BlackShow.instance.Show(false);
+        BlackShow.GetInstance().Show(false);
         transform.parent.gameObject.SetActive(false);
-        GameController.instance.StartGame(name);
+        GameController.GetInstance().StartGame(name);
     }
 }

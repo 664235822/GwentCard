@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Xml;
 
-public class EnemyController : MonoBehaviour {
-    public static EnemyController instance;
+public class EnemyController : Singleton<EnemyController> {
     public Transform[] grids;
     public GameObject enemy;
     [SerializeField] UISprite avatar_group;
@@ -13,11 +12,6 @@ public class EnemyController : MonoBehaviour {
     [SerializeField] UILabel number_label;
     [SerializeField] UILabel deck_realms_label;
     Global.Group group;
-
-    private void Awake()
-    {
-        instance = this;
-    }
 
     public void Initialize()
     {
@@ -31,28 +25,28 @@ public class EnemyController : MonoBehaviour {
                 avatar_group.spriteName = "player_faction_northern_realms";
                 group_label.text = "北方领域";
                 deck_realms.spriteName = "board_deck_northern_realms";
-                totalAtlas = GameController.instance.atlas[0];
+                totalAtlas = GameController.GetInstance().atlas[0];
                 break;
             case 1:
                 group = Global.Group.nilfgaardian;
                 avatar_group.spriteName = "player_faction_northern_nilfgaard";
                 group_label.text = "尼弗迦德";
                 deck_realms.spriteName = "board_deck_nilfgaard";
-                totalAtlas = GameController.instance.atlas[1];
+                totalAtlas = GameController.GetInstance().atlas[1];
                 break;
             case 2:
                 group = Global.Group.monster;
                 avatar_group.spriteName = "player_faction_northern_no_mans_land";
                 group_label.text = "怪兽";
                 deck_realms.spriteName = "board_deck_no_mans_land";
-                totalAtlas = GameController.instance.atlas[2];
+                totalAtlas = GameController.GetInstance().atlas[2];
                 break;
             case 3:
                 group = Global.Group.scoiatael;
                 avatar_group.spriteName = "player_faction_scoiatael";
                 group_label.text = "松鼠党";
                 deck_realms.spriteName = "board_deck_scoiatael";
-                totalAtlas = GameController.instance.atlas[3];
+                totalAtlas = GameController.GetInstance().atlas[3];
                 break;
         }
 
@@ -67,11 +61,11 @@ public class EnemyController : MonoBehaviour {
         {
             for (int i = 0; i < int.Parse(cardNode.Attributes["max"].Value); i++)
             {
-                GameObject cardObject = Instantiate(GameController.instance.cardPerfab, grids[0]);
+                GameObject cardObject = Instantiate(GameController.GetInstance().cardPerfab, grids[0]);
                 cardObject.name = name.ToString();
                 name++;
                 UISprite cardSprite = cardObject.GetComponent<UISprite>();
-                cardSprite.atlas = GameController.instance.atlas[4];
+                cardSprite.atlas = GameController.GetInstance().atlas[4];
                 cardSprite.spriteName = cardNode.Attributes["sprite"].Value;
                 CardProperty cardProperty = cardObject.GetComponent<CardProperty>();
                 cardProperty.line = (Global.Line)System.Enum.Parse(typeof(Global.Line), cardNode.Attributes["line"].Value);
@@ -86,7 +80,7 @@ public class EnemyController : MonoBehaviour {
         {
             for (int i = 0; i < int.Parse(cardNode.Attributes["max"].Value); i++)
             {
-                GameObject cardObject = Instantiate(GameController.instance.cardPerfab, grids[0]);
+                GameObject cardObject = Instantiate(GameController.GetInstance().cardPerfab, grids[0]);
                 cardObject.name = name.ToString();
                 name++;
                 UISprite cardSprite = cardObject.GetComponent<UISprite>();
@@ -105,11 +99,11 @@ public class EnemyController : MonoBehaviour {
         {
             for (int i = 0; i < int.Parse(cardNode.Attributes["max"].Value); i++)
             {
-                GameObject cardObject = Instantiate(GameController.instance.cardPerfab, grids[0]);
+                GameObject cardObject = Instantiate(GameController.GetInstance().cardPerfab, grids[0]);
                 cardObject.name = name.ToString();
                 name++;
                 UISprite cardSprite = cardObject.GetComponent<UISprite>();
-                cardSprite.atlas = GameController.instance.atlas[4];
+                cardSprite.atlas = GameController.GetInstance().atlas[4];
                 cardSprite.spriteName = cardNode.Attributes["sprite"].Value;
                 CardProperty cardProperty = cardObject.GetComponent<CardProperty>();
                 cardProperty.line = (Global.Line)System.Enum.Parse(typeof(Global.Line), cardNode.Attributes["line"].Value);
@@ -147,54 +141,54 @@ public class EnemyController : MonoBehaviour {
         switch (cardProperty.effect)
         {
             case Global.Effect.spy:
-                grid.SetParent(random, PlayerController.instance.grids[(int)cardProperty.line + 2]);
+                grid.SetParent(random, PlayerController.GetInstance().grids[(int)cardProperty.line + 2]);
                 DrawCards(2);
                 break;
             case Global.Effect.clear_sky:
-                WeatherController.instance.ClearSky();
+                WeatherController.GetInstance().ClearSky();
                 goto default;
             case Global.Effect.frost:
-                if (!WeatherController.instance.frost) WeatherController.instance.Frost();
+                if (!WeatherController.GetInstance().frost) WeatherController.GetInstance().Frost();
                 goto default;
             case Global.Effect.fog:
-                if (!WeatherController.instance.fog) WeatherController.instance.Fog();
+                if (!WeatherController.GetInstance().fog) WeatherController.GetInstance().Fog();
                 goto default;
             case Global.Effect.rain:
-                if (!WeatherController.instance.fog)   WeatherController.instance.Rain();
+                if (!WeatherController.GetInstance().fog)   WeatherController.GetInstance().Rain();
                 goto default;
             case Global.Effect.scorch:
                 int maxPower = 0;
                 for (int i = 2; i < 5; i++)
                 {
-                    for (int ii = 0; ii < PlayerController.instance.grids[i].childCount; ii++)
+                    for (int ii = 0; ii < PlayerController.GetInstance().grids[i].childCount; ii++)
                     {
-                        int power = PlayerController.instance.grids[i].GetChild(ii).GetComponent<CardBehavior>().totalPower;
+                        int power = PlayerController.GetInstance().grids[i].GetChild(ii).GetComponent<CardBehavior>().totalPower;
                         if (power > maxPower) maxPower = power;
                     }
                 }
                 for (int i = 2; i < 5; i++)
                 {
-                    for (int ii = 0; ii < EnemyController.instance.grids[i].childCount; ii++)
+                    for (int ii = 0; ii < EnemyController.GetInstance().grids[i].childCount; ii++)
                     {
-                        int power = EnemyController.instance.grids[i].GetChild(ii).GetComponent<CardBehavior>().totalPower;
+                        int power = EnemyController.GetInstance().grids[i].GetChild(ii).GetComponent<CardBehavior>().totalPower;
                         if (power > maxPower) maxPower = power;
                     }
                 }
 
                 for (int i = 2; i < 5; i++)
                 {
-                    for (int ii = PlayerController.instance.grids[i].childCount - 1; ii >= 0; ii--)
+                    for (int ii = PlayerController.GetInstance().grids[i].childCount - 1; ii >= 0; ii--)
                     {
-                        if (PlayerController.instance.grids[i].GetChild(ii).GetComponent<CardBehavior>().totalPower == maxPower)
-                            PlayerController.instance.grids[i].SetParent(ii, PlayerController.instance.grids[5]);
+                        if (PlayerController.GetInstance().grids[i].GetChild(ii).GetComponent<CardBehavior>().totalPower == maxPower)
+                            PlayerController.GetInstance().grids[i].SetParent(ii, PlayerController.GetInstance().grids[5]);
                     }
                 }
                 for (int i = 2; i < 5; i++)
                 {
-                    for (int ii = EnemyController.instance.grids[i].childCount - 1; ii >= 0; ii--)
+                    for (int ii = EnemyController.GetInstance().grids[i].childCount - 1; ii >= 0; ii--)
                     {
-                        if (EnemyController.instance.grids[i].GetChild(ii).GetComponent<CardBehavior>().totalPower == maxPower)
-                            EnemyController.instance.grids[i].SetParent(ii, EnemyController.instance.grids[5]);
+                        if (EnemyController.GetInstance().grids[i].GetChild(ii).GetComponent<CardBehavior>().totalPower == maxPower)
+                            EnemyController.GetInstance().grids[i].SetParent(ii, EnemyController.GetInstance().grids[5]);
                     }
                 }
                 goto default;
@@ -214,6 +208,6 @@ public class EnemyController : MonoBehaviour {
         }
 
         Number();
-        PowerController.instance.Number();
+        PowerController.GetInstance().Number();
     }
 }

@@ -2,13 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BlackShow : MonoBehaviour {
-    public static BlackShow instance;
-
-    private void Awake()
-    {
-        instance = this;
-    }
+public class BlackShow : Singleton<BlackShow> {
 
     public void Show(bool isShow)
     {
