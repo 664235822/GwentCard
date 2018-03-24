@@ -148,16 +148,16 @@ public class EnemyController : Singleton<EnemyController> {
                 WeatherController.GetInstance().ClearSky();
                 goto default;
             case Global.Effect.frost:
-                if (!WeatherController.GetInstance().frost) WeatherController.GetInstance().Frost();
+                if (!WeatherController.GetInstance().weather[0]) WeatherController.GetInstance().Frost();
                 goto default;
             case Global.Effect.fog:
-                if (!WeatherController.GetInstance().fog) WeatherController.GetInstance().Fog();
+                if (!WeatherController.GetInstance().weather[1]) WeatherController.GetInstance().Fog();
                 goto default;
             case Global.Effect.rain:
-                if (!WeatherController.GetInstance().fog)   WeatherController.GetInstance().Rain();
+                if (!WeatherController.GetInstance().weather[2])   WeatherController.GetInstance().Rain();
                 goto default;
             case Global.Effect.scorch:
-                int maxPower = 0;
+                int maxPower = 10;
                 for (int i = 2; i < 5; i++)
                 {
                     for (int ii = 0; ii < PlayerController.GetInstance().grids[i].childCount; ii++)
@@ -179,7 +179,8 @@ public class EnemyController : Singleton<EnemyController> {
                 {
                     for (int ii = PlayerController.GetInstance().grids[i].childCount - 1; ii >= 0; ii--)
                     {
-                        if (PlayerController.GetInstance().grids[i].GetChild(ii).GetComponent<CardBehavior>().totalPower == maxPower)
+                        Transform card = PlayerController.GetInstance().grids[i].GetChild(ii);
+                        if (card.GetComponent<CardBehavior>().totalPower == maxPower && !card.GetComponent<CardProperty>().gold)
                             PlayerController.GetInstance().grids[i].SetParent(ii, PlayerController.GetInstance().grids[5]);
                     }
                 }
@@ -187,7 +188,8 @@ public class EnemyController : Singleton<EnemyController> {
                 {
                     for (int ii = EnemyController.GetInstance().grids[i].childCount - 1; ii >= 0; ii--)
                     {
-                        if (EnemyController.GetInstance().grids[i].GetChild(ii).GetComponent<CardBehavior>().totalPower == maxPower)
+                        Transform card = EnemyController.GetInstance().grids[i].GetChild(ii);
+                        if (card.GetComponent<CardBehavior>().totalPower == maxPower && !card.GetComponent<CardProperty>().gold)
                             EnemyController.GetInstance().grids[i].SetParent(ii, EnemyController.GetInstance().grids[5]);
                     }
                 }

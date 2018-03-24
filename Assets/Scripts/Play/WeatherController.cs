@@ -10,17 +10,15 @@ public class WeatherController : Singleton<WeatherController> {
     [SerializeField] GameObject enemyFrostSprite;
     [SerializeField] GameObject enemyFogSprite;
     [SerializeField] GameObject enemyRainSprite;
-    [HideInInspector] public bool frost = false;
-    [HideInInspector] public bool fog = false;
-    [HideInInspector] public bool rain = false;
+    [HideInInspector] public bool[] weather = { false, false, false };
 
     public void ClearSky()
     {
         for (int i = 0; i < grid.childCount; i++)
             grid.SetParent(i, PlayerController.GetInstance().grids[5]);
-        frost = false;
-        fog = false;
-        rain = false;
+        weather[0] = false;
+        weather[1] = false;
+        weather[2] = false;
         playerFrostSprite.SetActive(false);
         playerFogSprite.SetActive(false);
         playerRainSprite.SetActive(false);
@@ -31,21 +29,21 @@ public class WeatherController : Singleton<WeatherController> {
 
     public void Frost()
     {
-        frost = true;
+        weather[0] = true;
         playerFrostSprite.SetActive(true);
         enemyFrostSprite.SetActive(true);
     }
 
     public void Fog()
     {
-        fog = true;
+        weather[1] = true;
         playerFogSprite.SetActive(true);
         enemyFogSprite.SetActive(true);
     }
 
     public void Rain()
     {
-        rain = true;
+        weather[2] = true;
         playerRainSprite.SetActive(true);
         enemyRainSprite.SetActive(true);
     }

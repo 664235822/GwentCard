@@ -14,32 +14,31 @@ public class CardBehavior : MonoBehaviour {
 
     public void Play()
     {
-        Transform grid = ShowCards.GetInstance().totalGrid;
-        for (int i = 0; i < grid.childCount; i++)
+        for (int i = 0; i < ShowCards.GetInstance().totalGrid.childCount; i++)
             if (ShowCards.GetInstance().grid.GetChild(i).name == name) index = i;
 
         switch (cardProperty.effect)
         {
             case Global.Effect.spy:
-                grid.SetParent(index, EnemyController.GetInstance().grids[(int)cardProperty.line + 2]);
+                ShowCards.GetInstance().totalGrid.SetParent(index, EnemyController.GetInstance().grids[(int)cardProperty.line + 2]);
                 PlayerController.GetInstance().DrawCards(2);
                 break;
             case Global.Effect.clear_sky:
                 WeatherController.GetInstance().ClearSky();
                 goto default;
             case Global.Effect.frost:
-                if (!WeatherController.GetInstance().frost) WeatherController.GetInstance().Frost();
+                if (!WeatherController.GetInstance().weather[0]) WeatherController.GetInstance().Frost();
                 goto default;
             case Global.Effect.fog:
-                if (!WeatherController.GetInstance().fog) WeatherController.GetInstance().Fog();
+                if (!WeatherController.GetInstance().weather[1]) WeatherController.GetInstance().Fog();
                 goto default;
             case Global.Effect.rain:
-                if (!WeatherController.GetInstance().rain) WeatherController.GetInstance().Rain();
+                if (!WeatherController.GetInstance().weather[2]) WeatherController.GetInstance().Rain();
                 goto default;
             case Global.Effect.scorch:
                 if (cardProperty.effect == Global.Effect.scorch)
                 {
-                    int maxPower = 0;
+                    int maxPower = 10;
                     for (int i = 2; i < 5; i++)
                     {
                         for (int ii = 0; ii < PlayerController.GetInstance().grids[i].childCount; ii++)
@@ -61,7 +60,8 @@ public class CardBehavior : MonoBehaviour {
                     {
                         for (int ii = PlayerController.GetInstance().grids[i].childCount - 1; ii >= 0; ii--)
                         {
-                            if (PlayerController.GetInstance().grids[i].GetChild(ii).GetComponent<CardBehavior>().totalPower == maxPower)
+                            Transform card = PlayerController.GetInstance().grids[i].GetChild(ii);
+                            if (card.GetComponent<CardBehavior>().totalPower == maxPower && !card.GetComponent<CardProperty>().gold)
                                 PlayerController.GetInstance().grids[i].SetParent(ii, PlayerController.GetInstance().grids[5]);
                         }
                     }
@@ -69,7 +69,8 @@ public class CardBehavior : MonoBehaviour {
                     {
                         for (int ii = EnemyController.GetInstance().grids[i].childCount - 1; ii >= 0; ii--)
                         {
-                            if (EnemyController.GetInstance().grids[i].GetChild(ii).GetComponent<CardBehavior>().totalPower == maxPower)
+                            Transform card = EnemyController.GetInstance().grids[i].GetChild(ii);
+                            if (card.GetComponent<CardBehavior>().totalPower == maxPower && !card.GetComponent<CardProperty>().gold)
                                 EnemyController.GetInstance().grids[i].SetParent(ii, EnemyController.GetInstance().grids[5]);
                         }
                     }
@@ -82,7 +83,7 @@ public class CardBehavior : MonoBehaviour {
                 ShowCards.GetInstance().Show(ShowCards.Behaviour.warhorn, PlayerController.GetInstance().grids[2], true);
                 return;
             default:
-                grid.SetParent(index, PlayerController.GetInstance().grids[(int)cardProperty.line + 2]);
+                ShowCards.GetInstance().totalGrid.SetParent(index, PlayerController.GetInstance().grids[(int)cardProperty.line + 2]);
                 break;
         }
 
@@ -98,13 +99,14 @@ public class CardBehavior : MonoBehaviour {
 
     public void Dummy()
     {
-        Transform grid = ShowCards.GetInstance().totalGrid;
+        int line = ShowCards.GetInstance().popupList.GetItemsInt();
         int dummyIndex = 0;
-        for (int i = 0; i < grid.childCount; i++)
+
+        for (int i = 0; i < PlayerController.GetInstance().grids[line + 2].childCount; i++)
             if (ShowCards.GetInstance().grid.GetChild(i).name == name) dummyIndex = i;
 
-        PlayerController.GetInstance().grids[1].SetParent(index, grid);
-        grid.SetParent(dummyIndex, PlayerController.GetInstance().grids[1]);
+        ShowCards.GetInstance().totalGrid.SetParent(index, PlayerController.GetInstance().grids[line + 2]);
+        PlayerController.GetInstance().grids[line + 2].SetParent(dummyIndex, ShowCards.GetInstance().totalGrid);
 
         ShowCards.GetInstance().Hide();
         PlayerController.GetInstance().Number();

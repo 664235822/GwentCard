@@ -5,18 +5,18 @@ using UnityEngine;
 public class ShowCards : Singleton<ShowCards> {
     public enum Behaviour { draw, show, dummy, warhorn }
     public Transform grid;
+    public UIPopupList popupList;
     [SerializeField] GameObject show;
     [SerializeField] UILabel label;
     [SerializeField] UIScrollView scrollView;
-    [SerializeField] UIButton button;
-    [SerializeField] UIPopupList popupList;
+    [SerializeField] UIButton OKButton;
+    [SerializeField] UIButton returnButton;
     [HideInInspector] public Transform totalGrid;
     Behaviour behaviour;
 
     public void Show(Behaviour behav, Transform ShowGrid, bool Repeat)
     {
         behaviour = behav;
-        totalGrid = ShowGrid;
 
         if (!Repeat)
         {
@@ -25,10 +25,6 @@ public class ShowCards : Singleton<ShowCards> {
             EnemyController.GetInstance().enemy.SetActive(false);
             show.SetActive(true);
         }
-
-        popupList.gameObject.SetActive(false);
-        popupList.value = "近战";
-        button.onClick.Clear();
 
         switch (behaviour)
         {
@@ -41,16 +37,17 @@ public class ShowCards : Singleton<ShowCards> {
             case Behaviour.dummy:
                 label.text = "请选择要替换的牌";
                 popupList.gameObject.SetActive(true);
-                goto default;
+                OKButton.gameObject.SetActive(false);
+                break;
             case Behaviour.warhorn:
                 label.text = "战争号角";
                 popupList.gameObject.SetActive(true);
-                button.transform.Find("Label").GetComponent<UILabel>().text = "确定";
-                //EventDelegate.Add(button.onClick, () =>);
+                OKButton.gameObject.SetActive(true);
                 break;
             default:
-                button.transform.Find("Label").GetComponent<UILabel>().text = "返回";
-                EventDelegate.Add(button.onClick, () => Hide());
+                totalGrid = ShowGrid;
+                popupList.gameObject.SetActive(false);
+                OKButton.gameObject.SetActive(false);
                 break;
         }
 
