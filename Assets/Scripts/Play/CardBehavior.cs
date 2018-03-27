@@ -99,14 +99,13 @@ public class CardBehavior : MonoBehaviour {
 
     public void Dummy()
     {
-        int line = ShowCards.GetInstance().popupList.GetItemsInt();
         int dummyIndex = 0;
 
-        for (int i = 0; i < PlayerController.GetInstance().grids[line + 2].childCount; i++)
+        for (int i = 0; i < PlayerController.GetInstance().grids[ShowCards.GetInstance().totalLine + 2].childCount; i++)
             if (ShowCards.GetInstance().grid.GetChild(i).name == name) dummyIndex = i;
 
-        ShowCards.GetInstance().totalGrid.SetParent(index, PlayerController.GetInstance().grids[line + 2]);
-        PlayerController.GetInstance().grids[line + 2].SetParent(dummyIndex, ShowCards.GetInstance().totalGrid);
+        ShowCards.GetInstance().totalGrid.SetParent(index, PlayerController.GetInstance().grids[ShowCards.GetInstance().totalLine + 2]);
+        PlayerController.GetInstance().grids[ShowCards.GetInstance().totalLine + 2].SetParent(dummyIndex, ShowCards.GetInstance().totalGrid);
 
         ShowCards.GetInstance().Hide();
         PlayerController.GetInstance().Number();

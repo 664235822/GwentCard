@@ -12,6 +12,7 @@ public class ShowCards : Singleton<ShowCards> {
     [SerializeField] UIButton OKButton;
     [SerializeField] UIButton returnButton;
     [HideInInspector] public Transform totalGrid;
+    [HideInInspector] public int totalLine = 0;
     Behaviour behaviour;
 
     public void Show(Behaviour behav, Transform ShowGrid, bool Repeat)
@@ -96,6 +97,7 @@ public class ShowCards : Singleton<ShowCards> {
 
     public void LineChanged()
     {
-        Show(behaviour, PlayerController.GetInstance().grids[popupList.GetItemsInt() + 2], true);
+        totalLine = popupList.GetItemsInt();
+        Show(behaviour, PlayerController.GetInstance().grids[totalLine + 2], true);
     }
 }
