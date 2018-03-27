@@ -61,6 +61,19 @@ public class GameController : Singleton<GameController> {
                 EnemyController.GetInstance().grids[i].SetParent(ii, EnemyController.GetInstance().grids[5]);
             }
         }
+        for (int i = 0; i < 3; i++)
+        {
+            if (WarhornController.GetInstance().playerWarhorn[i])
+            {
+                WarhornController.GetInstance().playerGrids[i].SetParent(0, PlayerController.GetInstance().grids[5]);
+                WarhornController.GetInstance().playerWarhorn[i] = false;
+            }
+            if (WarhornController.GetInstance().enemyWarhorn[i])
+            {
+                WarhornController.GetInstance().enemyGrids[i].SetParent(0, EnemyController.GetInstance().grids[5]);
+                WarhornController.GetInstance().enemyWarhorn[i] = false;
+            }
+        }
 
         PlayerController.GetInstance().grids[5].gameObject.SetActive(false);
         PlayerController.GetInstance().grids[5].gameObject.SetActive(true);

@@ -28,13 +28,16 @@ public class CardBehavior : MonoBehaviour {
                 goto default;
             case Global.Effect.frost:
                 if (!WeatherController.GetInstance().weather[0]) WeatherController.GetInstance().Frost();
-                goto default;
+                ShowCards.GetInstance().totalGrid.SetParent(index, WeatherController.GetInstance().grid);
+                break;
             case Global.Effect.fog:
                 if (!WeatherController.GetInstance().weather[1]) WeatherController.GetInstance().Fog();
-                goto default;
+                ShowCards.GetInstance().totalGrid.SetParent(index, WeatherController.GetInstance().grid);
+                break;
             case Global.Effect.rain:
                 if (!WeatherController.GetInstance().weather[2]) WeatherController.GetInstance().Rain();
-                goto default;
+                ShowCards.GetInstance().totalGrid.SetParent(index, WeatherController.GetInstance().grid);
+                break;
             case Global.Effect.scorch:
                 if (cardProperty.effect == Global.Effect.scorch)
                 {

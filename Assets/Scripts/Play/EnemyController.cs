@@ -149,13 +149,16 @@ public class EnemyController : Singleton<EnemyController> {
                 goto default;
             case Global.Effect.frost:
                 if (!WeatherController.GetInstance().weather[0]) WeatherController.GetInstance().Frost();
-                goto default;
+                grid.SetParent(random, WeatherController.GetInstance().grid);
+                break;
             case Global.Effect.fog:
                 if (!WeatherController.GetInstance().weather[1]) WeatherController.GetInstance().Fog();
-                goto default;
+                grid.SetParent(random, WeatherController.GetInstance().grid);
+                break;
             case Global.Effect.rain:
                 if (!WeatherController.GetInstance().weather[2])   WeatherController.GetInstance().Rain();
-                goto default;
+                grid.SetParent(random, WeatherController.GetInstance().grid);
+                break;
             case Global.Effect.scorch:
                 int maxPower = 10;
                 for (int i = 2; i < 5; i++)
@@ -199,10 +202,20 @@ public class EnemyController : Singleton<EnemyController> {
                 {
                     if (grids[i].childCount == 0) continue;
                     int dummyRandom = Random.Range(0, grids[i].childCount);
-                    grids[1].SetParent(random, grids[i]);
-                    grids[i].SetParent(dummyRandom, grids[1]);
+                    grid.SetParent(random, grids[i]);
+                    grids[i].SetParent(dummyRandom, grid);
                     break;
                 }
+                break;
+            case Global.Effect.warhorn:
+                int line = Random.Range(0, 3);
+                if (!WarhornController.GetInstance().enemyWarhorn[line])
+                {
+                    WarhornController.GetInstance().enemyWarhorn[line] = true;
+                    grid.SetParent(random, WarhornController.GetInstance().enemyGrids[line]);
+                }
+                else
+                    grid.SetParent(random, EnemyController.GetInstance().grids[5]);
                 break;
             default:
                 grid.SetParent(random, grids[(int)cardProperty.line + 2]);

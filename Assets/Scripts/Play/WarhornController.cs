@@ -10,13 +10,17 @@ public class WarhornController : Singleton<WarhornController> {
 
     public void PlayerWarhorn()
     {
-        playerWarhorn[ShowCards.GetInstance().totalLine] = true;
-        ShowCards.GetInstance().totalGrid.SetParent(CardBehavior.index, playerGrids[ShowCards.GetInstance().totalLine]);
+        if (!playerWarhorn[ShowCards.GetInstance().totalLine])
+        {
+            playerWarhorn[ShowCards.GetInstance().totalLine] = true;
+            ShowCards.GetInstance().totalGrid.SetParent(CardBehavior.index, playerGrids[ShowCards.GetInstance().totalLine]);
+        }
+        else
+            ShowCards.GetInstance().totalGrid.SetParent(CardBehavior.index, PlayerController.GetInstance().grids[5]);
 
         ShowCards.GetInstance().Hide();
         PlayerController.GetInstance().Number();
         PowerController.GetInstance().Number();
         EnemyController.GetInstance().Play(EnemyController.GetInstance().grids[1]);
     }
-
 }
