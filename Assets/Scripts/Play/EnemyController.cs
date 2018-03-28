@@ -148,17 +148,29 @@ public class EnemyController : Singleton<EnemyController> {
                 WeatherController.GetInstance().ClearSky();
                 goto default;
             case Global.Effect.frost:
-                if (!WeatherController.GetInstance().weather[0]) WeatherController.GetInstance().Frost();
-                grid.SetParent(random, WeatherController.GetInstance().grid);
-                break;
+                if (!WeatherController.GetInstance().weather[0])
+                {
+                    WeatherController.GetInstance().Frost();
+                    grid.SetParent(random, WeatherController.GetInstance().grid);
+                    break;
+                }
+                else goto default;
             case Global.Effect.fog:
-                if (!WeatherController.GetInstance().weather[1]) WeatherController.GetInstance().Fog();
-                grid.SetParent(random, WeatherController.GetInstance().grid);
-                break;
+                if (!WeatherController.GetInstance().weather[1])
+                {
+                    WeatherController.GetInstance().Fog();
+                    grid.SetParent(random, WeatherController.GetInstance().grid);
+                    break;
+                }
+                else goto default;
             case Global.Effect.rain:
-                if (!WeatherController.GetInstance().weather[2])   WeatherController.GetInstance().Rain();
-                grid.SetParent(random, WeatherController.GetInstance().grid);
-                break;
+                if (!WeatherController.GetInstance().weather[2])
+                {
+                    WeatherController.GetInstance().Rain();
+                    grid.SetParent(random, WeatherController.GetInstance().grid);
+                    break;
+                }
+                else goto default;
             case Global.Effect.scorch:
                 int maxPower = 10;
                 for (int i = 2; i < 5; i++)

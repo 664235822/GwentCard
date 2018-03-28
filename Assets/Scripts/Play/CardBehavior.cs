@@ -27,17 +27,29 @@ public class CardBehavior : MonoBehaviour {
                 WeatherController.GetInstance().ClearSky();
                 goto default;
             case Global.Effect.frost:
-                if (!WeatherController.GetInstance().weather[0]) WeatherController.GetInstance().Frost();
-                ShowCards.GetInstance().totalGrid.SetParent(index, WeatherController.GetInstance().grid);
-                break;
+                if (!WeatherController.GetInstance().weather[0])
+                {
+                    WeatherController.GetInstance().Frost();
+                    ShowCards.GetInstance().totalGrid.SetParent(index, WeatherController.GetInstance().grid);
+                    break;
+                }
+                else goto default;
             case Global.Effect.fog:
-                if (!WeatherController.GetInstance().weather[1]) WeatherController.GetInstance().Fog();
-                ShowCards.GetInstance().totalGrid.SetParent(index, WeatherController.GetInstance().grid);
-                break;
+                if (!WeatherController.GetInstance().weather[1])
+                {
+                    WeatherController.GetInstance().Fog();
+                    ShowCards.GetInstance().totalGrid.SetParent(index, WeatherController.GetInstance().grid);
+                    break;
+                }
+                else goto default;
             case Global.Effect.rain:
-                if (!WeatherController.GetInstance().weather[2]) WeatherController.GetInstance().Rain();
-                ShowCards.GetInstance().totalGrid.SetParent(index, WeatherController.GetInstance().grid);
-                break;
+                if (!WeatherController.GetInstance().weather[2])
+                {
+                    WeatherController.GetInstance().Rain();
+                    ShowCards.GetInstance().totalGrid.SetParent(index, WeatherController.GetInstance().grid);
+                    break;
+                }
+                else goto default;
             case Global.Effect.scorch:
                 if (cardProperty.effect == Global.Effect.scorch)
                 {
