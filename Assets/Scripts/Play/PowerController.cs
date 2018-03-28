@@ -91,7 +91,7 @@ public class PowerController : Singleton<PowerController> {
         }
         for (int i = 2; i < 5; i++)
         {
-            for (int ii = 0; ii < EnemyController.GetInstance().grids[i].childCount; i++)
+            for (int ii = 0; ii < EnemyController.GetInstance().grids[i].childCount; ii++)
             {
                 Transform card = EnemyController.GetInstance().grids[i].GetChild(ii);
                 CardProperty cardProperty = card.GetComponent<CardProperty>();
