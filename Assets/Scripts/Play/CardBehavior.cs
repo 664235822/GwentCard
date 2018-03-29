@@ -95,8 +95,16 @@ public class CardBehavior : MonoBehaviour {
                 ShowCards.GetInstance().Show(ShowCards.Behaviour.dummy, PlayerController.GetInstance().grids[2], true);
                 return;
             case Global.Effect.warhorn:
-                ShowCards.GetInstance().Show(ShowCards.Behaviour.warhorn, PlayerController.GetInstance().grids[2], true);
-                return;
+                if (cardProperty.line == Global.Line.empty)
+                {
+                    ShowCards.GetInstance().Show(ShowCards.Behaviour.warhorn, PlayerController.GetInstance().grids[2], true);
+                    return;
+                }
+                else
+                {
+                    WarhornController.GetInstance().playerWarhorn[(int)cardProperty.line] = true;
+                    goto default;
+                }
             default:
                 ShowCards.GetInstance().totalGrid.SetParent(index, PlayerController.GetInstance().grids[(int)cardProperty.line + 2]);
                 break;

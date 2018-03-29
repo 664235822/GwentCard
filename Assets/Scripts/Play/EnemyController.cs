@@ -183,9 +183,9 @@ public class EnemyController : Singleton<EnemyController> {
                 }
                 for (int i = 2; i < 5; i++)
                 {
-                    for (int ii = 0; ii < EnemyController.GetInstance().grids[i].childCount; ii++)
+                    for (int ii = 0; ii < grids[i].childCount; ii++)
                     {
-                        int power = EnemyController.GetInstance().grids[i].GetChild(ii).GetComponent<CardBehavior>().totalPower;
+                        int power = grids[i].GetChild(ii).GetComponent<CardBehavior>().totalPower;
                         if (power > maxPower) maxPower = power;
                     }
                 }
@@ -205,7 +205,7 @@ public class EnemyController : Singleton<EnemyController> {
                     {
                         Transform card = EnemyController.GetInstance().grids[i].GetChild(ii);
                         if (card.GetComponent<CardBehavior>().totalPower == maxPower && !card.GetComponent<CardProperty>().gold)
-                            EnemyController.GetInstance().grids[i].SetParent(ii, EnemyController.GetInstance().grids[5]);
+                            grids[i].SetParent(ii, EnemyController.GetInstance().grids[5]);
                     }
                 }
                 goto default;
@@ -220,15 +220,23 @@ public class EnemyController : Singleton<EnemyController> {
                 }
                 break;
             case Global.Effect.warhorn:
-                int line = Random.Range(0, 3);
-                if (!WarhornController.GetInstance().enemyWarhorn[line])
+                if (cardProperty.line == Global.Line.empty)
                 {
-                    WarhornController.GetInstance().enemyWarhorn[line] = true;
-                    grid.SetParent(random, WarhornController.GetInstance().enemyGrids[line]);
+                    int line = Random.Range(0, 3);
+                    if (!WarhornController.GetInstance().enemyWarhorn[line])
+                    {
+                        WarhornController.GetInstance().enemyWarhorn[line] = true;
+                        grid.SetParent(random, WarhornController.GetInstance().enemyGrids[line]);
+                    }
+                    else
+                        grid.SetParent(random, grids[5]);
+                    break;
                 }
                 else
-                    grid.SetParent(random, EnemyController.GetInstance().grids[5]);
-                break;
+                {
+                    WarhornController.GetInstance().enemyWarhorn[(int)cardProperty.line] = true;
+                    goto default;
+                }
             default:
                 grid.SetParent(random, grids[(int)cardProperty.line + 2]);
                 break;
