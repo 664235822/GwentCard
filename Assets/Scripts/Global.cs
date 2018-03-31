@@ -10,11 +10,11 @@ public static class Global {
     public static readonly string path = string.Format("{0}/PlayerCards.xml", Application.persistentDataPath);
     public static readonly string enemyPath = string.Format("{0}/EnemyCards.xml", Application.persistentDataPath);
 
-    public static void SetParent(this Transform Grid1, int index, Transform Grid2)
+    public static void SetParent(this Transform grid, int index, Transform targetGrid)
     {
-        Grid1.GetChild(index).SetParent(Grid2);
-        UIGrid grid1 = Grid1.GetComponent<UIGrid>();
-        UIGrid grid2 = Grid2.GetComponent<UIGrid>();
+        grid.GetChild(index).SetParent(targetGrid);
+        UIGrid grid1 = grid.GetComponent<UIGrid>();
+        UIGrid grid2 = targetGrid.GetComponent<UIGrid>();
         if (grid1 != null) grid1.Reposition();
         if (grid2 != null) grid2.Reposition();
     }

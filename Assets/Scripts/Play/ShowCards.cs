@@ -15,11 +15,11 @@ public class ShowCards : Singleton<ShowCards> {
     [HideInInspector] public int totalLine = 0;
     Behaviour behaviour;
 
-    public void Show(Behaviour behav, Transform ShowGrid, bool Repeat)
+    public void Show(Behaviour behav, Transform showGrid, bool repeat)
     {
         behaviour = behav;
 
-        if (!Repeat)
+        if (!repeat)
         {
             BlackShow.GetInstance().Show(true);
             PlayerController.GetInstance().player.SetActive(false);
@@ -46,17 +46,17 @@ public class ShowCards : Singleton<ShowCards> {
                 OKButton.gameObject.SetActive(true);
                 break;
             default:
-                totalGrid = ShowGrid;
+                totalGrid = showGrid;
                 popupList.gameObject.SetActive(false);
                 OKButton.gameObject.SetActive(false);
                 break;
         }
 
-        if (Repeat) grid.DestroyChildren();
+        if (repeat) grid.DestroyChildren();
 
-        for (int i = 0; i < ShowGrid.childCount; i++)
+        for (int i = 0; i < showGrid.childCount; i++)
         {
-            GameObject card = Instantiate(ShowGrid.GetChild(i).gameObject, grid);
+            GameObject card = Instantiate(showGrid.GetChild(i).gameObject, grid);
             UISprite sprite = card.GetComponent<UISprite>();
             sprite.width = 250;
             sprite.height = 450;
@@ -85,7 +85,7 @@ public class ShowCards : Singleton<ShowCards> {
         grid.GetComponent<UIGrid>().Reposition();
     }
 
-    public void Hide()
+    public void Hide(bool isDraw)
     {
         totalGrid = null;
         grid.DestroyChildren();
@@ -93,6 +93,8 @@ public class ShowCards : Singleton<ShowCards> {
         PlayerController.GetInstance().player.SetActive(true);
         EnemyController.GetInstance().enemy.SetActive(true);
         show.SetActive(false);
+        if (isDraw)
+            PlayerController.GetInstance().EndTurn();
     }
 
     public void LineChanged()

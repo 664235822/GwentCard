@@ -13,10 +13,10 @@ public class PlayerController : Singleton<PlayerController> {
     [SerializeField] UILabel deck_realms_label;
     Global.Group group;
 
-    public void Initialize(string Group)
+    public void Initialize(string playerGroup)
     {
         player.SetActive(true);
-        group = (Global.Group)System.Enum.Parse(typeof(Global.Group), Group);
+        group = (Global.Group)System.Enum.Parse(typeof(Global.Group), playerGroup);
         UIAtlas totalAtlas = new UIAtlas();
         switch (group)
         {
@@ -126,5 +126,12 @@ public class PlayerController : Singleton<PlayerController> {
     {
         number_label.text = grids[1].childCount.ToString();
         deck_realms_label.text = grids[0].childCount.ToString();
+    }
+
+    public void EndTurn()
+    {
+        Number();
+        PowerController.GetInstance().Number();
+        EnemyController.GetInstance().Play(EnemyController.GetInstance().grids[1]);
     }
 }

@@ -12,9 +12,9 @@ public class GameController : Singleton<GameController> {
     int enemy_fail = 0;
     readonly Color black = new Color(0.112f, 0.255f, 0.255f, 0.255f);
 
-    public void StartGame(string PlayerGroup)
+    public void StartGame(string playerGroup)
     {
-        PlayerController.GetInstance().Initialize(PlayerGroup);
+        PlayerController.GetInstance().Initialize(playerGroup);
         EnemyController.GetInstance().Initialize();
 
         int random = Random.Range(0, 2);

@@ -113,11 +113,7 @@ public class CardBehavior : MonoBehaviour {
         if (cardProperty.effect == Global.Effect.nurse)
             ShowCards.GetInstance().Show(ShowCards.Behaviour.draw, PlayerController.GetInstance().grids[5], true);
         else
-            ShowCards.GetInstance().Hide();
-
-        PlayerController.GetInstance().Number();
-        PowerController.GetInstance().Number();
-        EnemyController.GetInstance().Play(EnemyController.GetInstance().grids[1]);
+            ShowCards.GetInstance().Hide(true);
     }
 
     public void Dummy()
@@ -130,9 +126,7 @@ public class CardBehavior : MonoBehaviour {
         ShowCards.GetInstance().totalGrid.SetParent(index, PlayerController.GetInstance().grids[ShowCards.GetInstance().totalLine + 2]);
         PlayerController.GetInstance().grids[ShowCards.GetInstance().totalLine + 2].SetParent(dummyIndex, ShowCards.GetInstance().totalGrid);
 
-        ShowCards.GetInstance().Hide();
-        PlayerController.GetInstance().Number();
-        PowerController.GetInstance().Number();
-        EnemyController.GetInstance().Play(EnemyController.GetInstance().grids[1]);
+        ShowCards.GetInstance().Hide(true);
     }
+
 }

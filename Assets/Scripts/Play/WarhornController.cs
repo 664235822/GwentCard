@@ -18,9 +18,6 @@ public class WarhornController : Singleton<WarhornController> {
         else
             ShowCards.GetInstance().totalGrid.SetParent(CardBehavior.index, PlayerController.GetInstance().grids[5]);
 
-        ShowCards.GetInstance().Hide();
-        PlayerController.GetInstance().Number();
-        PowerController.GetInstance().Number();
-        EnemyController.GetInstance().Play(EnemyController.GetInstance().grids[1]);
+        ShowCards.GetInstance().Hide(true);
     }
 }

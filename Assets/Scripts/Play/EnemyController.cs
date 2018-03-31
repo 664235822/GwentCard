@@ -171,6 +171,12 @@ public class EnemyController : Singleton<EnemyController> {
                     break;
                 }
                 else goto default;
+            case Global.Effect.nurse:
+                if (grids[5].childCount == 0) goto default;
+                int nurseRandom = Random.Range(0, grids[5].childCount);
+                int nurseRandomLine = (int)grids[5].GetChild(nurseRandom).GetComponent<CardProperty>().line;
+                grids[5].SetParent(nurseRandom, grids[(int)nurseRandomLine + 2]);
+                goto default;
             case Global.Effect.scorch:
                 int maxPower = 10;
                 for (int i = 2; i < 5; i++)
