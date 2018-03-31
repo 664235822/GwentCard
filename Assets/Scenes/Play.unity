@@ -1976,6 +1976,10 @@ Prefab:
     m_Modifications:
     - target: {fileID: 11400000, guid: 7c3a28b051e872b448d4808cfcf9199c, type: 2}
       propertyPath: onClick.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: 7c3a28b051e872b448d4808cfcf9199c, type: 2}
+      propertyPath: onClick.Array.data[0].mParameters.Array.size
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: 7c3a28b051e872b448d4808cfcf9199c, type: 2}
@@ -2059,6 +2063,21 @@ MonoBehaviour:
     type: 2}
   m_PrefabInternal: {fileID: 428152600}
   m_Script: {fileID: 11500000, guid: 1fdca5042b1d12a4890ec1bd4f04290d, type: 3}
+--- !u!1 &428152603 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 100002, guid: 7c3a28b051e872b448d4808cfcf9199c, type: 2}
+  m_PrefabInternal: {fileID: 428152600}
+--- !u!114 &428152604
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 428152603}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b27eaa66e26bef4f9b93627aa26d36f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &434974819
 GameObject:
   m_ObjectHideFlags: 0
@@ -8984,6 +9003,7 @@ MonoBehaviour:
   OKButton: {fileID: 267553438}
   returnButton: {fileID: 428152602}
   totalGrid: {fileID: 0}
+  totalLine: 0
 --- !u!114 &1749374673
 MonoBehaviour:
   m_ObjectHideFlags: 0
