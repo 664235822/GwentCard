@@ -127,11 +127,4 @@ public class PlayerController : Singleton<PlayerController> {
         number_label.text = grids[1].childCount.ToString();
         deck_realms_label.text = grids[0].childCount.ToString();
     }
-
-    public void EndTurn()
-    {
-        Number();
-        PowerController.GetInstance().Number();
-        EnemyController.GetInstance().Play(EnemyController.GetInstance().grids[1]);
-    }
 }

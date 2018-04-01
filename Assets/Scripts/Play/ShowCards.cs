@@ -93,8 +93,12 @@ public class ShowCards : Singleton<ShowCards> {
         PlayerController.GetInstance().player.SetActive(true);
         EnemyController.GetInstance().enemy.SetActive(true);
         show.SetActive(false);
-        if (isDraw)
-            PlayerController.GetInstance().EndTurn();
+        if(isDraw)
+        {
+            PlayerController.GetInstance().Number();
+            PowerController.GetInstance().Number();
+            EnemyController.GetInstance().Play(EnemyController.GetInstance().grids[1]);
+        }
     }
 
     public void LineChanged()
