@@ -111,7 +111,7 @@ public class CardBehavior : MonoBehaviour {
         }
 
         if (cardProperty.effect == Global.Effect.nurse)
-            ShowCards.GetInstance().Show(ShowCards.Behaviour.draw, PlayerController.GetInstance().grids[5], true);
+            ShowCards.GetInstance().Show(ShowCards.Behaviour.nurse, PlayerController.GetInstance().grids[5], true);
         else
             ShowCards.GetInstance().Hide(true);
     }

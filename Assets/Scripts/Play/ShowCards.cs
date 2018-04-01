@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class ShowCards : Singleton<ShowCards> {
-    public enum Behaviour { draw, show, dummy, warhorn }
+    public enum Behaviour { draw, show, nurse, dummy, warhorn }
     public Transform grid;
     public UIPopupList popupList;
     [SerializeField] GameObject show;
@@ -35,20 +35,30 @@ public class ShowCards : Singleton<ShowCards> {
             case Behaviour.show:
                 label.text = "显示卡牌";
                 goto default;
+            case Behaviour.nurse:
+                label.text = "从墓地中打出卡牌";
+                totalGrid = showGrid;
+                popupList.gameObject.SetActive(false);
+                OKButton.gameObject.SetActive(false);
+                returnButton.GetComponent<HideButton>().isDraw = true;
+                break;
             case Behaviour.dummy:
                 label.text = "请选择要替换的牌";
                 popupList.gameObject.SetActive(true);
                 OKButton.gameObject.SetActive(false);
+                returnButton.GetComponent<HideButton>().isDraw = false;
                 break;
             case Behaviour.warhorn:
                 label.text = "战争号角";
                 popupList.gameObject.SetActive(true);
                 OKButton.gameObject.SetActive(true);
+                returnButton.GetComponent<HideButton>().isDraw = false;
                 break;
             default:
                 totalGrid = showGrid;
                 popupList.gameObject.SetActive(false);
                 OKButton.gameObject.SetActive(false);
+                returnButton.GetComponent<HideButton>().isDraw = false;
                 break;
         }
 
@@ -69,6 +79,10 @@ public class ShowCards : Singleton<ShowCards> {
                     break;
                 case Behaviour.show:
                     cardButton.enabled = false;
+                    break;
+                case Behaviour.nurse:
+                    EventDelegate.Add(cardButton.onClick, () => card.GetComponent<CardBehavior>().Play());
+                    cardButton.enabled = true;
                     break;
                 case Behaviour.dummy:
                     EventDelegate.Add(cardButton.onClick, () => card.GetComponent<CardBehavior>().Dummy());
