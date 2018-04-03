@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class ShowCards : Singleton<ShowCards> {
-    public enum Behaviour { draw, show, nurse, dummy, warhorn }
+    public enum Behaviour { draw, show, nurse, dummy, warhorn, agile }
     public Transform grid;
     public UIPopupList popupList;
     [SerializeField] GameObject show;
@@ -18,6 +18,11 @@ public class ShowCards : Singleton<ShowCards> {
     public void Show(Behaviour behav, Transform showGrid, bool repeat)
     {
         behaviour = behav;
+        popupList.items.Clear();
+        popupList.AddItem("近战");
+        popupList.AddItem("远程");
+        popupList.AddItem("攻城");
+        OKButton.onClick.Clear();
 
         if (!repeat)
         {
@@ -52,6 +57,19 @@ public class ShowCards : Singleton<ShowCards> {
                 label.text = "战争号角";
                 popupList.gameObject.SetActive(true);
                 OKButton.gameObject.SetActive(true);
+                EventDelegate.Add(OKButton.onClick, () => WarhornController.GetInstance().PlayerWarhorn());
+                returnButton.GetComponent<HideButton>().isDraw = false;
+                break;
+            case Behaviour.agile:
+                label.text = "请选择出牌的排";
+                popupList.gameObject.SetActive(true);
+                popupList.items.Remove("攻城");
+                OKButton.gameObject.SetActive(true);
+                EventDelegate.Add(OKButton.onClick, delegate
+                {
+                    totalGrid.SetParent(CardBehavior.index, PlayerController.GetInstance().grids[(int)totalLine + 2]);
+                    Hide(true);
+                });
                 returnButton.GetComponent<HideButton>().isDraw = false;
                 break;
             default:
@@ -89,6 +107,9 @@ public class ShowCards : Singleton<ShowCards> {
                     cardButton.enabled = true;
                     break;
                 case Behaviour.warhorn:
+                    cardButton.enabled = false;
+                    break;
+                case Behaviour.agile:
                     cardButton.enabled = false;
                     break;
             }

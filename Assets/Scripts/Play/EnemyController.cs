@@ -244,7 +244,13 @@ public class EnemyController : Singleton<EnemyController> {
                     goto default;
                 }
             default:
-                grid.SetParent(random, grids[(int)cardProperty.line + 2]);
+                if (cardProperty.line == Global.Line.agile)
+                {
+                    int agileRandom = Random.Range(0, 2);
+                    grid.SetParent(random, grids[agileRandom + 2]);
+                }
+                else
+                    grid.SetParent(random, grids[(int)cardProperty.line + 2]);
                 break;
         }
 

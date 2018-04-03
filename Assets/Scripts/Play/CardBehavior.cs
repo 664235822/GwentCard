@@ -106,7 +106,13 @@ public class CardBehavior : MonoBehaviour {
                     goto default;
                 }
             default:
-                ShowCards.GetInstance().totalGrid.SetParent(index, PlayerController.GetInstance().grids[(int)cardProperty.line + 2]);
+                if (cardProperty.line == Global.Line.agile)
+                {
+                    ShowCards.GetInstance().Show(ShowCards.Behaviour.agile, PlayerController.GetInstance().grids[2], true);
+                    return;
+                }
+                else
+                    ShowCards.GetInstance().totalGrid.SetParent(index, PlayerController.GetInstance().grids[(int)cardProperty.line + 2]);
                 break;
         }
 
@@ -128,5 +134,4 @@ public class CardBehavior : MonoBehaviour {
 
         ShowCards.GetInstance().Hide(true);
     }
-
 }
