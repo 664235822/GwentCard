@@ -153,14 +153,6 @@ public class SaveController : Singleton<SaveController> {
                     cardElement.SetAttribute("effect", cardProperty.effect.ToString());
                     cardElement.SetAttribute("gold", cardProperty.gold.ToString());
                     cardElement.SetAttribute("power", cardProperty.power.ToString());
-                    if (cardProperty.muster.Length != 0)
-                    {
-                        for (int i = 0; i < cardProperty.muster.Length; i++)
-                        {
-                            XmlElement musterElement = xml.CreateElement(cardProperty.muster[i].name);
-                            cardElement.AppendChild(musterElement);
-                        }
-                    }
                 }
                 node.AppendChild(cardElement);
             }

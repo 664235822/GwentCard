@@ -38,14 +38,6 @@ public class EnemySaveController : MonoBehaviour {
                 cardElement.SetAttribute("effect", cardProperty.effect.ToString());
                 cardElement.SetAttribute("gold", cardProperty.gold.ToString());
                 cardElement.SetAttribute("power", cardProperty.power.ToString());
-                if (cardProperty.muster.Length != 0)
-                {
-                    for (int ii = 0; ii < cardProperty.muster.Length; ii++)
-                    {
-                        XmlElement musterElement = xml.CreateElement(cardProperty.muster[ii].name);
-                        cardElement.AppendChild(musterElement);
-                    }
-                }
                 special1.AppendChild(cardElement);
             }
 
@@ -62,14 +54,6 @@ public class EnemySaveController : MonoBehaviour {
                 cardElement.SetAttribute("effect", cardProperty.effect.ToString());
                 cardElement.SetAttribute("gold", cardProperty.gold.ToString());
                 cardElement.SetAttribute("power", cardProperty.power.ToString());
-                if (cardProperty.muster.Length != 0)
-                {
-                    for (int ii = 0; ii < cardProperty.muster.Length; ii++)
-                    {
-                        XmlElement musterElement = xml.CreateElement(cardProperty.muster[ii].name);
-                        cardElement.AppendChild(musterElement);
-                    }
-                }
                 monster1.AppendChild(cardElement);
             }
 
@@ -86,14 +70,6 @@ public class EnemySaveController : MonoBehaviour {
                 cardElement.SetAttribute("effect", cardProperty.effect.ToString());
                 cardElement.SetAttribute("gold", cardProperty.gold.ToString());
                 cardElement.SetAttribute("power", cardProperty.power.ToString());
-                if (cardProperty.muster.Length != 0)
-                {
-                    for (int ii = 0; ii < cardProperty.muster.Length; ii++)
-                    {
-                        XmlElement musterElement = xml.CreateElement(cardProperty.muster[ii].name);
-                        cardElement.AppendChild(musterElement);
-                    }
-                }
                 neutral1.AppendChild(cardElement);
             }
 
@@ -127,14 +103,6 @@ public class EnemySaveController : MonoBehaviour {
                 cardElement.SetAttribute("effect", cardProperty.effect.ToString());
                 cardElement.SetAttribute("gold", cardProperty.gold.ToString());
                 cardElement.SetAttribute("power", cardProperty.power.ToString());
-                if (cardProperty.muster.Length != 0)
-                {
-                    for (int ii = 0; ii < cardProperty.muster.Length; ii++)
-                    {
-                        XmlElement musterElement = xml.CreateElement(cardProperty.muster[ii].name);
-                        cardElement.AppendChild(musterElement);
-                    }
-                }
                 special2.AppendChild(cardElement);
             }
 
@@ -151,14 +119,6 @@ public class EnemySaveController : MonoBehaviour {
                 cardElement.SetAttribute("effect", cardProperty.effect.ToString());
                 cardElement.SetAttribute("gold", cardProperty.gold.ToString());
                 cardElement.SetAttribute("power", cardProperty.power.ToString());
-                if (cardProperty.muster.Length != 0)
-                {
-                    for (int ii = 0; ii < cardProperty.muster.Length; ii++)
-                    {
-                        XmlElement musterElement = xml.CreateElement(cardProperty.muster[ii].name);
-                        cardElement.AppendChild(musterElement);
-                    }
-                }
                 monster2.AppendChild(cardElement);
             }
 
@@ -175,14 +135,6 @@ public class EnemySaveController : MonoBehaviour {
                 cardElement.SetAttribute("effect", cardProperty.effect.ToString());
                 cardElement.SetAttribute("gold", cardProperty.gold.ToString());
                 cardElement.SetAttribute("power", cardProperty.power.ToString());
-                if (cardProperty.muster.Length != 0)
-                {
-                    for (int ii = 0; ii < cardProperty.muster.Length; ii++)
-                    {
-                        XmlElement musterElement = xml.CreateElement(cardProperty.muster[ii].name);
-                        cardElement.AppendChild(musterElement);
-                    }
-                }
                 neutral2.AppendChild(cardElement);
             }
 
@@ -216,14 +168,6 @@ public class EnemySaveController : MonoBehaviour {
                 cardElement.SetAttribute("effect", cardProperty.effect.ToString());
                 cardElement.SetAttribute("gold", cardProperty.gold.ToString());
                 cardElement.SetAttribute("power", cardProperty.power.ToString());
-                if (cardProperty.muster.Length != 0)
-                {
-                    for (int ii = 0; ii < cardProperty.muster.Length; ii++)
-                    {
-                        XmlElement musterElement = xml.CreateElement(cardProperty.muster[ii].name);
-                        cardElement.AppendChild(musterElement);
-                    }
-                }
                 special3.AppendChild(cardElement);
             }
 
@@ -240,14 +184,6 @@ public class EnemySaveController : MonoBehaviour {
                 cardElement.SetAttribute("effect", cardProperty.effect.ToString());
                 cardElement.SetAttribute("gold", cardProperty.gold.ToString());
                 cardElement.SetAttribute("power", cardProperty.power.ToString());
-                if (cardProperty.muster.Length != 0)
-                {
-                    for (int ii = 0; ii < cardProperty.muster.Length; ii++)
-                    {
-                        XmlElement musterElement = xml.CreateElement(cardProperty.muster[ii].name);
-                        cardElement.AppendChild(musterElement);
-                    }
-                }
                 monster3.AppendChild(cardElement);
             }
 
@@ -264,14 +200,6 @@ public class EnemySaveController : MonoBehaviour {
                 cardElement.SetAttribute("effect", cardProperty.effect.ToString());
                 cardElement.SetAttribute("gold", cardProperty.gold.ToString());
                 cardElement.SetAttribute("power", cardProperty.power.ToString());
-                if (cardProperty.muster.Length != 0)
-                {
-                    for (int ii = 0; ii < cardProperty.muster.Length; ii++)
-                    {
-                        XmlElement musterElement = xml.CreateElement(cardProperty.muster[ii].name);
-                        cardElement.AppendChild(musterElement);
-                    }
-                }
                 neutral3.AppendChild(cardElement);
             }
 
@@ -305,14 +233,6 @@ public class EnemySaveController : MonoBehaviour {
                 cardElement.SetAttribute("effect", cardProperty.effect.ToString());
                 cardElement.SetAttribute("gold", cardProperty.gold.ToString());
                 cardElement.SetAttribute("power", cardProperty.power.ToString());
-                if (cardProperty.muster.Length != 0)
-                {
-                    for (int ii = 0; ii < cardProperty.muster.Length; ii++)
-                    {
-                        XmlElement musterElement = xml.CreateElement(cardProperty.muster[ii].name);
-                        cardElement.AppendChild(musterElement);
-                    }
-                }
                 special4.AppendChild(cardElement);
             }
 
@@ -329,14 +249,6 @@ public class EnemySaveController : MonoBehaviour {
                 cardElement.SetAttribute("effect", cardProperty.effect.ToString());
                 cardElement.SetAttribute("gold", cardProperty.gold.ToString());
                 cardElement.SetAttribute("power", cardProperty.power.ToString());
-                if (cardProperty.muster.Length != 0)
-                {
-                    for (int ii = 0; ii < cardProperty.muster.Length; ii++)
-                    {
-                        XmlElement musterElement = xml.CreateElement(cardProperty.muster[ii].name);
-                        cardElement.AppendChild(musterElement);
-                    }
-                }
                 monster4.AppendChild(cardElement);
             }
 
@@ -353,14 +265,6 @@ public class EnemySaveController : MonoBehaviour {
                 cardElement.SetAttribute("effect", cardProperty.effect.ToString());
                 cardElement.SetAttribute("gold", cardProperty.gold.ToString());
                 cardElement.SetAttribute("power", cardProperty.power.ToString());
-                if (cardProperty.muster.Length != 0)
-                {
-                    for (int ii = 0; ii < cardProperty.muster.Length; ii++)
-                    {
-                        XmlElement musterElement = xml.CreateElement(cardProperty.muster[ii].name);
-                        cardElement.AppendChild(musterElement);
-                    }
-                }
                 neutral4.AppendChild(cardElement);
             }
 
