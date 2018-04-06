@@ -8,7 +8,7 @@ public class WarhornController : Singleton<WarhornController> {
     [HideInInspector] public bool[] playerWarhorn = { false, false, false };
     [HideInInspector] public bool[] enemyWarhorn = { false, false, false };
 
-    public void PlayerWarhorn()
+    public void Warhorn()
     {
         if (!playerWarhorn[ShowCards.GetInstance().totalLine])
         {

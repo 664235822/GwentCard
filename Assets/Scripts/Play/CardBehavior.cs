@@ -94,6 +94,9 @@ public class CardBehavior : MonoBehaviour {
             case Global.Effect.dummy:
                 ShowCards.GetInstance().Show(ShowCards.Behaviour.dummy, PlayerController.GetInstance().grids[2], true);
                 return;
+            case Global.Effect.muster:
+                MusterController.GetInstance().Muster();
+                goto default;
             case Global.Effect.warhorn:
                 if (cardProperty.line == Global.Line.empty)
                 {

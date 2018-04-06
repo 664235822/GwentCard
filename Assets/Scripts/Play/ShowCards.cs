@@ -57,7 +57,7 @@ public class ShowCards : Singleton<ShowCards> {
                 label.text = "战争号角";
                 popupList.gameObject.SetActive(true);
                 OKButton.gameObject.SetActive(true);
-                EventDelegate.Add(OKButton.onClick, () => WarhornController.GetInstance().PlayerWarhorn());
+                EventDelegate.Add(OKButton.onClick, () => WarhornController.GetInstance().Warhorn());
                 returnButton.GetComponent<HideButton>().isDraw = false;
                 break;
             case Behaviour.agile:

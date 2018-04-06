@@ -172,10 +172,7 @@ public class EnemyController : Singleton<EnemyController> {
                 }
                 else goto default;
             case Global.Effect.nurse:
-                if (grids[5].childCount == 0) goto default;
-                int nurseRandom = Random.Range(0, grids[5].childCount);
-                int nurseRandomLine = (int)grids[5].GetChild(nurseRandom).GetComponent<CardProperty>().line;
-                grids[5].SetParent(nurseRandom, grids[(int)nurseRandomLine + 2]);
+                Play(grids[5]);
                 goto default;
             case Global.Effect.scorch:
                 int maxPower = 10;
@@ -243,6 +240,22 @@ public class EnemyController : Singleton<EnemyController> {
                     WarhornController.GetInstance().enemyWarhorn[(int)cardProperty.line] = true;
                     goto default;
                 }
+            case Global.Effect.muster:
+                int musterIndex = 0;
+                for (int i = 0; i < MusterController.GetInstance().musterCards.Length; i++)
+                    for (int ii = 0; ii < MusterController.GetInstance().musterCards[i].Length; ii++)
+                        if (grid.GetChild(random).GetComponent<UISprite>().spriteName == MusterController.GetInstance().musterCards[i][ii])
+                            musterIndex = i;
+
+                for (int i = 0; i < MusterController.GetInstance().musterCards[musterIndex].Length; i++)
+                    for (int ii = grids[0].childCount - 1; ii >= 0; ii--)
+                    {
+                        Transform card = grids[0].GetChild(ii);
+                        if (card.GetComponent<UISprite>().spriteName == MusterController.GetInstance().musterCards[musterIndex][i])
+                            grids[0].SetParent(ii, grids[(int)card.GetComponent<CardProperty>().line + 2]);
+                    }
+
+                goto default;
             default:
                 if (cardProperty.line == Global.Line.agile)
                 {
