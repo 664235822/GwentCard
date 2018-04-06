@@ -53,7 +53,7 @@ public class CardBehavior : MonoBehaviour {
             case Global.Effect.scorch:
                 if (cardProperty.effect == Global.Effect.scorch)
                 {
-                    int maxPower = 10;
+                    int maxPower = 0;
                     for (int i = 2; i < 5; i++)
                     {
                         for (int ii = 0; ii < PlayerController.GetInstance().grids[i].childCount; ii++)

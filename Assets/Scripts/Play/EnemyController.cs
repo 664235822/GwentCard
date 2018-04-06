@@ -175,7 +175,7 @@ public class EnemyController : Singleton<EnemyController> {
                 Play(grids[5]);
                 goto default;
             case Global.Effect.scorch:
-                int maxPower = 10;
+                int maxPower = 0;
                 for (int i = 2; i < 5; i++)
                 {
                     for (int ii = 0; ii < PlayerController.GetInstance().grids[i].childCount; ii++)
