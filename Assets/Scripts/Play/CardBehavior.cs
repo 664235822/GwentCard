@@ -58,16 +58,24 @@ public class CardBehavior : MonoBehaviour {
                     {
                         for (int ii = 0; ii < PlayerController.GetInstance().grids[i].childCount; ii++)
                         {
-                            int power = PlayerController.GetInstance().grids[i].GetChild(ii).GetComponent<CardBehavior>().totalPower;
-                            if (power > maxPower) maxPower = power;
+                            Transform card = PlayerController.GetInstance().grids[i].GetChild(ii);
+                            if (!card.GetComponent<CardProperty>().gold)
+                            {
+                                int power = card.GetComponent<CardBehavior>().totalPower;
+                                if (power > maxPower) maxPower = power;
+                            }
                         }
                     }
                     for (int i = 2; i < 5; i++)
                     {
                         for (int ii = 0; ii < EnemyController.GetInstance().grids[i].childCount; ii++)
                         {
-                            int power = EnemyController.GetInstance().grids[i].GetChild(ii).GetComponent<CardBehavior>().totalPower;
-                            if (power > maxPower) maxPower = power;
+                            Transform card = EnemyController.GetInstance().grids[i].GetChild(ii);
+                            if (!card.GetComponent<CardProperty>().gold)
+                            {
+                                int power = card.GetComponent<CardBehavior>().totalPower;
+                                if (power > maxPower) maxPower = power;
+                            }
                         }
                     }
 
