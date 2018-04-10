@@ -5,6 +5,8 @@ using UnityEngine;
 public class PowerController : Singleton<PowerController> {
     [SerializeField] UILabel[] player_power_label;
     [SerializeField] UILabel[] enemy_power_label;
+    [SerializeField] UISprite player_winner_indicator;
+    [SerializeField] UISprite enemy_winner_indicator;
     [HideInInspector] public int player_total = 0;
     [HideInInspector] public int enemy_total = 0;
     
@@ -122,5 +124,20 @@ public class PowerController : Singleton<PowerController> {
         enemy_total = enemy[0] + enemy[1] + enemy[2];
         player_power_label[3].text = player_total.ToString();
         enemy_power_label[3].text = enemy_total.ToString();
+        if (player_total > enemy_total)
+        {
+            player_winner_indicator.gameObject.SetActive(true);
+            enemy_winner_indicator.gameObject.SetActive(false);
+        }
+        else if (player_total < enemy_total)
+        {
+            player_winner_indicator.gameObject.SetActive(false);
+            enemy_winner_indicator.gameObject.SetActive(true);
+        }
+        else if (player_total == enemy_total)
+        {
+            player_winner_indicator.gameObject.SetActive(true);
+            enemy_winner_indicator.gameObject.SetActive(true);
+        }
     }
 }

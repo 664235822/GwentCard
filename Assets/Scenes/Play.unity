@@ -9494,6 +9494,8 @@ MonoBehaviour:
   - {fileID: 1471428021}
   - {fileID: 1390817176}
   - {fileID: 615352573}
+  player_winner_indicator: {fileID: 407556095}
+  enemy_winner_indicator: {fileID: 219701742}
   player_total: 0
   enemy_total: 0
 --- !u!114 &1749374674
