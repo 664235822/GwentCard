@@ -5,7 +5,7 @@ using System.Xml;
 
 public class EnemyController : Singleton<EnemyController> {
     public Transform[] grids;
-    public GameObject enemy;
+    public GameObject obj;
     [SerializeField] UISprite avatar_group;
     [SerializeField] UILabel group_label;
     [SerializeField] UISprite deck_realms;
@@ -15,7 +15,7 @@ public class EnemyController : Singleton<EnemyController> {
 
     public void Initialize()
     {
-        enemy.SetActive(true);
+        obj.SetActive(true);
         int random = Random.Range(0, 4);
         UIAtlas totalAtlas = new UIAtlas();
         switch (random)

@@ -5,7 +5,7 @@ using System.Xml;
 
 public class PlayerController : Singleton<PlayerController> {
     public Transform[] grids;
-    public GameObject player;
+    public GameObject obj;
     [SerializeField] UISprite avatar_group;
     [SerializeField] UILabel group_label;
     [SerializeField] UISprite deck_realms;
@@ -15,7 +15,7 @@ public class PlayerController : Singleton<PlayerController> {
 
     public void Initialize(string playerGroup)
     {
-        player.SetActive(true);
+        obj.SetActive(true);
         group = (Global.Group)System.Enum.Parse(typeof(Global.Group), playerGroup);
         UIAtlas totalAtlas = new UIAtlas();
         switch (group)

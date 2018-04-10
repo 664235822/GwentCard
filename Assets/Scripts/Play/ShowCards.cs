@@ -6,7 +6,7 @@ public class ShowCards : Singleton<ShowCards> {
     public enum Behaviour { draw, show, nurse, dummy, warhorn, agile }
     public Transform grid;
     public UIPopupList popupList;
-    [SerializeField] GameObject show;
+    [SerializeField] GameObject obj;
     [SerializeField] UILabel label;
     [SerializeField] UIScrollView scrollView;
     [SerializeField] UIButton OKButton;
@@ -27,9 +27,9 @@ public class ShowCards : Singleton<ShowCards> {
         if (!repeat)
         {
             BlackShow.GetInstance().Show(true);
-            PlayerController.GetInstance().player.SetActive(false);
-            EnemyController.GetInstance().enemy.SetActive(false);
-            show.SetActive(true);
+            PlayerController.GetInstance().obj.SetActive(false);
+            EnemyController.GetInstance().obj.SetActive(false);
+            obj.SetActive(true);
         }
 
         switch (behaviour)
@@ -125,9 +125,9 @@ public class ShowCards : Singleton<ShowCards> {
         totalGrid = null;
         grid.DestroyChildren();
         BlackShow.GetInstance().Show(false);
-        PlayerController.GetInstance().player.SetActive(true);
-        EnemyController.GetInstance().enemy.SetActive(true);
-        show.SetActive(false);
+        PlayerController.GetInstance().obj.SetActive(true);
+        EnemyController.GetInstance().obj.SetActive(true);
+        obj.SetActive(false);
         if(isDraw)
         {
             PlayerController.GetInstance().Number();

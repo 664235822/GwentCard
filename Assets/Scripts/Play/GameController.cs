@@ -25,6 +25,7 @@ public class GameController : Singleton<GameController> {
 
     public void EndTurn()
     {
+        GameOver.GetInstance().AddPower(PowerController.GetInstance().player_total, PowerController.GetInstance().enemy_total);
         int power = PowerController.GetInstance().player_total - PowerController.GetInstance().enemy_total;
         if (power > 0)
         {
@@ -44,6 +45,16 @@ public class GameController : Singleton<GameController> {
             enemy_fail++;
         }
 
+        if (player_fail == 2)
+            GameOver.GetInstance().Show(false);
+        else if (enemy_fail == 2)
+            GameOver.GetInstance().Show(true);
+        else
+            NewTurn();
+    }
+
+    void NewTurn()
+    {
         WeatherController.GetInstance().ClearSky();
 
         for (int i = 2; i < 5; i++)

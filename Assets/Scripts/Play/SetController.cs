@@ -3,16 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class SetController : Singleton<SetController> {
-    [SerializeField] GameObject set;
+    [SerializeField] GameObject obj;
     [SerializeField] UIToggle toggle;
     [SerializeField] UIButton button;
 
     public void Show()
     {
         BlackShow.GetInstance().Show(true);
-        set.SetActive(true);
-        PlayerController.GetInstance().player.SetActive(false);
-        EnemyController.GetInstance().enemy.SetActive(false);
+        obj.SetActive(true);
+        PlayerController.GetInstance().obj.SetActive(false);
+        EnemyController.GetInstance().obj.SetActive(false);
     }
 
     public void Check()
@@ -26,8 +26,8 @@ public class SetController : Singleton<SetController> {
     public void Return()
     {
         BlackShow.GetInstance().Show(false);
-        set.SetActive(false);
-        PlayerController.GetInstance().player.SetActive(true);
-        EnemyController.GetInstance().enemy.SetActive(true);
+        obj.SetActive(false);
+        PlayerController.GetInstance().obj.SetActive(true);
+        EnemyController.GetInstance().obj.SetActive(true);
     }
 }
