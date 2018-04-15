@@ -73,12 +73,12 @@ public class GameController : Singleton<GameController> {
         }
         for (int i = 0; i < 3; i++)
         {
-            if (WarhornController.GetInstance().playerWarhorn[i])
+            if (WarhornController.GetInstance().playerGrids[i].childCount == 1)
             {
                 WarhornController.GetInstance().playerGrids[i].SetParent(0, PlayerController.GetInstance().grids[5]);
                 WarhornController.GetInstance().playerWarhorn[i] = false;
             }
-            if (WarhornController.GetInstance().enemyWarhorn[i])
+            if (WarhornController.GetInstance().enemyGrids[i].childCount == 1)
             {
                 WarhornController.GetInstance().enemyGrids[i].SetParent(0, EnemyController.GetInstance().grids[5]);
                 WarhornController.GetInstance().enemyWarhorn[i] = false;
