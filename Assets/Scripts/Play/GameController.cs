@@ -7,7 +7,7 @@ public class GameController : Singleton<GameController> {
     public GameObject cardPerfab;
     [SerializeField] TweenAlpha[] player_life_gem;
     [SerializeField] TweenAlpha[] enemy_life_gem;
-    bool offensive;
+    [HideInInspector] public bool offensive;
     int player_fail = 0;
     int enemy_fail = 0;
 
@@ -21,6 +21,7 @@ public class GameController : Singleton<GameController> {
         else offensive = false;
 
         if (!offensive) EnemyController.GetInstance().Play(EnemyController.GetInstance().grids[1]);
+        StartCoroutine(TweenStart.GetInstance().Play());
     }
 
     public void EndTurn()
@@ -94,5 +95,6 @@ public class GameController : Singleton<GameController> {
 
         offensive = !offensive;
         if (!offensive) EnemyController.GetInstance().Play(EnemyController.GetInstance().grids[1]);
+        StartCoroutine(TweenStart.GetInstance().Play());
     }
 }
