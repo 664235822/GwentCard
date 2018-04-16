@@ -268,7 +268,7 @@ public class EnemyController : Singleton<EnemyController> {
                 break;
         }
 
-        StartCoroutine(TweenCard.GetInstance().Play(false));
+        StartCoroutine(TweenCard.GetInstance().Play(1));
         Number();
         PowerController.GetInstance().Number();
     }
