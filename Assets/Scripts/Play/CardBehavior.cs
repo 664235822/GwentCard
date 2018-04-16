@@ -16,6 +16,7 @@ public class CardBehavior : MonoBehaviour {
     {
         for (int i = 0; i < ShowCards.GetInstance().totalGrid.childCount; i++)
             if (ShowCards.GetInstance().grid.GetChild(i).name == name) index = i;
+        TweenCard.GetInstance().card = ShowCards.GetInstance().totalGrid.GetChild(index);
 
         switch (cardProperty.effect)
         {

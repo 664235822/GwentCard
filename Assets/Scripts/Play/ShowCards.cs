@@ -130,6 +130,7 @@ public class ShowCards : Singleton<ShowCards> {
         obj.SetActive(false);
         if(isDraw)
         {
+            StartCoroutine(TweenCard.GetInstance().Play(true));
             PlayerController.GetInstance().Number();
             PowerController.GetInstance().Number();
             EnemyController.GetInstance().Play(EnemyController.GetInstance().grids[1]);

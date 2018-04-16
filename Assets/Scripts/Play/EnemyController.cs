@@ -136,6 +136,7 @@ public class EnemyController : Singleton<EnemyController> {
     {
         if (grid.childCount == 0) return;
         int random = Random.Range(0, grid.childCount);
+        TweenCard.GetInstance().card = grid.GetChild(random);
         CardProperty cardProperty = grid.GetChild(random).GetComponent<CardProperty>();
 
         switch (cardProperty.effect)
@@ -267,6 +268,7 @@ public class EnemyController : Singleton<EnemyController> {
                 break;
         }
 
+        StartCoroutine(TweenCard.GetInstance().Play(false));
         Number();
         PowerController.GetInstance().Number();
     }
