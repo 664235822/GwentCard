@@ -8,6 +8,8 @@ public class TweenCard : Singleton<TweenCard> {
 
     public IEnumerator Play(int index)
     {
+        if (index == 1)
+            yield return new WaitForSeconds(3.0f);
         obj[index].GetComponent<UISprite>().atlas = card.GetComponent<UISprite>().atlas;
         obj[index].GetComponent<UISprite>().spriteName = card.GetComponent<UISprite>().spriteName;
         obj[index].transform.Find("TweenEffect").GetComponent<UISprite>().spriteName = string.Format("card_effect_{0}", card.GetComponent<CardProperty>().effect.ToString());

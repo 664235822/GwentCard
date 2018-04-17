@@ -14,7 +14,7 @@ public class TweenStart : Singleton<TweenStart> {
             label.text = "对手先手";
 
         obj.PlayForward();
-        yield return new WaitForSeconds(1.0f);
+        yield return new WaitForSeconds(2.0f);
         obj.PlayReverse();
     }
 }
