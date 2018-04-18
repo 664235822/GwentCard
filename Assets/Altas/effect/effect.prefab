@@ -54,7 +54,7 @@ MonoBehaviour:
   material: {fileID: 2100000, guid: bcab76aa8bf6c794a8291558afe72b77, type: 2}
   mSprites:
   - name: card_effect_agile
-    x: 0
+    x: 279
     y: 188
     width: 68
     height: 68
@@ -67,8 +67,8 @@ MonoBehaviour:
     paddingTop: 16
     paddingBottom: 16
   - name: card_effect_clear_sky
-    x: 259
-    y: 164
+    x: 0
+    y: 99
     width: 92
     height: 92
     borderLeft: 0
@@ -80,8 +80,8 @@ MonoBehaviour:
     paddingTop: 4
     paddingBottom: 4
   - name: card_effect_dummy
-    x: 208
-    y: 42
+    x: 85
+    y: 6
     width: 76
     height: 92
     borderLeft: 0
@@ -93,8 +93,8 @@ MonoBehaviour:
     paddingTop: 4
     paddingBottom: 4
   - name: card_effect_fog
-    x: 174
-    y: 135
+    x: 186
+    y: 192
     width: 84
     height: 64
     borderLeft: 0
@@ -106,7 +106,7 @@ MonoBehaviour:
     paddingTop: 18
     paddingBottom: 18
   - name: card_effect_frost
-    x: 135
+    x: 162
     y: 50
     width: 72
     height: 76
@@ -119,8 +119,8 @@ MonoBehaviour:
     paddingTop: 12
     paddingBottom: 12
   - name: card_effect_improve_neighbours
-    x: 162
-    y: 200
+    x: 182
+    y: 135
     width: 96
     height: 56
     borderLeft: 0
@@ -132,7 +132,7 @@ MonoBehaviour:
     paddingTop: 22
     paddingBottom: 22
   - name: card_effect_muster
-    x: 85
+    x: 93
     y: 127
     width: 88
     height: 64
@@ -145,8 +145,8 @@ MonoBehaviour:
     paddingTop: 23
     paddingBottom: 13
   - name: card_effect_nurse
-    x: 67
-    y: 34
+    x: 302
+    y: 119
     width: 67
     height: 68
     borderLeft: 0
@@ -158,8 +158,8 @@ MonoBehaviour:
     paddingTop: 16
     paddingBottom: 16
   - name: card_effect_rain
-    x: 0
-    y: 30
+    x: 235
+    y: 62
     width: 66
     height: 72
     borderLeft: 0
@@ -171,7 +171,7 @@ MonoBehaviour:
     paddingTop: 16
     paddingBottom: 12
   - name: card_effect_same_type_morale
-    x: 69
+    x: 93
     y: 192
     width: 92
     height: 64
@@ -185,7 +185,7 @@ MonoBehaviour:
     paddingBottom: 18
   - name: card_effect_scorch
     x: 0
-    y: 103
+    y: 14
     width: 84
     height: 84
     borderLeft: 0
@@ -197,8 +197,8 @@ MonoBehaviour:
     paddingTop: 8
     paddingBottom: 8
   - name: card_effect_spy
-    x: 285
-    y: 115
+    x: 348
+    y: 208
     width: 84
     height: 48
     borderLeft: 0
@@ -209,6 +209,19 @@ MonoBehaviour:
     paddingRight: 7
     paddingTop: 26
     paddingBottom: 26
+  - name: card_effect_warhorn
+    x: 0
+    y: 192
+    width: 92
+    height: 64
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 3
+    paddingRight: 3
+    paddingTop: 18
+    paddingBottom: 18
   mPixelSize: 1
   mReplacement: {fileID: 0}
   mCoordinates: 0

@@ -117,14 +117,11 @@ public class CardBehavior : MonoBehaviour {
                     WarhornController.GetInstance().playerWarhorn[(int)cardProperty.line] = true;
                     goto default;
                 }
+            case Global.Effect.agile:
+                ShowCards.GetInstance().Show(ShowCards.Behaviour.agile, PlayerController.GetInstance().grids[2], true);
+                return;
             default:
-                if (cardProperty.line == Global.Line.agile)
-                {
-                    ShowCards.GetInstance().Show(ShowCards.Behaviour.agile, PlayerController.GetInstance().grids[2], true);
-                    return;
-                }
-                else
-                    ShowCards.GetInstance().totalGrid.SetParent(index, PlayerController.GetInstance().grids[(int)cardProperty.line + 2]);
+                ShowCards.GetInstance().totalGrid.SetParent(index, PlayerController.GetInstance().grids[(int)cardProperty.line + 2]);
                 break;
         }
 
