@@ -11,7 +11,7 @@ public class PlayerController : Singleton<PlayerController> {
     [SerializeField] UISprite deck_realms;
     [SerializeField] UILabel number_label;
     [SerializeField] UILabel deck_realms_label;
-    Global.Group group;
+    [HideInInspector] public Global.Group group;
 
     public void Initialize(string playerGroup)
     {

@@ -11,7 +11,7 @@ public class EnemyController : Singleton<EnemyController> {
     [SerializeField] UISprite deck_realms;
     [SerializeField] UILabel number_label;
     [SerializeField] UILabel deck_realms_label;
-    Global.Group group;
+    [HideInInspector] public Global.Group group;
 
     public void Initialize()
     {
@@ -117,7 +117,7 @@ public class EnemyController : Singleton<EnemyController> {
         Number();
     }
 
-    void DrawCards(int index)
+    public void DrawCards(int index)
     {
         for (int i = 0; i < index; i++)
         {

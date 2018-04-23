@@ -5257,7 +5257,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 100002, guid: fee46b827274e694aa251e2d36700135, type: 2}
       propertyPath: m_Name
-      value: Control - EndTurn Button
+      value: Control - Turn Button
       objectReference: {fileID: 0}
     - target: {fileID: 11400002, guid: fee46b827274e694aa251e2d36700135, type: 2}
       propertyPath: mTrueTypeFont
@@ -5277,7 +5277,7 @@ Prefab:
       objectReference: {fileID: 1749374675}
     - target: {fileID: 11400000, guid: fee46b827274e694aa251e2d36700135, type: 2}
       propertyPath: onClick.Array.data[0].mMethodName
-      value: EndTurn
+      value: Turn
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: fee46b827274e694aa251e2d36700135, type: 2}
@@ -10895,6 +10895,7 @@ MonoBehaviour:
   deck_realms: {fileID: 1926060333}
   number_label: {fileID: 1900700347}
   deck_realms_label: {fileID: 1502660137}
+  group: 0
 --- !u!114 &1749374671
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10919,6 +10920,7 @@ MonoBehaviour:
   deck_realms: {fileID: 1308697920}
   number_label: {fileID: 773164920}
   deck_realms_label: {fileID: 1885540425}
+  group: 0
 --- !u!114 &1749374672
 MonoBehaviour:
   m_ObjectHideFlags: 0
