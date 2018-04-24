@@ -122,7 +122,7 @@ public class EnemyController : Singleton<EnemyController> {
         for (int i = 0; i < index; i++)
         {
             int random = Random.Range(0, grids[0].childCount);
-            grids[0].SetParent(random, grids[1]);
+            grids[0].GetChild(random).SetTarget(grids[1]);
         }
     }
 
@@ -136,13 +136,13 @@ public class EnemyController : Singleton<EnemyController> {
     {
         if (grid.childCount == 0) return;
         int random = Random.Range(0, grid.childCount);
-        TweenCard.GetInstance().card = grid.GetChild(random);
-        CardProperty cardProperty = grid.GetChild(random).GetComponent<CardProperty>();
+        Transform card = grid.GetChild(random);
+        CardProperty cardProperty = card.GetComponent<CardProperty>();
 
         switch (cardProperty.effect)
         {
             case Global.Effect.spy:
-                grid.SetParent(random, PlayerController.GetInstance().grids[(int)cardProperty.line + 2]);
+                card.SetTarget(PlayerController.GetInstance().grids[(int)cardProperty.line + 2]);
                 DrawCards(2);
                 break;
             case Global.Effect.clear_sky:
@@ -152,7 +152,7 @@ public class EnemyController : Singleton<EnemyController> {
                 if (!WeatherController.GetInstance().weather[0])
                 {
                     WeatherController.GetInstance().Frost();
-                    grid.SetParent(random, WeatherController.GetInstance().grid);
+                    card.SetTarget(WeatherController.GetInstance().grid);
                     break;
                 }
                 else goto default;
@@ -160,7 +160,7 @@ public class EnemyController : Singleton<EnemyController> {
                 if (!WeatherController.GetInstance().weather[1])
                 {
                     WeatherController.GetInstance().Fog();
-                    grid.SetParent(random, WeatherController.GetInstance().grid);
+                    card.SetTarget(WeatherController.GetInstance().grid);
                     break;
                 }
                 else goto default;
@@ -168,7 +168,7 @@ public class EnemyController : Singleton<EnemyController> {
                 if (!WeatherController.GetInstance().weather[2])
                 {
                     WeatherController.GetInstance().Rain();
-                    grid.SetParent(random, WeatherController.GetInstance().grid);
+                    card.SetTarget(WeatherController.GetInstance().grid);
                     break;
                 }
                 else goto default;
@@ -198,18 +198,18 @@ public class EnemyController : Singleton<EnemyController> {
                 {
                     for (int ii = PlayerController.GetInstance().grids[i].childCount - 1; ii >= 0; ii--)
                     {
-                        Transform card = PlayerController.GetInstance().grids[i].GetChild(ii);
-                        if (card.GetComponent<CardBehavior>().totalPower == maxPower && !card.GetComponent<CardProperty>().gold)
-                            PlayerController.GetInstance().grids[i].SetParent(ii, PlayerController.GetInstance().grids[5]);
+                        Transform scorchCard = PlayerController.GetInstance().grids[i].GetChild(ii);
+                        if (scorchCard.GetComponent<CardBehavior>().totalPower == maxPower && !scorchCard.GetComponent<CardProperty>().gold)
+                            scorchCard.SetTarget(PlayerController.GetInstance().grids[5]);
                     }
                 }
                 for (int i = 2; i < 5; i++)
                 {
                     for (int ii = EnemyController.GetInstance().grids[i].childCount - 1; ii >= 0; ii--)
                     {
-                        Transform card = EnemyController.GetInstance().grids[i].GetChild(ii);
-                        if (card.GetComponent<CardBehavior>().totalPower == maxPower && !card.GetComponent<CardProperty>().gold)
-                            grids[i].SetParent(ii, EnemyController.GetInstance().grids[5]);
+                        Transform scorchCard = EnemyController.GetInstance().grids[i].GetChild(ii);
+                        if (scorchCard.GetComponent<CardBehavior>().totalPower == maxPower && !scorchCard.GetComponent<CardProperty>().gold)
+                            scorchCard.SetTarget(EnemyController.GetInstance().grids[5]);
                     }
                 }
                 goto default;
@@ -218,8 +218,8 @@ public class EnemyController : Singleton<EnemyController> {
                 {
                     if (grids[i].childCount == 0) continue;
                     int dummyRandom = Random.Range(0, grids[i].childCount);
-                    grid.SetParent(random, grids[i]);
-                    grids[i].SetParent(dummyRandom, grid);
+                    card.SetTarget(grids[i]);
+                    grids[i].GetChild(dummyRandom).SetTarget(grid);
                     break;
                 }
                 break;
@@ -230,10 +230,10 @@ public class EnemyController : Singleton<EnemyController> {
                     if (!WarhornController.GetInstance().enemyWarhorn[line])
                     {
                         WarhornController.GetInstance().enemyWarhorn[line] = true;
-                        grid.SetParent(random, WarhornController.GetInstance().enemyGrids[line]);
+                        card.SetTarget(WarhornController.GetInstance().enemyGrids[line]);
                     }
                     else
-                        grid.SetParent(random, grids[5]);
+                        card.SetTarget(grids[5]);
                     break;
                 }
                 else
@@ -251,22 +251,22 @@ public class EnemyController : Singleton<EnemyController> {
                 for (int i = 0; i < MusterController.GetInstance().musterCards[musterIndex].Length; i++)
                     for (int ii = grids[0].childCount - 1; ii >= 0; ii--)
                     {
-                        Transform card = grids[0].GetChild(ii);
-                        if (card.GetComponent<UISprite>().spriteName == MusterController.GetInstance().musterCards[musterIndex][i])
-                            grids[0].SetParent(ii, grids[(int)card.GetComponent<CardProperty>().line + 2]);
+                        Transform musterCard = grids[0].GetChild(ii);
+                        if (musterCard.GetComponent<UISprite>().spriteName == MusterController.GetInstance().musterCards[musterIndex][i])
+                            musterCard.SetTarget(grids[(int)card.GetComponent<CardProperty>().line + 2]);
                     }
 
                 goto default;
             case Global.Effect.agile:
                 int agileRandom = Random.Range(0, 2);
-                grid.SetParent(random, grids[agileRandom + 2]);
+                card.SetTarget(grids[agileRandom + 2]);
                 break;
             default:
-                grid.SetParent(random, grids[(int)cardProperty.line + 2]);
+                card.SetTarget(grids[(int)cardProperty.line + 2]);
                 break;
         }
 
-        StartCoroutine(TweenCard.GetInstance().Play(1));
+        CoroutineManager.GetInstance().AddTask(TweenCard.GetInstance().Play(card));
         Number();
         PowerController.GetInstance().Number();
     }

@@ -15,7 +15,7 @@ public class WeatherController : Singleton<WeatherController> {
     public void ClearSky()
     {
         for (int i = 0; i < grid.childCount; i++)
-            grid.SetParent(i, PlayerController.GetInstance().grids[5]);
+            grid.GetChild(i).SetTarget(PlayerController.GetInstance().grids[5]);
         weather[0] = false;
         weather[1] = false;
         weather[2] = false;

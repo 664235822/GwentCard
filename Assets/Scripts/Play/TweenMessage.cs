@@ -2,19 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TweenStart : Singleton<TweenStart> {
+public class TweenMessage : Singleton<TweenMessage> {
     [SerializeField] TweenAlpha obj;
     [SerializeField] UILabel label;
 	
-    public IEnumerator Play()
+    public IEnumerator Play(string message)
     {
-        if (GameController.GetInstance().offensive)
-            label.text = "你先手";
-        else
-            label.text = "对手先手";
+        label.text = message;
 
         obj.PlayForward();
         yield return new WaitForSeconds(2.0f);
         obj.PlayReverse();
+        yield return new WaitForSeconds(1.0f);
+        CoroutineManager.GetInstance().Finish();
     }
 }

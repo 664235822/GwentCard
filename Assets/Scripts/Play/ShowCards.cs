@@ -10,7 +10,7 @@ public class ShowCards : Singleton<ShowCards> {
     [SerializeField] UILabel label;
     [SerializeField] UIScrollView scrollView;
     [SerializeField] UIButton OKButton;
-    [SerializeField] UIButton returnButton;
+    [HideInInspector] public Transform card;
     [HideInInspector] public Transform totalGrid;
     [HideInInspector] public int totalLine = 0;
     Behaviour behaviour;
@@ -45,20 +45,17 @@ public class ShowCards : Singleton<ShowCards> {
                 totalGrid = showGrid;
                 popupList.gameObject.SetActive(false);
                 OKButton.gameObject.SetActive(false);
-                returnButton.GetComponent<HideButton>().isDraw = true;
                 break;
             case Behaviour.dummy:
                 label.text = "请选择要替换的牌";
                 popupList.gameObject.SetActive(true);
                 OKButton.gameObject.SetActive(false);
-                returnButton.GetComponent<HideButton>().isDraw = false;
                 break;
             case Behaviour.warhorn:
                 label.text = "战争号角";
                 popupList.gameObject.SetActive(true);
                 OKButton.gameObject.SetActive(true);
                 EventDelegate.Add(OKButton.onClick, () => WarhornController.GetInstance().Warhorn());
-                returnButton.GetComponent<HideButton>().isDraw = false;
                 break;
             case Behaviour.agile:
                 label.text = "请选择出牌的排";
@@ -67,16 +64,15 @@ public class ShowCards : Singleton<ShowCards> {
                 OKButton.gameObject.SetActive(true);
                 EventDelegate.Add(OKButton.onClick, delegate
                 {
-                    totalGrid.SetParent(CardBehavior.index, PlayerController.GetInstance().grids[(int)totalLine + 2]);
-                    Hide(true);
+                    card.SetTarget(PlayerController.GetInstance().grids[(int)totalLine + 2]);
+                    Hide();
+                    PlayerController.GetInstance().PlayOver(card);
                 });
-                returnButton.GetComponent<HideButton>().isDraw = false;
                 break;
             default:
                 totalGrid = showGrid;
                 popupList.gameObject.SetActive(false);
                 OKButton.gameObject.SetActive(false);
-                returnButton.GetComponent<HideButton>().isDraw = false;
                 break;
         }
 
@@ -120,7 +116,7 @@ public class ShowCards : Singleton<ShowCards> {
         grid.GetComponent<UIGrid>().Reposition();
     }
 
-    public void Hide(bool isDraw)
+    public void Hide()
     {
         totalGrid = null;
         grid.DestroyChildren();
@@ -128,13 +124,6 @@ public class ShowCards : Singleton<ShowCards> {
         PlayerController.GetInstance().obj.SetActive(true);
         EnemyController.GetInstance().obj.SetActive(true);
         obj.SetActive(false);
-        if(isDraw)
-        {
-            StartCoroutine(TweenCard.GetInstance().Play(0));
-            PlayerController.GetInstance().Number();
-            PowerController.GetInstance().Number();
-            EnemyController.GetInstance().Play(EnemyController.GetInstance().grids[1]);
-        }
     }
 
     public void LineChanged()

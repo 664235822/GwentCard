@@ -62,7 +62,7 @@ public class MusterController : Singleton<MusterController> {
         int index = 0;
         for (int i = 0; i < musterCards.Length; i++)
             for (int ii = 0; ii < musterCards[i].Length; ii++)
-                if (ShowCards.GetInstance().totalGrid.GetChild(CardBehavior.index).GetComponent<UISprite>().spriteName == musterCards[i][ii])
+                if (ShowCards.GetInstance().card.GetComponent<UISprite>().spriteName == musterCards[i][ii])
                     index = i;
 
         for (int i = 0; i < musterCards[index].Length; i++)
@@ -70,7 +70,7 @@ public class MusterController : Singleton<MusterController> {
             {
                 Transform card = PlayerController.GetInstance().grids[0].GetChild(ii);
                 if (card.GetComponent<UISprite>().spriteName == musterCards[index][i])
-                    PlayerController.GetInstance().grids[0].SetParent(ii, PlayerController.GetInstance().grids[(int)card.GetComponent<CardProperty>().line + 2]);
+                    card.SetTarget(PlayerController.GetInstance().grids[(int)card.GetComponent<CardProperty>().line + 2]);
             }
     }
 }

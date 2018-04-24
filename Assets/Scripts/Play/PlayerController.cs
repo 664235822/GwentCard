@@ -110,7 +110,6 @@ public class PlayerController : Singleton<PlayerController> {
         }
 
         DrawCards(10);
-        Number();
     }
 
     public void DrawCards(int index)
@@ -118,8 +117,10 @@ public class PlayerController : Singleton<PlayerController> {
         for (int i = 0; i < index; i++)
         {
             int random = Random.Range(0, grids[0].childCount);
-            grids[0].SetParent(random, grids[1]);
+            grids[0].GetChild(random).SetTarget(grids[1]);
         }
+
+        Number();
     }
 
     public void Number()
@@ -127,4 +128,13 @@ public class PlayerController : Singleton<PlayerController> {
         number_label.text = grids[1].childCount.ToString();
         deck_realms_label.text = grids[0].childCount.ToString();
     }
+
+    public void PlayOver(Transform card)
+    {
+        CoroutineManager.GetInstance().AddTask(TweenCard.GetInstance().Play(card));
+        PlayerController.GetInstance().Number();
+        PowerController.GetInstance().Number();
+        EnemyController.GetInstance().Play(EnemyController.GetInstance().grids[1]);
+    }
+
 }
