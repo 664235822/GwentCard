@@ -389,7 +389,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 603651153}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -1, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1981871568}
@@ -426,13 +426,13 @@ MonoBehaviour:
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
   mWidth: 1920
-  mHeight: 1080
+  mHeight: 1937
   mDepth: 0
   mMat: {fileID: 0}
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 1.7777778
+  aspectRatio: 0.9912235
   mType: 0
   mFillDirection: 4
   mFillAmount: 1
@@ -447,7 +447,7 @@ MonoBehaviour:
   bottomType: 1
   topType: 1
   mAtlas: {fileID: 114705400081257296, guid: 78b7fe151f3fe8e4fa32116b9dff2cd1, type: 2}
-  mSpriteName: 185508404
+  mSpriteName: Geralt_Yennefer-size_1920x1080
   mFillCenter: 1
 --- !u!1 &858200535
 GameObject:
@@ -1191,7 +1191,7 @@ Transform:
   m_GameObject: {fileID: 1981871564}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.0018518518, y: 0.0018518518, z: 0.0018518518}
+  m_LocalScale: {x: 0.0010325245, y: 0.0010325245, z: 0.0010325245}
   m_Children:
   - {fileID: 462906031}
   - {fileID: 603651154}
