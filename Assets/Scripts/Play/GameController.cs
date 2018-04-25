@@ -56,13 +56,13 @@ public class GameController : Singleton<GameController> {
                 player_fail++;
                 enemy_fail++;
                 gameBehavior = GameBehavior.dogfall;
-                CoroutineManager.GetInstance().AddTask(TweenMessage.GetInstance().Play("领导牌技能发动，平手时获胜"));
             }
             else if (PlayerController.GetInstance().group == Global.Group.nilfgaardian)
             {
                 enemy_life_gem[enemy_fail].PlayForward();
                 enemy_fail++;
                 gameBehavior = GameBehavior.win;
+                CoroutineManager.GetInstance().AddTask(TweenMessage.GetInstance().Play("领导牌技能发动\r\n平手时获胜"));
             }
             else if (EnemyController.GetInstance().group == Global.Group.nilfgaardian)
             {
@@ -139,7 +139,7 @@ public class GameController : Singleton<GameController> {
             if (PlayerController.GetInstance().group == Global.Group.northern && gameBehavior == GameBehavior.win)
             {
                 PlayerController.GetInstance().DrawCards(1);
-                CoroutineManager.GetInstance().AddTask(TweenMessage.GetInstance().Play("领导牌技能发动，摸一张牌"));
+                CoroutineManager.GetInstance().AddTask(TweenMessage.GetInstance().Play("领导牌技能发动\r\n摸一张牌"));
             }
             if (EnemyController.GetInstance().group == Global.Group.northern && gameBehavior == GameBehavior.lose)
                 EnemyController.GetInstance().DrawCards(1);
