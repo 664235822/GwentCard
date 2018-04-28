@@ -101,7 +101,7 @@ public class CardBehavior : MonoBehaviour {
                 }
                 goto default;
             case Global.Effect.dummy:
-                ShowCards.GetInstance().Show(ShowCards.Behaviour.dummy, PlayerController.GetInstance().grids[2], true);
+                ShowCards.GetInstance().Show(ShowCards.ShowBehavior.dummy, PlayerController.GetInstance().grids[2], true);
                 return;
             case Global.Effect.muster:
                 MusterController.GetInstance().Muster();
@@ -109,7 +109,7 @@ public class CardBehavior : MonoBehaviour {
             case Global.Effect.warhorn:
                 if (cardProperty.line == Global.Line.empty)
                 {
-                    ShowCards.GetInstance().Show(ShowCards.Behaviour.warhorn, PlayerController.GetInstance().grids[2], true);
+                    ShowCards.GetInstance().Show(ShowCards.ShowBehavior.warhorn, PlayerController.GetInstance().grids[2], true);
                     return;
                 }
                 else
@@ -118,7 +118,7 @@ public class CardBehavior : MonoBehaviour {
                     goto default;
                 }
             case Global.Effect.agile:
-                ShowCards.GetInstance().Show(ShowCards.Behaviour.agile, PlayerController.GetInstance().grids[2], true);
+                ShowCards.GetInstance().Show(ShowCards.ShowBehavior.agile, PlayerController.GetInstance().grids[2], true);
                 return;
             default:
                 ShowCards.GetInstance().card.SetTarget(PlayerController.GetInstance().grids[(int)cardProperty.line + 2]);
@@ -126,12 +126,14 @@ public class CardBehavior : MonoBehaviour {
         }
 
         if (cardProperty.effect == Global.Effect.nurse)
-            ShowCards.GetInstance().Show(ShowCards.Behaviour.nurse, PlayerController.GetInstance().grids[5], true);
-        else
         {
-            ShowCards.GetInstance().Hide();
-            PlayerController.GetInstance().PlayOver(ShowCards.GetInstance().card);
+            ShowCards.GetInstance().Show(ShowCards.ShowBehavior.nurse, PlayerController.GetInstance().grids[5], true);
+            CoroutineManager.GetInstance().AddTask(TweenCard.GetInstance().Play(ShowCards.GetInstance().card));
+            return;
         }
+
+        ShowCards.GetInstance().Hide();
+        PlayerController.GetInstance().PlayOver(ShowCards.GetInstance().card);
     }
 
     public void Dummy()

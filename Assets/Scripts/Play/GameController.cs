@@ -81,77 +81,81 @@ public class GameController : Singleton<GameController> {
         }
 
         if (player_fail == 2)
+        {
             GameOver.GetInstance().Show(false);
+            return;
+        }
         else if (enemy_fail == 2)
+        {
             GameOver.GetInstance().Show(true);
+            return;
+        }
+
+        WeatherController.GetInstance().ClearSky();
+
+        for (int i = 2; i < 5; i++)
+        {
+            for (int ii = PlayerController.GetInstance().grids[i].childCount - 1; ii >= 0; ii--)
+            {
+                PlayerController.GetInstance().grids[i].GetChild(ii).SetTarget(PlayerController.GetInstance().grids[5]);
+            }
+        }
+        for (int i = 2; i < 5; i++)
+        {
+            for (int ii = EnemyController.GetInstance().grids[i].childCount - 1; ii >= 0; ii--)
+            {
+                EnemyController.GetInstance().grids[i].GetChild(ii).SetTarget(EnemyController.GetInstance().grids[5]);
+            }
+        }
+        for (int i = 0; i < 3; i++)
+        {
+            if (WarhornController.GetInstance().playerGrids[i].childCount == 1)
+            {
+                WarhornController.GetInstance().playerGrids[i].GetChild(0).SetTarget(PlayerController.GetInstance().grids[5]);
+                WarhornController.GetInstance().playerWarhorn[i] = false;
+            }
+            if (WarhornController.GetInstance().enemyGrids[i].childCount == 1)
+            {
+                WarhornController.GetInstance().enemyGrids[i].GetChild(0).SetTarget(EnemyController.GetInstance().grids[5]);
+                WarhornController.GetInstance().enemyWarhorn[i] = false;
+            }
+        }
+
+        PlayerController.GetInstance().grids[5].gameObject.SetActive(false);
+        PlayerController.GetInstance().grids[5].gameObject.SetActive(true);
+        EnemyController.GetInstance().grids[5].gameObject.SetActive(false);
+        EnemyController.GetInstance().grids[5].gameObject.SetActive(true);
+
+        PowerController.GetInstance().Number();
+
+        switch (gameBehavior)
+        {
+            case GameBehavior.win:
+                CoroutineManager.GetInstance().AddTask(TweenMessage.GetInstance().Play("此局获胜"));
+                break;
+            case GameBehavior.lose:
+                CoroutineManager.GetInstance().AddTask(TweenMessage.GetInstance().Play("此局失败"));
+                break;
+            case GameBehavior.dogfall:
+                CoroutineManager.GetInstance().AddTask(TweenMessage.GetInstance().Play("此局平手"));
+                break;
+        }
+
+        if (PlayerController.GetInstance().group == Global.Group.northern && gameBehavior == GameBehavior.win)
+        {
+            PlayerController.GetInstance().DrawCards(1);
+            CoroutineManager.GetInstance().AddTask(TweenMessage.GetInstance().Play("领导牌技能发动\r\n摸一张牌"));
+        }
+        if (EnemyController.GetInstance().group == Global.Group.northern && gameBehavior == GameBehavior.lose)
+            EnemyController.GetInstance().DrawCards(1);
+
+        offensive = !offensive;
+        if (offensive)
+            CoroutineManager.GetInstance().AddTask(TweenMessage.GetInstance().Play("你先手"));
         else
         {
-            WeatherController.GetInstance().ClearSky();
-
-            for (int i = 2; i < 5; i++)
-            {
-                for (int ii = PlayerController.GetInstance().grids[i].childCount - 1; ii >= 0; ii--)
-                {
-                    PlayerController.GetInstance().grids[i].GetChild(ii).SetTarget(PlayerController.GetInstance().grids[5]);
-                }
-            }
-            for (int i = 2; i < 5; i++)
-            {
-                for (int ii = EnemyController.GetInstance().grids[i].childCount - 1; ii >= 0; ii--)
-                {
-                    EnemyController.GetInstance().grids[i].GetChild(ii).SetTarget(EnemyController.GetInstance().grids[5]);
-                }
-            }
-            for (int i = 0; i < 3; i++)
-            {
-                if (WarhornController.GetInstance().playerGrids[i].childCount == 1)
-                {
-                    WarhornController.GetInstance().playerGrids[i].GetChild(0).SetTarget(PlayerController.GetInstance().grids[5]);
-                    WarhornController.GetInstance().playerWarhorn[i] = false;
-                }
-                if (WarhornController.GetInstance().enemyGrids[i].childCount == 1)
-                {
-                    WarhornController.GetInstance().enemyGrids[i].GetChild(0).SetTarget(EnemyController.GetInstance().grids[5]);
-                    WarhornController.GetInstance().enemyWarhorn[i] = false;
-                }
-            }
-
-            PlayerController.GetInstance().grids[5].gameObject.SetActive(false);
-            PlayerController.GetInstance().grids[5].gameObject.SetActive(true);
-            EnemyController.GetInstance().grids[5].gameObject.SetActive(false);
-            EnemyController.GetInstance().grids[5].gameObject.SetActive(true);
-
-            PowerController.GetInstance().Number();
-
-            switch(gameBehavior)
-            {
-                case GameBehavior.win:
-                    CoroutineManager.GetInstance().AddTask(TweenMessage.GetInstance().Play("此局获胜"));
-                    break;
-                case GameBehavior.lose:
-                    CoroutineManager.GetInstance().AddTask(TweenMessage.GetInstance().Play("此局失败"));
-                    break;
-                case GameBehavior.dogfall:
-                    CoroutineManager.GetInstance().AddTask(TweenMessage.GetInstance().Play("此局平手"));
-                    break;
-            }
-
-            if (PlayerController.GetInstance().group == Global.Group.northern && gameBehavior == GameBehavior.win)
-            {
-                PlayerController.GetInstance().DrawCards(1);
-                CoroutineManager.GetInstance().AddTask(TweenMessage.GetInstance().Play("领导牌技能发动\r\n摸一张牌"));
-            }
-            if (EnemyController.GetInstance().group == Global.Group.northern && gameBehavior == GameBehavior.lose)
-                EnemyController.GetInstance().DrawCards(1);
-
-            offensive = !offensive;
-            if (offensive)
-                CoroutineManager.GetInstance().AddTask(TweenMessage.GetInstance().Play("你先手"));
-            else
-            {
-                CoroutineManager.GetInstance().AddTask(TweenMessage.GetInstance().Play("对方先手"));
-                EnemyController.GetInstance().Play(EnemyController.GetInstance().grids[1]);
-            }
+            CoroutineManager.GetInstance().AddTask(TweenMessage.GetInstance().Play("对方先手"));
+            EnemyController.GetInstance().Play(EnemyController.GetInstance().grids[1]);
         }
     }
 }

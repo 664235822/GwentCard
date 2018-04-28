@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class ShowButton : MonoBehaviour {
-    [SerializeField] ShowCards.Behaviour behaviour;
+    [SerializeField] ShowCards.ShowBehavior behavior;
     [SerializeField] Transform grid;
 
     public void OnClick()
     {
-        ShowCards.GetInstance().Show(behaviour, grid, false);
+        ShowCards.GetInstance().Show(behavior, grid, false);
     }
 	
 }

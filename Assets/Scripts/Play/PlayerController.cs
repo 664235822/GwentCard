@@ -132,7 +132,7 @@ public class PlayerController : Singleton<PlayerController> {
     public void PlayOver(Transform card)
     {
         CoroutineManager.GetInstance().AddTask(TweenCard.GetInstance().Play(card));
-        PlayerController.GetInstance().Number();
+        Number();
         PowerController.GetInstance().Number();
         EnemyController.GetInstance().Play(EnemyController.GetInstance().grids[1]);
     }
