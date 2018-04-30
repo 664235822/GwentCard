@@ -93,6 +93,35 @@ public class GameController : Singleton<GameController> {
 
         WeatherController.GetInstance().ClearSky();
 
+        Transform playerMonsterCard = null;
+        if (PlayerController.GetInstance().group == Global.Group.monster)
+        {
+            ArrayList line = new ArrayList();
+            for (int i = 0; i < 3; i++)
+                if (PlayerController.GetInstance().grids[i + 2].childCount != 0)
+                    line.Add(i);
+            if (line.Count != 0)
+            {
+                int randomLine = (int)line[Random.Range(0, line.Count)];
+                int randomIndex = Random.Range(0, PlayerController.GetInstance().grids[randomLine + 2].childCount);
+                playerMonsterCard = PlayerController.GetInstance().grids[randomLine + 2].GetChild(randomIndex);
+            }
+        }
+        Transform enemyMonsterCard = null;
+        if(EnemyController.GetInstance().group==Global.Group.monster)
+        {
+            ArrayList line = new ArrayList();
+            for (int i = 0; i < 3; i++)
+                if (EnemyController.GetInstance().grids[i + 2].childCount != 0)
+                    line.Add(i);
+            if (line.Count != 0)
+            {
+                int randomLine = (int)line[Random.Range(0, line.Count)];
+                int randomIndex = Random.Range(0, EnemyController.GetInstance().grids[randomLine + 2].childCount);
+                enemyMonsterCard = EnemyController.GetInstance().grids[randomLine + 2].GetChild(randomIndex);
+            }
+        }
+
         for (int i = 2; i < 5; i++)
         {
             for (int ii = PlayerController.GetInstance().grids[i].childCount - 1; ii >= 0; ii--)
@@ -121,13 +150,6 @@ public class GameController : Singleton<GameController> {
             }
         }
 
-        PlayerController.GetInstance().grids[5].gameObject.SetActive(false);
-        PlayerController.GetInstance().grids[5].gameObject.SetActive(true);
-        EnemyController.GetInstance().grids[5].gameObject.SetActive(false);
-        EnemyController.GetInstance().grids[5].gameObject.SetActive(true);
-
-        PowerController.GetInstance().Number();
-
         switch (gameBehavior)
         {
             case GameBehavior.win:
@@ -148,6 +170,20 @@ public class GameController : Singleton<GameController> {
         }
         if (EnemyController.GetInstance().group == Global.Group.northern && gameBehavior == GameBehavior.lose)
             EnemyController.GetInstance().DrawCards(1);
+        if (PlayerController.GetInstance().group == Global.Group.monster && playerMonsterCard != null)
+        {
+            playerMonsterCard.SetTarget(PlayerController.GetInstance().grids[(int)playerMonsterCard.GetComponent<CardProperty>().line + 2]);
+            CoroutineManager.GetInstance().AddTask(TweenMessage.GetInstance().Play("领导牌技能发动\r\n保留一张牌再战场上"));
+        }
+        if (EnemyController.GetInstance().group == Global.Group.monster && enemyMonsterCard != null)
+            enemyMonsterCard.SetTarget(EnemyController.GetInstance().grids[(int)enemyMonsterCard.GetComponent<CardProperty>().line + 2]);
+
+        PlayerController.GetInstance().grids[5].gameObject.SetActive(false);
+        PlayerController.GetInstance().grids[5].gameObject.SetActive(true);
+        EnemyController.GetInstance().grids[5].gameObject.SetActive(false);
+        EnemyController.GetInstance().grids[5].gameObject.SetActive(true);
+
+        PowerController.GetInstance().Number();
 
         offensive = !offensive;
         if (offensive)
