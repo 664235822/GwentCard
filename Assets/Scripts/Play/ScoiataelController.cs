@@ -13,7 +13,7 @@ public class ScoiataelController : MonoBehaviour {
         else
             button.isEnabled = false;
 
-        OnValueChange();
+        GameController.GetInstance().offensive = true;
     }
 
     private void Awake()
