@@ -17,9 +17,12 @@ public class GameController : Singleton<GameController> {
         PlayerController.GetInstance().Initialize(playerGroup);
         EnemyController.GetInstance().Initialize();
 
-        int random = Random.Range(0, 2);
-        if (random == 0) offensive = true;
-        else offensive = false;
+        if (PlayerController.GetInstance().group != Global.Group.scoiatael)
+        { 
+            int random = Random.Range(0, 2);
+            if (random == 0) offensive = true;
+            else offensive = false;
+        }
 
         if (offensive)
             CoroutineManager.GetInstance().AddTask(TweenMessage.GetInstance().Play("你先手"));

@@ -2894,7 +2894,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 712bcf0ecb23d7f4181dba72bb2f60bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  behaviour: 1
+  behavior: 0
   grid: {fileID: 554622357}
 --- !u!65 &444981331
 BoxCollider:
@@ -3282,6 +3282,112 @@ MonoBehaviour:
   mMaxLineHeight: 0
   mLineWidth: 0
   mMultiline: 1
+--- !u!1001 &548460653
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 843698543}
+    m_Modifications:
+    - target: {fileID: 11400000, guid: 004eb8234dcbc3f4bb49009e57a6ed44, type: 2}
+      propertyPath: items.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: 004eb8234dcbc3f4bb49009e57a6ed44, type: 2}
+      propertyPath: onChange.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 400002, guid: 004eb8234dcbc3f4bb49009e57a6ed44, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: -110
+      objectReference: {fileID: 0}
+    - target: {fileID: 400002, guid: 004eb8234dcbc3f4bb49009e57a6ed44, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 215
+      objectReference: {fileID: 0}
+    - target: {fileID: 400002, guid: 004eb8234dcbc3f4bb49009e57a6ed44, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400002, guid: 004eb8234dcbc3f4bb49009e57a6ed44, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400002, guid: 004eb8234dcbc3f4bb49009e57a6ed44, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400002, guid: 004eb8234dcbc3f4bb49009e57a6ed44, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400002, guid: 004eb8234dcbc3f4bb49009e57a6ed44, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 400002, guid: 004eb8234dcbc3f4bb49009e57a6ed44, type: 2}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 400002, guid: 004eb8234dcbc3f4bb49009e57a6ed44, type: 2}
+      propertyPath: m_LocalScale.x
+      value: 1.001001
+      objectReference: {fileID: 0}
+    - target: {fileID: 400002, guid: 004eb8234dcbc3f4bb49009e57a6ed44, type: 2}
+      propertyPath: m_LocalScale.y
+      value: 1.001001
+      objectReference: {fileID: 0}
+    - target: {fileID: 400002, guid: 004eb8234dcbc3f4bb49009e57a6ed44, type: 2}
+      propertyPath: m_LocalScale.z
+      value: 1.001001
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400004, guid: 004eb8234dcbc3f4bb49009e57a6ed44, type: 2}
+      propertyPath: mTrueTypeFont
+      value: 
+      objectReference: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    - target: {fileID: 11400004, guid: 004eb8234dcbc3f4bb49009e57a6ed44, type: 2}
+      propertyPath: mFont
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400004, guid: 004eb8234dcbc3f4bb49009e57a6ed44, type: 2}
+      propertyPath: mText
+      value: "\u968F\u673A"
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: 004eb8234dcbc3f4bb49009e57a6ed44, type: 2}
+      propertyPath: items.Array.data[0]
+      value: "\u5148\u624B"
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: 004eb8234dcbc3f4bb49009e57a6ed44, type: 2}
+      propertyPath: mSelectedItem
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: 004eb8234dcbc3f4bb49009e57a6ed44, type: 2}
+      propertyPath: items.Array.data[1]
+      value: "\u540E\u624B"
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: 004eb8234dcbc3f4bb49009e57a6ed44, type: 2}
+      propertyPath: items.Array.data[2]
+      value: Third Option
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: 004eb8234dcbc3f4bb49009e57a6ed44, type: 2}
+      propertyPath: onChange.Array.data[1].mTarget
+      value: 
+      objectReference: {fileID: 1306054723}
+    - target: {fileID: 11400000, guid: 004eb8234dcbc3f4bb49009e57a6ed44, type: 2}
+      propertyPath: onChange.Array.data[1].mMethodName
+      value: PopupListChange
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: 004eb8234dcbc3f4bb49009e57a6ed44, type: 2}
+      propertyPath: bitmapFont
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: 004eb8234dcbc3f4bb49009e57a6ed44, type: 2}
+      propertyPath: trueTypeFont
+      value: 
+      objectReference: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 004eb8234dcbc3f4bb49009e57a6ed44, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1 &554622356
 GameObject:
   m_ObjectHideFlags: 0
@@ -3414,7 +3520,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 712bcf0ecb23d7f4181dba72bb2f60bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  behaviour: 1
+  behavior: 0
   grid: {fileID: 740401577}
 --- !u!65 &588277605
 BoxCollider:
@@ -7287,7 +7393,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 712bcf0ecb23d7f4181dba72bb2f60bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  behaviour: 1
+  behavior: 0
   grid: {fileID: 1433508382}
 --- !u!65 &1198946433
 BoxCollider:
@@ -7942,7 +8048,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 712bcf0ecb23d7f4181dba72bb2f60bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  behaviour: 1
+  behavior: 0
   grid: {fileID: 420423685}
 --- !u!65 &1306021063
 BoxCollider:
@@ -8035,6 +8141,21 @@ MonoBehaviour:
   mAtlas: {fileID: 114705400081257296, guid: 78b7fe151f3fe8e4fa32116b9dff2cd1, type: 2}
   mSpriteName: card_effect_spy
   mFillCenter: 1
+--- !u!1 &1306054717 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 100002, guid: 004eb8234dcbc3f4bb49009e57a6ed44, type: 2}
+  m_PrefabInternal: {fileID: 548460653}
+--- !u!114 &1306054723
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1306054717}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8643eba6fa80657478e2dfa93203641e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1308697918
 GameObject:
   m_ObjectHideFlags: 0
@@ -9565,7 +9686,7 @@ Transform:
   m_GameObject: {fileID: 1522447883}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.0010325245, y: 0.0010325245, z: 0.0010325245}
+  m_LocalScale: {x: 0.0018518518, y: 0.0018518518, z: 0.0018518518}
   m_Children:
   - {fileID: 800891161}
   - {fileID: 1531042215}
@@ -9963,7 +10084,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 712bcf0ecb23d7f4181dba72bb2f60bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  behaviour: 1
+  behavior: 0
   grid: {fileID: 2115584301}
 --- !u!65 &1578243838
 BoxCollider:
@@ -10434,7 +10555,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 712bcf0ecb23d7f4181dba72bb2f60bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  behaviour: 1
+  behavior: 0
   grid: {fileID: 710089526}
 --- !u!65 &1681423498
 BoxCollider:
@@ -10570,7 +10691,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 712bcf0ecb23d7f4181dba72bb2f60bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  behaviour: 1
+  behavior: 0
   grid: {fileID: 1115554523}
 --- !u!65 &1694860988
 BoxCollider:
@@ -11782,7 +11903,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 712bcf0ecb23d7f4181dba72bb2f60bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  behaviour: 1
+  behavior: 0
   grid: {fileID: 353921879}
 --- !u!65 &1857504920
 BoxCollider:
@@ -13478,7 +13599,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 712bcf0ecb23d7f4181dba72bb2f60bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  behaviour: 0
+  behavior: 0
   grid: {fileID: 600705352}
 --- !u!1001 &2091140185
 Prefab:
