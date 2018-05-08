@@ -12,7 +12,9 @@ public class ScoiataelController : MonoBehaviour {
             button.isEnabled = true;
         else
             button.isEnabled = false;
-	}
+
+        OnValueChange();
+    }
 
     private void Awake()
     {
@@ -20,13 +22,11 @@ public class ScoiataelController : MonoBehaviour {
         popupList = GetComponent<UIPopupList>();
     }
 
-    public void PopupListChange()
+    public void OnValueChange()
     {
         if (popupList.value == "先手")
             GameController.GetInstance().offensive = true;
         else
             GameController.GetInstance().offensive = false;
-
-        CoroutineManager.GetInstance().AddTask(TweenMessage.GetInstance().Play("领导牌技能发动\r\n可选择先手后手"));
     }
 }

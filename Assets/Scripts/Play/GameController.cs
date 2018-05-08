@@ -7,7 +7,7 @@ public class GameController : Singleton<GameController> {
     public GameObject cardPerfab;
     [SerializeField] TweenAlpha[] player_life_gem;
     [SerializeField] TweenAlpha[] enemy_life_gem;
-    [HideInInspector] public bool offensive;
+    [HideInInspector] public bool offensive = true;
     enum GameBehavior { win, lose, dogfall }
     int player_fail = 0;
     int enemy_fail = 0;
@@ -17,8 +17,10 @@ public class GameController : Singleton<GameController> {
         PlayerController.GetInstance().Initialize(playerGroup);
         EnemyController.GetInstance().Initialize();
 
-        if (PlayerController.GetInstance().group != Global.Group.scoiatael)
-        { 
+        if (PlayerController.GetInstance().group == Global.Group.scoiatael)
+            CoroutineManager.GetInstance().AddTask(TweenMessage.GetInstance().Play("领导牌技能发动\r\n可选择先手后手"));
+        else
+        {
             int random = Random.Range(0, 2);
             if (random == 0) offensive = true;
             else offensive = false;

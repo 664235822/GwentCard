@@ -3351,7 +3351,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11400004, guid: 004eb8234dcbc3f4bb49009e57a6ed44, type: 2}
       propertyPath: mText
-      value: "\u968F\u673A"
+      value: "\u5148\u624B"
       objectReference: {fileID: 0}
     - target: {fileID: 11400000, guid: 004eb8234dcbc3f4bb49009e57a6ed44, type: 2}
       propertyPath: items.Array.data[0]
@@ -3375,7 +3375,7 @@ Prefab:
       objectReference: {fileID: 1306054723}
     - target: {fileID: 11400000, guid: 004eb8234dcbc3f4bb49009e57a6ed44, type: 2}
       propertyPath: onChange.Array.data[1].mMethodName
-      value: PopupListChange
+      value: OnValueChange
       objectReference: {fileID: 0}
     - target: {fileID: 11400000, guid: 004eb8234dcbc3f4bb49009e57a6ed44, type: 2}
       propertyPath: bitmapFont
@@ -9686,7 +9686,7 @@ Transform:
   m_GameObject: {fileID: 1522447883}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.0018518518, y: 0.0018518518, z: 0.0018518518}
+  m_LocalScale: {x: 0.00095011876, y: 0.00095011876, z: 0.00095011876}
   m_Children:
   - {fileID: 800891161}
   - {fileID: 1531042215}
