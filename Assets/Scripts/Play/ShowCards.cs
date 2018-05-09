@@ -62,12 +62,7 @@ public class ShowCards : Singleton<ShowCards> {
                 popupList.gameObject.SetActive(true);
                 popupList.items.Remove("攻城");
                 OKButton.gameObject.SetActive(true);
-                EventDelegate.Add(OKButton.onClick, delegate
-                {
-                    card.SetTarget(PlayerController.GetInstance().grids[(int)totalLine + 2]);
-                    Hide();
-                    PlayerController.GetInstance().PlayOver(card);
-                });
+                EventDelegate.Add(OKButton.onClick, () => AgileController.GetInstance().Agile());
                 break;
             default:
                 totalGrid = showGrid;
