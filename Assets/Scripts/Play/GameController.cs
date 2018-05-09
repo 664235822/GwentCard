@@ -12,11 +12,15 @@ public class GameController : Singleton<GameController> {
     int player_fail = 0;
     int enemy_fail = 0;
 
-    public void StartGame(string playerGroup)
+    public void Initialize(string playerGroup)
     {
         PlayerController.GetInstance().Initialize(playerGroup);
         EnemyController.GetInstance().Initialize();
+        ReplaceController.GetInstance().Show(false);
+    }
 
+    public void StartGame()
+    {
         if (PlayerController.GetInstance().group == Global.Group.scoiatael)
             CoroutineManager.GetInstance().AddTask(TweenMessage.GetInstance().Play("领导牌技能发动\r\n可选择先手后手"));
         else
