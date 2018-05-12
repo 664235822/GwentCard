@@ -1,6 +1,6 @@
 //-------------------------------------------------
 //            NGUI: Next-Gen UI kit
-// Copyright © 2011-2017 Tasharen Entertainment Inc
+// Copyright © 2011-2018 Tasharen Entertainment Inc
 //-------------------------------------------------
 
 using UnityEngine;
@@ -13,7 +13,7 @@ using UnityEngine;
 [AddComponentMenu("NGUI/Interaction/Button Color")]
 public class UIButtonColor : UIWidgetContainer
 {
-	public enum State
+	[DoNotObfuscateNGUI] public enum State
 	{
 		Normal,
 		Hover,

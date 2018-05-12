@@ -1,6 +1,6 @@
 //-------------------------------------------------
 //            NGUI: Next-Gen UI kit
-// Copyright © 2011-2017 Tasharen Entertainment Inc
+// Copyright © 2011-2018 Tasharen Entertainment Inc
 //-------------------------------------------------
 
 using UnityEngine;
@@ -105,17 +105,24 @@ public class UIAtlasMaker : EditorWindow
 
 	List<Texture> GetSelectedTextures ()
 	{
-		List<Texture> textures = new List<Texture>();
+		var textures = new List<Texture>();
+		var names = new List<string>();
 
 		if (Selection.objects != null && Selection.objects.Length > 0)
 		{
-			Object[] objects = EditorUtility.CollectDependencies(Selection.objects);
+			var objects = Selection.GetFiltered(typeof(Texture), SelectionMode.DeepAssets);
 
 			foreach (Object o in objects)
 			{
-				Texture tex = o as Texture;
+				var tex = o as Texture;
 				if (tex == null || tex.name == "Font Texture") continue;
-				if (NGUISettings.atlas == null || NGUISettings.atlas.texture != tex) textures.Add(tex);
+				if (names.Contains(tex.name)) continue;
+
+				if (NGUISettings.atlas == null || NGUISettings.atlas.texture != tex)
+				{
+					names.Add(tex.name);
+					textures.Add(tex);
+				}
 			}
 		}
 		return textures;
@@ -988,7 +995,7 @@ public class UIAtlasMaker : EditorWindow
 					GUILayout.Space(-1f);
 					bool highlight = (UIAtlasInspector.instance != null) && (NGUISettings.selectedSprite == iter.Key);
 					GUI.backgroundColor = highlight ? Color.white : new Color(0.8f, 0.8f, 0.8f);
-					GUILayout.BeginHorizontal("AS TextArea", GUILayout.MinHeight(20f));
+					GUILayout.BeginHorizontal(NGUIEditorTools.textArea, GUILayout.MinHeight(20f));
 					GUI.backgroundColor = Color.white;
 					GUILayout.Label(index.ToString(), GUILayout.Width(24f));
 

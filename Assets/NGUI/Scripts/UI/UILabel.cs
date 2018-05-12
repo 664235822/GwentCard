@@ -1,6 +1,6 @@
 //-------------------------------------------------
 //            NGUI: Next-Gen UI kit
-// Copyright © 2011-2017 Tasharen Entertainment Inc
+// Copyright © 2011-2018 Tasharen Entertainment Inc
 //-------------------------------------------------
 
 using UnityEngine;
@@ -12,7 +12,7 @@ using Alignment = NGUIText.Alignment;
 [AddComponentMenu("NGUI/UI/NGUI Label")]
 public class UILabel : UIWidget
 {
-	public enum Effect
+	[DoNotObfuscateNGUI] public enum Effect
 	{
 		None,
 		Shadow,
@@ -20,7 +20,7 @@ public class UILabel : UIWidget
 		Outline8,
 	}
 
-	public enum Overflow
+	[DoNotObfuscateNGUI] public enum Overflow
 	{
 		ShrinkContent,
 		ClampContent,
@@ -28,14 +28,14 @@ public class UILabel : UIWidget
 		ResizeHeight,
 	}
 
-	public enum Crispness
+	[DoNotObfuscateNGUI] public enum Crispness
 	{
 		Never,
 		OnDesktop,
 		Always,
 	}
 
-	public enum Modifier
+	[DoNotObfuscateNGUI] public enum Modifier
 	{
 		None,
 		ToUppercase,
@@ -76,6 +76,7 @@ public class UILabel : UIWidget
 	[HideInInspector][SerializeField] float mFloatSpacingY = 0;
 	[HideInInspector][SerializeField] bool mOverflowEllipsis = false;
 	[HideInInspector][SerializeField] int mOverflowWidth = 0;
+	[HideInInspector] [SerializeField] int mOverflowHeight = 0;
 	[HideInInspector][SerializeField] Modifier mModifier = Modifier.None;
 
 	// Obsolete values
@@ -105,7 +106,7 @@ public class UILabel : UIWidget
 		get
 		{
 			if (trueTypeFont) return Mathf.RoundToInt(mScale * mFinalFontSize);
-			return Mathf.RoundToInt(mFinalFontSize * mScale);
+			return Mathf.RoundToInt(mFontSize * mScale);
 		}
 	}
 
@@ -282,6 +283,7 @@ public class UILabel : UIWidget
 					mText = "";
 					MarkAsChanged();
 					ProcessAndRequest();
+					if (autoResizeBoxCollider) ResizeCollider();
 				}
 			}
 			else if (mText != value)
@@ -289,9 +291,9 @@ public class UILabel : UIWidget
 				mText = value;
 				MarkAsChanged();
 				ProcessAndRequest();
-			}
 
-			if (autoResizeBoxCollider) ResizeCollider();
+				if (autoResizeBoxCollider) ResizeCollider();
+			}
 		}
 	}
 
@@ -585,9 +587,34 @@ public class UILabel : UIWidget
 		}
 		set
 		{
+			if (value < 0) value = 0;
+
 			if (mOverflowWidth != value)
 			{
 				mOverflowWidth = value;
+				MarkAsChanged();
+			}
+		}
+	}
+
+	/// <summary>
+	/// Maximum height used when Resize Freely overflow type is enabled.
+	/// If the printed text exceeds this height, it will reduce the font size.
+	/// </summary>
+
+	public int overflowHeight
+	{
+		get
+		{
+			return mOverflowHeight;
+		}
+		set
+		{
+			if (value < 0) value = 0;
+
+			if (mOverflowHeight != value)
+			{
+				mOverflowHeight = value;
 				MarkAsChanged();
 			}
 		}
@@ -1379,17 +1406,29 @@ public class UILabel : UIWidget
 
 		if (mOverflow == Overflow.ResizeFreely)
 		{
-			NGUIText.rectWidth = 1000000;
-			NGUIText.regionWidth = 1000000;
-
 			if (mOverflowWidth > 0)
 			{
-				NGUIText.rectWidth = Mathf.Min(NGUIText.rectWidth, mOverflowWidth);
-				NGUIText.regionWidth = Mathf.Min(NGUIText.regionWidth, mOverflowWidth);
+				NGUIText.rectWidth = mOverflowWidth;
+				NGUIText.regionWidth = mOverflowWidth;
+			}
+			else
+			{
+				NGUIText.rectWidth = 1000000;
+				NGUIText.regionWidth = 1000000;
+			}
+
+			if (mOverflowHeight > 0)
+			{
+				NGUIText.rectHeight = mOverflowHeight;
+				NGUIText.regionHeight = mOverflowHeight;
+			}
+			else
+			{
+				NGUIText.rectHeight = 1000000;
+				NGUIText.regionHeight = 1000000;
 			}
 		}
-
-		if (mOverflow == Overflow.ResizeFreely || mOverflow == Overflow.ResizeHeight)
+		else if (mOverflow == Overflow.ResizeFreely || mOverflow == Overflow.ResizeHeight)
 		{
 			NGUIText.rectHeight = 1000000;
 			NGUIText.regionHeight = 1000000;
@@ -1426,6 +1465,12 @@ public class UILabel : UIWidget
 				else if (mOverflow == Overflow.ResizeFreely)
 				{
 					mCalculatedSize = NGUIText.CalculatePrintedSize(mProcessedText);
+
+					if (!fits && mOverflowWidth > 0)
+					{
+						if (--ps > 1) continue;
+						else break;
+					}
 
 					int w = Mathf.Max(minWidth, Mathf.RoundToInt(mCalculatedSize.x));
 					if (regionX != 1f) w = Mathf.RoundToInt(w / regionX);
@@ -1944,6 +1989,10 @@ public class UILabel : UIWidget
 				}
 			}
 		}
+
+		if (NGUIText.symbolStyle == NGUIText.SymbolStyle.NoOutline)
+			for (int i = 0, imax = cols.Count; i < imax; i++)
+				if (cols[i].r == -1f) cols[i] = Color.white;
 
 		if (onPostFill != null)
 			onPostFill(this, offset, verts, uvs, cols);

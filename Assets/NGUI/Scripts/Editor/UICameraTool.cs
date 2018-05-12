@@ -1,6 +1,6 @@
 ﻿//-------------------------------------------------
 //            NGUI: Next-Gen UI kit
-// Copyright © 2011-2017 Tasharen Entertainment Inc
+// Copyright © 2011-2018 Tasharen Entertainment Inc
 //-------------------------------------------------
 
 using UnityEditor;
@@ -184,7 +184,7 @@ public class UICameraTool : EditorWindow
 		if (cam != null)
 		{
 			GUI.backgroundColor = highlight ? Color.white : new Color(0.8f, 0.8f, 0.8f);
-			GUILayout.BeginHorizontal("AS TextArea", GUILayout.MinHeight(20f));
+			GUILayout.BeginHorizontal(NGUIEditorTools.textArea, GUILayout.MinHeight(20f));
 			GUI.backgroundColor = Color.white;
 		}
 		else
@@ -201,7 +201,7 @@ public class UICameraTool : EditorWindow
 			if (enabled != EditorGUILayout.Toggle(enabled, GUILayout.Width(20f)))
 			{
 				cam.enabled = !enabled;
-				EditorUtility.SetDirty(cam.gameObject);
+				NGUITools.SetDirty(cam.gameObject);
 			}
 		}
 		else
@@ -234,7 +234,7 @@ public class UICameraTool : EditorWindow
 		if (GUILayout.Button(camName, EditorStyles.label, GUILayout.MinWidth(100f)) && cam != null)
 		{
 			Selection.activeGameObject = cam.gameObject;
-			EditorUtility.SetDirty(cam.gameObject);
+			NGUITools.SetDirty(cam.gameObject);
 		}
 		GUILayout.Label(camLayer, GUILayout.Width(70f));
 

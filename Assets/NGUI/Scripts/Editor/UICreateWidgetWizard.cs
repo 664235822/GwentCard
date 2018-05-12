@@ -1,6 +1,6 @@
 //-------------------------------------------------
 //            NGUI: Next-Gen UI kit
-// Copyright © 2011-2017 Tasharen Entertainment Inc
+// Copyright © 2011-2018 Tasharen Entertainment Inc
 //-------------------------------------------------
 
 #if !UNITY_3_5 && !UNITY_FLASH
@@ -17,7 +17,7 @@ using System.Collections.Generic;
 
 public class UICreateWidgetWizard : EditorWindow
 {
-	public enum WidgetType
+	[DoNotObfuscateNGUI] public enum WidgetType
 	{
 		Label,
 		Sprite,

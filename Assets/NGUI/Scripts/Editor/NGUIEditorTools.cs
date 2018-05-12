@@ -1,6 +1,6 @@
 //-------------------------------------------------
 //            NGUI: Next-Gen UI kit
-// Copyright © 2011-2017 Tasharen Entertainment Inc
+// Copyright © 2011-2018 Tasharen Entertainment Inc
 //-------------------------------------------------
 
 using UnityEditor;
@@ -441,7 +441,7 @@ static public class NGUIEditorTools
 		TextureImporterSettings settings = new TextureImporterSettings();
 		ti.ReadTextureSettings(settings);
 
-		if (force || !settings.readable || settings.npotScale != TextureImporterNPOTScale.None || settings.alphaIsTransparency)
+		if (force || !settings.readable || settings.npotScale != TextureImporterNPOTScale.None)
 		{
 			settings.readable = true;
 #if !UNITY_4_7 && !UNITY_5_3 && !UNITY_5_4
@@ -454,7 +454,6 @@ static public class NGUIEditorTools
 			if (NGUISettings.trueColorAtlas) settings.textureFormat = TextureImporterFormat.AutomaticTruecolor;
 #endif
 			settings.npotScale = TextureImporterNPOTScale.None;
-			settings.alphaIsTransparency = false;
 			ti.SetTextureSettings(settings);
 			AssetDatabase.ImportAsset(path, ImportAssetOptions.ForceUpdate | ImportAssetOptions.ForceSynchronousImport);
 		}
@@ -1270,7 +1269,7 @@ static public class NGUIEditorTools
 			{
 				NGUIEditorTools.RegisterUndo("Uniform scaling fix", t);
 				t.localScale = Vector3.one;
-				EditorUtility.SetDirty(t);
+				NGUITools.SetDirty(t);
 			}
 			t = t.parent;
 		}
@@ -1349,6 +1348,12 @@ static public class NGUIEditorTools
 
 	static bool mEndHorizontal = false;
 
+#if UNITY_4_7 || UNITY_5_5 || UNITY_5_6
+	static public string textArea = "AS TextArea";
+#else
+	static public string textArea = "TextArea";
+#endif
+
 	/// <summary>
 	/// Begin drawing the content area.
 	/// </summary>
@@ -1359,7 +1364,7 @@ static public class NGUIEditorTools
 		{
 			mEndHorizontal = true;
 			GUILayout.BeginHorizontal();
-			EditorGUILayout.BeginHorizontal("AS TextArea", GUILayout.MinHeight(10f));
+			EditorGUILayout.BeginHorizontal(textArea, GUILayout.MinHeight(10f));
 		}
 		else
 		{
@@ -1752,7 +1757,7 @@ static public class NGUIEditorTools
 			foreach (Object obj in objects)
 			{
 				if (obj == null) continue;
-				EditorUtility.SetDirty(obj);
+				NGUITools.SetDirty(obj);
 			}
 		}
 	}
@@ -2037,9 +2042,18 @@ static public class NGUIEditorTools
 	static public Object GUIDToObject (string guid)
 	{
 		if (string.IsNullOrEmpty(guid)) return null;
-		
+
 		if (s_GetInstanceIDFromGUID == null)
-			s_GetInstanceIDFromGUID = typeof(AssetDatabase).GetMethod("GetInstanceIDFromGUID", BindingFlags.Static | BindingFlags.NonPublic);
+		{
+			var type = typeof(AssetDatabase);
+
+			// Unity 3, 4, 5 and 2017
+			s_GetInstanceIDFromGUID = type.GetMethod("GetInstanceIDFromGUID", BindingFlags.Static | BindingFlags.NonPublic);
+
+			// Unity 2018+
+			if (s_GetInstanceIDFromGUID == null) s_GetInstanceIDFromGUID = type.GetMethod("GetMainAssetInstanceID", BindingFlags.Static | BindingFlags.NonPublic);
+			if (s_GetInstanceIDFromGUID == null) return null;
+		}
 
 		int id = (int)s_GetInstanceIDFromGUID.Invoke(null, new object[] { guid });
 		if (id != 0) return EditorUtility.InstanceIDToObject(id);

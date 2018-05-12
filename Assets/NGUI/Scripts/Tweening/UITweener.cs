@@ -1,6 +1,6 @@
 //-------------------------------------------------
 //            NGUI: Next-Gen UI kit
-// Copyright © 2011-2017 Tasharen Entertainment Inc
+// Copyright © 2011-2018 Tasharen Entertainment Inc
 //-------------------------------------------------
 
 using UnityEngine;
@@ -19,7 +19,7 @@ public abstract class UITweener : MonoBehaviour
 
 	static public UITweener current;
 
-	public enum Method
+	[DoNotObfuscateNGUI] public enum Method
 	{
 		Linear,
 		EaseIn,
@@ -29,7 +29,7 @@ public abstract class UITweener : MonoBehaviour
 		BounceOut,
 	}
 
-	public enum Style
+	[DoNotObfuscateNGUI] public enum Style
 	{
 		Once,
 		Loop,
@@ -105,6 +105,12 @@ public abstract class UITweener : MonoBehaviour
 	// Deprecated functionality, kept for backwards compatibility
 	[HideInInspector] public GameObject eventReceiver;
 	[HideInInspector] public string callWhenFinished;
+
+	/// <summary>
+	/// Custom time scale for this tween, if desired. Can be used to slow down or speed up the animation.
+	/// </summary>
+
+	[System.NonSerialized] public float timeScale = 1f;
 
 	bool mStarted = false;
 	float mStartTime = 0f;
@@ -183,7 +189,7 @@ public abstract class UITweener : MonoBehaviour
 		if (time < mStartTime) return;
 
 		// Advance the sampling factor
-		mFactor += (duration == 0f) ? 1f : amountPerDelta * delta;
+		mFactor += (duration == 0f) ? 1f : amountPerDelta * delta * timeScale;
 
 		// Loop style simply resets the play factor after it exceeds 1.
 		if (style == Style.Loop)

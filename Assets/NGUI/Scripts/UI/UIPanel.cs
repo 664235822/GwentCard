@@ -1,6 +1,6 @@
 //-------------------------------------------------
 //            NGUI: Next-Gen UI kit
-// Copyright © 2011-2017 Tasharen Entertainment Inc
+// Copyright © 2011-2018 Tasharen Entertainment Inc
 //-------------------------------------------------
 
 using UnityEngine;
@@ -20,7 +20,7 @@ public class UIPanel : UIRect
 
 	static public List<UIPanel> list = new List<UIPanel>();
 
-	public enum RenderQueue
+	[DoNotObfuscateNGUI] public enum RenderQueue
 	{
 		Automatic,
 		StartAt,
@@ -600,7 +600,16 @@ public class UIPanel : UIRect
 			{
 				return new Vector4(mClipRange.x + mClipOffset.x, mClipRange.y + mClipOffset.y, size.x, size.y);
 			}
-			return new Vector4(0f, 0f, size.x, size.y);
+			else
+			{
+				var v = new Vector4(0f, 0f, size.x, size.y);
+				var offset = anchorCamera.WorldToScreenPoint(cachedTransform.position);
+				offset.x -= size.x * 0.5f;
+				offset.y -= size.y * 0.5f;
+				v.x -= offset.x;
+				v.y -= offset.y;
+				return v;
+			}
 		}
 	}
 
@@ -1946,6 +1955,11 @@ public class UIPanel : UIRect
 	{
 		if (anchorCamera == null) return;
 
+#if UNITY_4_3 || UNITY_4_5 || UNITY_4_6 || UNITY_4_7
+		if (!mCam.isOrthoGraphic) return;
+#else
+		if (!mCam.orthographic) return;
+#endif
 		bool clip = (mClipping != UIDrawCall.Clipping.None);
 		Transform t = clip ? transform : mCam.transform;
 
@@ -1962,11 +1976,7 @@ public class UIPanel : UIRect
 
 		Gizmos.matrix = t.localToWorldMatrix;
 
-#if UNITY_4_3 || UNITY_4_5 || UNITY_4_6 || UNITY_4_7
-		if (isUsingThisPanel && !clip && mCam.isOrthoGraphic)
-#else
-		if (isUsingThisPanel && !clip && mCam.orthographic)
-#endif
+		if (isUsingThisPanel && !clip)
 		{
 			UIRoot rt = root;
 
@@ -1992,18 +2002,16 @@ public class UIPanel : UIRect
 				Gizmos.DrawWireCube(szPos, szSize);
 			}
 		}
+
 		Gizmos.color = (isUsingThisPanel && !detailedClipped) ? new Color(1f, 0f, 0.5f) : new Color(0.5f, 0f, 0.5f);
 		Gizmos.DrawWireCube(pos, size);
 
-		if (detailedView)
+		if (detailedView && detailedClipped)
 		{
-			if (detailedClipped)
-			{
-				Gizmos.color = new Color(1f, 0f, 0.5f);
-				size.x -= mClipSoftness.x * 2f;
-				size.y -= mClipSoftness.y * 2f;
-				Gizmos.DrawWireCube(pos, size);
-			}
+			Gizmos.color = new Color(1f, 0f, 0.5f);
+			size.x -= mClipSoftness.x * 2f;
+			size.y -= mClipSoftness.y * 2f;
+			Gizmos.DrawWireCube(pos, size);
 		}
 	}
 #endif // UNITY_EDITOR

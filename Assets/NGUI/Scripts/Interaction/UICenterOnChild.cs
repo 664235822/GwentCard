@@ -1,6 +1,6 @@
 //-------------------------------------------------
 //            NGUI: Next-Gen UI kit
-// Copyright © 2011-2017 Tasharen Entertainment Inc
+// Copyright © 2011-2018 Tasharen Entertainment Inc
 //-------------------------------------------------
 
 using UnityEngine;
@@ -82,7 +82,7 @@ public class UICenterOnChild : MonoBehaviour
 				if (mScrollView)
 				{
 					mScrollView.centerOnChild = this;
-					mScrollView.onDragFinished += OnDragFinished;
+					//mScrollView.onDragFinished += OnDragFinished;
 				}
 
 				if (mScrollView.horizontalScrollBar != null)

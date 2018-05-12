@@ -1,6 +1,6 @@
 //-------------------------------------------------
 //            NGUI: Next-Gen UI kit
-// Copyright © 2011-2017 Tasharen Entertainment Inc
+// Copyright © 2011-2018 Tasharen Entertainment Inc
 //-------------------------------------------------
 
 using UnityEngine;
@@ -8,6 +8,8 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
+
+public class DoNotObfuscateNGUI : Attribute { }
 
 /// <summary>
 /// Helper class containing generic functions used throughout the UI library.
@@ -120,7 +122,11 @@ static public class NGUITools
 
 				if (mListener == null)
 				{
-					Camera cam = Camera.main;
+#if W2
+					var cam = MainCamera.instance;
+#else
+					var cam = Camera.main;
+#endif
 					if (cam == null) cam = GameObject.FindObjectOfType(typeof(Camera)) as Camera;
 					if (cam != null) mListener = cam.gameObject.AddComponent<AudioListener>();
 				}
@@ -238,8 +244,11 @@ static public class NGUITools
 			if (cam && (cam.cullingMask & layerMask) != 0)
 				return cam;
 		}
-
+#if W2
+		cam = MainCamera.instance;
+#else
 		cam = Camera.main;
+#endif
 		if (cam && (cam.cullingMask & layerMask) != 0) return cam;
 
 #if UNITY_4_3 || UNITY_FLASH
@@ -361,31 +370,107 @@ static public class NGUITools
 	{
 		if (box != null)
 		{
-			GameObject go = box.gameObject;
-			UIWidget w = go.GetComponent<UIWidget>();
+			var go = box.gameObject;
+			var w = go.GetComponent<UIWidget>();
 
 			if (w != null)
 			{
-				Vector4 dr = w.drawRegion;
+				var dr = w.drawRegion;
 
 				if (dr.x != 0f || dr.y != 0f || dr.z != 1f || dr.w != 1f)
 				{
-					Vector4 region = w.drawingDimensions;
+					var region = w.drawingDimensions;
 					box.center = new Vector3((region.x + region.z) * 0.5f, (region.y + region.w) * 0.5f);
 					box.size = new Vector3(region.z - region.x, region.w - region.y);
 				}
 				else
 				{
-					Vector3[] corners = w.localCorners;
+					var corners = w.localCorners;
 					box.center = Vector3.Lerp(corners[0], corners[2], 0.5f);
 					box.size = corners[2] - corners[0];
 				}
 			}
 			else
 			{
-				Bounds b = NGUIMath.CalculateRelativeWidgetBounds(go.transform, considerInactive);
+				var b = NGUIMath.CalculateRelativeWidgetBounds(go.transform, considerInactive);
 				box.center = b.center;
 				box.size = new Vector3(b.size.x, b.size.y, 0f);
+			}
+#if UNITY_EDITOR
+			NGUITools.SetDirty(box);
+#endif
+		}
+	}
+
+	/// <summary>
+	/// Adjust the widget's collider based on the depth of the widgets, as well as the widget's dimensions.
+	/// </summary>
+
+	static public void UpdateWidgetCollider (UIWidget w)
+	{
+		if (w == null) return;
+		var bc = w.GetComponent<BoxCollider>();
+		if (bc != null) UpdateWidgetCollider(w, bc);
+		else UpdateWidgetCollider(w, w.GetComponent<BoxCollider2D>());
+	}
+
+	/// <summary>
+	/// Adjust the widget's collider based on the depth of the widgets, as well as the widget's dimensions.
+	/// </summary>
+
+	static public void UpdateWidgetCollider (UIWidget w, BoxCollider box)
+	{
+		if (box != null && w != null)
+		{
+			var dr = w.drawRegion;
+
+			if (dr.x != 0f || dr.y != 0f || dr.z != 1f || dr.w != 1f)
+			{
+				var region = w.drawingDimensions;
+				box.center = new Vector3((region.x + region.z) * 0.5f, (region.y + region.w) * 0.5f);
+				box.size = new Vector3(region.z - region.x, region.w - region.y);
+			}
+			else
+			{
+				var corners = w.localCorners;
+				box.center = Vector3.Lerp(corners[0], corners[2], 0.5f);
+				box.size = corners[2] - corners[0];
+			}
+#if UNITY_EDITOR
+			NGUITools.SetDirty(box);
+#endif
+		}
+	}
+
+	// <summary>
+	/// Adjust the widget's collider based on the depth of the widgets, as well as the widget's dimensions.
+	/// </summary>
+
+	static public void UpdateWidgetCollider (UIWidget w, BoxCollider2D box)
+	{
+		if (box != null && w != null)
+		{
+			var dr = w.drawRegion;
+
+			if (dr.x != 0f || dr.y != 0f || dr.z != 1f || dr.w != 1f)
+			{
+				var region = w.drawingDimensions;
+#if UNITY_4_3 || UNITY_4_5 || UNITY_4_6 || UNITY_4_7
+				box.center = new Vector3((region.x + region.z) * 0.5f, (region.y + region.w) * 0.5f);
+#else
+				box.offset = new Vector3((region.x + region.z) * 0.5f, (region.y + region.w) * 0.5f);
+#endif
+				box.size = new Vector3(region.z - region.x, region.w - region.y);
+			}
+			else
+			{
+				var corners = w.localCorners;
+#if UNITY_4_3 || UNITY_4_5 || UNITY_4_6 || UNITY_4_7
+				box.center = Vector3.Lerp(corners[0], corners[2], 0.5f);
+#else
+				box.offset = Vector3.Lerp(corners[0], corners[2], 0.5f);
+#endif
+				box.size = corners[2] - corners[0];
 			}
 #if UNITY_EDITOR
 			NGUITools.SetDirty(box);
@@ -486,16 +571,10 @@ static public class NGUITools
 	/// Convenience function that marks the specified object as dirty in the Unity Editor.
 	/// </summary>
 
-	static public void SetDirty (UnityEngine.Object obj)
+	static public void SetDirty (UnityEngine.Object obj, string undoName = "last change")
 	{
 #if UNITY_EDITOR
-		if (obj)
-		{
-			//if (obj is Component) Debug.Log(NGUITools.GetHierarchy((obj as Component).gameObject), obj);
-			//else if (obj is GameObject) Debug.Log(NGUITools.GetHierarchy(obj as GameObject), obj);
-			//else Debug.Log("Hmm... " + obj.GetType(), obj);
-			UnityEditor.EditorUtility.SetDirty(obj);
-		}
+		if (obj) UnityEditor.EditorUtility.SetDirty(obj);
 #endif
 	}
 
@@ -553,28 +632,52 @@ static public class NGUITools
 
 	static public GameObject AddChild (this GameObject parent, GameObject prefab, int layer)
 	{
-		var go = GameObject.Instantiate(prefab) as GameObject;
+#if UNITY_5_5_OR_NEWER
+		var go = (parent != null) ? UnityEngine.Object.Instantiate(prefab, parent.transform) : UnityEngine.Object.Instantiate(prefab);
 #if UNITY_EDITOR
-		if (!Application.isPlaying)
-			UnityEditor.Undo.RegisterCreatedObjectUndo(go, "Create Object");
+		if (!Application.isPlaying) UnityEditor.Undo.RegisterCreatedObjectUndo(go, "Create Object");
 #endif
 		if (go != null)
 		{
+			var t = go.transform;
 			go.name = prefab.name;
 
 			if (parent != null)
 			{
-				Transform t = go.transform;
-				t.parent = parent.transform;
-				t.localPosition = Vector3.zero;
-				t.localRotation = Quaternion.identity;
-				t.localScale = Vector3.one;
 				if (layer == -1) go.layer = parent.layer;
 				else if (layer > -1 && layer < 32) go.layer = layer;
 			}
+
+			t.localPosition = Vector3.zero;
+			t.localRotation = Quaternion.identity;
+			t.localScale = Vector3.one;
 			go.SetActive(true);
 		}
 		return go;
+#else
+		var go = GameObject.Instantiate(prefab) as GameObject;
+#if UNITY_EDITOR
+		if (!Application.isPlaying) UnityEditor.Undo.RegisterCreatedObjectUndo(go, "Create Object");
+#endif
+		if (go != null)
+		{
+			Transform t = go.transform;
+			go.name = prefab.name;
+
+			if (parent != null)
+			{
+				t.parent = parent.transform;
+				if (layer == -1) go.layer = parent.layer;
+				else if (layer > -1 && layer < 32) go.layer = layer;
+			}
+
+			t.localPosition = Vector3.zero;
+			t.localRotation = Quaternion.identity;
+			t.localScale = Vector3.one;
+			go.SetActive(true);
+		}
+		return go;
+#endif
 	}
 
 	/// <summary>
@@ -2412,5 +2515,26 @@ static public class NGUITools
 		}
 		return c;
 	}
+
+	/// <summary>
+	/// Transforms this color from linear to gamma space, but only if the active color space is actually set to linear.
+	/// </summary>
+
+	static public Color LinearToGammaSpace (this Color c)
+	{
+		if (mColorSpace == ColorSpace.Uninitialized)
+			mColorSpace = QualitySettings.activeColorSpace;
+
+		if (mColorSpace == ColorSpace.Linear)
+		{
+			return new Color(
+				Mathf.LinearToGammaSpace(c.r),
+				Mathf.LinearToGammaSpace(c.g),
+				Mathf.LinearToGammaSpace(c.b),
+				Mathf.LinearToGammaSpace(c.a));
+		}
+		return c;
+	}
+
 	static ColorSpace mColorSpace = ColorSpace.Uninitialized;
 }

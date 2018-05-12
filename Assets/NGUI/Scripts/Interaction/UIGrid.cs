@@ -1,6 +1,6 @@
 //-------------------------------------------------
 //            NGUI: Next-Gen UI kit
-// Copyright © 2011-2017 Tasharen Entertainment Inc
+// Copyright © 2011-2018 Tasharen Entertainment Inc
 //-------------------------------------------------
 
 using UnityEngine;
@@ -16,14 +16,14 @@ public class UIGrid : UIWidgetContainer
 {
 	public delegate void OnReposition ();
 
-	public enum Arrangement
+	[DoNotObfuscateNGUI] public enum Arrangement
 	{
 		Horizontal,
 		Vertical,
 		CellSnap,
 	}
 
-	public enum Sorting
+	[DoNotObfuscateNGUI] public enum Sorting
 	{
 		None,
 		Alphabetic,
@@ -413,10 +413,9 @@ public class UIGrid : UIWidgetContainer
 				fy = Mathf.Lerp(-maxX * cellHeight, 0f, po.y);
 			}
 
-			for (int i = 0; i < myTrans.childCount; ++i)
+			foreach (var t in list)
 			{
-				Transform t = myTrans.GetChild(i);
-				SpringPosition sp = t.GetComponent<SpringPosition>();
+				var sp = t.GetComponent<SpringPosition>();
 
 				if (sp != null)
 				{

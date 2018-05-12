@@ -1,6 +1,6 @@
 //-------------------------------------------------
 //            NGUI: Next-Gen UI kit
-// Copyright © 2011-2017 Tasharen Entertainment Inc
+// Copyright © 2011-2018 Tasharen Entertainment Inc
 //-------------------------------------------------
 
 using UnityEngine;
@@ -42,7 +42,7 @@ using UnityEditor;
 [RequireComponent(typeof(Camera))]
 public class UICamera : MonoBehaviour
 {
-	public enum ControlScheme
+	[DoNotObfuscateNGUI] public enum ControlScheme
 	{
 		Mouse,
 		Touch,
@@ -53,7 +53,7 @@ public class UICamera : MonoBehaviour
 	/// Whether the touch event will be sending out the OnClick notification at the end.
 	/// </summary>
 
-	public enum ClickNotification
+	[DoNotObfuscateNGUI] public enum ClickNotification
 	{
 		None,
 		Always,
@@ -111,7 +111,7 @@ public class UICamera : MonoBehaviour
 	/// Camera type controls how raycasts are handled by the UICamera.
 	/// </summary>
 
-	public enum EventType : int
+	[DoNotObfuscateNGUI] public enum EventType : int
 	{
 		World_3D,	// Perform a Physics.Raycast and sort by distance to the point that was hit.
 		UI_3D,		// Perform a Physics.Raycast and sort by widget depth.
@@ -252,7 +252,7 @@ public class UICamera : MonoBehaviour
 
 	public LayerMask eventReceiverMask = -1;
 
-	public enum ProcessEventsIn
+	[DoNotObfuscateNGUI] public enum ProcessEventsIn
 	{
 		Update,
 		LateUpdate,
@@ -791,7 +791,7 @@ public class UICamera : MonoBehaviour
 	/// Object that should be showing the tooltip.
 	/// </summary>
 
-	static public GameObject tooltipObject { get { return mTooltip; } }
+	static public GameObject tooltipObject { get { return mTooltip; } set { ShowTooltip(value); } }
 
 #if !W2
 	/// <summary>
@@ -830,7 +830,13 @@ public class UICamera : MonoBehaviour
 
 				if (currentTouch != null)
 				{
-					mLastOverResult = currentTouch.isOverUI;
+					if (currentTouch.pressed != null)
+					{
+						mLastOverResult = IsPartOfUI(currentTouch.pressed);
+						return mLastOverResult;
+					}
+
+					mLastOverResult = IsPartOfUI(currentTouch.current);
 					return mLastOverResult;
 				}
 
@@ -849,7 +855,7 @@ public class UICamera : MonoBehaviour
 				{
 					var m = mMouse[i];
 
-					if (IsPartOfUI(m.current))
+					if (IsPartOfUI(m.pressed != null ? m.pressed : m.current))
 					{
 						mLastOverResult = true;
 						return mLastOverResult;
@@ -2010,6 +2016,9 @@ public class UICamera : MonoBehaviour
 	void OnValidate () { Start(); }
 #endif
 
+	[ContextMenu("Start ignoring events")] void StartIgnoring () { ignoreAllEvents = true; }
+	[ContextMenu("Stop ignoring events")] void StopIgnoring () { ignoreAllEvents = false; }
+
 	/// <summary>
 	/// Check the input and send out appropriate events.
 	/// </summary>
@@ -2158,7 +2167,10 @@ public class UICamera : MonoBehaviour
 			currentKey = KeyCode.Mouse0;
 			posChanged = true;
 		}
-		else if (sqrMag > 0.001f) posChanged = true;
+		else if (sqrMag > 0.001f)
+		{
+			posChanged = true;
+		}
 
 		// Propagate the updates to the other mouse buttons
 		for (int i = 1; i < 3; ++i)
@@ -2172,14 +2184,24 @@ public class UICamera : MonoBehaviour
 		{
 			mNextRaycast = RealTime.time + 0.02f;
 			Raycast(currentTouch);
-			for (int i = 0; i < 3; ++i) mMouse[i].current = currentTouch.current;
+
+			if (isPressed)
+			{
+				posChanged = true;
+				for (int i = 0; i < 3; ++i) mMouse[i].current = currentTouch.current;
+			}
+			else if (mMouse[0].current != currentTouch.current)
+			{
+				currentKey = KeyCode.Mouse0;
+				posChanged = true;
+				for (int i = 0; i < 3; ++i) mMouse[i].current = currentTouch.current;
+			}
 		}
 
 		bool highlightChanged = (currentTouch.last != currentTouch.current);
 		bool wasPressed = (currentTouch.pressed != null);
 
-		if (!wasPressed)
-			hoveredObject = currentTouch.current;
+		if (!wasPressed && posChanged) hoveredObject = currentTouch.current;
 
 		currentTouchID = -1;
 		if (highlightChanged) currentKey = KeyCode.Mouse0;
@@ -2229,7 +2251,7 @@ public class UICamera : MonoBehaviour
 				currentTouchID = -1 - i;
 				currentKey = KeyCode.Mouse0 + i;
 			}
-	
+
 			// We don't want to update the last camera while there is a touch happening
 			if (pressed)
 			{
@@ -2237,7 +2259,7 @@ public class UICamera : MonoBehaviour
 				currentTouch.pressTime = RealTime.time;
 			}
 			else if (currentTouch.pressed != null) currentCamera = currentTouch.pressedCam;
-	
+
 			// Process the mouse events
 			ProcessTouch(pressed, unpressed);
 		}

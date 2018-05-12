@@ -1,6 +1,6 @@
 //-------------------------------------------------
 //            NGUI: Next-Gen UI kit
-// Copyright © 2011-2017 Tasharen Entertainment Inc
+// Copyright © 2011-2018 Tasharen Entertainment Inc
 //-------------------------------------------------
 
 using UnityEditor;
@@ -13,7 +13,7 @@ using System.Collections.Generic;
 
 public class UICreateNewUIWizard : EditorWindow
 {
-	public enum CameraType
+	[DoNotObfuscateNGUI] public enum CameraType
 	{
 		None,
 		Simple2D,

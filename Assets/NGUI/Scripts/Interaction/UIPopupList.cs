@@ -1,6 +1,6 @@
 //-------------------------------------------------
 //            NGUI: Next-Gen UI kit
-// Copyright © 2011-2017 Tasharen Entertainment Inc
+// Copyright © 2011-2018 Tasharen Entertainment Inc
 //-------------------------------------------------
 
 using UnityEngine;
@@ -25,14 +25,14 @@ public class UIPopupList : UIWidgetContainer
 
 	const float animSpeed = 0.15f;
 
-	public enum Position
+	[DoNotObfuscateNGUI] public enum Position
 	{
 		Auto,
 		Above,
 		Below,
 	}
 
-	public enum Selection
+	[DoNotObfuscateNGUI] public enum Selection
 	{
 		OnPress,
 		OnClick,
@@ -153,6 +153,12 @@ public class UIPopupList : UIWidgetContainer
 	public List<object> itemData = new List<object>();
 
 	/// <summary>
+	/// You can associate specific callbacks with each entry if you like.
+	/// </summary>
+
+	public List<System.Action> itemCallbacks = new List<System.Action>();
+
+	/// <summary>
 	/// Amount of padding added to labels.
 	/// </summary>
 
@@ -206,7 +212,7 @@ public class UIPopupList : UIWidgetContainer
 	
 	public int overlap = 0;
 
-	public enum OpenOn
+	[DoNotObfuscateNGUI] public enum OpenOn
 	{
 		ClickOrTap,
 		RightClick,
@@ -291,6 +297,19 @@ public class UIPopupList : UIWidgetContainer
 	}
 
 	/// <summary>
+	/// Callback associated with the current selection.
+	/// </summary>
+
+	public System.Action callback
+	{
+		get
+		{
+			int index = items.IndexOf(mSelectedItem);
+			return (index > -1) && index < itemCallbacks.Count ? itemCallbacks[index] : null;
+		}
+	}
+
+	/// <summary>
 	/// Whether the collider is enabled and the widget can be interacted with.
 	/// </summary>
 
@@ -324,6 +343,30 @@ public class UIPopupList : UIWidgetContainer
 	protected float activeFontScale { get { return (trueTypeFont != null || bitmapFont == null) ? 1f : (float)fontSize / bitmapFont.defaultSize; } }
 
 	/// <summary>
+	/// Scale needed to be applied to the popup in order for it to fit on the screen.
+	/// </summary>
+
+	protected float fitScale
+	{
+		get
+		{
+			if (separatePanel)
+			{
+				var height = items.Count * (fontSize + padding.y) + padding.y;
+				var size = NGUITools.screenSize.y;
+				if (height > size) return size / height;
+			}
+			else if (mPanel != null && mPanel.anchorCamera != null && mPanel.anchorCamera.orthographic)
+			{
+				var height = items.Count * (fontSize + padding.y) + padding.y;
+				var size = mPanel.height;
+				if (height > size) return size / height;
+			}
+			return 1f;
+		}
+	}
+
+	/// <summary>
 	/// Set the current selection.
 	/// </summary>
 
@@ -352,6 +395,7 @@ public class UIPopupList : UIWidgetContainer
 	{
 		items.Clear();
 		itemData.Clear();
+		itemCallbacks.Clear();
 	}
 
 	/// <summary>
@@ -362,16 +406,28 @@ public class UIPopupList : UIWidgetContainer
 	{
 		items.Add(text);
 		itemData.Add(text);
+		itemCallbacks.Add(null);
 	}
 
 	/// <summary>
 	/// Add a new item to the popup list.
 	/// </summary>
 
-	public virtual void AddItem (string text, object data)
+	public virtual void AddItem (string text, System.Action del)
+	{
+		items.Add(text);
+		itemCallbacks.Add(del);
+	}
+
+	/// <summary>
+	/// Add a new item to the popup list.
+	/// </summary>
+
+	public virtual void AddItem (string text, object data, System.Action del = null)
 	{
 		items.Add(text);
 		itemData.Add(data);
+		itemCallbacks.Add(del);
 	}
 
 	/// <summary>
@@ -386,6 +442,7 @@ public class UIPopupList : UIWidgetContainer
 		{
 			items.RemoveAt(index);
 			itemData.RemoveAt(index);
+			if (index < itemCallbacks.Count) itemCallbacks.RemoveAt(index);
 		}
 	}
 
@@ -401,6 +458,7 @@ public class UIPopupList : UIWidgetContainer
 		{
 			items.RemoveAt(index);
 			itemData.RemoveAt(index);
+			if (index < itemCallbacks.Count) itemCallbacks.RemoveAt(index);
 		}
 	}
 
@@ -430,6 +488,9 @@ public class UIPopupList : UIWidgetContainer
 				// Legacy functionality support (for backwards compatibility)
 				eventReceiver.SendMessage(functionName, mSelectedItem, SendMessageOptions.DontRequireReceiver);
 			}
+
+			var cb = callback;
+			if (cb != null) cb();
 
 			current = old;
 			mExecuting = false;
@@ -473,7 +534,7 @@ public class UIPopupList : UIWidgetContainer
 		}
 
 		// Auto-upgrade to the true type font
-		if (trueTypeFont == null && bitmapFont != null && bitmapFont.isDynamic)
+		if (trueTypeFont == null && bitmapFont != null && bitmapFont.isDynamic && bitmapFont.replacement == null)
 		{
 			trueTypeFont = bitmapFont.dynamicFont;
 			bitmapFont = null;
@@ -498,18 +559,21 @@ public class UIPopupList : UIWidgetContainer
 		}
 		else if (fnt != null)
 		{
-			// Auto-upgrade from 3.0.2 and earlier
-			if (fnt.isDynamic)
+			if (fnt.replacement == null)
 			{
-				trueTypeFont = fnt.dynamicFont;
-				fontStyle = fnt.dynamicFontStyle;
-				fontSize = fnt.defaultSize;
-				mUseDynamicFont = true;
-			}
-			else
-			{
-				bitmapFont = fnt;
-				mUseDynamicFont = false;
+				// Auto-upgrade from 3.0.2 and earlier
+				if (fnt.isDynamic)
+				{
+					trueTypeFont = fnt.dynamicFont;
+					fontStyle = fnt.dynamicFontStyle;
+					fontSize = fnt.defaultSize;
+					mUseDynamicFont = true;
+				}
+				else
+				{
+					bitmapFont = fnt;
+					mUseDynamicFont = false;
+				}
 			}
 		}
 		else
@@ -831,14 +895,15 @@ public class UIPopupList : UIWidgetContainer
 		GameObject go = widget.gameObject;
 		Transform t = widget.cachedTransform;
 
-		float minHeight = activeFontSize * activeFontScale + mBgBorder * 2f;
-		t.localScale = new Vector3(1f, minHeight / widget.height, 1f);
+		var fitScale = this.fitScale;
+		var minHeight = activeFontSize * activeFontScale + mBgBorder * 2f;
+		t.localScale = new Vector3(fitScale, fitScale * minHeight / widget.height, fitScale);
 		TweenScale.Begin(go, animSpeed, Vector3.one).method = UITweener.Method.EaseOut;
 
 		if (placeAbove)
 		{
 			Vector3 pos = t.localPosition;
-			t.localPosition = new Vector3(pos.x, pos.y - widget.height + minHeight, pos.z);
+			t.localPosition = new Vector3(pos.x, pos.y - fitScale * widget.height + fitScale * minHeight, pos.z);
 			TweenPosition.Begin(go, animSpeed, pos).method = UITweener.Method.EaseOut;
 		}
 	}
@@ -952,16 +1017,25 @@ public class UIPopupList : UIWidgetContainer
 					Rigidbody2D rb = mChild.AddComponent<Rigidbody2D>();
 					rb.isKinematic = true;
 				}
-				
+
 				var panel = mChild.AddComponent<UIPanel>();
 				panel.depth = 1000000;
 				panel.sortingOrder = mPanel.sortingOrder;
 			}
+			
 			current = this;
 
-			var pTrans = separatePanel ? ((Component)mPanel.GetComponentInParent<UIRoot>() ?? mPanel).transform : mPanel.cachedTransform;
+			var pTrans = mPanel.cachedTransform;
 			Transform t = mChild.transform;
 			t.parent = pTrans;
+			Transform rootTrans = pTrans;
+
+			if (separatePanel)
+			{
+				var root = mPanel.GetComponentInParent<UIRoot>();
+				if (root == null && UIRoot.list.Count != 0) root = UIRoot.list[0];
+				if (root != null) rootTrans = root.transform;
+			}
 
 			// Manually triggered popup list on some other game object
 			if (openOn == OpenOn.Manual && mSelection != gameObject)
@@ -983,8 +1057,9 @@ public class UIPopupList : UIWidgetContainer
 
 			StartCoroutine("CloseIfUnselected");
 
+			var f = fitScale;
 			t.localRotation = Quaternion.identity;
-			t.localScale = Vector3.one;
+			t.localScale = new Vector3(f, f, f);
 
 			int depth = separatePanel ? 0 : NGUITools.CalculateNextDepth(mPanel.gameObject);
 
@@ -1040,9 +1115,7 @@ public class UIPopupList : UIWidgetContainer
 			mHighlight.pivot = UIWidget.Pivot.TopLeft;
 			mHighlight.color = highlightColor;
 
-			float fontHeight = activeFontSize;
-			float dynScale = activeFontScale;
-			float labelHeight = fontHeight * dynScale;
+			float labelHeight = activeFontSize * activeFontScale;
 			float lineHeight = labelHeight + padding.y;
 			float x = 0f, y = placeAbove ? bgPadding.y - padding.y - overlap : -padding.y - bgPadding.y + overlap;
 			float contentHeight = bgPadding.y * 2f + padding.y;
@@ -1070,6 +1143,7 @@ public class UIPopupList : UIWidgetContainer
 				lbl.cachedTransform.localPosition = new Vector3(bgPadding.x + padding.x - lbl.pivotOffset.x, y, -1f);
 				lbl.overflowMethod = UILabel.Overflow.ResizeFreely;
 				lbl.alignment = alignment;
+				lbl.symbolStyle = NGUIText.SymbolStyle.Colored;
 				labels.Add(lbl);
 
 				contentHeight += lineHeight;
@@ -1166,37 +1240,48 @@ public class UIPopupList : UIWidgetContainer
 			// If we need to place the popup list above the item, we need to reposition everything by the size of the list
 			if (placeAbove)
 			{
-				min.y = max.y - bgPadding.y;
-				max.y = min.y + mBackground.height;
-				max.x = min.x + mBackground.width;
-				t.localPosition = new Vector3(min.x, max.y - bgPadding.y, min.z);
+				var bgY = bgPadding.y * f;
+				min.y = max.y - bgPadding.y * f;
+				max.y = min.y + (mBackground.height - bgPadding.y * 2f) * f;
+				max.x = min.x + mBackground.width * f;
+				t.localPosition = new Vector3(min.x, max.y - bgY, min.z);
 			}
 			else
 			{
-				max.y = min.y + bgPadding.y;
-				min.y = max.y - mBackground.height;
-				max.x = min.x + mBackground.width;
+				max.y = min.y + bgPadding.y * f;
+				min.y = max.y - mBackground.height * f;
+				max.x = min.x + mBackground.width * f;
 			}
 
-			Transform pt = mPanel.cachedTransform.parent;
+			var absoluteParent = mPanel;// UIRoot.list[0].GetComponent<UIPanel>();
 
-			if (pt != null)
+			for (;;)
 			{
-				min = mPanel.cachedTransform.TransformPoint(min);
-				max = mPanel.cachedTransform.TransformPoint(max);
-				min = pt.InverseTransformPoint(min);
-				max = pt.InverseTransformPoint(max);
+				var p = absoluteParent.parent;
+				if (p == null) break;
+				var pp = p.GetComponentInParent<UIPanel>();
+				if (pp == null) break;
+				absoluteParent = pp;
+			}
+
+			if (pTrans != null)
+			{
+				min = pTrans.TransformPoint(min);
+				max = pTrans.TransformPoint(max);
+				min = absoluteParent.cachedTransform.InverseTransformPoint(min);
+				max = absoluteParent.cachedTransform.InverseTransformPoint(max);
 				var adj = UIRoot.GetPixelSizeAdjustment(gameObject);
 				min /= adj;
 				max /= adj;
 			}
 
 			// Ensure that everything fits into the panel's visible range
-			Vector3 offset = mPanel.hasClipping ? Vector3.zero : mPanel.CalculateConstrainOffset(min, max);
-			Vector3 pos = t.localPosition + offset;
+			var offset = absoluteParent.CalculateConstrainOffset(min, max);
+			var pos = t.localPosition + offset;
 			pos.x = Mathf.Round(pos.x);
 			pos.y = Mathf.Round(pos.y);
 			t.localPosition = pos;
+			t.parent = rootTrans;
 		}
 		else OnSelect(false);
 	}

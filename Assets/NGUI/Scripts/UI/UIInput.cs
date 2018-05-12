@@ -1,6 +1,6 @@
 //-------------------------------------------------
 //            NGUI: Next-Gen UI kit
-// Copyright © 2011-2017 Tasharen Entertainment Inc
+// Copyright © 2011-2018 Tasharen Entertainment Inc
 //-------------------------------------------------
 
 #if !UNITY_EDITOR && (UNITY_IPHONE || UNITY_ANDROID || UNITY_WP8 || UNITY_WP_8_1 || UNITY_BLACKBERRY || UNITY_WINRT || UNITY_METRO)
@@ -18,14 +18,14 @@ using System.Text;
 [AddComponentMenu("NGUI/UI/Input Field")]
 public class UIInput : MonoBehaviour
 {
-	public enum InputType
+	[DoNotObfuscateNGUI] public enum InputType
 	{
 		Standard,
 		AutoCorrect,
 		Password,
 	}
 
-	public enum Validation
+	[DoNotObfuscateNGUI] public enum Validation
 	{
 		None,
 		Integer,
@@ -37,7 +37,7 @@ public class UIInput : MonoBehaviour
 	}
 
 #if UNITY_EDITOR
-	public enum KeyboardType
+	[DoNotObfuscateNGUI] public enum KeyboardType
 	{
 		Default = (int)TouchScreenKeyboardType.Default,
 		ASCIICapable = (int)TouchScreenKeyboardType.ASCIICapable,
@@ -49,7 +49,7 @@ public class UIInput : MonoBehaviour
 		EmailAddress = (int)TouchScreenKeyboardType.EmailAddress,
 	}
 #else
-	public enum KeyboardType
+	[DoNotObfuscateNGUI] public enum KeyboardType
 	{
 		Default = 0,
 		ASCIICapable = 1,
@@ -62,7 +62,7 @@ public class UIInput : MonoBehaviour
 	}
 #endif
 
-	public enum OnReturnKey
+	[DoNotObfuscateNGUI] public enum OnReturnKey
 	{
 		Default,
 		Submit,
@@ -1036,7 +1036,11 @@ public class UIInput : MonoBehaviour
 			{
 				ev.Use();
 
-				if (!string.IsNullOrEmpty(mValue))
+				if (onUpArrow != null)
+				{
+					onUpArrow();
+				}
+				else if (!string.IsNullOrEmpty(mValue))
 				{
 					mSelectionEnd = label.GetCharacterIndex(mSelectionEnd, KeyCode.UpArrow);
 					if (mSelectionEnd != 0) mSelectionEnd += mDrawStart;
@@ -1050,7 +1054,11 @@ public class UIInput : MonoBehaviour
 			{
 				ev.Use();
 
-				if (!string.IsNullOrEmpty(mValue))
+				if (onDownArrow != null)
+				{
+					onDownArrow();
+				}
+				else if (!string.IsNullOrEmpty(mValue))
 				{
 					mSelectionEnd = label.GetCharacterIndex(mSelectionEnd, KeyCode.DownArrow);
 					if (mSelectionEnd != label.processedText.Length) mSelectionEnd += mDrawStart;
@@ -1111,6 +1119,9 @@ public class UIInput : MonoBehaviour
 		return false;
 	}
 #endif
+
+	[System.NonSerialized] public System.Action onUpArrow;
+	[System.NonSerialized] public System.Action onDownArrow;
 
 	/// <summary>
 	/// Insert the specified text string into the current input value, respecting selection and validation.

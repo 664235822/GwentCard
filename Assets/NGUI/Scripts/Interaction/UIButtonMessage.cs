@@ -1,6 +1,6 @@
 //-------------------------------------------------
 //            NGUI: Next-Gen UI kit
-// Copyright © 2011-2017 Tasharen Entertainment Inc
+// Copyright © 2011-2018 Tasharen Entertainment Inc
 //-------------------------------------------------
 
 using UnityEngine;
@@ -12,7 +12,7 @@ using UnityEngine;
 [AddComponentMenu("NGUI/Interaction/Button Message (Legacy)")]
 public class UIButtonMessage : MonoBehaviour
 {
-	public enum Trigger
+	[DoNotObfuscateNGUI] public enum Trigger
 	{
 		OnClick,
 		OnMouseOver,

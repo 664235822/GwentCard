@@ -1,6 +1,6 @@
 //-------------------------------------------------
 //            NGUI: Next-Gen UI kit
-// Copyright © 2011-2017 Tasharen Entertainment Inc
+// Copyright © 2011-2018 Tasharen Entertainment Inc
 //-------------------------------------------------
 
 using UnityEngine;
@@ -14,7 +14,7 @@ using System.Collections.Generic;
 [AddComponentMenu("NGUI/Interaction/Drag and Drop Item")]
 public class UIDragDropItem : MonoBehaviour
 {
-	public enum Restriction
+	[DoNotObfuscateNGUI] public enum Restriction
 	{
 		None,
 		Horizontal,
@@ -352,8 +352,7 @@ public class UIDragDropItem : MonoBehaviour
 			mTable = NGUITools.FindInParents<UITable>(mParent);
 
 			// Re-enable the drag scroll view script
-			if (mDragScrollView != null)
-				Invoke("EnableDragScrollView", 0.001f);
+			if (mDragScrollView != null) Invoke("EnableDragScrollView", 0.001f);
 
 			// Notify the widgets that the parent has changed
 			NGUITools.MarkParentAsChanged(gameObject);
@@ -361,11 +360,18 @@ public class UIDragDropItem : MonoBehaviour
 			if (mTable != null) mTable.repositionNow = true;
 			if (mGrid != null) mGrid.repositionNow = true;
 		}
-		else NGUITools.Destroy(gameObject);
 
 		// We're now done
 		OnDragDropEnd();
+
+		if (cloneOnDrag) DestroySelf();
 	}
+
+	/// <summary>
+	/// Called at the end of OnDragDropRelease, indicating that the cloned object should now be destroyed.
+	/// </summary>
+
+	protected virtual void DestroySelf () { NGUITools.Destroy(gameObject); }
 
 	/// <summary>
 	/// Function called when the object gets reparented after the drop operation finishes.

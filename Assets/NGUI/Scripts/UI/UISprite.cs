@@ -1,6 +1,6 @@
 //-------------------------------------------------
 //            NGUI: Next-Gen UI kit
-// Copyright © 2011-2017 Tasharen Entertainment Inc
+// Copyright © 2011-2018 Tasharen Entertainment Inc
 //-------------------------------------------------
 
 using UnityEngine;
@@ -233,6 +233,25 @@ public class UISprite : UIBasicSprite
 			UISpriteData sp = GetAtlasSprite();
 			if (sp == null) return base.border;
 			return new Vector4(sp.borderLeft, sp.borderBottom, sp.borderRight, sp.borderTop);
+		}
+	}
+	/// <summary>
+	/// Trimmed space in the atlas around the sprite. X = left, Y = bottom, Z = right, W = top.
+	/// </summary>
+	protected override Vector4 padding
+	{
+		get
+		{
+			UISpriteData sp = GetAtlasSprite();
+			var p = new Vector4(0, 0, 0, 0);
+			if (sp != null)
+			{
+				p.x = sp.paddingLeft;
+				p.y = sp.paddingBottom;
+				p.z = sp.paddingRight;
+				p.w = sp.paddingTop;
+			}
+			return p;
 		}
 	}
 

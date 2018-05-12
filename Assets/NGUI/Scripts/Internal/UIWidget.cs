@@ -1,6 +1,6 @@
 //-------------------------------------------------
 //            NGUI: Next-Gen UI kit
-// Copyright © 2011-2017 Tasharen Entertainment Inc
+// Copyright © 2011-2018 Tasharen Entertainment Inc
 //-------------------------------------------------
 
 using UnityEngine;
@@ -14,7 +14,7 @@ using System.Collections.Generic;
 [AddComponentMenu("NGUI/UI/NGUI Widget")]
 public class UIWidget : UIRect
 {
-	public enum Pivot
+	[DoNotObfuscateNGUI] public enum Pivot
 	{
 		TopLeft,
 		Top,
@@ -100,7 +100,7 @@ public class UIWidget : UIRect
 
 	public bool hideIfOffScreen = false;
 
-	public enum AspectRatioSource
+	[DoNotObfuscateNGUI] public enum AspectRatioSource
 	{
 		Free,
 		BasedOnWidth,
@@ -303,6 +303,21 @@ public class UIWidget : UIRect
 				mColor = value;
 				Invalidate(alphaChange);
 			}
+		}
+	}
+
+	/// <summary>
+	/// Change the color without affecting the alpha.
+	/// </summary>
+
+	public void SetColorNoAlpha (Color c)
+	{
+		if (mColor.r != c.r || mColor.g != c.g || mColor.b != c.b)
+		{
+			mColor.r = c.r;
+			mColor.g = c.g;
+			mColor.b = c.b;
+			Invalidate(false);
 		}
 	}
 
@@ -804,7 +819,12 @@ public class UIWidget : UIRect
 	/// Adjust the widget's collider size to match the widget's dimensions.
 	/// </summary>
 
-	public void ResizeCollider () { if (NGUITools.GetActive(this)) NGUITools.UpdateWidgetCollider(gameObject); }
+	public void ResizeCollider ()
+	{
+		var bc = GetComponent<BoxCollider>();
+		if (bc != null) NGUITools.UpdateWidgetCollider(this, bc);
+		else NGUITools.UpdateWidgetCollider(this, GetComponent<BoxCollider2D>());
+	}
 
 	/// <summary>
 	/// Static widget comparison function used for depth sorting.

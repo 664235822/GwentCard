@@ -1,6 +1,6 @@
 //-------------------------------------------------
 //            NGUI: Next-Gen UI kit
-// Copyright © 2011-2017 Tasharen Entertainment Inc
+// Copyright © 2011-2018 Tasharen Entertainment Inc
 //-------------------------------------------------
 
 using UnityEditor;
@@ -115,7 +115,7 @@ public class SpriteSelector : ScriptableWizard
 									{
 										NGUIEditorTools.RegisterUndo("Atlas Selection", mSprite);
 										mSprite.MakePixelPerfect();
-										EditorUtility.SetDirty(mSprite.gameObject);
+										NGUITools.SetDirty(mSprite.gameObject);
 									}
 
 									NGUISettings.selectedSprite = sprite.name;

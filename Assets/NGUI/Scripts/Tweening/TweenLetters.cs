@@ -1,6 +1,6 @@
 //-------------------------------------------------
 //            NGUI: Next-Gen UI kit
-// Copyright © 2011-2017 Tasharen Entertainment Inc
+// Copyright © 2011-2018 Tasharen Entertainment Inc
 //-------------------------------------------------
 
 using UnityEngine;
@@ -12,7 +12,7 @@ using System.Collections.Generic;
 
 public class TweenLetters : UITweener
 {
-	public enum AnimationLetterOrder { Forward, Reverse, Random }
+	[DoNotObfuscateNGUI] public enum AnimationLetterOrder { Forward, Reverse, Random }
 
 	class LetterProperties
 	{
@@ -151,7 +151,7 @@ public class TweenLetters : UITweener
 					verts[iv] = vert;
 
 					c = cols[iv];
-					c.a = lerpAlpha;
+					c.a *= lerpAlpha;
 					cols[iv] = c;
 				}
 			}

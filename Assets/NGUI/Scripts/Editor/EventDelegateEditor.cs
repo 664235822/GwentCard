@@ -1,6 +1,6 @@
 //-------------------------------------------------
 //            NGUI: Next-Gen UI kit
-// Copyright © 2011-2017 Tasharen Entertainment Inc
+// Copyright © 2011-2018 Tasharen Entertainment Inc
 //-------------------------------------------------
 
 using UnityEngine;
@@ -106,13 +106,13 @@ static public class EventDelegateEditor
 		{
 			NGUIEditorTools.RegisterUndo("Delegate Selection", undoObject);
 			del.Clear();
-			EditorUtility.SetDirty(undoObject);
+			NGUITools.SetDirty(undoObject);
 		}
 		else if (del.target != target)
 		{
 			NGUIEditorTools.RegisterUndo("Delegate Selection", undoObject);
 			del.target = target;
-			EditorUtility.SetDirty(undoObject);
+			NGUITools.SetDirty(undoObject);
 		}
 
 		if (del.target != null && del.target.gameObject != null)
@@ -135,7 +135,7 @@ static public class EventDelegateEditor
 				NGUIEditorTools.RegisterUndo("Delegate Selection", undoObject);
 				del.target = entry.target as MonoBehaviour;
 				del.methodName = entry.name;
-				EditorUtility.SetDirty(undoObject);
+				NGUITools.SetDirty(undoObject);
 				retVal = true;
 			}
 
@@ -153,7 +153,7 @@ static public class EventDelegateEditor
 					{
 						GUI.changed = false;
 						param.obj = obj;
-						EditorUtility.SetDirty(undoObject);
+						NGUITools.SetDirty(undoObject);
 					}
 
 					if (obj == null) continue;
@@ -192,13 +192,13 @@ static public class EventDelegateEditor
 								param.obj = ents[newSel - 1].target;
 								param.field = ents[newSel - 1].name;
 							}
-							EditorUtility.SetDirty(undoObject);
+							NGUITools.SetDirty(undoObject);
 						}
 					}
 					else if (!string.IsNullOrEmpty(param.field))
 					{
 						param.field = null;
-						EditorUtility.SetDirty(undoObject);
+						NGUITools.SetDirty(undoObject);
 					}
 
 					PropertyReferenceDrawer.filter = typeof(void);

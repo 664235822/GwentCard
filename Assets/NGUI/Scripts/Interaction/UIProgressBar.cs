@@ -1,6 +1,6 @@
 //-------------------------------------------------
 //            NGUI: Next-Gen UI kit
-// Copyright © 2011-2017 Tasharen Entertainment Inc
+// Copyright © 2011-2018 Tasharen Entertainment Inc
 //-------------------------------------------------
 
 using UnityEngine;
@@ -14,7 +14,7 @@ using System.Collections.Generic;
 [AddComponentMenu("NGUI/Interaction/NGUI Progress Bar")]
 public class UIProgressBar : UIWidgetContainer
 {
-	public enum FillDirection
+	[DoNotObfuscateNGUI] public enum FillDirection
 	{
 		LeftToRight,
 		RightToLeft,

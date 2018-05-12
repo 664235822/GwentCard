@@ -1,6 +1,6 @@
 //-------------------------------------------------
 //            NGUI: Next-Gen UI kit
-// Copyright © 2011-2017 Tasharen Entertainment Inc
+// Copyright © 2011-2018 Tasharen Entertainment Inc
 //-------------------------------------------------
 
 //#define SHOW_HIDDEN_OBJECTS
@@ -34,7 +34,7 @@ public class UIDrawCall : MonoBehaviour
 
 	static public BetterList<UIDrawCall> inactiveList { get { return mInactiveList; } }
 
-	public enum Clipping : int
+	[DoNotObfuscateNGUI] public enum Clipping : int
 	{
 		None = 0,
 		TextureMask = 1,			// Clipped using a texture rather than math
@@ -291,7 +291,7 @@ public class UIDrawCall : MonoBehaviour
 	}
 
 #if !UNITY_4_7
-	public enum ShadowMode
+	[DoNotObfuscateNGUI] public enum ShadowMode
 	{
 		None,
 		Receive,
