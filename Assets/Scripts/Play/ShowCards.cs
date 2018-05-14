@@ -6,8 +6,8 @@ public class ShowCards : Singleton<ShowCards> {
     public enum ShowBehavior { draw, show, replace, nurse, dummy, warhorn, agile }
     public Transform grid;
     public UIPopupList popupList;
-    public UILabel label;
     [SerializeField] GameObject obj;
+    [SerializeField] UILabel label;
     [SerializeField] UIScrollView scrollView;
     [SerializeField] UIButton OKButton;
     [SerializeField] UIButton returnButton;

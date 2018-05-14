@@ -153,7 +153,6 @@ public class CardBehavior : MonoBehaviour {
     public void Replace()
     {
         ShowCards.GetInstance().replaceInt++;
-        ShowCards.GetInstance().label.text = string.Format("请选择要替换的牌 {0}/2", ShowCards.GetInstance().replaceInt);
 
         int replaceIndex = 0;
         for (int i = 0; i < ShowCards.GetInstance().grid.childCount; i++)
