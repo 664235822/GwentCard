@@ -3,16 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class ShowCards : Singleton<ShowCards> {
-    public enum ShowBehavior { draw, show, nurse, dummy, warhorn, agile }
+    public enum ShowBehavior { draw, show, replace, nurse, dummy, warhorn, agile }
     public Transform grid;
     public UIPopupList popupList;
+    public UILabel label;
     [SerializeField] GameObject obj;
-    [SerializeField] UILabel label;
     [SerializeField] UIScrollView scrollView;
     [SerializeField] UIButton OKButton;
+    [SerializeField] UIButton returnButton;
     [HideInInspector] public Transform card;
     [HideInInspector] public Transform totalGrid;
     [HideInInspector] public int totalLine = 0;
+    [HideInInspector] public int replaceInt = 0;
     ShowBehavior showBehavior;
 
     public void Show(ShowBehavior behavior, Transform showGrid, bool repeat)
@@ -23,6 +25,8 @@ public class ShowCards : Singleton<ShowCards> {
         popupList.AddItem("远程");
         popupList.AddItem("攻城");
         OKButton.onClick.Clear();
+        returnButton.onClick.Clear();
+        EventDelegate.Add(returnButton.onClick, () => Hide());
 
         if (!repeat)
         {
@@ -40,12 +44,13 @@ public class ShowCards : Singleton<ShowCards> {
             case ShowBehavior.show:
                 label.text = "显示卡牌";
                 goto default;
+            case ShowBehavior.replace:
+                label.text = string.Format("请选择要替换的牌 {0}/2", replaceInt);
+                EventDelegate.Add(returnButton.onClick, () => GameController.GetInstance().StartGame());
+                goto default;
             case ShowBehavior.nurse:
                 label.text = "从墓地中打出卡牌";
-                totalGrid = showGrid;
-                popupList.gameObject.SetActive(false);
-                OKButton.gameObject.SetActive(false);
-                break;
+                goto default;
             case ShowBehavior.dummy:
                 label.text = "请选择要替换的牌";
                 popupList.gameObject.SetActive(true);
@@ -88,6 +93,10 @@ public class ShowCards : Singleton<ShowCards> {
                     break;
                 case ShowBehavior.show:
                     cardButton.enabled = false;
+                    break;
+                case ShowBehavior.replace:
+                    EventDelegate.Add(cardButton.onClick, () => card.GetComponent<CardBehavior>().Replace());
+                    cardButton.enabled = true;
                     break;
                 case ShowBehavior.nurse:
                     EventDelegate.Add(cardButton.onClick, () => card.GetComponent<CardBehavior>().Play());

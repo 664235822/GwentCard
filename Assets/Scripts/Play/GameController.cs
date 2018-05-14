@@ -16,7 +16,7 @@ public class GameController : Singleton<GameController> {
     {
         PlayerController.GetInstance().Initialize(playerGroup);
         EnemyController.GetInstance().Initialize();
-        ReplaceController.GetInstance().Show(false);
+        ShowCards.GetInstance().Show(ShowCards.ShowBehavior.replace, PlayerController.GetInstance().grids[1], false);
     }
 
     public void StartGame()

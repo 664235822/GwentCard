@@ -152,19 +152,22 @@ public class CardBehavior : MonoBehaviour {
 
     public void Replace()
     {
-        ReplaceController.GetInstance().index++;
-        ReplaceController.GetInstance().label.text = string.Format("请选择要替换的牌 {0}/2", ReplaceController.GetInstance().index);
+        ShowCards.GetInstance().replaceInt++;
+        ShowCards.GetInstance().label.text = string.Format("请选择要替换的牌 {0}/2", ShowCards.GetInstance().replaceInt);
 
         int replaceIndex = 0;
-        for (int i = 0; i < ReplaceController.GetInstance().grid.childCount; i++)
-            if (ReplaceController.GetInstance().grid.GetChild(i).name == name) replaceIndex = i;
+        for (int i = 0; i < ShowCards.GetInstance().grid.childCount; i++)
+            if (ShowCards.GetInstance().grid.GetChild(i).name == name) replaceIndex = i;
 
         PlayerController.GetInstance().grids[1].GetChild(replaceIndex).SetTarget(PlayerController.GetInstance().grids[0]);
         PlayerController.GetInstance().grids[0].GetChild(Random.Range(0, PlayerController.GetInstance().grids[0].childCount)).SetTarget(PlayerController.GetInstance().grids[1]);
 
-        ReplaceController.GetInstance().Show(true);
-
-        if (ReplaceController.GetInstance().index == 2)
-            ReplaceController.GetInstance().Hide();
+        if (ShowCards.GetInstance().replaceInt != 2)
+            ShowCards.GetInstance().Show(ShowCards.ShowBehavior.replace, PlayerController.GetInstance().grids[1], true);
+        else
+        {
+            ShowCards.GetInstance().Hide();
+            GameController.GetInstance().StartGame();
+        }
     }
 }
