@@ -8,7 +8,7 @@ public class LeaderBehaviorBase : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        EventDelegate.Add(button.onClick, () => Play());
+        //EventDelegate.Add(button.onClick, () => Play());
 	}
 
     private void Awake()

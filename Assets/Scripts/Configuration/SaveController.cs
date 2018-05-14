@@ -144,7 +144,12 @@ public class SaveController : Singleton<SaveController> {
             if (card.Find("Control - Simple Checkbox").GetComponent<UIToggle>().value)
             {
                 XmlElement cardElement = xml.CreateElement(card.name);
-                if (list != "leader")
+                if (list == "leader")
+                {
+                    cardElement.SetAttribute("behavior", card.GetComponent<LeaderBehaviorBase>().GetType().ToString());
+                    cardElement.SetAttribute("message", card.GetComponent<LeaderBehaviorBase>().Message);
+                }
+                else
                 {
                     cardElement.SetAttribute("total", card.GetComponent<CardPlus>().total.ToString());
                     cardElement.SetAttribute("sprite", card.GetComponent<UISprite>().spriteName);
