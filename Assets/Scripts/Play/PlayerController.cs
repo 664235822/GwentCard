@@ -52,6 +52,15 @@ public class PlayerController : Singleton<PlayerController> {
         XmlNode xmlNode = root.SelectSingleNode(string.Format("/root/{0}", group));
 
         int name = 0;
+
+        XmlNode leaderNode = xmlNode.SelectSingleNode("leader").FirstChild;
+        GameObject leaderObject = LeaderController.GetInstance().obj;
+        UISprite leaderSprite = leaderObject.GetComponent<UISprite>();
+        leaderSprite.atlas = totalAtlas;
+        leaderSprite.spriteName = leaderNode.Attributes["sprite"].Value;//这行代码有问题
+        leaderObject.AddComponent(System.Type.GetType(leaderNode.Attributes["behavior"].Value));
+        leaderObject.GetComponent<LeaderBehaviorBase>().Message = leaderNode.Attributes["message"].Value;
+
         XmlNodeList special = xmlNode.SelectSingleNode("special").ChildNodes;
         foreach(XmlNode cardNode in special)
         {

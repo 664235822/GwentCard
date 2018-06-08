@@ -18,4 +18,9 @@ public class NorthernBehavior1 : LeaderBehaviorBase {
 
         base.Play();
     }
+
+    public sealed override bool GetEnabled()
+    {
+        return (!WeatherController.GetInstance().weather[1] && isEnabled);
+    }
 }

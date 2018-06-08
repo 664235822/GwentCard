@@ -4,21 +4,21 @@ using UnityEngine;
 
 public class LeaderBehaviorBase : MonoBehaviour {
     public string Message;
-    UIButton button;
+    protected bool isEnabled = true;
 
 	// Use this for initialization
 	void Start () {
         //EventDelegate.Add(button.onClick, () => Play());
 	}
 
-    private void Awake()
-    {
-        button = GetComponent<UIButton>();
-    }
-
     public virtual void Play()
     {
-        button.isEnabled = false;
+        isEnabled = false;
         PlayerController.GetInstance().PlayOver(transform);
+    }
+
+    public virtual bool GetEnabled()
+    {
+        return isEnabled;
     }
 }

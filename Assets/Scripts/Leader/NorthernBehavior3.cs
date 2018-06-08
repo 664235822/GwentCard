@@ -13,4 +13,9 @@ public class NorthernBehavior3 : LeaderBehaviorBase{
         }
         base.Play();
     }
+
+    public sealed override bool GetEnabled()
+    {
+        return (!WarhornController.GetInstance().playerWarhorn[2] && isEnabled);
+    }
 }
