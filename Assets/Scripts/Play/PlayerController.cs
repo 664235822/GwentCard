@@ -57,7 +57,7 @@ public class PlayerController : Singleton<PlayerController> {
         GameObject leaderObject = LeaderController.GetInstance().obj;
         UISprite leaderSprite = leaderObject.GetComponent<UISprite>();
         leaderSprite.atlas = totalAtlas;
-        leaderSprite.spriteName = leaderNode.Attributes["sprite"].Value;//这行代码有问题
+        leaderSprite.spriteName = leaderNode.Attributes["sprite"].Value;
         leaderObject.AddComponent(System.Type.GetType(leaderNode.Attributes["behavior"].Value));
         leaderObject.GetComponent<LeaderBehaviorBase>().Message = leaderNode.Attributes["message"].Value;
 

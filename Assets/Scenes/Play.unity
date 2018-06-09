@@ -5695,7 +5695,7 @@ MonoBehaviour:
   rightType: 1
   bottomType: 1
   topType: 1
-  mAtlas: {fileID: 114438320826604494, guid: 29403d4f893411440b24a74962abb07d, type: 2}
+  mAtlas: {fileID: 0}
   mSpriteName: ballista1
   mFillCenter: 1
 --- !u!1 &797879417
