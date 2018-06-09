@@ -147,8 +147,11 @@ public class SaveController : Singleton<SaveController> {
                 if (list == "leader")
                 {
                     cardElement.SetAttribute("sprite", card.GetComponent<UISprite>().spriteName);
-                    cardElement.SetAttribute("behavior", card.GetComponent<LeaderBehaviorBase>().GetType().ToString());
-                    cardElement.SetAttribute("message", card.GetComponent<LeaderBehaviorBase>().Message);
+                    if (card.GetComponent<LeaderBehaviorBase>() != null)
+                    {
+                        cardElement.SetAttribute("behavior", card.GetComponent<LeaderBehaviorBase>().GetType().ToString());
+                        cardElement.SetAttribute("message", card.GetComponent<LeaderBehaviorBase>().Message);
+                    }
                 }
                 else
                 {
