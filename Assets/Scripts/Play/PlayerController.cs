@@ -54,7 +54,7 @@ public class PlayerController : Singleton<PlayerController> {
         int name = 0;
 
         XmlNode leaderNode = xmlNode.SelectSingleNode("leader").FirstChild;
-        GameObject leaderObject = LeaderController.GetInstance().obj;
+        GameObject leaderObject = LeaderController.GetInstance().obj[0];
         UISprite leaderSprite = leaderObject.GetComponent<UISprite>();
         leaderSprite.atlas = totalAtlas;
         leaderSprite.spriteName = leaderNode.Attributes["sprite"].Value;

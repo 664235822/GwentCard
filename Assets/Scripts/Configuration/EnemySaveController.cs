@@ -22,6 +22,12 @@ public class EnemySaveController : MonoBehaviour {
             {
                 Transform card = leader1Transform.GetChild(i);
                 XmlElement cardElement = xml.CreateElement(card.name);
+                cardElement.SetAttribute("sprite", card.GetComponent<UISprite>().spriteName);
+                if (card.GetComponent<LeaderBehaviorBase>() != null)
+                {
+                    cardElement.SetAttribute("behavior", card.GetComponent<LeaderBehaviorBase>().GetType().ToString());
+                    cardElement.SetAttribute("message", card.GetComponent<LeaderBehaviorBase>().Message);
+                }
                 leader1.AppendChild(cardElement);
             }
 
@@ -87,6 +93,12 @@ public class EnemySaveController : MonoBehaviour {
             {
                 Transform card = leader2Transform.GetChild(i);
                 XmlElement cardElement = xml.CreateElement(card.name);
+                cardElement.SetAttribute("sprite", card.GetComponent<UISprite>().spriteName);
+                if (card.GetComponent<LeaderBehaviorBase>() != null)
+                {
+                    cardElement.SetAttribute("behavior", card.GetComponent<LeaderBehaviorBase>().GetType().ToString());
+                    cardElement.SetAttribute("message", card.GetComponent<LeaderBehaviorBase>().Message);
+                }
                 leader2.AppendChild(cardElement);
             }
 
@@ -152,6 +164,12 @@ public class EnemySaveController : MonoBehaviour {
             {
                 Transform card = leader3Transform.GetChild(i);
                 XmlElement cardElement = xml.CreateElement(card.name);
+                cardElement.SetAttribute("sprite", card.GetComponent<UISprite>().spriteName);
+                if (card.GetComponent<LeaderBehaviorBase>() != null)
+                {
+                    cardElement.SetAttribute("behavior", card.GetComponent<LeaderBehaviorBase>().GetType().ToString());
+                    cardElement.SetAttribute("message", card.GetComponent<LeaderBehaviorBase>().Message);
+                }
                 leader3.AppendChild(cardElement);
             }
 
@@ -217,6 +235,12 @@ public class EnemySaveController : MonoBehaviour {
             {
                 Transform card = leader4Transform.GetChild(i);
                 XmlElement cardElement = xml.CreateElement(card.name);
+                cardElement.SetAttribute("sprite", card.GetComponent<UISprite>().spriteName);
+                if (card.GetComponent<LeaderBehaviorBase>() != null)
+                {
+                    cardElement.SetAttribute("behavior", card.GetComponent<LeaderBehaviorBase>().GetType().ToString());
+                    cardElement.SetAttribute("message", card.GetComponent<LeaderBehaviorBase>().Message);
+                }
                 leader4.AppendChild(cardElement);
             }
 

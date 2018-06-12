@@ -56,6 +56,19 @@ public class EnemyController : Singleton<EnemyController> {
         XmlNode xmlNode = root.SelectSingleNode(string.Format("/root/{0}", group));
 
         int name = 0;
+
+        XmlNodeList leaderList = xmlNode.SelectSingleNode("leader").ChildNodes;
+        XmlNode leaderNode = leaderList[Random.Range(0, leaderList.Count)];
+        GameObject leaderObject = LeaderController.GetInstance().obj[1];
+        UISprite leaderSprite = leaderObject.GetComponent<UISprite>();
+        leaderSprite.atlas = totalAtlas;
+        leaderSprite.spriteName = leaderNode.Attributes["sprite"].Value;
+        if (leaderNode.Attributes["behavior"] != null)
+        {
+            leaderObject.AddComponent(System.Type.GetType(leaderNode.Attributes["behavior"].Value));
+            leaderObject.GetComponent<LeaderBehaviorBase>().Message = leaderNode.Attributes["message"].Value;
+        }
+
         XmlNodeList special = xmlNode.SelectSingleNode("special").ChildNodes;
         foreach (XmlNode cardNode in special)
         {
