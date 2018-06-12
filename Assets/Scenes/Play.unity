@@ -2105,7 +2105,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &332732995
 Transform:
   m_ObjectHideFlags: 0
@@ -3014,7 +3014,7 @@ GameObject:
   - component: {fileID: 477804691}
   - component: {fileID: 477804692}
   m_Layer: 8
-  m_Name: turn_indicator_opponent
+  m_Name: turn_indicator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3867,7 +3867,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &602574562
 Transform:
   m_ObjectHideFlags: 0
@@ -3999,7 +3999,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &632377369
 Transform:
   m_ObjectHideFlags: 0
@@ -4511,7 +4511,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &698836961
 Transform:
   m_ObjectHideFlags: 0
@@ -5439,7 +5439,7 @@ GameObject:
   - component: {fileID: 790973963}
   - component: {fileID: 790973964}
   m_Layer: 8
-  m_Name: turn_indicator_opponent
+  m_Name: turn_indicator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

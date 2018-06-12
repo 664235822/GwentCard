@@ -280,6 +280,7 @@ public class EnemyController : Singleton<EnemyController> {
         }
 
         CoroutineManager.GetInstance().AddTask(TweenCard.GetInstance().Play(card));
+        StartCoroutine(LeaderController.GetInstance().EnemyTurnIndicator());
         Number();
         PowerController.GetInstance().Number();
     }

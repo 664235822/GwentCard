@@ -31,7 +31,10 @@ public class GameController : Singleton<GameController> {
         }
 
         if (offensive)
+        {
             CoroutineManager.GetInstance().AddTask(TweenMessage.GetInstance().Play("你先手"));
+            LeaderController.GetInstance().PlayerTurnIndicator();
+        }
         else
         {
             CoroutineManager.GetInstance().AddTask(TweenMessage.GetInstance().Play("对方先手"));
@@ -196,7 +199,10 @@ public class GameController : Singleton<GameController> {
 
         offensive = !offensive;
         if (offensive)
+        {
             CoroutineManager.GetInstance().AddTask(TweenMessage.GetInstance().Play("你先手"));
+            LeaderController.GetInstance().PlayerTurnIndicator();
+        }
         else
         {
             CoroutineManager.GetInstance().AddTask(TweenMessage.GetInstance().Play("对方先手"));
