@@ -6,14 +6,10 @@ public class LeaderBehaviorBase : MonoBehaviour {
     public string Message;
     protected bool isEnabled = true;
 
-	// Use this for initialization
-	void Start () {
-        //EventDelegate.Add(button.onClick, () => Play());
-	}
-
     public virtual void Play()
     {
         isEnabled = false;
+        LeaderController.GetInstance().Hide();
         PlayerController.GetInstance().PlayOver(transform);
     }
 

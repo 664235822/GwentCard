@@ -9,7 +9,10 @@ public class TweenCard : Singleton<TweenCard> {
     {
         obj.GetComponent<UISprite>().atlas = card.GetComponent<UISprite>().atlas;
         obj.GetComponent<UISprite>().spriteName = card.GetComponent<UISprite>().spriteName;
-        obj.transform.Find("TweenEffect").GetComponent<UISprite>().spriteName = string.Format("card_effect_{0}", card.GetComponent<CardProperty>().effect.ToString());
+        if (card.GetComponent<CardProperty>() != null)
+            obj.transform.Find("TweenEffect").GetComponent<UISprite>().spriteName = string.Format("card_effect_{0}", card.GetComponent<CardProperty>().effect.ToString());
+        else
+            obj.transform.Find("TweenEffect").GetComponent<UISprite>().spriteName = "";
         obj.GetComponent<TweenAlpha>().PlayForward();
         yield return new WaitForSeconds(0.5f);
         obj.transform.Find("TweenEffect").GetComponent<TweenScale>().PlayForward();
