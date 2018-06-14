@@ -9,7 +9,7 @@ public class LeaderBehaviorBase : MonoBehaviour {
     public virtual void Play()
     {
         isEnabled = false;
-        LeaderController.GetInstance().Hide();
+        ShowCards.GetInstance().Hide();
         PlayerController.GetInstance().PlayOver(transform);
     }
 

@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class ShowCards : Singleton<ShowCards> {
-    public enum ShowBehavior { draw, show, replace, nurse, dummy, warhorn, agile }
+    public enum ShowBehavior { draw, show, leader, replace, nurse, dummy, warhorn, agile }
     public Transform grid;
     public UIPopupList popupList;
     [SerializeField] GameObject obj;
     [SerializeField] UILabel label;
+    [SerializeField] UILabel messageLabel;
     [SerializeField] UIScrollView scrollView;
     [SerializeField] UIButton OKButton;
     [SerializeField] UIButton returnButton;
@@ -44,6 +45,20 @@ public class ShowCards : Singleton<ShowCards> {
             case ShowBehavior.show:
                 label.text = "显示卡牌";
                 goto default;
+            case ShowBehavior.leader:
+                label.text = "领导牌";
+                LeaderBehaviorBase leaderBehavior = LeaderController.GetInstance().obj[0].GetComponent<LeaderBehaviorBase>();
+                if (leaderBehavior != null)
+                {
+                    messageLabel.text = leaderBehavior.Message;
+                    messageLabel.gameObject.SetActive(true);
+                    popupList.gameObject.SetActive(false);
+                    OKButton.gameObject.SetActive(true);
+                    OKButton.GetComponent<UIButton>().isEnabled = leaderBehavior.GetEnabled();
+                    EventDelegate.Add(OKButton.onClick, () => leaderBehavior.Play());
+                    break;
+                }
+                else goto default;
             case ShowBehavior.replace:
                 label.text = string.Format("请选择要替换的牌 {0}/2", replaceInt);
                 EventDelegate.Add(returnButton.onClick, () => GameController.GetInstance().StartGame());
@@ -53,17 +68,20 @@ public class ShowCards : Singleton<ShowCards> {
                 goto default;
             case ShowBehavior.dummy:
                 label.text = "请选择要替换的牌";
+                messageLabel.gameObject.SetActive(false);
                 popupList.gameObject.SetActive(true);
                 OKButton.gameObject.SetActive(false);
                 break;
             case ShowBehavior.warhorn:
                 label.text = "战争号角";
+                messageLabel.gameObject.SetActive(false);
                 popupList.gameObject.SetActive(true);
                 OKButton.gameObject.SetActive(true);
                 EventDelegate.Add(OKButton.onClick, () => WarhornController.GetInstance().Warhorn());
                 break;
             case ShowBehavior.agile:
                 label.text = "请选择出牌的排";
+                messageLabel.gameObject.SetActive(false);
                 popupList.gameObject.SetActive(true);
                 popupList.items.Remove("攻城");
                 OKButton.gameObject.SetActive(true);
@@ -71,6 +89,7 @@ public class ShowCards : Singleton<ShowCards> {
                 break;
             default:
                 totalGrid = showGrid;
+                messageLabel.gameObject.SetActive(false);
                 popupList.gameObject.SetActive(false);
                 OKButton.gameObject.SetActive(false);
                 break;
