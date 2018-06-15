@@ -12,7 +12,7 @@ public class LeaderController : Singleton<LeaderController> {
         turn_indicator[0].gameObject.SetActive(true);
         turn_indicator[1].gameObject.SetActive(false);
         LeaderBehaviorBase leaderBehavior = obj[0].GetComponent<LeaderBehaviorBase>();
-        if (leaderBehavior != null && leaderBehavior.GetEnabled())
+        if (leaderBehavior != null && leaderBehavior.IsEnabled)
             turn_indicator[0].spriteName = turn_indicator_string[1];
         else
             turn_indicator[0].spriteName = turn_indicator_string[0];
@@ -23,7 +23,7 @@ public class LeaderController : Singleton<LeaderController> {
         turn_indicator[1].gameObject.SetActive(true);
         turn_indicator[0].gameObject.SetActive(false);
         LeaderBehaviorBase leaderBehavior = obj[1].GetComponent<LeaderBehaviorBase>();
-        if (leaderBehavior != null && leaderBehavior.GetEnabled())
+        if (leaderBehavior != null && leaderBehavior.IsEnabled)
             turn_indicator[1].spriteName = turn_indicator_string[1];
         else
             turn_indicator[1].spriteName = turn_indicator_string[0];

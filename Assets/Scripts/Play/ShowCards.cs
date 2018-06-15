@@ -54,7 +54,7 @@ public class ShowCards : Singleton<ShowCards> {
                     messageLabel.gameObject.SetActive(true);
                     popupList.gameObject.SetActive(false);
                     OKButton.gameObject.SetActive(true);
-                    OKButton.GetComponent<UIButton>().isEnabled = leaderBehavior.GetEnabled();
+                    OKButton.GetComponent<UIButton>().isEnabled = leaderBehavior.IsEnabled;
                     EventDelegate.Add(OKButton.onClick, () => leaderBehavior.Play());
                     break;
                 }

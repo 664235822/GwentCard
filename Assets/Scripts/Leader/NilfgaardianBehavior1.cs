@@ -2,17 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NorthernBehavior1 : LeaderBehaviorBase {
+public class NilfgaardianBehavior1 : LeaderBehaviorBase {
 
     public sealed override void Play()
     {
         int index = -1;
         for (int i = 0; i < PlayerController.GetInstance().grids[0].childCount; i++)
-            if (PlayerController.GetInstance().grids[0].GetChild(i).GetComponent<CardProperty>().effect == Global.Effect.fog) index = i;
+            if (PlayerController.GetInstance().grids[0].GetChild(i).GetComponent<CardProperty>().effect == Global.Effect.rain) index = i;
 
         if (index != -1)
         {
-            WeatherController.GetInstance().Fog();
+            WeatherController.GetInstance().Rain();
             PlayerController.GetInstance().grids[0].GetChild(index).SetTarget(WeatherController.GetInstance().grid);
         }
 
@@ -23,7 +23,7 @@ public class NorthernBehavior1 : LeaderBehaviorBase {
     {
         get
         {
-            return (!WeatherController.GetInstance().weather[1] && isEnabled);
+            return (!WeatherController.GetInstance().weather[2] && isEnabled);
         }
     }
 }

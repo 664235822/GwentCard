@@ -10,9 +10,12 @@ public class NorthernBehavior2 : LeaderBehaviorBase {
         base.Play();
     }
 
-    public sealed override bool GetEnabled()
+    public sealed override bool IsEnabled
     {
-        bool[] weather = WeatherController.GetInstance().weather;
-        return (weather[0] || weather[1] || weather[2]) && enabled;
+        get
+        {
+            bool[] weather = WeatherController.GetInstance().weather;
+            return (weather[0] || weather[1] || weather[2]) && enabled;
+        }
     }
 }

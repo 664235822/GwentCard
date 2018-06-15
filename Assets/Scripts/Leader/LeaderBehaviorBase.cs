@@ -13,8 +13,15 @@ public class LeaderBehaviorBase : MonoBehaviour {
         PlayerController.GetInstance().PlayOver(transform);
     }
 
-    public virtual bool GetEnabled()
+    public virtual bool IsEnabled
     {
-        return isEnabled;
+        get
+        {
+            return isEnabled;
+        }
+        set
+        {
+            isEnabled = value;
+        }
     }
 }
