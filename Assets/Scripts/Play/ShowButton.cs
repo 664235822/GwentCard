@@ -2,13 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ShowButton : MonoBehaviour {
-    [SerializeField] ShowCards.ShowBehavior behavior;
-    [SerializeField] Transform grid;
-
-    public void OnClick()
+namespace GwentCard.Play
+{
+    public class ShowButton : MonoBehaviour
     {
-        ShowCards.GetInstance().Show(behavior, grid, false);
+        [SerializeField] ShowCards.ShowBehavior behavior;
+        [SerializeField] Transform grid;
+
+        public void OnClick()
+        {
+            ShowCards.GetInstance().Show(behavior, grid, false);
+        }
     }
-	
 }

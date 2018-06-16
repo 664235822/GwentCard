@@ -2,10 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Exit : MonoBehaviour {
-
-	public void OnClick()
+namespace GwentCard.Main
+{
+    public class Exit : MonoBehaviour
     {
-        Application.Quit();
+        public void OnClick()
+        {
+            Application.Quit();
+        }
     }
 }

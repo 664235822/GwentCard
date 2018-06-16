@@ -1,22 +1,26 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using GwentCard.Play;
 
-public class MonsterBehavior2 : LeaderBehaviorBase {
-
-    public sealed override void Play()
+namespace GwentCard.Leader
+{
+    public class MonsterBehavior2 : LeaderBehaviorBase
     {
-        WarhornController.GetInstance().playerWarhorn[0] = true;
-        Instantiate(transform).SetTarget(WarhornController.GetInstance().playerGrids[0]);
-
-        base.Play();
-    }
-
-    public sealed override bool IsEnabled
-    {
-        get
+        public sealed override void Play()
         {
-            return !WarhornController.GetInstance().playerWarhorn[0] && isEnabled;
+            WarhornController.GetInstance().playerWarhorn[0] = true;
+            Instantiate(transform).SetTarget(WarhornController.GetInstance().playerGrids[0]);
+
+            base.Play();
+        }
+
+        public sealed override bool IsEnabled
+        {
+            get
+            {
+                return !WarhornController.GetInstance().playerWarhorn[0] && isEnabled;
+            }
         }
     }
 }

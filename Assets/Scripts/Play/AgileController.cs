@@ -2,12 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AgileController : Singleton<AgileController> {
-
-	public void Agile()
+namespace GwentCard.Play
+{
+    public class AgileController : Singleton<AgileController>
     {
-        ShowCards.GetInstance().card.SetTarget(PlayerController.GetInstance().grids[(int)ShowCards.GetInstance().totalLine + 2]);
-        ShowCards.GetInstance().Hide();
-        PlayerController.GetInstance().PlayOver(ShowCards.GetInstance().card);
+        public void Agile()
+        {
+            ShowCards.GetInstance().card.SetTarget(PlayerController.GetInstance().grids[(int)ShowCards.GetInstance().totalLine + 2]);
+            ShowCards.GetInstance().Hide();
+            PlayerController.GetInstance().PlayOver(ShowCards.GetInstance().card);
+        }
     }
 }

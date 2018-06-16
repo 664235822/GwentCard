@@ -2,31 +2,36 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ScoiataelController : MonoBehaviour {
-    UIButton button;
-    UIPopupList popupList;
-
-	// Use this for initialization
-	void Start () {
-        if (transform.parent.GetComponent<UIButton>().isEnabled)
-            button.isEnabled = true;
-        else
-            button.isEnabled = false;
-
-        GameController.GetInstance().offensive = true;
-    }
-
-    private void Awake()
+namespace GwentCard.Play
+{
+    public class ScoiataelController : MonoBehaviour
     {
-        button = GetComponent<UIButton>();
-        popupList = GetComponent<UIPopupList>();
-    }
+        UIButton button;
+        UIPopupList popupList;
 
-    public void OnValueChange()
-    {
-        if (popupList.value == "先手")
+        // Use this for initialization
+        void Start()
+        {
+            if (transform.parent.GetComponent<UIButton>().isEnabled)
+                button.isEnabled = true;
+            else
+                button.isEnabled = false;
+
             GameController.GetInstance().offensive = true;
-        else
-            GameController.GetInstance().offensive = false;
+        }
+
+        private void Awake()
+        {
+            button = GetComponent<UIButton>();
+            popupList = GetComponent<UIPopupList>();
+        }
+
+        public void OnValueChange()
+        {
+            if (popupList.value == "先手")
+                GameController.GetInstance().offensive = true;
+            else
+                GameController.GetInstance().offensive = false;
+        }
     }
 }

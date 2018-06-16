@@ -2,14 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Singleton<T> : MonoBehaviour where T : Component {
-    private static T instance;
-
-    public static T GetInstance()
+namespace GwentCard
+{
+    public class Singleton<T> : MonoBehaviour where T : Component
     {
-        if (instance == null)
-            instance = FindObjectOfType(typeof(T)) as T;
+        private static T instance;
 
-        return instance;
+        public static T GetInstance()
+        {
+            if (instance == null)
+                instance = FindObjectOfType(typeof(T)) as T;
+
+            return instance;
+        }
     }
 }

@@ -2,62 +2,66 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NumberController : Singleton<NumberController> {
-    [SerializeField] UILabel[] labels;
-    [HideInInspector] public int leaderCount = 0;
-    [HideInInspector] public int specialCount = 0;
-    [HideInInspector] public int monsterCount = 0;
-
-    public void Number()
+namespace GwentCard.Configuration
+{
+    public class NumberController : Singleton<NumberController>
     {
-        Transform group = transform.Find(TagController.GetInstance().group.ToString());
-        leaderCount = 0;
-        specialCount = 0;
-        monsterCount = 0;
+        [SerializeField] UILabel[] labels;
+        [HideInInspector] public int leaderCount = 0;
+        [HideInInspector] public int specialCount = 0;
+        [HideInInspector] public int monsterCount = 0;
 
-        Transform leader = group.transform.Find("leader");
-        for (int i = 0; i < leader.childCount; i++)
+        public void Number()
         {
-            Transform card = leader.GetChild(i);
-            if (card.Find("Control - Simple Checkbox").GetComponent<UIToggle>().value)
-                leaderCount++;
-        }
+            Transform group = transform.Find(TagController.GetInstance().group.ToString());
+            leaderCount = 0;
+            specialCount = 0;
+            monsterCount = 0;
 
-        Transform special = group.transform.Find("special");
-        for (int i = 0;i < special.childCount;i++)
-        {
-            Transform card = special.GetChild(i);
-            if(card.Find("Control - Simple Checkbox").GetComponent<UIToggle>().value)
+            Transform leader = group.transform.Find("leader");
+            for (int i = 0; i < leader.childCount; i++)
             {
-                for (int ii = 0; ii < card.GetComponent<CardPlus>().total; ii++)
-                    specialCount++;
+                Transform card = leader.GetChild(i);
+                if (card.Find("Control - Simple Checkbox").GetComponent<UIToggle>().value)
+                    leaderCount++;
             }
-        }
 
-        Transform monster = group.transform.Find("monster");
-        for (int i = 0; i < monster.childCount; i++)
-        {
-            Transform card = monster.GetChild(i);
-            if (card.Find("Control - Simple Checkbox").GetComponent<UIToggle>().value)
+            Transform special = group.transform.Find("special");
+            for (int i = 0; i < special.childCount; i++)
             {
-                for (int ii = 0; ii < card.GetComponent<CardPlus>().total; ii++)
-                    monsterCount++;
+                Transform card = special.GetChild(i);
+                if (card.Find("Control - Simple Checkbox").GetComponent<UIToggle>().value)
+                {
+                    for (int ii = 0; ii < card.GetComponent<CardPlus>().total; ii++)
+                        specialCount++;
+                }
             }
-        }
 
-        Transform neutral = group.transform.Find("neutral");
-        for (int i = 0; i < neutral.childCount; i++)
-        {
-            Transform card = neutral.GetChild(i);
-            if (card.Find("Control - Simple Checkbox").GetComponent<UIToggle>().value)
+            Transform monster = group.transform.Find("monster");
+            for (int i = 0; i < monster.childCount; i++)
             {
-                for (int ii = 0; ii < card.GetComponent<CardPlus>().total; ii++)
-                    monsterCount++;
+                Transform card = monster.GetChild(i);
+                if (card.Find("Control - Simple Checkbox").GetComponent<UIToggle>().value)
+                {
+                    for (int ii = 0; ii < card.GetComponent<CardPlus>().total; ii++)
+                        monsterCount++;
+                }
             }
-        }
 
-        labels[0].text = string.Format("领导牌：{0}/1", leaderCount);
-        labels[1].text = string.Format("特殊牌：{0}/10", specialCount);
-        labels[2].text = string.Format("生物牌：25/{0}/40", monsterCount);
+            Transform neutral = group.transform.Find("neutral");
+            for (int i = 0; i < neutral.childCount; i++)
+            {
+                Transform card = neutral.GetChild(i);
+                if (card.Find("Control - Simple Checkbox").GetComponent<UIToggle>().value)
+                {
+                    for (int ii = 0; ii < card.GetComponent<CardPlus>().total; ii++)
+                        monsterCount++;
+                }
+            }
+
+            labels[0].text = string.Format("领导牌：{0}/1", leaderCount);
+            labels[1].text = string.Format("特殊牌：{0}/10", specialCount);
+            labels[2].text = string.Format("生物牌：25/{0}/40", monsterCount);
+        }
     }
 }

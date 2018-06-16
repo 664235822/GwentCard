@@ -2,11 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LeaderCardCheck : MonoBehaviour {
-
-    public void Check()
+namespace GwentCard.Configuration
+{
+    public class LeaderCardCheck : MonoBehaviour
     {
-        SaveController.GetInstance().UpdateXML(transform.parent);
-        NumberController.GetInstance().Number();
+        public void Check()
+        {
+            SaveController.GetInstance().UpdateXML(transform.parent);
+            NumberController.GetInstance().Number();
+        }
     }
 }

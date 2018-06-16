@@ -3,11 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class LoadScene : MonoBehaviour {
-    [SerializeField] string scene;
-
-	public void OnClick()
+namespace GwentCard
+{
+    public class LoadScene : MonoBehaviour
     {
-        SceneManager.LoadScene(scene);
+        [SerializeField] string scene;
+
+        public void OnClick()
+        {
+            SceneManager.LoadScene(scene);
+        }
     }
 }

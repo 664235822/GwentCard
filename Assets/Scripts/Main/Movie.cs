@@ -3,26 +3,30 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Video;
 
-public class Movie : MonoBehaviour {
-    VideoPlayer videoPlayer;
-
-    private void Awake()
+namespace GwentCard.Main
+{
+    public class Movie : MonoBehaviour
     {
-        videoPlayer = GetComponent<VideoPlayer>();
-    }
+        VideoPlayer videoPlayer;
 
-    private void OnGUI()
-    {
-        if (videoPlayer.isPlaying && Input.GetMouseButtonDown(0))
+        private void Awake()
         {
-            videoPlayer.Stop();
-            MusicController.GetInstance().Continue();
+            videoPlayer = GetComponent<VideoPlayer>();
         }
-    }
 
-    public void OnClick()
-    {
-        videoPlayer.Play();
-        MusicController.GetInstance().Pause();
+        private void OnGUI()
+        {
+            if (videoPlayer.isPlaying && Input.GetMouseButtonDown(0))
+            {
+                videoPlayer.Stop();
+                MusicManager.GetInstance().Continue();
+            }
+        }
+
+        public void OnClick()
+        {
+            videoPlayer.Play();
+            MusicManager.GetInstance().Pause();
+        }
     }
 }

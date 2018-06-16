@@ -1,12 +1,17 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using GwentCard.Play;
 
-public class ScoiataelBehavior2 : LeaderBehaviorBase {
-
-    public sealed override void Play()
+namespace GwentCard.Leader
+{
+    public class ScoiataelBehavior2 : LeaderBehaviorBase
     {
-        PlayerController.GetInstance().DrawCards(1);
-        isEnabled = false;
+
+        public sealed override void Play()
+        {
+            PlayerController.GetInstance().DrawCards(1);
+            isEnabled = false;
+        }
     }
 }

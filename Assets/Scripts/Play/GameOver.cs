@@ -2,35 +2,39 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameOver : Singleton<GameOver> {
-    [SerializeField] GameObject obj;
-    [SerializeField] UILabel label;
-    [SerializeField] UILabel[] player_labels;
-    [SerializeField] UILabel[] enemy_labels;
-    ArrayList playerPowerList = new ArrayList();
-    ArrayList enemyPowerList = new ArrayList();
-
-    public void Show(bool isWin)
+namespace GwentCard.Play
+{
+    public class GameOver : Singleton<GameOver>
     {
-        BlackShow.GetInstance().Show(true);
-        PlayerController.GetInstance().obj.SetActive(false);
-        EnemyController.GetInstance().obj.SetActive(false);
-        obj.SetActive(true);
+        [SerializeField] GameObject obj;
+        [SerializeField] UILabel label;
+        [SerializeField] UILabel[] player_labels;
+        [SerializeField] UILabel[] enemy_labels;
+        ArrayList playerPowerList = new ArrayList();
+        ArrayList enemyPowerList = new ArrayList();
 
-        if (isWin)
-            label.text = "游戏结束，你赢了！";
-        else
-            label.text = "游戏结束，你输了";
+        public void Show(bool isWin)
+        {
+            BlackShow.GetInstance().Show(true);
+            PlayerController.GetInstance().obj.SetActive(false);
+            EnemyController.GetInstance().obj.SetActive(false);
+            obj.SetActive(true);
 
-        for (int i = 0; i < playerPowerList.Count; i++)
-            player_labels[i].text = playerPowerList[i].ToString();
-        for (int i = 0; i < enemyPowerList.Count; i++)
-            enemy_labels[i].text = enemyPowerList[i].ToString();
-    }
+            if (isWin)
+                label.text = "游戏结束，你赢了！";
+            else
+                label.text = "游戏结束，你输了";
 
-    public void AddPower(int playerPower,int enemyPower)
-    {
-        playerPowerList.Add(playerPower);
-        enemyPowerList.Add(enemyPower);
+            for (int i = 0; i < playerPowerList.Count; i++)
+                player_labels[i].text = playerPowerList[i].ToString();
+            for (int i = 0; i < enemyPowerList.Count; i++)
+                enemy_labels[i].text = enemyPowerList[i].ToString();
+        }
+
+        public void AddPower(int playerPower, int enemyPower)
+        {
+            playerPowerList.Add(playerPower);
+            enemyPowerList.Add(enemyPower);
+        }
     }
 }

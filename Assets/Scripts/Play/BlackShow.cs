@@ -2,10 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BlackShow : Singleton<BlackShow> {
-
-    public void Show(bool isShow)
+namespace GwentCard.Play
+{
+    public class BlackShow : Singleton<BlackShow>
     {
-        gameObject.SetActive(isShow);
+        public void Show(bool isShow)
+        {
+            gameObject.SetActive(isShow);
+        }
     }
 }

@@ -1,29 +1,33 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using GwentCard.Play;
 
-public class NilfgaardianBehavior1 : LeaderBehaviorBase {
-
-    public sealed override void Play()
+namespace GwentCard.Leader
+{
+    public class NilfgaardianBehavior1 : LeaderBehaviorBase
     {
-        int index = -1;
-        for (int i = 0; i < PlayerController.GetInstance().grids[0].childCount; i++)
-            if (PlayerController.GetInstance().grids[0].GetChild(i).GetComponent<CardProperty>().effect == Global.Effect.rain) index = i;
-
-        if (index != -1)
+        public sealed override void Play()
         {
-            WeatherController.GetInstance().Rain();
-            PlayerController.GetInstance().grids[0].GetChild(index).SetTarget(WeatherController.GetInstance().grid);
+            int index = -1;
+            for (int i = 0; i < PlayerController.GetInstance().grids[0].childCount; i++)
+                if (PlayerController.GetInstance().grids[0].GetChild(i).GetComponent<CardProperty>().effect == Global.Effect.rain) index = i;
+
+            if (index != -1)
+            {
+                WeatherController.GetInstance().Rain();
+                PlayerController.GetInstance().grids[0].GetChild(index).SetTarget(WeatherController.GetInstance().grid);
+            }
+
+            base.Play();
         }
 
-        base.Play();
-    }
-
-    public sealed override bool IsEnabled
-    {
-        get
+        public sealed override bool IsEnabled
         {
-            return (!WeatherController.GetInstance().weather[2] && isEnabled);
+            get
+            {
+                return (!WeatherController.GetInstance().weather[2] && isEnabled);
+            }
         }
     }
 }

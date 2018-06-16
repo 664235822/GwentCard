@@ -1,27 +1,32 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using GwentCard.Play;
 
-public class LeaderBehaviorBase : MonoBehaviour {
-    public string Message;
-    protected bool isEnabled = true;
-
-    public virtual void Play()
+namespace GwentCard.Leader
+{
+    public class LeaderBehaviorBase : MonoBehaviour
     {
-        isEnabled = false;
-        ShowCards.GetInstance().Hide();
-        PlayerController.GetInstance().PlayOver(transform);
-    }
+        public string Message;
+        protected bool isEnabled = true;
 
-    public virtual bool IsEnabled
-    {
-        get
+        public virtual void Play()
         {
-            return isEnabled;
+            isEnabled = false;
+            ShowCards.GetInstance().Hide();
+            PlayerController.GetInstance().PlayOver(transform);
         }
-        set
+
+        public virtual bool IsEnabled
         {
-            isEnabled = value;
+            get
+            {
+                return isEnabled;
+            }
+            set
+            {
+                isEnabled = value;
+            }
         }
     }
 }

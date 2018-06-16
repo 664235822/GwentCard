@@ -2,18 +2,22 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TweenMessage : Singleton<TweenMessage> {
-    [SerializeField] TweenAlpha obj;
-    [SerializeField] UILabel label;
-	
-    public IEnumerator Play(string message)
+namespace GwentCard.Play
+{
+    public class TweenMessage : Singleton<TweenMessage>
     {
-        label.text = message;
+        [SerializeField] TweenAlpha obj;
+        [SerializeField] UILabel label;
 
-        obj.PlayForward();
-        yield return new WaitForSeconds(2.0f);
-        obj.PlayReverse();
-        yield return new WaitForSeconds(1.0f);
-        CoroutineManager.GetInstance().Finish();
+        public IEnumerator Play(string message)
+        {
+            label.text = message;
+
+            obj.PlayForward();
+            yield return new WaitForSeconds(2.0f);
+            obj.PlayReverse();
+            yield return new WaitForSeconds(1.0f);
+            CoroutineManager.GetInstance().Finish();
+        }
     }
 }
