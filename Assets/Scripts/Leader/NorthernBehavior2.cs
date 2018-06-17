@@ -18,7 +18,7 @@ namespace GwentCard.Leader
             get
             {
                 bool[] weather = WeatherController.GetInstance().weather;
-                return (weather[0] || weather[1] || weather[2]) && enabled;
+                return (weather[0] || weather[1] || weather[2]) && isEnabled;
             }
         }
     }

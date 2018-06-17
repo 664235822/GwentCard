@@ -18,7 +18,7 @@ namespace GwentCard.Play
         {
             int index = 0;
             for (int i = 0; i < ShowCards.GetInstance().totalGrid.childCount; i++)
-                if (ShowCards.GetInstance().grid.GetChild(i).name == name) index = i;
+                if (string.Format("{0}(Clone)", ShowCards.GetInstance().totalGrid.GetChild(i).name) == name) index = i;
             ShowCards.GetInstance().card = ShowCards.GetInstance().totalGrid.GetChild(index);
 
             switch (cardProperty.effect)
