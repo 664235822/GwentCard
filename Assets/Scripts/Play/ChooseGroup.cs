@@ -22,8 +22,7 @@ namespace GwentCard.Play
             xml.Load(Global.path);
             XmlElement root = xml.DocumentElement;
             XmlNode group = root.SelectSingleNode(string.Format("/root/{0}", name));
-            if (group.Attributes["save"].Value == true.ToString()) button.isEnabled = true;
-            else button.isEnabled = false;
+            button.isEnabled = bool.Parse(group.Attributes["save"].Value);
         }
 
         public void OnClick()

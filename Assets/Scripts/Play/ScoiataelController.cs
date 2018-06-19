@@ -12,11 +12,7 @@ namespace GwentCard.Play
         // Use this for initialization
         void Start()
         {
-            if (transform.parent.GetComponent<UIButton>().isEnabled)
-                button.isEnabled = true;
-            else
-                button.isEnabled = false;
-
+            button.isEnabled = transform.parent.GetComponent<UIButton>().isEnabled;
             GameController.GetInstance().offensive = true;
         }
 

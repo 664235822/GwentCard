@@ -14,11 +14,11 @@ namespace GwentCard.Configuration
         [HideInInspector] public Global.List list = Global.List.leader;
         GameObject[] grids = new GameObject[4];
         readonly string[] groupLabelText = {
-        "赢得一局后可从牌组中抽一张牌",
-        "平手时获得胜利",
-        "每局过后随机选择一张怪物单位牌待在战场上",
-        "战斗开始时，你可以决定谁先行动"
-    };
+            "赢得一局后可从牌组中抽一张牌",
+            "平手时获得胜利",
+            "每局过后随机选择一张怪物单位牌待在战场上",
+            "战斗开始时，你可以决定谁先行动"
+        };
 
         // Use this for initialization
         void Start()
