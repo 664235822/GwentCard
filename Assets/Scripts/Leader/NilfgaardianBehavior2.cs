@@ -16,10 +16,10 @@ namespace GwentCard.Leader
             int random2 = random.Next(0, max);
             int random3 = random.Next(0, max);
             ArrayList cardList = new ArrayList();
-            cardList.Add(grid.GetChild(random1).gameObject);
-            cardList.Add(grid.GetChild(random2).gameObject);
-            cardList.Add(grid.GetChild(random3).gameObject);
-            ShowCards.GetInstance().ShowLeader(cardList, null, () => base.Play());
+            cardList.Add(Instantiate(grid.GetChild(random1).gameObject));
+            cardList.Add(Instantiate(grid.GetChild(random2).gameObject));
+            cardList.Add(Instantiate(grid.GetChild(random3).gameObject));
+            ShowCards.GetInstance().ShowLeader(cardList, grid, false, () => base.Play());
         }
 
         public sealed override bool IsEnabled

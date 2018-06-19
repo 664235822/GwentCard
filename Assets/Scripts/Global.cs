@@ -15,8 +15,11 @@ namespace GwentCard
 
         public static void SetTarget(this Transform card, Transform target)
         {
-            UIGrid cardGrid = card.parent.GetComponent<UIGrid>();
+            Transform cardParent = card.parent;
+            UIGrid cardGrid = null;
+            if (cardParent != null) cardGrid = cardParent.GetComponent<UIGrid>();
             card.SetParent(target);
+            card.localScale = new Vector3(1, 1, 1);
             UIGrid targetGrid = target.GetComponent<UIGrid>();
             if (cardGrid != null) cardGrid.Reposition();
             if (targetGrid != null) targetGrid.Reposition();

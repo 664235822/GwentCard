@@ -17,10 +17,16 @@ namespace GwentCard.Leader
                     grid.GetChild(i).GetComponent<CardProperty>().effect == Global.Effect.frost ||
                     grid.GetChild(i).GetComponent<CardProperty>().effect == Global.Effect.fog ||
                     grid.GetChild(i).GetComponent<CardProperty>().effect == Global.Effect.rain)
-                    cardList.Add(grid.GetChild(i).gameObject);
+                {
+                    GameObject card = Instantiate(grid.GetChild(i).gameObject);
+                    UIButton button = card.GetComponent<UIButton>();
+                    EventDelegate.Add(button.onClick, () => card.GetComponent<CardBehavior>().Play());
+                    EventDelegate.Add(button.onClick, () => isEnabled = false);
+                    cardList.Add(card);
+                }
             }
 
-            ShowCards.GetInstance().ShowLeader(cardList, () => isEnabled = false, () => ShowCards.GetInstance().Hide());
+            ShowCards.GetInstance().ShowLeader(cardList, grid, true, () => ShowCards.GetInstance().Hide());
         }
     }
 }

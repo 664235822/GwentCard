@@ -143,33 +143,22 @@ namespace GwentCard.Play
             grid.GetComponent<UIGrid>().Reposition();
         }
 
-        public void ShowLeader(ArrayList cards, EventDelegate.Callback callback, EventDelegate.Callback returnCallBack)
+        public void ShowLeader(ArrayList cardList, Transform targetGrid, bool buttonEnabled, EventDelegate.Callback returnCallBack)
         {
             OKButton.gameObject.SetActive(false);
             returnButton.onClick.Clear();
             EventDelegate.Add(returnButton.onClick, returnCallBack);
             grid.DestroyChildren();
+            totalGrid = targetGrid;
 
-            if (LeaderController.GetInstance().obj[0].GetComponent<LeaderBehaviorBase>().GetType() == typeof(MonsterBehavior1))
-                totalGrid = PlayerController.GetInstance().grids[0];
-
-            for (int i = 0; i < cards.Count; i++)
+            for (int i = 0; i < cardList.Count; i++)
             {
-                GameObject card = Instantiate(cards[i] as GameObject, grid);
+                GameObject card = cardList[i] as GameObject;
+                card.transform.SetTarget(grid);
                 UISprite sprite = card.GetComponent<UISprite>();
                 sprite.width = 250;
                 sprite.height = 450;
-                UIButton cardButton = card.GetComponent<UIButton>();
-                if (callback != null)
-                {
-                    EventDelegate.Add(cardButton.onClick, callback);
-                    cardButton.enabled = true;
-                }
-                else cardButton.enabled = false;
-
-                if (LeaderController.GetInstance().obj[0].GetComponent<LeaderBehaviorBase>().GetType() == typeof(MonsterBehavior1))
-                    EventDelegate.Add(cardButton.onClick, () => card.GetComponent<CardBehavior>().Play());
-
+                card.GetComponent<UIButton>().enabled = buttonEnabled;
                 card.GetComponent<UIDragScrollView>().scrollView = scrollView;
                 card.GetComponent<BoxCollider>().size = new Vector3(250, 450, 1);
             }
