@@ -151,6 +151,14 @@ namespace GwentCard.Play
             grid.DestroyChildren();
             totalGrid = targetGrid;
 
+            if (LeaderController.GetInstance().obj[0].GetComponent<LeaderBehaviorBase>().GetType() == typeof(MonsterBehavior3))
+            {
+                if (replaceInt < 2)
+                    label.text = string.Format("请选择要丢弃的卡牌 {0}/2", replaceInt);
+                else
+                    label.text = "请从牌组中选取卡牌";
+            }
+
             for (int i = 0; i < cardList.Count; i++)
             {
                 GameObject card = cardList[i] as GameObject;
