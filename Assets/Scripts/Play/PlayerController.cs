@@ -62,11 +62,8 @@ namespace GwentCard.Play
             UISprite leaderSprite = leaderObject.GetComponent<UISprite>();
             leaderSprite.atlas = totalAtlas;
             leaderSprite.spriteName = leaderNode.Attributes["sprite"].Value;
-            if (leaderNode.Attributes["behavior"] != null)
-            {
-                leaderObject.AddComponent(System.Type.GetType(leaderNode.Attributes["behavior"].Value));
-                leaderObject.GetComponent<LeaderBehaviorBase>().Message = leaderNode.Attributes["message"].Value;
-            }
+            leaderObject.AddComponent(System.Type.GetType(leaderNode.Attributes["behavior"].Value));
+            leaderObject.GetComponent<LeaderBehaviorBase>().Message = leaderNode.Attributes["message"].Value;
 
             XmlNodeList special = xmlNode.SelectSingleNode("special").ChildNodes;
             foreach (XmlNode cardNode in special)

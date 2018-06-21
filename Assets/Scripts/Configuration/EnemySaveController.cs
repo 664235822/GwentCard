@@ -28,11 +28,8 @@ namespace GwentCard.Configuration
                     Transform card = leader1Transform.GetChild(i);
                     XmlElement cardElement = xml.CreateElement(card.name);
                     cardElement.SetAttribute("sprite", card.GetComponent<UISprite>().spriteName);
-                    if (card.GetComponent<LeaderBehaviorBase>() != null)
-                    {
-                        cardElement.SetAttribute("behavior", card.GetComponent<LeaderBehaviorBase>().GetType().ToString());
-                        cardElement.SetAttribute("message", card.GetComponent<LeaderBehaviorBase>().Message);
-                    }
+                    cardElement.SetAttribute("behavior", card.GetComponent<LeaderBehaviorBase>().GetType().ToString());
+                    cardElement.SetAttribute("message", card.GetComponent<LeaderBehaviorBase>().Message);
                     leader1.AppendChild(cardElement);
                 }
 

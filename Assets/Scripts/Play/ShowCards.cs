@@ -52,17 +52,13 @@ namespace GwentCard.Play
                 case ShowBehavior.leader:
                     label.text = "领导牌";
                     LeaderBehaviorBase leaderBehavior = LeaderController.GetInstance().obj[0].GetComponent<LeaderBehaviorBase>();
-                    if (leaderBehavior != null)
-                    {
-                        messageLabel.text = leaderBehavior.Message;
-                        messageLabel.gameObject.SetActive(true);
-                        popupList.gameObject.SetActive(false);
-                        OKButton.gameObject.SetActive(true);
-                        OKButton.GetComponent<UIButton>().isEnabled = leaderBehavior.IsEnabled;
-                        EventDelegate.Add(OKButton.onClick, () => leaderBehavior.Play());
-                        break;
-                    }
-                    else goto default;
+                    messageLabel.text = leaderBehavior.Message;
+                    messageLabel.gameObject.SetActive(true);
+                    popupList.gameObject.SetActive(false);
+                    OKButton.gameObject.SetActive(true);
+                    OKButton.GetComponent<UIButton>().isEnabled = leaderBehavior.IsEnabled;
+                    EventDelegate.Add(OKButton.onClick, () => leaderBehavior.Play());
+                    break;
                 case ShowBehavior.replace:
                     label.text = string.Format("请选择要替换的牌 {0}/2", replaceInt);
                     EventDelegate.Add(returnButton.onClick, () => GameController.GetInstance().StartGame());
