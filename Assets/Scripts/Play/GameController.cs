@@ -59,6 +59,7 @@ namespace GwentCard.Play
 
         public void Turn()
         {
+            TurnController.GetInstance().Clear();
             GameOver.GetInstance().AddPower(PowerController.GetInstance().player_total, PowerController.GetInstance().enemy_total);
             int power = PowerController.GetInstance().player_total - PowerController.GetInstance().enemy_total;
             GameBehavior gameBehavior = new GameBehavior();

@@ -149,8 +149,16 @@ namespace GwentCard.Play
         public void Play(Transform grid)
         {
             if (grid.childCount == 0) return;
-            int random = Random.Range(0, grid.childCount);
-            Transform card = grid.GetChild(random);
+            bool isTurn = AIController.GetInstance().AITurn();
+            int index = AIController.GetInstance().AICard(grid);
+
+            if (isTurn || index == -1)
+            {
+                TurnController.GetInstance().EnemyTurn();
+                return;
+            }
+
+            Transform card = grid.GetChild(index);
             CardProperty cardProperty = card.GetComponent<CardProperty>();
 
             switch (cardProperty.effect)
@@ -228,19 +236,32 @@ namespace GwentCard.Play
                     }
                     goto default;
                 case Global.Effect.dummy:
+                    int dummyGrid = 0;
+                    int dummyIndex = 0;
                     for (int i = 2; i < 5; i++)
-                    {
-                        if (grids[i].childCount == 0) continue;
-                        int dummyRandom = Random.Range(0, grids[i].childCount);
-                        card.SetTarget(grids[i]);
-                        grids[i].GetChild(dummyRandom).SetTarget(grid);
-                        break;
-                    }
+                        for (int ii = 0; ii < EnemyController.GetInstance().grids[i].childCount; ii++)
+                            if (EnemyController.GetInstance().grids[i].GetChild(ii).GetComponent<CardProperty>().effect == Global.Effect.spy ||
+                                EnemyController.GetInstance().grids[i].GetChild(ii).GetComponent<CardProperty>().effect == Global.Effect.nurse ||
+                                EnemyController.GetInstance().grids[i].GetChild(ii).GetComponent<CardProperty>().effect == Global.Effect.scorch ||
+                                EnemyController.GetInstance().grids[i].GetChild(ii).GetComponent<CardProperty>().effect == Global.Effect.warhorn)
+                            {
+                                dummyGrid = i;
+                                dummyIndex = ii;
+                            }
+                    card.SetTarget(grids[dummyGrid]);
+                    grids[dummyGrid].GetChild(dummyIndex).SetTarget(grid);
                     break;
                 case Global.Effect.warhorn:
                     if (cardProperty.line == Global.Line.empty)
                     {
-                        int line = Random.Range(0, 3);
+                        int line = 0;
+                        int maxCount =0;
+                        for (int i = 2; i < 5; i++)
+                            if (EnemyController.GetInstance().grids[i].childCount >= maxCount)
+                            {
+                                line = i - 2;
+                                maxCount = EnemyController.GetInstance().grids[i].childCount;
+                            }
                         if (!WarhornController.GetInstance().enemyWarhorn[line])
                         {
                             WarhornController.GetInstance().enemyWarhorn[line] = true;
@@ -259,7 +280,7 @@ namespace GwentCard.Play
                     int musterIndex = 0;
                     for (int i = 0; i < MusterController.GetInstance().musterCards.Length; i++)
                         for (int ii = 0; ii < MusterController.GetInstance().musterCards[i].Length; ii++)
-                            if (grid.GetChild(random).GetComponent<UISprite>().spriteName == MusterController.GetInstance().musterCards[i][ii])
+                            if (grid.GetChild(index).GetComponent<UISprite>().spriteName == MusterController.GetInstance().musterCards[i][ii])
                                 musterIndex = i;
 
                     for (int i = 0; i < MusterController.GetInstance().musterCards[musterIndex].Length; i++)
@@ -272,8 +293,11 @@ namespace GwentCard.Play
 
                     goto default;
                 case Global.Effect.agile:
-                    int agileRandom = Random.Range(0, 2);
-                    card.SetTarget(grids[agileRandom + 2]);
+                    int agileIndex = 0;
+                    for (int i = 0; i < 2; i++)
+                        if (!WeatherController.GetInstance().weather[i])
+                            agileIndex = i;
+                    card.SetTarget(grids[agileIndex + 2]);
                     break;
                 default:
                     card.SetTarget(grids[(int)cardProperty.line + 2]);
@@ -284,6 +308,8 @@ namespace GwentCard.Play
             StartCoroutine(LeaderController.GetInstance().EnemyTurnIndicator());
             Number();
             PowerController.GetInstance().Number();
+            if (TurnController.GetInstance().isTurned[0])
+                Play(grids[1]);
         }
     }
 }

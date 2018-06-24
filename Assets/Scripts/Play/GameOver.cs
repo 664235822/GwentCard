@@ -10,8 +10,8 @@ namespace GwentCard.Play
         [SerializeField] UILabel label;
         [SerializeField] UILabel[] player_labels;
         [SerializeField] UILabel[] enemy_labels;
-        ArrayList playerPowerList = new ArrayList();
-        ArrayList enemyPowerList = new ArrayList();
+        [HideInInspector] public ArrayList playerPowerList = new ArrayList();
+        [HideInInspector] public ArrayList enemyPowerList = new ArrayList();
 
         public void Show(bool isWin)
         {

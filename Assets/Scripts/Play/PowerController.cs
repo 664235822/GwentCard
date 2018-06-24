@@ -12,11 +12,13 @@ namespace GwentCard.Play
         [SerializeField] UISprite enemy_winner_indicator;
         [HideInInspector] public int player_total = 0;
         [HideInInspector] public int enemy_total = 0;
+        [HideInInspector] public int[] player = { 0, 0, 0 };
+        [HideInInspector] public int[] enemy = { 0, 0, 0 };
 
         public void Number()
         {
-            int[] player = { 0, 0, 0 };
-            int[] enemy = { 0, 0, 0 };
+            player = new int[3] { 0, 0, 0 };
+            enemy = new int[3] { 0, 0, 0 };
             int[] player_improve_neighbours = { 0, 0, 0 };
             int[] enemy_improve_neighbours = { 0, 0, 0 };
             Dictionary<string, int> player_same_type_morale = new Dictionary<string, int>();
