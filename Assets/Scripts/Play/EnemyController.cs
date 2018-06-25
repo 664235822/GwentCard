@@ -287,7 +287,7 @@ namespace GwentCard.Play
                         {
                             Transform musterCard = grids[0].GetChild(ii);
                             if (musterCard.GetComponent<UISprite>().spriteName == MusterController.GetInstance().musterCards[musterIndex][i])
-                                musterCard.SetTarget(grids[(int)card.GetComponent<CardProperty>().line + 2]);
+                                musterCard.SetTarget(grids[(int)musterCard.GetComponent<CardProperty>().line + 2]);
                         }
 
                     goto default;
