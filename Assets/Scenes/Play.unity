@@ -1102,6 +1102,7 @@ GameObject:
   m_Component:
   - component: {fileID: 112286555}
   - component: {fileID: 112286556}
+  - component: {fileID: 112286557}
   m_Layer: 8
   m_Name: turn_label
   m_TagString: Untagged
@@ -1191,6 +1192,54 @@ MonoBehaviour:
   mMaxLineHeight: 0
   mLineWidth: 0
   mMultiline: 1
+--- !u!114 &112286557
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 112286554}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e2747e3775af504da1a4d5a46c5a1ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  method: 0
+  style: 2
+  animationCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 1
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 1
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  ignoreTimeScale: 1
+  delay: 0
+  duration: 1
+  steeperCurves: 0
+  tweenGroup: 0
+  useFixedUpdate: 0
+  onFinished: []
+  eventReceiver: {fileID: 0}
+  callWhenFinished: 
+  from: 1
+  to: 0.5
 --- !u!1 &135555910
 GameObject:
   m_ObjectHideFlags: 0
@@ -5597,7 +5646,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 778074408}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -777, y: 160, z: 0}
+  m_LocalPosition: {x: -777, y: 163, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 366304285}
@@ -11518,7 +11567,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4818902021708988, guid: 5e3eda3479a605e4099c6ad0226c69c6, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 159
+      value: 162
       objectReference: {fileID: 0}
     - target: {fileID: 4818902021708988, guid: 5e3eda3479a605e4099c6ad0226c69c6, type: 2}
       propertyPath: m_LocalPosition.z
@@ -13119,7 +13168,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1900700345}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -731, y: 159, z: 0}
+  m_LocalPosition: {x: -731, y: 162, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 689842680}
@@ -14097,6 +14146,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2023485835}
   - component: {fileID: 2023485836}
+  - component: {fileID: 2023485837}
   m_Layer: 8
   m_Name: turn_label
   m_TagString: Untagged
@@ -14111,7 +14161,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2023485834}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -691, y: 114, z: 0}
+  m_LocalPosition: {x: -691, y: 111, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 689842680}
@@ -14186,6 +14236,54 @@ MonoBehaviour:
   mMaxLineHeight: 0
   mLineWidth: 0
   mMultiline: 1
+--- !u!114 &2023485837
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2023485834}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e2747e3775af504da1a4d5a46c5a1ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  method: 0
+  style: 2
+  animationCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 1
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 1
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  ignoreTimeScale: 1
+  delay: 0
+  duration: 1
+  steeperCurves: 0
+  tweenGroup: 0
+  useFixedUpdate: 0
+  onFinished: []
+  eventReceiver: {fileID: 0}
+  callWhenFinished: 
+  from: 1
+  to: 0.5
 --- !u!1 &2058272857
 GameObject:
   m_ObjectHideFlags: 0
@@ -14508,7 +14606,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4818902021708988, guid: 5e3eda3479a605e4099c6ad0226c69c6, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 159
+      value: 162
       objectReference: {fileID: 0}
     - target: {fileID: 4818902021708988, guid: 5e3eda3479a605e4099c6ad0226c69c6, type: 2}
       propertyPath: m_LocalPosition.z

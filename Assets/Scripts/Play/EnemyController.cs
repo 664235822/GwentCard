@@ -148,7 +148,6 @@ namespace GwentCard.Play
 
         public void Play(Transform grid)
         {
-            if (grid.childCount == 0) return;
             bool isTurn = AIController.GetInstance().AITurn();
             int index = AIController.GetInstance().AICard(grid);
 
