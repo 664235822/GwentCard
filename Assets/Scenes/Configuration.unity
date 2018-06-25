@@ -13417,12 +13417,12 @@ Prefab:
     - target: {fileID: 114497043296445316, guid: 51944738dbaaf644d86e3da5ef27e439,
         type: 2}
       propertyPath: effect
-      value: 5
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 114497043296445316, guid: 51944738dbaaf644d86e3da5ef27e439,
         type: 2}
       propertyPath: line
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 51944738dbaaf644d86e3da5ef27e439, type: 2}
