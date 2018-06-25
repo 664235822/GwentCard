@@ -110,12 +110,12 @@ namespace GwentCard.Play
 
             if (player_fail == 2)
             {
-                GameOver.GetInstance().Show(false);
+                CoroutineManager.GetInstance().AddTask(GameOver.GetInstance().Show(false));
                 return;
             }
             else if (enemy_fail == 2)
             {
-                GameOver.GetInstance().Show(true);
+                CoroutineManager.GetInstance().AddTask(GameOver.GetInstance().Show(true));
                 return;
             }
 

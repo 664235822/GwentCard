@@ -13,7 +13,7 @@ namespace GwentCard.Play
         [HideInInspector] public ArrayList playerPowerList = new ArrayList();
         [HideInInspector] public ArrayList enemyPowerList = new ArrayList();
 
-        public void Show(bool isWin)
+        public IEnumerator Show(bool isWin)
         {
             BlackShow.GetInstance().Show(true);
             PlayerController.GetInstance().obj.SetActive(false);
@@ -29,6 +29,8 @@ namespace GwentCard.Play
                 player_labels[i].text = playerPowerList[i].ToString();
             for (int i = 0; i < enemyPowerList.Count; i++)
                 enemy_labels[i].text = enemyPowerList[i].ToString();
+
+            yield return null;
         }
 
         public void AddPower(int playerPower, int enemyPower)
