@@ -15,10 +15,14 @@ namespace GwentCard.Play
         {
             isTurned[0] = true;
             playerLabel.SetActive(true);
-            EnemyController.GetInstance().Play(EnemyController.GetInstance().grids[1]);
 
             if (isTurned[0] && isTurned[1])
+            {
                 GameController.GetInstance().Turn();
+                return;
+            }
+
+            EnemyController.GetInstance().Play(EnemyController.GetInstance().grids[1]);
         }
 
         public void EnemyTurn()
