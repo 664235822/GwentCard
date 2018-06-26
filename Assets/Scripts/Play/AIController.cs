@@ -143,27 +143,34 @@ namespace GwentCard.Play
                 return true;
 
             if (TurnController.GetInstance().turnIndex == 0)
-                if (TurnController.GetInstance().isTurned[0] && (
-                    playerHandCount - enemyHandCount > 2 ||
+                if (TurnController.GetInstance().isTurned[0] &&
+                    (playerHandCount - enemyHandCount >= 1 ||
                     PowerController.GetInstance().enemy_total > PowerController.GetInstance().player_total ||
-                    PowerController.GetInstance().player_total - PowerController.GetInstance().enemy_total >= 15))
+                    PowerController.GetInstance().player_total - PowerController.GetInstance().enemy_total >= 25))
                     return true;
                 else if (PowerController.GetInstance().enemy_total - PowerController.GetInstance().player_total >= 15 ||
-                    PowerController.GetInstance().player_total - PowerController.GetInstance().enemy_total >= 25)
+                        PowerController.GetInstance().player_total - PowerController.GetInstance().enemy_total >= 25)
                     return true;
             if (TurnController.GetInstance().turnIndex == 1)
-                if (TurnController.GetInstance().isTurned[0] && (
-                    playerHandCount - enemyHandCount > 2 ||
-                    PowerController.GetInstance().enemy_total > PowerController.GetInstance().player_total))
-                    return true;
+            {
+                if (TurnController.GetInstance().isTurned[0])
+                {
+                    if ((int)GameOver.GetInstance().enemyPowerList[0] > (int)GameOver.GetInstance().playerPowerList[0] &&
+                        playerHandCount - enemyHandCount >= 1)
+                        return true;
+                    else if ((int)GameOver.GetInstance().playerPowerList[0] > (int)GameOver.GetInstance().enemyPowerList[0] &&
+                            PowerController.GetInstance().enemy_total > PowerController.GetInstance().player_total)
+                        return true;
+                }
                 else if ((int)GameOver.GetInstance().enemyPowerList[0] > (int)GameOver.GetInstance().playerPowerList[0] &&
-                        PowerController.GetInstance().player_total - PowerController.GetInstance().enemy_total >= 15)
+                        PowerController.GetInstance().player_total - PowerController.GetInstance().enemy_total >= 25)
                     return true;
                 else if ((int)GameOver.GetInstance().playerPowerList[0] > (int)GameOver.GetInstance().enemyPowerList[0] &&
                         PowerController.GetInstance().enemy_total - PowerController.GetInstance().player_total >= 15)
                     return true;
                 else if (PowerController.GetInstance().enemy_total - PowerController.GetInstance().player_total >= 25)
                     return true;
+            }
 
             return false;
         }
