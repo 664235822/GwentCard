@@ -34,14 +34,14 @@ namespace GwentCard.Play
                 else offensive = false;
             }
 
-            if (LeaderController.GetInstance().obj[0].GetComponent<LeaderBehaviorBase>().GetType() == typeof(NilfgaardianBehavior3))
+            if (LeaderController.GetInstance().obj[0].GetComponent<PlayerLeaderBehavior>().GetType() == typeof(NilfgaardianBehavior3))
             {
-                LeaderController.GetInstance().obj[0].GetComponent<LeaderBehaviorBase>().Play();
+                LeaderController.GetInstance().obj[0].GetComponent<PlayerLeaderBehavior>().Play();
                 CoroutineManager.GetInstance().AddTask(TweenMessage.GetInstance().Play("领导牌技能发动\r\n取消对手领导牌能力"));
             }
-            if (LeaderController.GetInstance().obj[0].GetComponent<LeaderBehaviorBase>().GetType() == typeof(ScoiataelBehavior2))
+            if (LeaderController.GetInstance().obj[0].GetComponent<PlayerLeaderBehavior>().GetType() == typeof(ScoiataelBehavior2))
             {
-                LeaderController.GetInstance().obj[0].GetComponent<LeaderBehaviorBase>().Play();
+                LeaderController.GetInstance().obj[0].GetComponent<PlayerLeaderBehavior>().Play();
                 CoroutineManager.GetInstance().AddTask(TweenMessage.GetInstance().Play("领导牌技能发动\r\n战斗开始时多摸一张牌"));
             }
 

@@ -5,7 +5,7 @@ using GwentCard.Play;
 
 namespace GwentCard.Leader
 {
-    public class ScoiataelBehavior2 : LeaderBehaviorBase
+    public class ScoiataelBehavior2 : PlayerLeaderBehavior
     {
         public sealed override void Play()
         {

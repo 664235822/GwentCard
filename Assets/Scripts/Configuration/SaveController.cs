@@ -152,8 +152,8 @@ namespace GwentCard.Configuration
                     if (list == "leader")
                     {
                         cardElement.SetAttribute("sprite", card.GetComponent<UISprite>().spriteName);
-                        cardElement.SetAttribute("behavior", card.GetComponent<LeaderBehaviorBase>().GetType().ToString());
-                        cardElement.SetAttribute("message", card.GetComponent<LeaderBehaviorBase>().Message);
+                        cardElement.SetAttribute("behavior", card.GetComponent<PlayerLeaderBehavior>().GetType().ToString());
+                        cardElement.SetAttribute("message", card.GetComponent<PlayerLeaderBehavior>().message);
                     }
                     else
                     {

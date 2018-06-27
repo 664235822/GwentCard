@@ -51,8 +51,8 @@ namespace GwentCard.Play
                     goto default;
                 case ShowBehavior.leader:
                     label.text = "领导牌";
-                    LeaderBehaviorBase leaderBehavior = LeaderController.GetInstance().obj[0].GetComponent<LeaderBehaviorBase>();
-                    messageLabel.text = leaderBehavior.Message;
+                    PlayerLeaderBehavior leaderBehavior = LeaderController.GetInstance().obj[0].GetComponent<PlayerLeaderBehavior>();
+                    messageLabel.text = leaderBehavior.message;
                     messageLabel.gameObject.SetActive(true);
                     popupList.gameObject.SetActive(false);
                     OKButton.gameObject.SetActive(true);
@@ -149,7 +149,7 @@ namespace GwentCard.Play
             grid.DestroyChildren();
             totalGrid = targetGrid;
 
-            if (LeaderController.GetInstance().obj[0].GetComponent<LeaderBehaviorBase>().GetType() == typeof(MonsterBehavior3))
+            if (LeaderController.GetInstance().obj[0].GetComponent<PlayerLeaderBehavior>().GetType() == typeof(MonsterBehavior3))
             {
                 if (replaceInt < 2)
                     label.text = string.Format("请选择要丢弃的卡牌 {0}/2", replaceInt);

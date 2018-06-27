@@ -5,7 +5,7 @@ using GwentCard.Play;
 
 namespace GwentCard.Leader
 {
-    public class MonsterBehavior3 : LeaderBehaviorBase
+    public class MonsterBehavior3 : PlayerLeaderBehavior
     {
         public sealed override void Play()
         {
