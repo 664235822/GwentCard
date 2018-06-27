@@ -11,6 +11,7 @@ namespace GwentCard.Play
         public GameObject cardPerfab;
         [SerializeField] TweenAlpha[] player_life_gem;
         [SerializeField] TweenAlpha[] enemy_life_gem;
+        [SerializeField] UIButton turnButton;
         [HideInInspector] public bool offensive = true;
         enum GameBehavior { win, lose, dogfall }
         int player_fail = 0;
@@ -110,11 +111,13 @@ namespace GwentCard.Play
 
             if (player_fail == 2)
             {
+                turnButton.isEnabled = false;
                 CoroutineManager.GetInstance().AddTask(GameOver.GetInstance().Show(false));
                 return;
             }
             else if (enemy_fail == 2)
             {
+                turnButton.isEnabled = false;
                 CoroutineManager.GetInstance().AddTask(GameOver.GetInstance().Show(true));
                 return;
             }

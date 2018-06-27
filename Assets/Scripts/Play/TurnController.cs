@@ -36,11 +36,11 @@ namespace GwentCard.Play
 
         public void Clear()
         {
+            turnIndex++;
             playerLabel.SetActive(false);
             enemyLabel.SetActive(false);
             isTurned[0] = false;
             isTurned[1] = false;
-            turnIndex++;
         }
     }
 }

@@ -5863,6 +5863,12 @@ Prefab:
 Transform:
   m_PrefabParentObject: {fileID: 400002, guid: fee46b827274e694aa251e2d36700135, type: 2}
   m_PrefabInternal: {fileID: 795781032}
+--- !u!114 &795781034 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 11400000, guid: fee46b827274e694aa251e2d36700135,
+    type: 2}
+  m_PrefabInternal: {fileID: 795781032}
+  m_Script: {fileID: 11500000, guid: 1fdca5042b1d12a4890ec1bd4f04290d, type: 3}
 --- !u!1 &796338601
 GameObject:
   m_ObjectHideFlags: 0
@@ -11973,6 +11979,7 @@ MonoBehaviour:
   enemy_life_gem:
   - {fileID: 1711743097}
   - {fileID: 1378530772}
+  turnButton: {fileID: 795781034}
   offensive: 0
 --- !u!114 &1749374676
 MonoBehaviour:
