@@ -77,6 +77,7 @@ namespace GwentCard.Play
                     messageLabel.gameObject.SetActive(false);
                     popupList.gameObject.SetActive(true);
                     OKButton.gameObject.SetActive(true);
+                    OKButton.GetComponent<UIButton>().isEnabled = true;
                     EventDelegate.Add(OKButton.onClick, () => WarhornController.GetInstance().Warhorn());
                     break;
                 case ShowBehavior.agile:
@@ -85,6 +86,7 @@ namespace GwentCard.Play
                     popupList.gameObject.SetActive(true);
                     popupList.items.Remove("攻城");
                     OKButton.gameObject.SetActive(true);
+                    OKButton.GetComponent<UIButton>().isEnabled = true;
                     EventDelegate.Add(OKButton.onClick, () => AgileController.GetInstance().Agile());
                     break;
                 default:
