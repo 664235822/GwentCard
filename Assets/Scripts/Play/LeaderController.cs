@@ -26,7 +26,7 @@ namespace GwentCard.Play
         {
             turn_indicator[1].gameObject.SetActive(true);
             turn_indicator[0].gameObject.SetActive(false);
-            PlayerLeaderBehavior leaderBehavior = obj[1].GetComponent<PlayerLeaderBehavior>();
+            EnemyLeaderBehavior leaderBehavior = obj[1].GetComponent<EnemyLeaderBehavior>();
             if (leaderBehavior.IsEnabled)
                 turn_indicator[1].spriteName = turn_indicator_string[1];
             else

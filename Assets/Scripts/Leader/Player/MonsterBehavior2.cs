@@ -10,7 +10,7 @@ namespace GwentCard.Leader
         public sealed override void Play()
         {
             WarhornController.GetInstance().playerWarhorn[0] = true;
-            Instantiate(transform).SetTarget(WarhornController.GetInstance().playerGrids[0]);
+            Instantiate(transform, WarhornController.GetInstance().playerGrids[0]);
 
             base.Play();
         }

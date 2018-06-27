@@ -68,7 +68,6 @@ namespace GwentCard.Play
             leaderSprite.atlas = totalAtlas;
             leaderSprite.spriteName = leaderNode.Attributes["sprite"].Value;
             leaderObject.AddComponent(System.Type.GetType(leaderNode.Attributes["behavior"].Value));
-            leaderObject.GetComponent<PlayerLeaderBehavior>().message = leaderNode.Attributes["message"].Value;
 
             XmlNodeList special = xmlNode.SelectSingleNode("special").ChildNodes;
             foreach (XmlNode cardNode in special)
@@ -140,7 +139,7 @@ namespace GwentCard.Play
             }
         }
 
-        void Number()
+        public void Number()
         {
             number_label.text = grids[1].childCount.ToString();
             deck_realms_label.text = grids[0].childCount.ToString();
@@ -150,6 +149,12 @@ namespace GwentCard.Play
         {
             bool isTurn = AIController.GetInstance().AITurn();
             int index = AIController.GetInstance().AICard(grid);
+
+            if (LeaderController.GetInstance().obj[1].GetComponent<EnemyLeaderBehavior>().IsEnabled)
+            {
+                LeaderController.GetInstance().obj[1].GetComponent<EnemyLeaderBehavior>().Play();
+                return;
+            }
 
             if (isTurn || index == -1)
             {
@@ -254,20 +259,16 @@ namespace GwentCard.Play
                     if (cardProperty.line == Global.Line.empty)
                     {
                         int line = 0;
-                        int maxCount =0;
+                        int maxCount = 0;
                         for (int i = 2; i < 5; i++)
-                            if (EnemyController.GetInstance().grids[i].childCount >= maxCount)
+                            if (EnemyController.GetInstance().grids[i].childCount >= maxCount &&
+                                !WarhornController.GetInstance().enemyWarhorn[i])
                             {
                                 line = i - 2;
                                 maxCount = EnemyController.GetInstance().grids[i].childCount;
                             }
-                        if (!WarhornController.GetInstance().enemyWarhorn[line])
-                        {
-                            WarhornController.GetInstance().enemyWarhorn[line] = true;
-                            card.SetTarget(WarhornController.GetInstance().enemyGrids[line]);
-                        }
-                        else
-                            card.SetTarget(grids[5]);
+                        WarhornController.GetInstance().enemyWarhorn[line] = true;
+                        card.SetTarget(WarhornController.GetInstance().enemyGrids[line]);
                         break;
                     }
                     else

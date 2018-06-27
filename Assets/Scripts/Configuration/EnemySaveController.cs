@@ -28,8 +28,7 @@ namespace GwentCard.Configuration
                     Transform card = leader1Transform.GetChild(i);
                     XmlElement cardElement = xml.CreateElement(card.name);
                     cardElement.SetAttribute("sprite", card.GetComponent<UISprite>().spriteName);
-                    cardElement.SetAttribute("behavior", card.GetComponent<PlayerLeaderBehavior>().GetType().ToString());
-                    cardElement.SetAttribute("message", card.GetComponent<PlayerLeaderBehavior>().message);
+                    cardElement.SetAttribute("behavior", card.GetComponent<EnemyLeaderBehavior>().GetType().ToString());
                     leader1.AppendChild(cardElement);
                 }
 
@@ -96,11 +95,7 @@ namespace GwentCard.Configuration
                     Transform card = leader2Transform.GetChild(i);
                     XmlElement cardElement = xml.CreateElement(card.name);
                     cardElement.SetAttribute("sprite", card.GetComponent<UISprite>().spriteName);
-                    if (card.GetComponent<PlayerLeaderBehavior>() != null)
-                    {
-                        cardElement.SetAttribute("behavior", card.GetComponent<PlayerLeaderBehavior>().GetType().ToString());
-                        cardElement.SetAttribute("message", card.GetComponent<PlayerLeaderBehavior>().message);
-                    }
+                    cardElement.SetAttribute("behavior", card.GetComponent<EnemyLeaderBehavior>().GetType().ToString());
                     leader2.AppendChild(cardElement);
                 }
 
@@ -167,11 +162,7 @@ namespace GwentCard.Configuration
                     Transform card = leader3Transform.GetChild(i);
                     XmlElement cardElement = xml.CreateElement(card.name);
                     cardElement.SetAttribute("sprite", card.GetComponent<UISprite>().spriteName);
-                    if (card.GetComponent<PlayerLeaderBehavior>() != null)
-                    {
-                        cardElement.SetAttribute("behavior", card.GetComponent<PlayerLeaderBehavior>().GetType().ToString());
-                        cardElement.SetAttribute("message", card.GetComponent<PlayerLeaderBehavior>().message);
-                    }
+                    cardElement.SetAttribute("behavior", card.GetComponent<EnemyLeaderBehavior>().GetType().ToString());
                     leader3.AppendChild(cardElement);
                 }
 
@@ -238,11 +229,7 @@ namespace GwentCard.Configuration
                     Transform card = leader4Transform.GetChild(i);
                     XmlElement cardElement = xml.CreateElement(card.name);
                     cardElement.SetAttribute("sprite", card.GetComponent<UISprite>().spriteName);
-                    if (card.GetComponent<PlayerLeaderBehavior>() != null)
-                    {
-                        cardElement.SetAttribute("behavior", card.GetComponent<PlayerLeaderBehavior>().GetType().ToString());
-                        cardElement.SetAttribute("message", card.GetComponent<PlayerLeaderBehavior>().message);
-                    }
+                    cardElement.SetAttribute("behavior", card.GetComponent<EnemyLeaderBehavior>().GetType().ToString());
                     leader4.AppendChild(cardElement);
                 }
 

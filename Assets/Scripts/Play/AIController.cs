@@ -47,10 +47,13 @@ namespace GwentCard.Play
                 WeatherController.GetInstance().weather[2]))
                 return index;//晴天
 
-            if (HasCard(Global.Effect.warhorn, out index) && (
-                EnemyController.GetInstance().grids[2].childCount > 3 ||
-                EnemyController.GetInstance().grids[3].childCount > 3 ||
-                EnemyController.GetInstance().grids[4].childCount > 3))
+            if (HasCard(Global.Effect.warhorn, out index) &&
+                (EnemyController.GetInstance().grids[2].childCount > 3 && 
+                !WarhornController.GetInstance().enemyWarhorn[0]) ||
+                (EnemyController.GetInstance().grids[3].childCount > 3 &&
+                !WarhornController.GetInstance().enemyWarhorn[1]) || 
+                (EnemyController.GetInstance().grids[4].childCount > 3 &&
+                !WarhornController.GetInstance().enemyWarhorn[2]))
                 return index;//战斗号角
 
             bool isDummy = false;

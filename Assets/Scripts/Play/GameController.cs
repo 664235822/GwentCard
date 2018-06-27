@@ -45,6 +45,17 @@ namespace GwentCard.Play
                 LeaderController.GetInstance().obj[0].GetComponent<PlayerLeaderBehavior>().Play();
                 CoroutineManager.GetInstance().AddTask(TweenMessage.GetInstance().Play("领导牌技能发动\r\n战斗开始时多摸一张牌"));
             }
+            if (LeaderController.GetInstance().obj[1].GetComponent<EnemyLeaderBehavior>().GetType() == typeof(EnemyNilfgaardianBehavior3))
+            {
+                LeaderController.GetInstance().obj[1].GetComponent<EnemyLeaderBehavior>().Play();
+                CoroutineManager.GetInstance().AddTask(TweenMessage.GetInstance().Play("敌方领导牌技能发动\r\n取消我方领导牌能力"));
+            }
+            if (LeaderController.GetInstance().obj[1].GetComponent<EnemyLeaderBehavior>().GetType() == typeof(EnemyScoiataelBehavior2))
+            {
+                LeaderController.GetInstance().obj[1].GetComponent<EnemyLeaderBehavior>().Play();
+                CoroutineManager.GetInstance().AddTask(TweenMessage.GetInstance().Play("敌方领导牌技能发动\r\n战斗开始时多摸一张牌"));
+            }
+
 
             if (offensive)
             {

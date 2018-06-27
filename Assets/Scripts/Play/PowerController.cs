@@ -6,8 +6,8 @@ namespace GwentCard.Play
 {
     public class PowerController : Singleton<PowerController>
     {
-        public UILabel[] player_power_label;
-        public UILabel[] enemy_power_label;
+        [SerializeField] UILabel[] player_power_label;
+        [SerializeField] UILabel[] enemy_power_label;
         [SerializeField] UISprite player_winner_indicator;
         [SerializeField] UISprite enemy_winner_indicator;
         [HideInInspector] public int player_total = 0;
