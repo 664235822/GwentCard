@@ -180,12 +180,12 @@ namespace GwentCard.Play
             }
             for (int i = 0; i < 3; i++)
             {
-                if (WarhornController.GetInstance().playerGrids[i].childCount == 1)
+                if (WarhornController.GetInstance().playerWarhorn[i])
                 {
                     WarhornController.GetInstance().playerGrids[i].GetChild(0).SetTarget(PlayerController.GetInstance().grids[5]);
                     WarhornController.GetInstance().playerWarhorn[i] = false;
                 }
-                if (WarhornController.GetInstance().enemyGrids[i].childCount == 1)
+                if (WarhornController.GetInstance().enemyWarhorn[i])
                 {
                     WarhornController.GetInstance().enemyGrids[i].GetChild(0).SetTarget(EnemyController.GetInstance().grids[5]);
                     WarhornController.GetInstance().enemyWarhorn[i] = false;

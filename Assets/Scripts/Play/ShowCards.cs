@@ -65,7 +65,12 @@ namespace GwentCard.Play
                     goto default;
                 case ShowBehavior.nurse:
                     label.text = "从墓地中打出卡牌";
-                    goto default;
+                    totalGrid = showGrid;
+                    messageLabel.gameObject.SetActive(false);
+                    popupList.gameObject.SetActive(false);
+                    OKButton.gameObject.SetActive(false);
+                    EventDelegate.Add(returnButton.onClick, () => EnemyController.GetInstance().Play(EnemyController.GetInstance().grids[1]));
+                    break;
                 case ShowBehavior.dummy:
                     label.text = "请选择要替换的牌";
                     messageLabel.gameObject.SetActive(false);

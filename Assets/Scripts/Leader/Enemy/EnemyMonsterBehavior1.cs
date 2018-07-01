@@ -29,6 +29,8 @@ namespace GwentCard.Leader
             {
                 WeatherController.GetInstance().Frost();
                 (cardList[index] as Transform).SetTarget(WeatherController.GetInstance().grid);
+                base.Play();
+                return;
             }//霜冻
 
             index = HasWeather(Global.Effect.fog);
@@ -38,6 +40,8 @@ namespace GwentCard.Leader
             {
                 WeatherController.GetInstance().Fog();
                 (cardList[index] as Transform).SetTarget(WeatherController.GetInstance().grid);
+                base.Play();
+                return;
             }//雾天
 
             index = HasWeather(Global.Effect.rain);
@@ -47,6 +51,8 @@ namespace GwentCard.Leader
             {
                 WeatherController.GetInstance().Rain();
                 (cardList[index] as Transform).SetTarget(WeatherController.GetInstance().grid);
+                base.Play();
+                return;
             }//地形雨
 
             int playerPower = 0;
@@ -67,9 +73,9 @@ namespace GwentCard.Leader
             {
                 WeatherController.GetInstance().ClearSky();
                 (cardList[index] as Transform).SetTarget(EnemyController.GetInstance().grids[5]);
+                base.Play();
+                return;
             }//晴天
-
-            base.Play();
         }
 
         public sealed override bool IsEnabled
