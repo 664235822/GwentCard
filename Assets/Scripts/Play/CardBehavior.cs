@@ -130,8 +130,8 @@ namespace GwentCard.Play
 
             if (cardProperty.effect == Global.Effect.nurse)
             {
-                ShowCards.GetInstance().Show(ShowCards.ShowBehavior.nurse, PlayerController.GetInstance().grids[5], true);
                 CoroutineManager.GetInstance().AddTask(TweenCard.GetInstance().Play(ShowCards.GetInstance().card));
+                ShowCards.GetInstance().Show(ShowCards.ShowBehavior.nurse, PlayerController.GetInstance().grids[5], true);
                 return;
             }
 

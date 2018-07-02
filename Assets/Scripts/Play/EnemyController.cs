@@ -199,8 +199,10 @@ namespace GwentCard.Play
                     }
                     else goto default;
                 case Global.Effect.nurse:
+                    card.SetTarget(grids[(int)cardProperty.line + 2]);
+                    CoroutineManager.GetInstance().AddTask(TweenCard.GetInstance().Play(card));
                     Play(grids[5]);
-                    goto default;
+                    return;
                 case Global.Effect.scorch:
                     int maxPower = 0;
                     for (int i = 2; i < 5; i++)
