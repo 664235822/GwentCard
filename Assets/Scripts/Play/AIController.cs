@@ -64,7 +64,9 @@ namespace GwentCard.Play
                         EnemyController.GetInstance().grids[i].GetChild(ii).GetComponent<CardProperty>().effect == Global.Effect.scorch ||
                         EnemyController.GetInstance().grids[i].GetChild(ii).GetComponent<CardProperty>().effect == Global.Effect.warhorn)
                         isDummy = true;
-            if (HasCard(Global.Effect.dummy, out index) && isDummy)
+            if (HasCard(Global.Effect.dummy, out index)
+                && grid != EnemyController.GetInstance().grids[5]
+                && isDummy)
                 return index;//稻草人
 
             int playerMaxPower = 0;
