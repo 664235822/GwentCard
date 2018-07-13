@@ -10,6 +10,7 @@ namespace GwentCard.Leader
         public sealed override void Play()
         {
             EnemyController.GetInstance().DrawCards(1);
+            EnemyController.GetInstance().Number();
             isEnabled = false;
         }
     }

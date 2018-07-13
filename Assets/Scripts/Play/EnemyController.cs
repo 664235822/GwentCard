@@ -162,7 +162,15 @@ namespace GwentCard.Play
                 return;
             }
 
-            Transform card = grid.GetChild(index);
+            Transform card;
+            try
+            {
+                card = grid.GetChild(index);
+            }
+            catch
+            {
+                card = grid.GetChild(Random.Range(0, grid.childCount));
+            }
             CardProperty cardProperty = card.GetComponent<CardProperty>();
 
             switch (cardProperty.effect)
