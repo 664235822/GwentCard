@@ -493,6 +493,61 @@ static public class Localization
 	}
 
 	/// <summary>
+	/// Whether the specified key is present in the localization.
+	/// </summary>
+
+	static public bool Has (string key)
+	{
+		if (string.IsNullOrEmpty(key)) return false;
+
+		// Ensure we have a language to work with
+		if (!localizationHasBeenSet) LoadDictionary(PlayerPrefs.GetString("Language", "English"));
+		if (mLanguages == null) return false;
+
+		string lang = language;
+
+		if (mLanguageIndex == -1)
+		{
+			for (int i = 0; i < mLanguages.Length; ++i)
+			{
+				if (mLanguages[i] == lang)
+				{
+					mLanguageIndex = i;
+					break;
+				}
+			}
+		}
+
+		if (mLanguageIndex == -1)
+		{
+			mLanguageIndex = 0;
+			mLanguage = mLanguages[0];
+		}
+
+		var scheme = UICamera.currentScheme;
+
+		if (scheme == UICamera.ControlScheme.Touch)
+		{
+			string altKey = key + " Mobile";
+			if (mReplacement.ContainsKey(altKey)) return true;
+			if (mLanguageIndex != -1 && mDictionary.ContainsKey(altKey)) return true;
+			if (mOldDictionary.ContainsKey(altKey)) return true;
+		}
+		else if (scheme == UICamera.ControlScheme.Controller)
+		{
+			string altKey = key + " Controller";
+			if (mReplacement.ContainsKey(altKey)) return true;
+			if (mLanguageIndex != -1 && mDictionary.ContainsKey(altKey)) return true;
+			if (mOldDictionary.ContainsKey(altKey)) return true;
+		}
+
+		if (mReplacement.ContainsKey(key)) return true;
+		if (mLanguageIndex != -1 && mDictionary.ContainsKey(key)) return true;
+		if (mOldDictionary.ContainsKey(key)) return true;
+		return false;
+	}
+
+	/// <summary>
 	/// Localize the specified value.
 	/// </summary>
 

@@ -468,7 +468,11 @@ public abstract class UIRect : MonoBehaviour
 
 	public void Update ()
 	{
-		if (!mCam) ResetAndUpdateAnchors();
+		if (!mCam)
+		{
+			ResetAndUpdateAnchors();
+			mUpdateFrame = -1;
+		}
 		else if (!mAnchorsCached) ResetAnchors();
 
 		int frame = Time.frameCount;

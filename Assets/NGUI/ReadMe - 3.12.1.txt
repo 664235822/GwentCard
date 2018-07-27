@@ -1,7 +1,7 @@
 ----------------------------------------------
             NGUI: Next-Gen UI kit
  Copyright © 2011-2016 Tasharen Entertainment
-            Version 3.12.0
+            Version 3.12.1
     http://www.tasharen.com/?page_id=197
             support@tasharen.com
 ----------------------------------------------
@@ -18,9 +18,10 @@ If you've obtained NGUI via some other means then note that your license is effe
 as Tasharen cannot provide support for pirated and/or potentially modified software.
 
 Documentation can be found here: http://www.tasharen.com/forum/index.php?topic=6754.0
+Support is provided here: https://discord.gg/tasharen
 
-If you have any questions, suggestions, comments or feature requests, please
-drop by the NGUI forum, found here: http://www.tasharen.com/forum/index.php?board=1.0
+If you have any questions, please first search the forum: http://www.tasharen.com/forum/index.php?board=1.0
+If you don't find an answer, simply ask in the #ngui-support channel in Discord: https://discord.gg/tasharen
 
 --------------------
  How To Update NGUI
@@ -35,7 +36,7 @@ If you have a Standard License:
 3. Import NGUI from the updated Unity Package.
 
 ---------------------------------------
- Support, documentation, and tutorials
+ Documentation, and tutorials
 ---------------------------------------
 
 All can be found here: http://www.tasharen.com/forum/index.php?topic=6754.0
@@ -54,6 +55,10 @@ and it will not be included in the build of your game. It's only used in the edi
 -----------------
  Version History
 -----------------
+
+3.12.1
+- NEW: Added an option to UIDragDropItem to make it work not just with press-and-hold but also with click-move-click dragging actions.
+- Improved the UIKeyBinding a bit (to string and from string conversion to be exact).
 
 3.12.0
 - NEW: Popup list can now accept delegates when setting up the items programmatically (ideally anonymous delegates).

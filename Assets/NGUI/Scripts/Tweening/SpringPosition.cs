@@ -70,8 +70,6 @@ public class SpringPosition : MonoBehaviour
 		if (updateScrollView) mSv = NGUITools.FindInParents<UIScrollView>(gameObject);
 	}
 
-	void OnEnable () { mThreshold = 0f; }
-
 	/// <summary>
 	/// Advance toward the target position.
 	/// </summary>

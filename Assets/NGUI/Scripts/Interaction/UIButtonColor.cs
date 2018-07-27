@@ -222,7 +222,7 @@ public class UIButtonColor : UIWidgetContainer
 
 	protected virtual void OnPress (bool isPressed)
 	{
-		if (isEnabled && UICamera.currentTouch != null)
+		if (isEnabled)
 		{
 			if (!mInitDone) OnInit();
 
@@ -232,7 +232,7 @@ public class UIButtonColor : UIWidgetContainer
 				{
 					SetState(State.Pressed, false);
 				}
-				else if (UICamera.currentTouch.current == gameObject)
+				else if (UICamera.currentTouch != null && UICamera.currentTouch.current == gameObject)
 				{
 					if (UICamera.currentScheme == UICamera.ControlScheme.Controller)
 					{

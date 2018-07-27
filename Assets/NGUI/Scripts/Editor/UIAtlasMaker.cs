@@ -870,7 +870,7 @@ public class UIAtlasMaker : EditorWindow
 		GUILayout.EndHorizontal();
 
 		GUILayout.BeginHorizontal();
-		NGUISettings.autoUpgradeSprites = EditorGUILayout.Toggle("Auto-upgrade", NGUISettings.trueColorAtlas, GUILayout.Width(100f));
+		NGUISettings.autoUpgradeSprites = EditorGUILayout.Toggle("Auto-upgrade", NGUISettings.autoUpgradeSprites, GUILayout.Width(100f));
 		GUILayout.Label("replace textures with sprites", GUILayout.MinWidth(70f));
 		GUILayout.EndHorizontal();
 

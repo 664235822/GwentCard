@@ -125,8 +125,11 @@ public class UIGrid : UIWidgetContainer
 		for (int i = 0; i < myTrans.childCount; ++i)
 		{
 			Transform t = myTrans.GetChild(i);
+
 			if (!hideInactive || (t && t.gameObject.activeSelf))
-				list.Add(t);
+			{
+				if (!UIDragDropItem.IsDragged(t.gameObject)) list.Add(t);
+			}
 		}
 
 		// Sort the list using the desired sorting logic
@@ -379,7 +382,7 @@ public class UIGrid : UIWidgetContainer
 
 			if (animateSmoothly && Application.isPlaying && (pivot != UIWidget.Pivot.TopLeft || Vector3.SqrMagnitude(t.localPosition - pos) >= 0.0001f))
 			{
-				SpringPosition sp = SpringPosition.Begin(t.gameObject, pos, 15f);
+				var sp = SpringPosition.Begin(t.gameObject, pos, 15f);
 				sp.updateScrollView = true;
 				sp.ignoreTimeScale = true;
 			}
@@ -398,7 +401,7 @@ public class UIGrid : UIWidgetContainer
 		// Apply the origin offset
 		if (pivot != UIWidget.Pivot.TopLeft)
 		{
-			Vector2 po = NGUIMath.GetPivotOffset(pivot);
+			var po = NGUIMath.GetPivotOffset(pivot);
 
 			float fx, fy;
 

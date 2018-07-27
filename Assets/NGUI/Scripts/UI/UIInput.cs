@@ -120,6 +120,10 @@ public class UIInput : MonoBehaviour
 	[System.NonSerialized]
 	public bool selectAllTextOnFocus = true;
 
+	/// <summary>
+	/// Whether the input text will be submitted when the input field gets unselected. By default this is off, and submit event will only be called when Enter is used.
+	/// </summary>
+
 	public bool submitOnUnselect = false;
 
 	/// <summary>
