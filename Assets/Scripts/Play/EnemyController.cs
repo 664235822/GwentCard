@@ -250,6 +250,11 @@ namespace GwentCard.Play
                     }
                     goto default;
                 case Global.Effect.dummy:
+                    if (EnemyController.GetInstance().grids[2].childCount == 0 &&
+                        EnemyController.GetInstance().grids[3].childCount == 0 &&
+                        EnemyController.GetInstance().grids[4].childCount == 0)
+                        break;
+
                     int dummyGrid = 0;
                     int dummyIndex = 0;
                     for (int i = 2; i < 5; i++)
@@ -268,6 +273,11 @@ namespace GwentCard.Play
                 case Global.Effect.warhorn:
                     if (cardProperty.line == Global.Line.empty)
                     {
+                        if (EnemyController.GetInstance().grids[2].childCount == 0 &&
+                           EnemyController.GetInstance().grids[3].childCount == 0 &&
+                           EnemyController.GetInstance().grids[4].childCount == 0)
+                            break;
+                        
                         int line = 0;
                         int maxCount = 0;
                         for (int i = 2; i < 5; i++)

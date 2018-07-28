@@ -142,14 +142,12 @@ namespace GwentCard.Play
 
         public bool AITurn()
         {
-            int playerHandCount = PlayerController.GetInstance().grids[1].childCount;
-            int enemyHandCount = EnemyController.GetInstance().grids[1].childCount;
-            if (enemyHandCount == 0)
+            if (EnemyController.GetInstance().grids[1].childCount == 0)
                 return true;
 
             if (TurnController.GetInstance().turnIndex == 0)
                 if (TurnController.GetInstance().isTurned[0] &&
-                    (playerHandCount - enemyHandCount >= 1 ||
+                    (PlayerController.GetInstance().grids[1].childCount >= EnemyController.GetInstance().grids[1].childCount ||
                     PowerController.GetInstance().enemy_total > PowerController.GetInstance().player_total ||
                     PowerController.GetInstance().player_total - PowerController.GetInstance().enemy_total >= 25))
                     return true;
@@ -160,18 +158,19 @@ namespace GwentCard.Play
             {
                 if (TurnController.GetInstance().isTurned[0])
                 {
-                    if ((int)GameOver.GetInstance().enemyPowerList[0] > (int)GameOver.GetInstance().playerPowerList[0] &&
-                        playerHandCount - enemyHandCount >= 1)
+                    if ((int)GameOver.GetInstance().playerPowerList[0] > (int)GameOver.GetInstance().enemyPowerList[0] &&
+                       PowerController.GetInstance().enemy_total > PowerController.GetInstance().player_total)
                         return true;
-                    else if ((int)GameOver.GetInstance().playerPowerList[0] > (int)GameOver.GetInstance().enemyPowerList[0] &&
-                            PowerController.GetInstance().enemy_total > PowerController.GetInstance().player_total)
+                    else if ((int)GameOver.GetInstance().enemyPowerList[0] >= (int)GameOver.GetInstance().playerPowerList[0] &&
+                            (PlayerController.GetInstance().grids[1].childCount >= EnemyController.GetInstance().grids[1].childCount ||
+                             PowerController.GetInstance().enemy_total > PowerController.GetInstance().player_total))
                         return true;
                 }
-                else if ((int)GameOver.GetInstance().enemyPowerList[0] > (int)GameOver.GetInstance().playerPowerList[0] &&
-                        PowerController.GetInstance().player_total - PowerController.GetInstance().enemy_total >= 25)
-                    return true;
                 else if ((int)GameOver.GetInstance().playerPowerList[0] > (int)GameOver.GetInstance().enemyPowerList[0] &&
                         PowerController.GetInstance().enemy_total - PowerController.GetInstance().player_total >= 15)
+                    return true;
+                else if ((int)GameOver.GetInstance().enemyPowerList[0] >= (int)GameOver.GetInstance().playerPowerList[0] &&
+                        PowerController.GetInstance().player_total - PowerController.GetInstance().enemy_total >= 25)
                     return true;
                 else if (PowerController.GetInstance().enemy_total - PowerController.GetInstance().player_total >= 25)
                     return true;
