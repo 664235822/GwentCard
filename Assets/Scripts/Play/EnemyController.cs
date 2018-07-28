@@ -181,7 +181,8 @@ namespace GwentCard.Play
                     break;
                 case Global.Effect.clear_sky:
                     WeatherController.GetInstance().ClearSky();
-                    goto default;
+                    card.SetTarget(EnemyController.GetInstance().grids[5]);
+                    break;
                 case Global.Effect.frost:
                     if (!WeatherController.GetInstance().weather[0])
                     {
@@ -210,6 +211,10 @@ namespace GwentCard.Play
                     card.SetTarget(grids[(int)cardProperty.line + 2]);
                     CoroutineManager.GetInstance().AddTask(TweenCard.GetInstance().Play(card));
                     Play(grids[5]);
+                    PlayerController.GetInstance().obj.SetActive(false);
+                    obj.SetActive(false);
+                    PlayerController.GetInstance().obj.SetActive(true);
+                    obj.SetActive(true);
                     return;
                 case Global.Effect.scorch:
                     int maxPower = 0;
