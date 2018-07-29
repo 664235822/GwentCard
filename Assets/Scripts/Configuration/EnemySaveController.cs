@@ -9,7 +9,6 @@ namespace GwentCard.Configuration
 {
     public class EnemySaveController : MonoBehaviour
     {
-
         // Use this for initialization
         void Start()
         {

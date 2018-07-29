@@ -258,7 +258,10 @@ namespace GwentCard.Play
                     if (EnemyController.GetInstance().grids[2].childCount == 0 &&
                         EnemyController.GetInstance().grids[3].childCount == 0 &&
                         EnemyController.GetInstance().grids[4].childCount == 0)
+                    {
+                        card.SetTarget(grids[5]);
                         break;
+                    }
 
                     int dummyGrid = 0;
                     int dummyIndex = 0;
@@ -281,7 +284,10 @@ namespace GwentCard.Play
                         if (EnemyController.GetInstance().grids[2].childCount == 0 &&
                            EnemyController.GetInstance().grids[3].childCount == 0 &&
                            EnemyController.GetInstance().grids[4].childCount == 0)
+                        {
+                            card.SetTarget(grids[5]);
                             break;
+                        }
                         
                         int line = 0;
                         int maxCount = 0;
