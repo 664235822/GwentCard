@@ -246,18 +246,18 @@ namespace GwentCard.Play
                     }
                     for (int i = 2; i < 5; i++)
                     {
-                        for (int ii = EnemyController.GetInstance().grids[i].childCount - 1; ii >= 0; ii--)
+                        for (int ii = grids[i].childCount - 1; ii >= 0; ii--)
                         {
-                            Transform scorchCard = EnemyController.GetInstance().grids[i].GetChild(ii);
+                            Transform scorchCard = grids[i].GetChild(ii);
                             if (scorchCard.GetComponent<CardBehavior>().totalPower == maxPower && !scorchCard.GetComponent<CardProperty>().gold)
-                                scorchCard.SetTarget(EnemyController.GetInstance().grids[5]);
+                                scorchCard.SetTarget(grids[5]);
                         }
                     }
                     goto default;
                 case Global.Effect.dummy:
-                    if (EnemyController.GetInstance().grids[2].childCount == 0 &&
-                        EnemyController.GetInstance().grids[3].childCount == 0 &&
-                        EnemyController.GetInstance().grids[4].childCount == 0)
+                    if (grids[2].childCount == 0 &&
+                        grids[3].childCount == 0 &&
+                        grids[4].childCount == 0)
                     {
                         card.SetTarget(grids[5]);
                         break;
@@ -266,11 +266,11 @@ namespace GwentCard.Play
                     int dummyGrid = 0;
                     int dummyIndex = 0;
                     for (int i = 2; i < 5; i++)
-                        for (int ii = 0; ii < EnemyController.GetInstance().grids[i].childCount; ii++)
-                            if (EnemyController.GetInstance().grids[i].GetChild(ii).GetComponent<CardProperty>().effect == Global.Effect.spy ||
-                                EnemyController.GetInstance().grids[i].GetChild(ii).GetComponent<CardProperty>().effect == Global.Effect.nurse ||
-                                EnemyController.GetInstance().grids[i].GetChild(ii).GetComponent<CardProperty>().effect == Global.Effect.scorch ||
-                                EnemyController.GetInstance().grids[i].GetChild(ii).GetComponent<CardProperty>().effect == Global.Effect.warhorn)
+                        for (int ii = 0; ii < grids[i].childCount; ii++)
+                            if (grids[i].GetChild(ii).GetComponent<CardProperty>().effect == Global.Effect.spy ||
+                                grids[i].GetChild(ii).GetComponent<CardProperty>().effect == Global.Effect.nurse ||
+                                grids[i].GetChild(ii).GetComponent<CardProperty>().effect == Global.Effect.scorch ||
+                                grids[i].GetChild(ii).GetComponent<CardProperty>().effect == Global.Effect.warhorn)
                             {
                                 dummyGrid = i;
                                 dummyIndex = ii;
@@ -281,9 +281,9 @@ namespace GwentCard.Play
                 case Global.Effect.warhorn:
                     if (cardProperty.line == Global.Line.empty)
                     {
-                        if (EnemyController.GetInstance().grids[2].childCount == 0 &&
-                           EnemyController.GetInstance().grids[3].childCount == 0 &&
-                           EnemyController.GetInstance().grids[4].childCount == 0)
+                        if (grids[2].childCount == 0 &&
+                           grids[3].childCount == 0 &&
+                           grids[4].childCount == 0)
                         {
                             card.SetTarget(grids[5]);
                             break;
@@ -292,11 +292,11 @@ namespace GwentCard.Play
                         int line = 0;
                         int maxCount = 0;
                         for (int i = 2; i < 5; i++)
-                            if (EnemyController.GetInstance().grids[i].childCount >= maxCount &&
+                            if (grids[i].childCount >= maxCount &&
                                 !WarhornController.GetInstance().enemyWarhorn[i])
                             {
                                 line = i - 2;
-                                maxCount = EnemyController.GetInstance().grids[i].childCount;
+                                maxCount = grids[i].childCount;
                             }
                         WarhornController.GetInstance().enemyWarhorn[line] = true;
                         card.SetTarget(WarhornController.GetInstance().enemyGrids[line]);
