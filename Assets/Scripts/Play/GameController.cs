@@ -217,10 +217,16 @@ namespace GwentCard.Play
             if (PlayerController.GetInstance().group == Global.Group.monster && playerMonsterCard != null)
             {
                 playerMonsterCard.SetTarget(PlayerController.GetInstance().grids[(int)playerMonsterCard.GetComponent<CardProperty>().line + 2]);
+                if (playerMonsterCard.GetComponent<CardProperty>().effect == Global.Effect.warhorn)
+                    WarhornController.GetInstance().playerWarhorn[0] = true;
                 CoroutineManager.GetInstance().AddTask(TweenMessage.GetInstance().Play("领导牌技能发动\r\n保留一张牌再战场上"));
             }
             if (EnemyController.GetInstance().group == Global.Group.monster && enemyMonsterCard != null)
+            {
                 enemyMonsterCard.SetTarget(EnemyController.GetInstance().grids[(int)enemyMonsterCard.GetComponent<CardProperty>().line + 2]);
+                if (enemyMonsterCard.GetComponent<CardProperty>().effect == Global.Effect.warhorn)
+                    WarhornController.GetInstance().enemyWarhorn[0] = true;
+            }
 
             PlayerController.GetInstance().grids[5].gameObject.SetActive(false);
             PlayerController.GetInstance().grids[5].gameObject.SetActive(true);
