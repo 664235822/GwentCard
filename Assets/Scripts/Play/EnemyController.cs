@@ -208,15 +208,18 @@ namespace GwentCard.Play
                     }
                     else goto default;
                 case Global.Effect.nurse:
-                    card.SetTarget(grids[(int)cardProperty.line + 2]);
-                    CoroutineManager.GetInstance().AddTask(TweenCard.GetInstance().Play(card));
                     if (grids[5].childCount != 0)
-                        Play(grids[5]);
-                    PlayerController.GetInstance().obj.SetActive(false);
-                    obj.SetActive(false);
-                    PlayerController.GetInstance().obj.SetActive(true);
-                    obj.SetActive(true);
-                    return;
+                    {
+                        card.SetTarget(grids[(int)cardProperty.line + 2]);
+                        CoroutineManager.GetInstance().AddTask(TweenCard.GetInstance().Play(card));
+                        Play(grids[5];
+                        PlayerController.GetInstance().obj.SetActive(false);
+                        obj.SetActive(false);
+                        PlayerController.GetInstance().obj.SetActive(true);
+                        obj.SetActive(true);
+                        return;
+                    }
+                    else goto default;
                 case Global.Effect.scorch:
                     int maxPower = 0;
                     for (int i = 2; i < 5; i++)
