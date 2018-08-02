@@ -212,7 +212,7 @@ namespace GwentCard.Play
                     {
                         card.SetTarget(grids[(int)cardProperty.line + 2]);
                         CoroutineManager.GetInstance().AddTask(TweenCard.GetInstance().Play(card));
-                        Play(grids[5];
+                        Play(grids[5]);
                         PlayerController.GetInstance().obj.SetActive(false);
                         obj.SetActive(false);
                         PlayerController.GetInstance().obj.SetActive(true);
