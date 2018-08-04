@@ -158,10 +158,10 @@ namespace GwentCard.Play
             {
                 if (TurnController.GetInstance().isTurned[0])
                 {
-                    if ((int)GameOver.GetInstance().playerPowerList[0] > (int)GameOver.GetInstance().enemyPowerList[0] &&
+                    if ((int)GameOver.GetInstance().playerPowerList[0] >= (int)GameOver.GetInstance().enemyPowerList[0] &&
                        PowerController.GetInstance().enemy_total > PowerController.GetInstance().player_total)
                         return true;
-                    else if ((int)GameOver.GetInstance().enemyPowerList[0] >= (int)GameOver.GetInstance().playerPowerList[0] &&
+                    else if ((int)GameOver.GetInstance().enemyPowerList[0] > (int)GameOver.GetInstance().playerPowerList[0] &&
                             (PlayerController.GetInstance().grids[1].childCount >= EnemyController.GetInstance().grids[1].childCount ||
                              PowerController.GetInstance().enemy_total > PowerController.GetInstance().player_total))
                         return true;
