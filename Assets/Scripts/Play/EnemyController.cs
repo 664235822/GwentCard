@@ -145,7 +145,7 @@ namespace GwentCard.Play
             deck_realms_label.text = grids[0].childCount.ToString();
         }
 
-        public void Play(Transform grid)
+        public IEnumerator Play(Transform grid)
         {
             bool isTurn = AIController.GetInstance().AITurn();
             int index = AIController.GetInstance().AICard(grid);
@@ -153,13 +153,15 @@ namespace GwentCard.Play
             if (LeaderController.GetInstance().obj[1].GetComponent<EnemyLeaderBehavior>().IsEnabled)
             {
                 LeaderController.GetInstance().obj[1].GetComponent<EnemyLeaderBehavior>().Play();
-                return;
+                CoroutineManager.GetInstance().Finish();
+                yield break;
             }
 
             if (isTurn || index == -1)
             {
-                TurnController.GetInstance().EnemyTurn();
-                return;
+                yield return TurnController.GetInstance().EnemyTurn();
+                CoroutineManager.GetInstance().Finish();
+                yield break;
             }
 
             Transform card;
@@ -181,7 +183,7 @@ namespace GwentCard.Play
                     break;
                 case Global.Effect.clear_sky:
                     WeatherController.GetInstance().ClearSky();
-                    card.SetTarget(EnemyController.GetInstance().grids[5]);
+                    card.SetTarget(grids[5]);
                     break;
                 case Global.Effect.frost:
                     if (!WeatherController.GetInstance().weather[0])
@@ -211,13 +213,13 @@ namespace GwentCard.Play
                     if (grids[5].childCount != 0)
                     {
                         card.SetTarget(grids[(int)cardProperty.line + 2]);
-                        CoroutineManager.GetInstance().AddTask(TweenCard.GetInstance().Play(card));
-                        Play(grids[5]);
+                        yield return TweenCard.GetInstance().Play(card);
+                        yield return Play(grids[5]);
                         PlayerController.GetInstance().obj.SetActive(false);
                         obj.SetActive(false);
                         PlayerController.GetInstance().obj.SetActive(true);
                         obj.SetActive(true);
-                        return;
+                        yield break;
                     }
                     else goto default;
                 case Global.Effect.scorch:
@@ -339,12 +341,13 @@ namespace GwentCard.Play
                     break;
             }
 
-            CoroutineManager.GetInstance().AddTask(TweenCard.GetInstance().Play(card));
+            yield return TweenCard.GetInstance().Play(card);
             StartCoroutine(LeaderController.GetInstance().EnemyTurnIndicator());
             Number();
             PowerController.GetInstance().Number();
             if (TurnController.GetInstance().isTurned[0])
-                Play(grids[1]);
+                yield return Play(grids[1]);
+            CoroutineManager.GetInstance().Finish();
         }
     }
 }

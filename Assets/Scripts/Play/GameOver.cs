@@ -30,6 +30,7 @@ namespace GwentCard.Play
             for (int i = 0; i < enemyPowerList.Count; i++)
                 enemy_labels[i].text = enemyPowerList[i].ToString();
 
+            CoroutineManager.GetInstance().Finish();
             yield return null;
         }
 

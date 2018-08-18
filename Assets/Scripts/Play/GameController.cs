@@ -65,11 +65,11 @@ namespace GwentCard.Play
             else
             {
                 CoroutineManager.GetInstance().AddTask(TweenMessage.GetInstance().Play("对方先手"));
-                EnemyController.GetInstance().Play(EnemyController.GetInstance().grids[1]);
+                CoroutineManager.GetInstance().AddTask(EnemyController.GetInstance().Play(EnemyController.GetInstance().grids[1]));
             }
         }
 
-        public void Turn()
+        public IEnumerator Turn()
         {
             TurnController.GetInstance().Clear();
             GameOver.GetInstance().AddPower(PowerController.GetInstance().player_total, PowerController.GetInstance().enemy_total);
@@ -102,7 +102,7 @@ namespace GwentCard.Play
                     enemy_life_gem[enemy_fail].PlayForward();
                     enemy_fail++;
                     gameBehavior = GameBehavior.win;
-                    CoroutineManager.GetInstance().AddTask(TweenMessage.GetInstance().Play("领导牌技能发动\r\n平手时获胜"));
+                    yield return TweenMessage.GetInstance().Play("领导牌技能发动\r\n平手时获胜");
                 }
                 else if (EnemyController.GetInstance().group == Global.Group.nilfgaardian)
                 {
@@ -123,14 +123,16 @@ namespace GwentCard.Play
             if (player_fail == 2)
             {
                 turnButton.isEnabled = false;
-                CoroutineManager.GetInstance().AddTask(GameOver.GetInstance().Show(false));
-                return;
+                yield return GameOver.GetInstance().Show(false);
+                CoroutineManager.GetInstance().Finish();
+                yield break;
             }
             else if (enemy_fail == 2)
             {
                 turnButton.isEnabled = false;
-                CoroutineManager.GetInstance().AddTask(GameOver.GetInstance().Show(true));
-                return;
+                yield return GameOver.GetInstance().Show(true);
+                CoroutineManager.GetInstance().Finish();
+                yield break;
             }
 
             WeatherController.GetInstance().ClearSky();
@@ -197,20 +199,20 @@ namespace GwentCard.Play
             switch (gameBehavior)
             {
                 case GameBehavior.win:
-                    CoroutineManager.GetInstance().AddTask(TweenMessage.GetInstance().Play("此局获胜"));
+                    yield return TweenMessage.GetInstance().Play("此局获胜");
                     break;
                 case GameBehavior.lose:
-                    CoroutineManager.GetInstance().AddTask(TweenMessage.GetInstance().Play("此局失败"));
+                    yield return TweenMessage.GetInstance().Play("此局失败");
                     break;
                 case GameBehavior.dogfall:
-                    CoroutineManager.GetInstance().AddTask(TweenMessage.GetInstance().Play("此局平手"));
+                    yield return TweenMessage.GetInstance().Play("此局平手");
                     break;
             }
 
             if (PlayerController.GetInstance().group == Global.Group.northern && gameBehavior == GameBehavior.win)
             {
                 PlayerController.GetInstance().DrawCards(1);
-                CoroutineManager.GetInstance().AddTask(TweenMessage.GetInstance().Play("领导牌技能发动\r\n摸一张牌"));
+                yield return TweenMessage.GetInstance().Play("领导牌技能发动\r\n摸一张牌");
             }
             if (EnemyController.GetInstance().group == Global.Group.northern && gameBehavior == GameBehavior.lose)
                 EnemyController.GetInstance().DrawCards(1);
@@ -219,7 +221,7 @@ namespace GwentCard.Play
                 playerMonsterCard.SetTarget(PlayerController.GetInstance().grids[(int)playerMonsterCard.GetComponent<CardProperty>().line + 2]);
                 if (playerMonsterCard.GetComponent<CardProperty>().effect == Global.Effect.warhorn)
                     WarhornController.GetInstance().playerWarhorn[0] = true;
-                CoroutineManager.GetInstance().AddTask(TweenMessage.GetInstance().Play("领导牌技能发动\r\n保留一张牌再战场上"));
+                yield return TweenMessage.GetInstance().Play("领导牌技能发动\r\n保留一张牌再战场上");
             }
             if (EnemyController.GetInstance().group == Global.Group.monster && enemyMonsterCard != null)
             {
@@ -238,14 +240,16 @@ namespace GwentCard.Play
             offensive = !offensive;
             if (offensive)
             {
-                CoroutineManager.GetInstance().AddTask(TweenMessage.GetInstance().Play("你先手"));
+                yield return TweenMessage.GetInstance().Play("你先手");
                 LeaderController.GetInstance().PlayerTurnIndicator();
             }
             else
             {
-                CoroutineManager.GetInstance().AddTask(TweenMessage.GetInstance().Play("对方先手"));
-                EnemyController.GetInstance().Play(EnemyController.GetInstance().grids[1]);
+                yield return TweenMessage.GetInstance().Play("对方先手");
+                CoroutineManager.GetInstance().AddTask(EnemyController.GetInstance().Play(EnemyController.GetInstance().grids[1]));
             }
+
+            CoroutineManager.GetInstance().Finish();
         }
     }
 }

@@ -149,7 +149,7 @@ namespace GwentCard.Play
             PowerController.GetInstance().Number();
 
             if (!TurnController.GetInstance().isTurned[1])
-                EnemyController.GetInstance().Play(EnemyController.GetInstance().grids[1]);
+                CoroutineManager.GetInstance().AddTask(EnemyController.GetInstance().Play(EnemyController.GetInstance().grids[1]));
         }
     }
 }

@@ -18,20 +18,23 @@ namespace GwentCard.Play
 
             if (isTurned[0] && isTurned[1])
             {
-                GameController.GetInstance().Turn();
+                CoroutineManager.GetInstance().AddTask(GameController.GetInstance().Turn());
                 return;
             }
 
-            EnemyController.GetInstance().Play(EnemyController.GetInstance().grids[1]);
+            CoroutineManager.GetInstance().AddTask(EnemyController.GetInstance().Play(EnemyController.GetInstance().grids[1]));
         }
 
-        public void EnemyTurn()
+        public IEnumerator EnemyTurn()
         {
             isTurned[1] = true;
             enemyLabel.SetActive(true);
 
             if (isTurned[0] && isTurned[1])
-                GameController.GetInstance().Turn();
+                yield return GameController.GetInstance().Turn();
+
+            CoroutineManager.GetInstance().Finish();
+            yield return null;
         }
 
         public void Clear()
