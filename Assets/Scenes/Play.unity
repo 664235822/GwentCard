@@ -3270,7 +3270,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 632377369}
-  m_RootOrder: 10
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &477804692
 MonoBehaviour:
@@ -3897,7 +3897,7 @@ Transform:
   m_Children:
   - {fileID: 637366119}
   m_Father: {fileID: 632377369}
-  m_RootOrder: 28
+  m_RootOrder: 26
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &595605974
 MonoBehaviour:
@@ -4257,9 +4257,9 @@ Transform:
   - {fileID: 1742871567}
   - {fileID: 773164919}
   - {fileID: 112286555}
+  - {fileID: 477804691}
   - {fileID: 248442582}
   - {fileID: 962142046}
-  - {fileID: 477804691}
   - {fileID: 1762950048}
   - {fileID: 61607647}
   - {fileID: 382505295}
@@ -4275,9 +4275,9 @@ Transform:
   - {fileID: 1395685456}
   - {fileID: 205909524}
   - {fileID: 683167256}
+  - {fileID: 595605973}
   - {fileID: 795781033}
   - {fileID: 449774577}
-  - {fileID: 595605973}
   - {fileID: 1400737514}
   m_Father: {fileID: 1749374669}
   m_RootOrder: 0
@@ -11895,7 +11895,6 @@ MonoBehaviour:
   enemy_life_gem:
   - {fileID: 1711743097}
   - {fileID: 1378530772}
-  turnButton: {fileID: 795781034}
   offensive: 0
 --- !u!114 &1749374676
 MonoBehaviour:
@@ -12052,6 +12051,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerLabel: {fileID: 112286554}
   enemyLabel: {fileID: 2023485834}
+  turnButton: {fileID: 795781034}
   turnIndex: 0
   isTurned: 0000
 --- !u!1 &1757265212

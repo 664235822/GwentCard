@@ -8,8 +8,18 @@ namespace GwentCard.Play
     {
         [SerializeField] GameObject playerLabel;
         [SerializeField] GameObject enemyLabel;
+        [SerializeField] UIButton turnButton;
         [HideInInspector] public int turnIndex = 0;
         [HideInInspector] public bool[] isTurned = { false, false };
+
+        // Update is called once per frame
+        void Update()
+        {
+            if (!isTurned[0] && CoroutineManager.GetInstance().GetFinish())
+                turnButton.isEnabled = true;
+            else
+                turnButton.isEnabled = false;
+        }
 
         public void PlayerTurn()
         {
@@ -42,6 +52,7 @@ namespace GwentCard.Play
             turnIndex++;
             playerLabel.SetActive(false);
             enemyLabel.SetActive(false);
+            turnButton.isEnabled = true;
             isTurned[0] = false;
             isTurned[1] = false;
         }

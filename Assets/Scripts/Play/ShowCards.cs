@@ -106,30 +106,34 @@ namespace GwentCard.Play
 
             for (int i = 0; i < showGrid.childCount; i++)
             {
-                GameObject card = Instantiate(showGrid.GetChild(i).gameObject, grid);
-                UISprite sprite = card.GetComponent<UISprite>();
+                GameObject cardObject = Instantiate(showGrid.GetChild(i).gameObject, grid);
+                UISprite sprite = cardObject.GetComponent<UISprite>();
                 sprite.width = 250;
                 sprite.height = 450;
-                UIButton cardButton = card.GetComponent<UIButton>();
+                UIButton cardButton = cardObject.GetComponent<UIButton>();
                 switch (showBehavior)
                 {
                     case ShowBehavior.draw:
-                        EventDelegate.Add(cardButton.onClick, () => card.GetComponent<CardBehavior>().Play());
-                        cardButton.enabled = true;
+                        if (CoroutineManager.GetInstance().GetFinish())
+                        {
+                            EventDelegate.Add(cardButton.onClick, () => cardObject.GetComponent<CardBehavior>().Play());
+                            cardButton.enabled = true;
+                        }
+                        else cardButton.enabled = false;
                         break;
                     case ShowBehavior.show:
                         cardButton.enabled = false;
                         break;
                     case ShowBehavior.replace:
-                        EventDelegate.Add(cardButton.onClick, () => card.GetComponent<CardBehavior>().Replace());
+                        EventDelegate.Add(cardButton.onClick, () => cardObject.GetComponent<CardBehavior>().Replace());
                         cardButton.enabled = true;
                         break;
                     case ShowBehavior.nurse:
-                        EventDelegate.Add(cardButton.onClick, () => card.GetComponent<CardBehavior>().Play());
+                        EventDelegate.Add(cardButton.onClick, () => cardObject.GetComponent<CardBehavior>().Play());
                         cardButton.enabled = true;
                         break;
                     case ShowBehavior.dummy:
-                        EventDelegate.Add(cardButton.onClick, () => card.GetComponent<CardBehavior>().Dummy());
+                        EventDelegate.Add(cardButton.onClick, () => cardObject.GetComponent<CardBehavior>().Dummy());
                         cardButton.enabled = true;
                         break;
                     case ShowBehavior.warhorn:
@@ -139,8 +143,8 @@ namespace GwentCard.Play
                         cardButton.enabled = false;
                         break;
                 }
-                card.GetComponent<UIDragScrollView>().scrollView = scrollView;
-                card.GetComponent<BoxCollider>().size = new Vector3(250, 450, 1);
+                cardObject.GetComponent<UIDragScrollView>().scrollView = scrollView;
+                cardObject.GetComponent<BoxCollider>().size = new Vector3(250, 450, 1);
             }
 
             grid.GetComponent<UIGrid>().Reposition();
@@ -164,14 +168,14 @@ namespace GwentCard.Play
 
             for (int i = 0; i < cardList.Count; i++)
             {
-                GameObject card = cardList[i] as GameObject;
-                card.transform.SetTarget(grid);
-                UISprite sprite = card.GetComponent<UISprite>();
+                GameObject cardObject = cardList[i] as GameObject;
+                cardObject.transform.SetTarget(grid);
+                UISprite sprite = cardObject.GetComponent<UISprite>();
                 sprite.width = 250;
                 sprite.height = 450;
-                card.GetComponent<UIButton>().enabled = buttonEnabled;
-                card.GetComponent<UIDragScrollView>().scrollView = scrollView;
-                card.GetComponent<BoxCollider>().size = new Vector3(250, 450, 1);
+                cardObject.GetComponent<UIButton>().enabled = buttonEnabled;
+                cardObject.GetComponent<UIDragScrollView>().scrollView = scrollView;
+                cardObject.GetComponent<BoxCollider>().size = new Vector3(250, 450, 1);
             }
 
             grid.GetComponent<UIGrid>().Reposition();

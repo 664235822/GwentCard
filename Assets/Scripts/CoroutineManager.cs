@@ -40,5 +40,10 @@ namespace GwentCard
             current = null;
             isFinish = true;
         }
+
+        public bool GetFinish()
+        {
+            return isFinish;
+        }
     }
 }
