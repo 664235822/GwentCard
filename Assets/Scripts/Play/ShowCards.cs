@@ -69,7 +69,7 @@ namespace GwentCard.Play
                     messageLabel.gameObject.SetActive(false);
                     popupList.gameObject.SetActive(false);
                     OKButton.gameObject.SetActive(false);
-                    EventDelegate.Add(returnButton.onClick, () => EnemyController.GetInstance().Play(EnemyController.GetInstance().grids[1]));
+                    EventDelegate.Add(returnButton.onClick, () => CoroutineManager.GetInstance().AddTask(EnemyController.GetInstance().Play(EnemyController.GetInstance().grids[1])));
                     break;
                 case ShowBehavior.dummy:
                     label.text = "请选择要替换的牌";
