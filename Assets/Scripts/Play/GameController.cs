@@ -242,7 +242,7 @@ namespace GwentCard.Play
             else
             {
                 yield return TweenMessage.GetInstance().Play("对方先手");
-                yield return EnemyController.GetInstance().Play(EnemyController.GetInstance().grids[1]));
+                yield return EnemyController.GetInstance().Play(EnemyController.GetInstance().grids[1]);
             }
 
             CoroutineManager.GetInstance().Finish();
