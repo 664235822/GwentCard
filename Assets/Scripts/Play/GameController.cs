@@ -55,7 +55,6 @@ namespace GwentCard.Play
                 CoroutineManager.GetInstance().AddTask(TweenMessage.GetInstance().Play("敌方领导牌技能发动\r\n战斗开始时多摸一张牌"));
             }
 
-
             if (offensive)
             {
                 CoroutineManager.GetInstance().AddTask(TweenMessage.GetInstance().Play("你先手"));
@@ -243,7 +242,7 @@ namespace GwentCard.Play
             else
             {
                 yield return TweenMessage.GetInstance().Play("对方先手");
-                CoroutineManager.GetInstance().AddTask(EnemyController.GetInstance().Play(EnemyController.GetInstance().grids[1]));
+                yield return EnemyController.GetInstance().Play(EnemyController.GetInstance().grids[1]));
             }
 
             CoroutineManager.GetInstance().Finish();

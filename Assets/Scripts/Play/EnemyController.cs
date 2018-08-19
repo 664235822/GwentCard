@@ -153,6 +153,7 @@ namespace GwentCard.Play
             if (LeaderController.GetInstance().obj[1].GetComponent<EnemyLeaderBehavior>().IsEnabled)
             {
                 LeaderController.GetInstance().obj[1].GetComponent<EnemyLeaderBehavior>().Play();
+                yield return PlayOver(LeaderController.GetInstance().obj[1].transform);
                 CoroutineManager.GetInstance().Finish();
                 yield break;
             }
@@ -341,13 +342,18 @@ namespace GwentCard.Play
                     break;
             }
 
-            yield return TweenCard.GetInstance().Play(card);
+            yield return PlayOver(card);
+            CoroutineManager.GetInstance().Finish();
+        }
+
+        IEnumerator PlayOver(Transform card)
+        {
             StartCoroutine(LeaderController.GetInstance().EnemyTurnIndicator());
+            yield return TweenCard.GetInstance().Play(card);
             Number();
             PowerController.GetInstance().Number();
             if (TurnController.GetInstance().isTurned[0])
                 yield return Play(grids[1]);
-            CoroutineManager.GetInstance().Finish();
         }
     }
 }
