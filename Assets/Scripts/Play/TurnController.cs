@@ -12,8 +12,7 @@ namespace GwentCard.Play
         [HideInInspector] public int turnIndex = 0;
         [HideInInspector] public bool[] isTurned = { false, false };
 
-        // Update is called once per frame
-        void Update()
+        private void FixedUpdate()
         {
             if (!isTurned[0] && CoroutineManager.GetInstance().GetFinish())
                 turnButton.isEnabled = true;
