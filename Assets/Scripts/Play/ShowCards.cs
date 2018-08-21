@@ -114,12 +114,8 @@ namespace GwentCard.Play
                 switch (showBehavior)
                 {
                     case ShowBehavior.draw:
-                        if (CoroutineManager.GetInstance().GetFinish())
-                        {
-                            EventDelegate.Add(cardButton.onClick, () => cardObject.GetComponent<CardBehavior>().Play());
-                            cardButton.enabled = true;
-                        }
-                        else cardButton.enabled = false;
+                        EventDelegate.Add(cardButton.onClick, () => cardObject.GetComponent<CardBehavior>().Play());
+                        cardButton.enabled = true;
                         break;
                     case ShowBehavior.show:
                         cardButton.enabled = false;

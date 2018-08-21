@@ -11,7 +11,8 @@ namespace GwentCard.Play
 
         public void OnClick()
         {
-            ShowCards.GetInstance().Show(behavior, grid, false);
+            if (CoroutineManager.GetInstance().GetFinish())
+                ShowCards.GetInstance().Show(behavior, grid, false);
         }
     }
 }

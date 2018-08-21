@@ -51,7 +51,6 @@ namespace GwentCard.Play
             turnIndex++;
             playerLabel.SetActive(false);
             enemyLabel.SetActive(false);
-            turnButton.isEnabled = true;
             isTurned[0] = false;
             isTurned[1] = false;
         }
