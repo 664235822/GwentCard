@@ -12,14 +12,8 @@ Unity3D制作的巫师3狂猎中的昆特牌小游戏
 <img src="https://github.com/664235822/GwentCard/raw/master/img/5.png" />
 <img src="https://github.com/664235822/GwentCard/raw/master/img/6.png" />
 
-# 其他
-
-### 插件
-NGUI
-
-### 许可证
-GPL3.0
-
-### 作者
-SmallPig
+## 其他
+* 插件 NGUI
+* 许可证 GPL3.0
+* 作者 SmallPig
 
