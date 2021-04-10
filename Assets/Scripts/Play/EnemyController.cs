@@ -300,11 +300,12 @@ namespace GwentCard.Play
                         int maxCount = 0;
                         for (int i = 2; i < 5; i++)
                             if (grids[i].childCount >= maxCount &&
-                                !WarhornController.GetInstance().enemyWarhorn[i])
+                                !WarhornController.GetInstance().enemyWarhorn[i - 2])
                             {
                                 line = i - 2;
                                 maxCount = grids[i].childCount;
                             }
+
                         WarhornController.GetInstance().enemyWarhorn[line] = true;
                         card.SetTarget(WarhornController.GetInstance().enemyGrids[line]);
                         break;
