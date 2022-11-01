@@ -15,6 +15,10 @@ Unity3D制作的巫师3狂猎中的昆特牌小游戏
 <img src="https://github.com/664235822/GwentCard/raw/master/img/5.png" />
 <img src="https://github.com/664235822/GwentCard/raw/master/img/6.png" />
 
+## 使用方式
+* 请使用git和git-lfs或者其他相似软件对项目进行clone
+* 不能直接下载项目zip包
+
 ## 其他
 * 插件 NGUI
 * 许可证 GPL3.0
