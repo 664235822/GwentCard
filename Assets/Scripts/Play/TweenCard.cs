@@ -17,10 +17,12 @@ namespace GwentCard.Play
             else
                 obj.transform.Find("TweenEffect").GetComponent<UISprite>().spriteName = "";
             obj.GetComponent<TweenAlpha>().PlayForward();
+            obj.GetComponent<TweenScale>().PlayForward();
             yield return new WaitForSeconds(0.5f);
             obj.transform.Find("TweenEffect").GetComponent<TweenScale>().PlayForward();
             yield return new WaitForSeconds(1.0f);
             obj.GetComponent<TweenAlpha>().PlayReverse();
+            obj.GetComponent<TweenScale>().PlayReverse();
             obj.transform.Find("TweenEffect").GetComponent<TweenScale>().PlayReverse();
             yield return new WaitForSeconds(1.5f);
             CoroutineManager.GetInstance().Finish();
